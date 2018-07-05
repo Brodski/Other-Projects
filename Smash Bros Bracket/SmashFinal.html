@@ -1,0 +1,173 @@
+<html>
+<head>
+
+<link  href="CSS/minorDisplay.css" 	rel="stylesheet" type = "text/css"> 
+<link  href="CSS/mainDisplay.css" 	rel="stylesheet" type = "text/css"  >
+<link  href="CSS/Table_p2.css" 		rel="stylesheet" type = "text/css" id ="Table_css" >
+
+<script src =	"JS/bracket_builder.js" 	type="text/javascript"></script>	
+<script src =	"JS/button_properties.js" 	type="text/javascript"></script> 
+<script src =	"JS/p1_functions.js" 		type="text/javascript"></script> 
+<script src =	"JS/p2_functions.js" 		type="text/javascript"></script> 	
+<script src =	"JS/p3_functions.js"		type="text/javascript"></script> 
+<script src =	"JS/changeDisplay.js"		type="text/javascript"></script> 	
+<script src =	"JS/UltimateRandomNameArrangement.js" 	type="text/javascript"></script> 	
+</head>
+
+<body id="bodyID">
+<script>
+//GENERAL VARIABLES
+var real_entries;
+var num_of_players;
+var ent_per;
+var p2grpArray =[[]];
+var player_and_entArr = [[]];
+var p3player_entryArray = [[]];
+var number_of_entries;
+var made_already = false;
+
+// BRACKET BUILDING VARIABLES
+var brackID;	// = document.getElementById("bracket");
+var T_boxesID;	// = document.getElementById("T_boxesID");
+var steps;
+var num_entries; 
+var two_d_textboxes = [[]]; //2D
+var steps;
+var txt_boxes; // = T_boxesID.getElementsByTagName("input");
+var change_x;
+var winnerStatus = [];
+var win_image;
+var arrayButton;
+var pair_txtbox =[[]];
+var arrayImage;
+
+//PRO POSITIONING VARIABLES... PUTING THE NAMES IN THE BRACKETS TEXTBOXES!!!	
+var entriesArr = [[]];
+var playersArr = [[]];
+var fraction_per = [];
+var RNG_arr = []; // Array of random numbers. 0 to 1;
+var slot_positionRNG_arr = []; // Array of random numbers from 0 to 32 => 0 to Touranament size
+var counter_rng =0;
+var rng_index = 0;
+var unique_count = 0;
+var remaining_pl;
+var dont_repeat_this = false;
+
+var placement_counter=0;
+var ordered_names = [[]];
+
+
+</script>
+
+<div id="topBanID" class="topBanner"> 
+	  <img class="headerIMG" src='Images/Smash_Logo.png' alt="SUPER SMASH BROTHERS"> 
+</div>
+	
+<div class="big_wrap" id ="big_wrapID">
+
+		<div class="leftBanner" id ="leftBannerID">
+			<img class="leftpic"> 
+		</div>	
+	<!--- this div/page here is SHOWED FIRST to the user --->
+		
+		<div class ="centerDisplay" id="pg1_rightID">
+
+			<div class="right_pic"> </div>
+			<div class="btv_div">
+				<div id="entry_TableID" class ="tablesdiv rounded">
+					<table class="table_lay">
+					<tr>
+						<td> Tournament size </td>
+						<td class ="smaller taRight">  <select id ="size_dropboxID">
+								<option> 4 </option>
+								<option> 8 </option>
+								<option> 16</option>	
+								<option> 32 </option>
+								<option> 64 </option>
+							</select>	
+						</td>
+					</tr>
+		<!-- I never added in this "group" features
+					<tr>	
+						<td  onmouseover="overMouse(this)" onmouseout="outMouse(this)"> Groups </td>
+						<td class="taRight">  <input id="ch_bx_groupID" type="checkbox" onclick="ck_box_fnc()" value="g_enabled" checked="true"> </td>
+					</tr>
+		-->			
+					<tr>	
+						<td id="playersTextnumberID"> Number of Players </td>
+						<td> <input class ="inWidth" id="numPlayersID"type="text"> </td>
+					</tr>
+					<tr id ="row_entries">	
+						<td> Entries per Player </td>
+						<td> <input class="inWidth" id="ent_per_playerID" type="text"> </td>
+					</tr>
+					</table>
+				</div>		
+				
+				<div>  
+						<button class ="nxt_btn" type="button" onclick="submit_btn_p1();">Next </button> 
+						<div style="clear: both"> </div>
+						<div id="help_grpID" class="hiddenClass rounded" > Entries from the same group will not be matched against each other. </div>
+						<div id="errorID" class="hiddenClass rounded errorClass"> Must enter whole numbers. And cannot leave anything blank. Or other error </div>
+				</div>
+			</div>	
+
+		</div>
+
+	<!--- this div below is SHOWED SECOND to the user --->
+		<div class ="centerDisplay" id="pg2_rightID">
+			<div class="right_pic"> </div>
+			<div class="btv_div"> <!---"pg2_subwrap"> --->
+				<div id="player_tableID" class ="tablesdiv rounded"> 
+					<table id ="p2table" class="table_lay"> 	
+					</table>			
+				</div>
+			<div> 
+				<button class ="pre_btn" type="button" onclick="prev_btn_p2();"> Previous </button> 
+				<button class ="nxt_btn" type="button" onclick="sumbit_pg2();"> Next </button>  
+				<div style="clear: both"> </div>
+				<div id="errorID2" class="hiddenClass rounded errorClass"> Must enter whole numbers. And cannot leave anything blank. Or other error </div>
+			</div>			
+		</div>
+   </div>
+	
+	<!--- this div is SHOWED THIRDLY to the user --->
+		<div class ="centerDisplay" id="pg3_rightID">
+			<div class="right_pic"> </div>
+			<div class="btv_div">
+				<div id="setup_tableID" class ="tablesdiv2 rounded"></div>
+				<div>
+					<button class ="pre_btn" type="button" onclick="prev_btn_pg3();"> Previous </button> 
+					<button class ="nxt_btn" type="button" onclick="submit_pg3();"> Next </button> 
+					<div style="clear: both"> </div>
+				</div>
+			</div>
+
+		</div> 		
+		<!-- This div is SHOWED FOURTH to the user -->
+		<canvas id ="myCanvas"  style="position:absolute" ></canvas> <!---Putting the canvas before (or after) allows me to stack the two. http://stackoverflow.com/questions/13987162/how-would-i-overlay-a-canvas-over-text?rq=1 --->
+		<div class="centerDisplay"  id ="bracket" > 
+			<div id='T_boxesID' style="color:red">  </div>
+			<div class= "rightImage"> 
+			</div>
+			<button id="btn_Bracket" class ="pre_btn" type="button" onclick="prev_btn_brack();"> Previous </button> 
+			<script>
+			
+				hideInlineStuff("bracket");
+				hideInlineStuff("pg2_rightID");
+				hideInlineStuff("pg3_rightID");				
+
+			</script>
+		</div>
+
+<div id="footer"> 
+	<br>
+	Contact <a href="LoganWallace.Smash@gmail.com">LoganWallace.Smash@gmail.com </a>
+	<br>
+	Images were provided by <a href="http://h3118u573r.deviantart.com/"> U | Buster</a>, aka, h3118u573r
+	<br>
+</div>
+	
+</body>
+
+</html>

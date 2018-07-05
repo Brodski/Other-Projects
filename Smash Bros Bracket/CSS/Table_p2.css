@@ -1,0 +1,31 @@
+table,  td {
+	padding: 5;
+	border: 1px solid black;
+	border-collapse:collapse;
+	margin:0;
+	font-weight: bold;
+	z-index:5;
+}
+
+.table_lay {
+	width: 600px;
+	border: 3px solid grey;
+	margin: 10 auto;	
+	z-index:5;	
+}
+
+table input[type=checkbox] {
+	width:20;
+	height: 20;
+}
+
+tr {
+	height: 37;
+}
+tr:nth-child(even) {
+    background-color: #AED3FD 
+}
+
+tr:nth-child(odd) {
+   background-color: #F7FBFE 
+}

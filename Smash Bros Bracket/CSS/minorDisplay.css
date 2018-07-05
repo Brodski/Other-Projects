@@ -1,0 +1,111 @@
+
+.pre_btn {
+	width: 100;
+	height:35;
+	margin: 20px 20px 20px;
+	display: block;
+	float:left;
+}
+
+.nxt_btn {
+	width: 100;
+	height:35;
+	margin: 20px 20px 20px;
+	display: block;
+	float:right;
+}
+
+#help_grpID {
+	padding: 15;
+	border: 3px solid grey;
+	background-color: #fff;
+	
+}
+
+.rounded {
+	border-radius: 10px 10px 10px 10px;
+	-moz-border-radius: 10px 10px 10px 10px;
+	-webkit-border-radius: 10px 10px 10px 10px;
+	border: 2px solid #000000;
+}
+
+.inWidth {
+    width: 50;
+}
+
+.taRight {
+	text-align: right
+}
+
+.errorClass {
+	color: red;
+	padding: 15;
+	border: 3px solid grey;
+	background-color: #fff;
+	
+}
+.smaller {
+	width: 10%;
+} /* we can apply smaller to the right td, or we can use the nth child odd with witdh 90% */
+
+/*///////////////////////////////////////////////////////
+//
+//		CLASSES ADDED TO DYNAMICALLY CREATED STUFF
+//
+//////////////////////////////////////////////////////*/
+
+/* -----BUTTONS----- */
+.winner {
+    font-weight: 900;
+	box-shadow: 0px 0px 10px 5px black;
+	-webkit-box-shadow: 0px 0px 10px 5px black;
+	-moz-box-shadow: 0px 0px 10px 5px black;
+}
+.loser {
+    opacity: 0.8;
+}
+.winnerbtn {
+     font-weight: 900;
+}
+.loserbtn {
+    opacity: 0.8;
+}
+
+/* ---- TEXT and TABLES ----*/
+/* part of TableBuilder() from p1_functions, tableBuilder is creating display for p2 */
+.p2_playerTx_width {
+	width: 200;
+}
+input { /* input textbox*/
+	width:  153px;
+	height: 23px;
+}
+
+.p2_entrytx_width {
+	width: 50;
+}
+
+/* Used in p2_functions, is creating display for p3 */
+.p3_player_width {
+	width: 90;
+}
+.p3_entry_width {
+	width: 110;
+}
+
+/* ----BRACKET--- */
+.canvasclass {
+	z-index:5; /* T_boxesID are 2*/
+	top: 0px;
+	}
+.T_boxesID {
+    display: inline-block;
+	width: 100%;
+	height: 100%;
+	}
+
+/* ----changeDISPLAY class----- */
+.hiddenClass {
+	display: none;
+}
+	
