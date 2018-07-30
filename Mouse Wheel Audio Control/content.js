@@ -67,8 +67,8 @@ function respondToHover(e) {
 	}	
 	
 	hoverOnMute();
-	//uselessShit();
-	//OtherShit(ytplayer);
+	//uselessStuff();
+	//OtherStuff(ytplayer);
 	
 }
 
@@ -94,7 +94,7 @@ function sendWheelEventToAudioButton(direction, ytplayer){
 	
 }
 
-function uselessShit(){
+function uselessStuff(){
 	//var volCont = document.getElementsByClassName("ytp-volume-control-hover");
 	var volCont = document.getElementsByClassName("ytp-mute-button");
 	
@@ -143,7 +143,7 @@ function hoverOnMute(){
 }
 
 //This doesnt realy do anything
-function OtherShit(ytplayer){
+function OtherStuff(ytplayer){
 	//var kyEvent = new KeyboardEvent ("keydown", {key: "ArrowUp"});	
 }
 

@@ -1,6 +1,6 @@
 
 function clickOn2(){
-	console.log("HADKFJK");
+	console.log("pop up clicked???");
 		alert("hello");
 }
 
