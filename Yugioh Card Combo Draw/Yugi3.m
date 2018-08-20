@@ -2,14 +2,15 @@
 function [ chance ] = Yugi3(monsters, deck, x)
 %UNTITLED2 Summary of this function goes here
 %This bad boy calculates the probablity of have x number of the same card.
-%   It uses combinatorics, n choose k, order does not matter
-%   ie, draw 2 flamestrikes by your 10th draw.
+%   It uses combinatorics, n choose k, and order does not matter
+%   ie, draw 2 CardXs by your 10th draw.
 %
-%   x is the number we are questioning what is the probability of getting
-%        x number of monsters (flamestrikes) by the n-th drawn card
+%   x (in the parameter) is the number which we're question "what are the 
+%	chances of drawing x many cards"
+%        x number of monsters (CardXs) by the n-th drawn card
 %
-%   Chanceing of drawing x number of flamestrikes by turn n 
-%           = (number of ways to drawing at lest x of the same card) / 
+%   Chanceing of drawing x number of CardXs by turn n 
+%           = (number of ways to draw at least x of the same card) / 
 %                     (number of ways to draw "10" cards from your deck)
 %
 %   monsters > x (obviously)
@@ -20,7 +21,7 @@ function [ chance ] = Yugi3(monsters, deck, x)
 %  drawncards-(x+1)monsters, then x-2 monsters... 
 %
 %Example,by the 5th card;  
-%  We find the number of ways to draw 2 monsters when we have 4 monsters, 
+%  We find the number of ways to draw 2 monsters when we have 4 monsters in deck, 
 %  and draw 3 others cards that are not monsters. 
 %  Then find number of ways to draw 3 monsters (when we have 4 monsters) 
 %  and draw 2 other cards that are not monters. Ect.
