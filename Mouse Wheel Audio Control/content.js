@@ -108,7 +108,6 @@ function uselessStuff(){
 			cancelable: true} );
 	var divz = document.getElementById('player-api');
 	divz.dispatchEvent(keyEvent);
-	//ytplayer.dispatchEvent(keyEvent);
 	
 	var movieP = document.getElementById("movie_player");
 	movieP.dispatchEvent(syntheticEvent);
