@@ -170,7 +170,7 @@ function adjustVolumeWheel(direction){
 	volSlider.getNamedItem("style").value = sValue;
 	console.log("sValue: " + sValue);
 		
-	//console.log("PRINTING volSlider")
+
 //	printAttributes(volSlider);
 	//console.log("PRINTING ytplayer.attributes")
 	console.log("ytplayer.muted " + ytplayer.muted);
