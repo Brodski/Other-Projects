@@ -13,7 +13,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
-var VOLUME_VEL = 0.05; //How much the volume changes per mousewheel
+var VOLUME_VEL = 0.05; //How much the volume changes per mousewheel click
 
 
 function pauseIt(){
