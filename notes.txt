@@ -1,0 +1,793 @@
+
+
+Element: System
+	eg) System.out.println("Hello, World!");
+	- This denotes that the subsequent expression will call upon the System class, from the 
+java.lang package.
+
+java.lang package
+	- Auto imported into every java program
+	- contains classes and interfaces that are essential to the Java language.
+	- primative types (boolean, int, float, byte, ect), and System, string, Thread
+
+
+Element: (dot operator) .
+eg) obj.toString(); 
+	-Dot operators provide you access to a classes members; i.e. its fields
+(variables) and its methods. 
+	-'obj' is dereferenced. 
+	-Dereferencing follows the memory address stored in a reference, to the place in memory where the 
+actual object resides. 
+
+Field  
+	is a variable inside a class. 
+
+Members 
+	Variables, Methods, Inner class, or (the super class's constructor)
+	
+Literal:
+	-A variable is a name that can represent different values during the execution of the program. 
+	-A constant is a name that represents the same value throughout a program. 
+	-But a literal is not a name -- it is the value itself.
+	-A literal can be a number, a character, or a string. For example, in the expression,
+		x = 3     x is a variable, and 3 is a literal.
+
+bytecode:
+	Bytecode is program code that has been compiled from source code into low-level code designed for a 
+software interpreter. It may be executed by a virtual machine (such as a JVM) or further compiled into 
+machine code, which is recognized by the processor.
+	bytecode is compiled programming code that targets a virtual machine rather than a specific 
+computer architecture
+	- if compiled into bytecode, then its a comiopled language (java, C)
+	- if interpreted, then executing a program means reading the source file a line at a time, and doing 
+what it says
+	- interpreted is where the instructions are not directly executed by the target machine, but instead read and executed 
+by some other program 
+
+JVM:
+	- Java Virtual Machine
+	- A JVM is a software-based machine that runs Java programs. 
+	- reads (interprets?) the compiled code, (bytecode) 
+	- JVMs allow Java apps to run on almost any computer. Windows, OS X, and Linux 
+	- similar to a physical processor. 
+	- the Java code  from a .JAVA file must first be converted into instructions the JVM can understand.
+		 called "bytecode,"
+
+int: 2^15 (-,+)
+double: 2^31 -,+
+float: 32 bits
+double 64 bits
+long double 128
+
+
+
+--------------------------------------------------------------------
+	
+- Javascript; Object based scripting (protype) language   
+										| Java; OOP  language
+- Javascript; Runs on a browser only.   | Java; Runs as an application, run on a virtual machine 
+- Javascript; it is interpreted, not compiled. Every browser has a interpreter
+										| Java; compiled and executed... machine code
+- Javascript; event based 				| Java thread based 
+- Javascript; DYNAMICALLY typed language | Java; STATICALLY typed language
+- Javascript; Objects are PROTOYPE based | Java; Objects are class bassed, everything must be w/in a class
+- Javascript easier to implement. 		 | Java faster, powerful
+		https://www.geeksforgeeks.org/difference-between-java-and-javascript/
+
+Prototype objects
+	- Javascript
+	- When already-created objects are cloned and reused to construct a program.
+	- It uses a classless inheritance programming style in creating duplicate object instances.
+	- Prototype-based programming is also known as classless programming or instance-based programming.
+		https://www.techopedia.com/definition/30040/prototype-based-programming
+	- Polymorphism NO
+	- Inheritance NO
+	- Encapsualtioon Yes
+		
+Statically typed language:
+	- Java
+	- the data type of a variable is known at compile time
+	- all variables must first be declared before they can be used. 
+	- Once declared to be of a certain data type, it cannot hold values of other data types
+	- advantage: lots of trival bugs are caught at early stages
+Dynamically typed languages: 
+	- Javascript, Ruby, Python
+	- variable types can change at run time. 
+	- you dont have to specify the data type of the variable before compile time
+	- advantage: faster programming
+
+	
+Scripting Language
+	-scripts: programs written for a special run-time environment that automate the execution of tasks
+that could alternatively be executed by a human operator
+	- are often interpreted (rather than compiled).
+	- a programming language is typically compiled first before being allowed to run, 
+	- scripting languages are interpreted from source code or bytecode one command at a time.
+	-  is a computer language with a series of commands within a file that is capable of being executed 
+without being compiled
+----------------------------------------------------------
+
+Value: 
+	- contents 
+	- a number that has value to the programer
+	- the representation of some entity that can be manipulated by a program
+	
+Reference: 
+	- address, location,   
+	- a value that enables a program to access a particular datum, such as a variable's value
+	
+Primativate data type - 
+	- They are the most basic kinds of data types and they driectly contain values. 
+	- 8 total: int, float, double, long, shot, byte, char, boolean
+Object data 
+	- programmer created types
+	
+	
+Data Type
+	- itentifies what type of data that an object can hold and what operations can be applied to it
+
+---------------------------------------------------
+
+Lambda
+	- A function with no name.
+	- An expression whose value is a function
+	- Don't need to: declare the function somewhere else (and look for it later).
+	- Naming something that you're only using once.
+	Ex) args.foreach(arg => println(arg))
+	- the argument to the foreach method is an expression for an anonymous function. 
+	- lambda = anonymous function
+
+	
+------------------------------------------------------
+
+Subtyping
+	- when a subclass object is used in place of it's superclass
+	- Cat is a subtype of Animal, then Cat can be used wherever Animal is use
+	
+Enumerated
+	- a set of named values
+	- identifiers that behave as constants in the language.
+	- implicitly public static final.
+	
+-------------------------------------
+OOP
+------------------------------------
+
+Object Oriented Programing
+	- organized around data. "data controlling acces to code"
+	- in an OO langauge you define the data and the routines that are permitted to act on that data.
+	
+	- Purpose; To break large complex programs down into small simple pieces that work together
+	- is the relationships and interactions between classes/objects, without specifying the final 
+application classes/objects that are involved
+	
+	- Encapsualtioon
+	- Polymorphism
+	- Inheritance
+
+Class
+	-the blueprints/template for objcts, and describes the state/behavior
+	-State: properties of an object
+	-Behavior
+	-  used to model real-world objects you find in life
+
+Object
+	- instance of a class
+	- operates on its "own" data structure
+	- exists in memory
+	- could be multiple, but only 1 class to describe all of it's objects
+
+------------------------------------------------------------
+
+POLYMORPHISM 
+	- the programming language's ability to process objects differently depending on 
+their data type. 
+	- IS-A test is considered to be polymorphic.
+	- method overloading 
+	- method overriding
+	- subtyping
+	- (when you access a object or type, the code determines which exact type it is and calls the associated 
+code.)
+	https://stackoverflow.com/questions/1031273/what-is-polymorphism-what-is-it-for-and-how-is-it-used
+
+------------------------------------------------------------
+ENCAPSULATION
+	- a data-hiding mechanism that restricts access to the objects
+	- It a mechanism of wrapping the variables and the methods that act on the data together as a single unit
+		
+	- Java's basic unit of encapsulation is the class. ... package 2nd example
+	
+	- Access Modifiers (public private) ... define the visibility of classes, methods, and attributes 
+	- the variables of a class will be hidden from other classes, and can be accessed only 
+through the methods of their current class. 
+	Purpose: 
+	- keeps code and data safe from outisde interferance and misuse.
+	- prevents the data from being accessed from the outside
+	- protect data
+	- (flexible easier to change?)
+	
+--------------------------------------------------------------	
+	
+ABSTRACTION 
+	- where you show only “relevant/essential” data and “hide” unnecessary details of an object from the user
+	- "abstracting away the details"
+	- making the programming simpler, reduce complexity.
+	- generalizting, via abstract class & interface
+	- Abstraction is about simplicity (removing & generalizing), Encapsualtioon is about security.
+	
+	- (providing only essential information about the data to the outside world, hiding the background 
+details or implementation.)
+
+---------------------------------------
+																		
+INHERITANCE	: IS-A		
+																
+	- where one class acquires the properties (methods and fields) of another.
+	- Purpose: You can reuse the fields of another class
+	
+	- Cannot have multiple inheritacnes of classes (C# & Java) ... Diamond problems		 	 
+	- Subclasses inherit: 
+		- public members
+		- protected
+		- (private fields/methods are still accessible by methods and innter classes)
+	- Subclasses DONT inherit:
+		- private members 
+		- Constructors
+		- members with the same name as the Parent class
+	- Members = Variables, Methods, Inner class, or (the super class's constructor)
+	
+	- Recall: When you create an object, that object will inherit fields from all of the class's 
+superclasses.
+	- methods or constructors of same field; problematic.
+	- super class  = base class = parent class
+	- subclass = derived class = extended class = child class
+	- a super class is the parent class of a derived class
+	
+	-Subclass will have more methods and variables than super class
+	-Subclass will inherit all the properties of the superclass except the 
+private properties of the superclass
+	- SubClass IS-A SuperClass
+	
+	Ex)
+	public class Animal {}
+	public class Mammal extends Animal {}				
+	public class Dog extends Mammal {}
+	- Animal is the superclass of Mammal Class ... Mammal IS A Animal
+	- Mammal is the subclass of Animal						
+	- Dog is the subclass of booth Mammal and Animal ... Dog IS A Mammal
+	
+	Ex)
+public class mySuperClass {  }
+public class subClass extends mySuperClass { }
+public static void main(String(args[]){
+	// The subclass will have at least all the properties of the superclass.
+	// Thus this is possible
+	mySuperClass superClassX = new subClass();
+}
+----------------------------
+INTERFACE
+	- The set of behaviours/controls on an object.
+	- Typically, a company sells a software package that contains complex methods that another company 
+wants to use in its own software product.
+
+	- contains only the declaration of the members, no body 
+	- Can contain: methods, properties, events, indexers (C#)
+	- Can't contain: constants, fields, operators, instance constructors, finalizers, or types. No static
+	
+	- Could implement mutliple interfaces to a class
+	- In Java, Static methods and Default methods could be used in an interface to define a methods body 
+in the interface. The purpose, so you dont have to change the class that implements the interfaec
+	- Interfaces contain no implementation of methods. 
+	- classes that implement interfaces must implement all its members.
+	- A class or struct can implement multiple interfaces. A class can inherit a base class and also 
+implement one or more interfaces.
+
+	List a = new ArrayList();
+	List b = new LinkedList();
+	List c = new Vector(); 
+	List d = new Stack(); 
+	- The list Interface is implemented by ArrayList, LinkedList, Vecor and Stack classes, and more
+
+	public void setMapReference(int xCoordinate, int yCoordinate) { //method code }
+	- setMapReference(int, int) is the method signature
+
+---------------------------------------------------------									
+
+IMMUTABLE
+ - is an object whose state cannot be modified after it is created.
+ - Contains:
+ - class & data members are private final.
+ - a constructor
+ - Getters
+ - No setters
+ Immutable vs Final
+ - By declaring a reference variable as final, we won’t get any immutability nature
+ - final ensures that the address of the object remains the same whereas the Immutable suggests that we 
+can’t change the state of the object once created.
+https://www.geeksforgeeks.org/final-vs-immutability-java/
+
+SINGLETON
+- a class that can have only one object of itself
+- Contains: 
+- private constructor (prevents instantiating the object )
+- public variable/setters
+- "getter" for the object (static  accessor method, ie, a factory method to return the class member)
+- creates  static object of itself (private static mySingleton st = null;)
+
+FINAL in Java (sealed in C#)
+- "final" class 	to prevent inheritence, your class from being subclassed. 
+- "final" methos 	to prevent overriding, prevent certain methods within your class from being overriden. 
+- "final" variable	to create constants, prevent changes to a variable's value. A final variable can only be 
+initialized once,
+
+
+Instance Initialization Blocks 
+	- executed before constructors. 
+	- They are executed whenever the class is initialized and before constructors are invoked.
+	- They are typically placed above the constructors within braces.
+	https://www.geeksforgeeks.org/instance-initialization-block-iib-java/
+ 
+ ---------------------------------------
+ 
+Abstract class
+	- for the sole purpose of making a class a subclass of another.
+	- can only be subclassed
+	- cannot be instantiated
+	- (In C#, virtual means that a method could overriden)
+	- (In C#, for each abstract method you must use the override keyword in the subclass that inherit the 
+abstract  classes)
+
+	- Abstract method is a method that is declared without an implementation 
+	Ex)
+abstract void moveTo(double deltaX, double deltaY);
+
+
+----------------------------------------------------
+
+	NOT (quite) OOP
+
+----------------------------------------------------
+
+GENERICS
+	- Allows you to make "generic" methods or classes to whatever type
+	- Allows types to be a parameter to methods, classes and interfaces.
+	- generic method can be called with arguments of different types
+	- can processes objects without stating what type the object is.
+	
+	- Code Reuse: can write a method/class/interface once and use for any type we want.
+	- Type Safety: Generics make errors to appear at compile time than at run time
+	Ex) public class Box<T> {...}
+	
+	Bounded Type Parameterized
+	- accept types which extend/implement a class/interface, (Comparable)
+	- ? = wildcard = any type
+	- public static <T extends Comparable<T>> T maximum(T x, T y, T z) {  T max = x; ..... }
+	- add(List<? extends Number> list) .... Upper Bounded Wildcards
+	- add(List<? super Integer) .......... Lower Bounded Wildcard
+	
+	- Parameterized type - a class that deals with other objects without stating what type it is.
+				     	 - types that take other types as parameters. 	
+
+
+--------------------------------------------------------------
+
+
+Access Modifiers:
+	public 		- this class, other classes (w/in package), subclasses, packages, the entire app
+	protected 	- this class, subclasses, packages
+	(no modifer)- this class, package
+	private 	- this class
+
+Access Levels
+Modifier	
+			Class	Package	Subclass	Entire App
+public		Y		Y		Y			Y
+protected	Y		Y		Y			N
+no modifier	Y		Y		N			N
+private		Y		N		N			N
+
+	- Protected: Variables, methods, and constructors, which are declared protected in a superclass can 
+	be accessed only by the subclasses in other package or any class within the package of the 
+protected members' class.
+
+PACKAGE
+	-  a namespace that organizes a set of related classes and interfaces.
+	-  bundle of related types (classes, interfaces, enumerations, ect) 
+	-  software written in the Java programming language can be composed of hundreds or thousands of 
+individual classes, 
+	- keep things organized by placing related classes and interfaces into packages.
+	This allows you, the programmer, to focus on the design of your particular application, rather than the 
+infrastructure required to make it work.
+
+----------------------------------------------------
+
+STATIC
+	- A static variable will get memory only once and retain its value
+		- all objects that have a static variable will have same value
+	- A static method can be invoked without the need for creating an instance of a class.
+	- A static method can access static data member and can change the value of it.	
+	- It makes your program memory efficient (i.e., it saves memory).
+	
+	- in Java only static inner classes
+	- in C#, a static class cannot be instantiated... Because there is no instance variable, you access the 
+members of a static class by using the class name it
+
+--------------------------------------------------------
+
+STACK
+
+	- new block is created in the stack memory whenever a method is invoked
+	- holds references to other objects in the heap
+	- holds primatives
+	- when the foo() method terminates, the memory for the method foo() is freed
+
+	Heap memory is used by all the parts of the application whereas stack memory is used only by one thread of execution.
+	Stack memory is short-lived whereas heap memory lives from the start till the end of application execution.
+	
+	The run-time stack, consisting of stack frames, is responsible for program execution and function calls. A stack frame contains all the data for one function call: its parameters, the return address, and its local variables. 
+
+	The stack frame only exists during the execution time of a function, and so do the objects on the stack frame
+
+	A shallow copy constructs a new compound object and then (to the extent possible) inserts references into it to the objects found in the original.
+A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.
+	
+	HEAP
+	- Java Heap space is used by java runtime to allocate memory for:
+	- holds all objects
+	- hold JRE classes
+	
+Shallow/Deep Copy
+	-Deep: Any object pointed to by the source is copied and the copy is pointed to. 
+	So two completely separate objects will be created.
+	-Shallow: Copies references.
+	
+String Pool:
+	-The string pool allows string constants to be reused, which is possible because strings in Java are 
+immutable.
+
+int    *ip;    /* pointer to an integer */
+double *dp;    /* pointer to a double */
+float  *fp;    /* pointer to a float */
+char   *ch     /* pointer to a character */
+-The actual data type of the value of all pointers, whether integer, float, character, or otherwise, is the 
+same, a long hexadecimal number that represents a memory address. The only difference between pointers of 
+different data types is the data type of the variable or constant that the pointer points to.
+
+Design Patterns:
+	- It is a template for how to solve a problem that can be used in many different 
+situations/application or systems 
+
+local primitives go on the stack
+	When you declare and instantiate an object. The actual object goes on the heap. What goes on the stack? The 
+address of the object on the heap. C++ programmers would call this a pointer, but some Java developers are 
+against the word "pointer". Whatever. Just know that the address of the object goes on the stack.
+
+--------------------------------------------------------
+
+--------------------------------------------------------
+	
+MVC
+	Model 	- Gets the data from the database or XML-file and processes it
+			- responds to view and controller
+	View	- UI, What the user sees
+			- HTML/CSS
+			- Templating engines
+	Contoler- Takes user input 
+			- Gets data from the model, passes data to the view
+			- does calculations and processes data sent to it
+			- logic
+
+--------------------------------------------------------
+REST
+	-In the REST architectural style, the implementation of the client and the implementation of the server 
+can be done independently without each knowing about the other. This means that the code on the client side 
+can be changed at any time without affecting the operation of the server, and the code on the server side 
+can be changed without affecting the operation of the client.
+	- stateless : the server does not need to know anything about what state the client is in and vice versa.
+	GET 	— return 200 (OK)
+	POST 	— return 201 (OK CREATED)
+	PUT 	— return 200 (OK)
+	DELETE 	— return 204 (NO CONTENT) 
+REST API
+- the messenger that takes requests adn tells a system what you want and then returns the response.
+- a piece of software that plugs one application directly into the data and services of 
+another, granting it access to specific parts of a server. 
+
+
+API
+- APIs are the 'middle man', they can sit between your program and the hardware (or other software)
+- helps two different layers (software/hardware) talk to each other w/o having tons of code in common.
+- these software layers help standardize the programing process so program can interact with lots 
+of others easily
+-makes it possible for all the disparate devices and software work well with each other
+- device layer
+	- APIs are used for communication between services
+	- APIs let two pieces of software communicate
+	- EX) An API for a website is code that allows two software programs to communicate with each another
+	- APIs also control access to resources
+	- APIs are also used to control access to hardware devices and software functions that an application 
+	may not necessarily have permission to use. 
+	- APIs often play a big role in security.
+
+Driver
+	- software that allows your computer to communicate with hadware or devices. (sound card)
+	- very low level?
+
+Processes and Threads
+	- Processes are often seen as synonymous with programs
+	- Threads exist within a process — every process has at least one. 
+	- Threads share the process's resources, including memory and open files. 
+
+
+
+
+
+--------------------------------------------------------
+
+
+- Firmware is software written directly into our hardware devices.
+- Firmware is stored on flash ROM (special types of memory) 
+	- written once, by the manufacturer 
+-exmpale
+	There's firmware in computer motherboards (it's called BIOS or UEFI), there's firmware in hard disks, solid-state drives (SSDs), 
+CD/DVD/Blu-Ray drives, there's firmware in network cards, routers, access points, range extenders, there's even firmware in your 
+gaming mouse and keyboard. These are just some examples that are related to computers.
+firmware VS operating system
+	firmware is stored on the hardware device itself while drivers are installed inside the operating system. Also, firmware can start 
+on its own and do what it is programmed to do while drivers must be run by the operating system. The biggest difference between the 
+two is that the firmware tells the devices what they should do, while the driver tells the operating system how to communicate with 
+the same devices.
+- provides the low-level control for the device's specific hardware. 
+--------------------------------------------------------
+
+CONTAINERS
+
+	- It allow you to package your application together with libraries and other dependencies, providing 
+isolated environments for running your software services.
+	- Instead of virtualizing the hardware stack as with the virtual machines approach, containers 
+virtualize at the operating system level, with multiple containers running atop the OS kernel directly. 
+	- Containers virtualize the operating system instead of hardware. 
+	- containers are far more lightweight: they share the OS kernel, start much faster, and use a fraction 
+of the memory  
+	create predictable environments that are isolated from other applications. 
+	allow you to package your application and its dependencies together into one succinct manifest that can 
+be version controlledI
+	Containers can also include software dependencies needed by the application, such as specific versions 
+of programming language runtimes and other software libraries.
+less time debugging and diagnosing 
+
+	- Pods ared sorted containers
+	Pods add a layer of abstraction to grouped containers
+	Containers within a pod share an IP address and port space
+	Containers in different pods have distinct IP addresses 	
+	
+	node has the services necessary to run application containers and be managed from the master systems.
+	A node is a worker machine in Kubernetes,
+	A node may be a VM or physical machine
+	Each node contains the services necessary to run pods and is managed by the master components.
+	
+	- Container orchestration - managing the lifecycles of containers, especially in large, dynamic 
+environments
+--------------------------------------------------------
+
+ Agile
+	- iterative development
+	- flexible, adaptive planning
+	- frequenlt delievery
+	- feedback, communication
+	- face to face
+
+Waterfall
+	- progress and project phases are linear
+	- development steps be taken throughout the software development
+	
+	
+SOFTWARE AS A SERVICE
+	- rent 
+	- software is purchased as a subscription
+	- the software is hosted on the cloud; accessed by the customer via internet, no worries about OS like mac
+	- SaaS uses the web to deliver applications that are managed by a third-party vendor and whose interface 
+is accessed on the clients’ side. Most SaaS applications can be run directly from a web browser without any 
+downloads or installations required, 
+	low risk for customer
+	
+	allows many businesses to exercise better and more predictable budgeting.
+	SaaS removes the need for organizations to install and run applications on their own computers or in their own data centers.
+
+
+Software Cycle
+	- is a process that produces software with the highest quality and lowest cost in the shortest time
+	- Requirement gathering and analysis -Meetings with managers, stake holders and users are held in order 
+to determine the requirements
+	- Design - specifying hardware and system requirements and also helps in defining overall system 
+architecture
+	- Implementation - work is divided in modules/units and actual coding is started. 
+	- Testing - unit testing, integration testing, system testing, acceptance testing, non-functional testing 
+	- Deployment 
+	- Maintenance - problems comes up and needs to be solved
+	
+--------------------------------------------------------
+
+Threads & Processes
+A process is a collection of virtual memory space, code, data, and system resources. A thread is code that is to be serially executed within a process. A processor executes threads,
+ process always has at least one thread of execution, known as the primary thread
+
+SDK (Software Development Kit)
+	- a set of software development tools that allows the creation of applications for a certain software 
+package, software framework, hardware platform, computer system, video game console, operating system, or 
+similar development platform
+	- ex) visual editors or debuggers, chat SDK, or image SDKs
+
+Protocol
+		A protocol is a set of rules and guidelines for communicating data. Rules are defined for each step 
+and process during communication between two or more computers. Networks have to follow these rules to 
+successfully transmit data.
+	
+--------------------------------------------------------
+C# and C++
+
+
+DEBUG AND Release
+	- Debug and Release are just labels for different solution configurations.
+	- Release mode optimizes 
+	- Debug generates debug data, in.pdb (Program Database File) files 
+
+PREPROCESSOR DIRECTIVE 
+	#IF DIRECTIVE
+	- compiless the code between the directives only if the specified symbol is defined
+	- followed eventually by an #endif directive
+	- eg) #if (DEBUG && !MYTEST)
+	
+STA Thread
+- tells the compiler to use a Single Thread Apartment model
+- If not present, the application uses the multithreaded apartment model, which is not supported for Windows Forms.
+- used for Windows Forms (GUI's) as that uses Win32 for its drawing, which is implemented as STA. If you are using something that's STA model from multiple threads then you get corrupted objects
+- don't worry about it, just accept that Windows GUI threads must be marked as STA otherwise weird stuff happens
+
+Win32 = Window's (API) for developing 32-bit applications,  available in the Microsoft WIndows operating systems
+
+LAZY
+	- “Lazy Instantiation” defers creation of an object till the time it is actually accessed.
+	- Lazy Instantiation optimizes resources by using them when it is actually required
+	- The process of object creation is always expensive as it involves allocation of memory on the heap.
+	- when object creation is non-trivial (taxing)
+
+COM (Component Object Model)
+	- COM is a mechanism that was developed (by Microsoft) to allow people to distribute binaries that could be reused even if the 
+		caller was using another vendor's C++/C# compiler or (ultimately) a different language altogether.
+	- The essence of COM is a language-neutral way of implementing objects that can be used in environments different from the one in 
+		which they were created, even across machine boundaries
+	- COM is a platform-independent, distributed, object-oriented system for creating binary software components that can interact	
+		it defines a binary interoperability standard for creating reusable software libraries that interact at run time. 
+		libraries without the requirement of compiling them into your application.
+ASSEMBLY
+	- In C# terms, it's basically a single C# project.
+	- An assembly is the compiled output of your code, typically a DLL or EXE 
+	- Assembly is the smallest unit of deployment of a .net application. It can be a dll or an exe.
+	- Ttwo types: Private Assembly, Public/Shared Assembly, Satellite Assembly
+		- Assemblies are the building blocks of .NET Framework applications; they form the fundamental unit of deployment, version 
+control, reuse, activation scoping, and security permissions. An assembly is a collection of types and resources that are built to 
+work together and form a logical unit of functionality.
+	(Access modifiers article) .. All types and type members have an accessibility level, which controls whether they can be used from 
+other code in your assembly or other assemblies
+	https://stackoverflow.com/questions/2972732/what-are-net-assemblies
+	https://social.msdn.microsoft.com/Forums/en-US/088ce8ed-ef9b-4dea-88b3-ca016885e26d/what-is-an-assembly-in-terms-of-c?forum=csharplanguage
+	
+
+BOXING
+	- boxing and unboxing are computationally expensive processes.
+	int i = 123;      // a value type
+	object o = i;     // boxing
+	int j = (int)o;   // unboxing
+
+Struct Vs Class
+		- struct: all members are public by default
+		- class: all members are private by default
+		- classes are reference types and structs are value types
+		- structures do not support inheritance
+		- structures cannot have default constructor
+		- Purpose: The general rule to follow is that structs should be small, simple (one-level) 
+collections of related properties, that are immutable once created; for anything else, use a class.
+
+
+
+----------------------------------------------------------------------------
+
+	DESIGN PATTERNS
+
+https://www.tutorialspoint.com/design_pattern/
+
+FACTORY
+	- related to object creation
+	- we create object without exposing the creation logic to client 
+	- uses a static member-function (static factory method) which creates & returns (newly created) objects
+	- Advantage: provides "code for interface rather than implementation."
+	ex)	 ShapeFactory shapeFactory = new ShapeFactory();
+		 Shape shape1 = shapeFactory.getShape("CIRCLE");
+		 Shape shape2 = shapeFactory.getShape("SQUARE");
+MVVC 
+	- Model-view-ViewModel
+	- essential, the view does extra work on the data
+	- the ViewModel of MVVC s a value converter, meaning it is responsible for converting the data objects 
+from the model in such a way that objects are easily managed and presented. 
+	- the ViewModel is more model than view, and handles most if not all of the 
+view's display logic
+
+OBSERVER PATTERN 
+	- a software design pattern 
+	- an object (the subject), maintains a list of its dependents, (the observers), and notifies them 
+automatically of any state changes, usually by calling one of their methods.
+	-  in event driven software.
+	https://www.geeksforgeeks.org/observer-pattern-set-2-implementation/
+
+(LOOSE COUPLING)
+	-  is an approach to interconnecting the components in a system so that those components, depend on each 
+other to the least extent practicable.
+	- hardware and software may interact but they are not dependant on each other to work
+	-The goal of a loose coupling architecture is to reduce the risk that a change made within one element 
+will create unanticipated changes within other elements.
+	- (network, hardware, software, or other functional components)
+	
+----------------------------------------------------------------------------
+
+NORMALIZATION
+	- Database normalization is typically a refinement process after the initial exercise of identifying 
+the data objects that should be in the relational database, identifying their relationships and defining 
+the tables required and the columns within each table.
+	- Normalization entails organizing the columns (attributes) and tables (relations) of a database to 
+ensure that their dependencies (logical constraints, FK, PK) are properly enforced by database integrity 
+constraints
+
+DENORMALIZTION
+	- is intended to speed query execution (reading faster, at the cost of write speed)
+	- is used on a previously-normalized 
+	
+STAR SCHEMA
+	- The Star schema is easy to understand and provides optimal disk usage.
+	- The star schema consists of one or more fact tables referencing any number of dimension tables. 
+	- facts are FKs referencing dimension tables
+	- The dimension table contain the set of attributes. (date, product, or customer)
+	- The dimension table is joined to the fact table using a foreign key
+	- The dimension table are not joined to each other
+	- The dimension tables are NOT normalized. 
+	
+	
+	
+SNOWFLAKE SCHEMA
+	- A Snowflake Schema is an extension of a Star Schema, and it adds additional dimensions
+	- fact table in the middle
+	- The dimension tables are normalized which splits data into additional tables.
+	- The main benefit of the snowflake schema it uses smaller disk space.
+		https://www.guru99.com/star-snowflake-data-warehousing.html
+----------------------------------------------------------------------------
+
+
+
+every one function sould have one entrance and one exit
+
+command-query specation; every method should be either a command or a query, not both. The answer 
+to a question should not change the answer
+
+method should do 1 thing (but erroneously it does multiple things)
+
+passing boolean into function is bad
+
+high level methods should do high level work and not low level work
+
+bean are classes that encapsulate many objects into a single object (thebean)
+----------------------------------------------------------------------------
+
+
+
+
+
+'==' tests object reference in java
+
+ DLL is a library that contains code and data that can be used by more than one program at the same time
+ 
+ public is visible from wherever.
+
+internal is visible only within an assembly
+
+assembly is a file that is automatically generated by the compiler upon successful compilation of every .NET 
+application. It can be either a Dynamic Link Library or an executable file. 
