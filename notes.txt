@@ -1,4 +1,4 @@
-
+﻿
 
 Element: System
 	eg) System.out.println("Hello, World!");
@@ -416,34 +416,34 @@ members of a static class by using the class name it
 
 STACK
 
-	- new block is created in the stack memory whenever a method is invoked
+	- new block (called stack frame) is created in the stack memory whenever a method is invoked
 	- holds references to other objects in the heap
-	- holds primatives
+	- holds local primatives
 	- when the foo() method terminates, the memory for the method foo() is freed
 
 	Heap memory is used by all the parts of the application whereas stack memory is used only by one thread of execution.
 	Stack memory is short-lived whereas heap memory lives from the start till the end of application execution.
 	
-	The run-time stack, consisting of stack frames, is responsible for program execution and function calls. A stack frame contains all the data for one function call: its parameters, the return address, and its local variables. 
+	The run-time stack, consisting of stack frames, is responsible for program execution and function calls. 
+	A stack frame contains all the data for one function call: its parameters, the return address, and its local variables. 
 
 	The stack frame only exists during the execution time of a function, and so do the objects on the stack frame
+	- stack frame a portion of memory allocated for a block of code, block of code = method?
 
-	A shallow copy constructs a new compound object and then (to the extent possible) inserts references into it to the objects found in the original.
-A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.
+	When you declare and instantiate an object. The actual object goes on the heap. What goes on the stack? The 
+address of the object on the heap. C++ programmers would call this a pointer, but some Java developers are 
+against the word "pointer". Whatever. Just know that the address of the object goes on the stack.
 	
-	HEAP
-	- Java Heap space is used by java runtime to allocate memory for:
-	- holds all objects
+	
+HEAP
+	- holds all objects & its data
 	- hold JRE classes
+
+JRE (Java Runtime Environment )
+	-provides the minimum requirements for executing a Java application; it consists of the Java Virtual Machine (JVM), core classes, and 
+supporting files.	
 	
-Shallow/Deep Copy
-	-Deep: Any object pointed to by the source is copied and the copy is pointed to. 
-	So two completely separate objects will be created.
-	-Shallow: Copies references.
-	
-String Pool:
-	-The string pool allows string constants to be reused, which is possible because strings in Java are 
-immutable.
+
 
 int    *ip;    /* pointer to an integer */
 double *dp;    /* pointer to a double */
@@ -453,18 +453,31 @@ char   *ch     /* pointer to a character */
 same, a long hexadecimal number that represents a memory address. The only difference between pointers of 
 different data types is the data type of the variable or constant that the pointer points to.
 
+
+	
+Shallow/Deep Copy
+	-Deep: Any object pointed to by the source is copied and the copy is pointed to. 
+	So two completely separate objects will be created.
+	-Shallow: Copies references.
+	A shallow copy constructs a new compound object and then (to the extent possible) inserts references into it to the objects found in 
+the original.
+	A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.
+	
+	
+String Pool:
+	-The string pool allows string constants to be reused, which is possible because strings in Java are 
+immutable.
+
+
+
+
+--------------------------------------------------------
+
+--------------------------------------------------------
+
 Design Patterns:
 	- It is a template for how to solve a problem that can be used in many different 
 situations/application or systems 
-
-local primitives go on the stack
-	When you declare and instantiate an object. The actual object goes on the heap. What goes on the stack? The 
-address of the object on the heap. C++ programmers would call this a pointer, but some Java developers are 
-against the word "pointer". Whatever. Just know that the address of the object goes on the stack.
-
---------------------------------------------------------
-
---------------------------------------------------------
 	
 MVC
 	Model 	- Gets the data from the database or XML-file and processes it
@@ -476,6 +489,34 @@ MVC
 			- Gets data from the model, passes data to the view
 			- does calculations and processes data sent to it
 			- logic
+			
+MVC
+
+frameworks that uses MVC concpets
+- Flask
+- Ruby on Rails
+- Angular JS
+
+Model
+- gets and sends data
+- interacts with dataase (SQL or NOSQL or XML or JSON)
+- manipulates data
+- business logic
+- communicat with controller
+- sometimes can update the view (depends on framework
+
+View
+- The UI, what user see
+- HTML/CSS
+- Communicates with controller
+- Template Engines
+
+Controller
+- Receives input (from view, clicking link, forms)
+- contoler interaction between the model and view (user clicks, etc)
+- Gets data from model
+- passes data to the view
+		
 
 --------------------------------------------------------
 REST
@@ -556,18 +597,7 @@ be version controlledI
 of programming language runtimes and other software libraries.
 less time debugging and diagnosing 
 
-	- Pods ared sorted containers
-	Pods add a layer of abstraction to grouped containers
-	Containers within a pod share an IP address and port space
-	Containers in different pods have distinct IP addresses 	
-	
-	node has the services necessary to run application containers and be managed from the master systems.
-	A node is a worker machine in Kubernetes,
-	A node may be a VM or physical machine
-	Each node contains the services necessary to run pods and is managed by the master components.
-	
-	- Container orchestration - managing the lifecycles of containers, especially in large, dynamic 
-environments
+
 --------------------------------------------------------
 
  Agile
@@ -609,8 +639,9 @@ architecture
 --------------------------------------------------------
 
 Threads & Processes
-A process is a collection of virtual memory space, code, data, and system resources. A thread is code that is to be serially executed within a process. A processor executes threads,
- process always has at least one thread of execution, known as the primary thread
+	a process is a collection of virtual memory space, code, data, and system resources. a thread is code that is to be 
+serially executed within a process. a processor executes threads, process always has at least one thread of execution, 
+known as the primary thread
 
 SDK (Software Development Kit)
 	- a set of software development tools that allows the creation of applications for a certain software 
