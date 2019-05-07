@@ -761,6 +761,126 @@ will create unanticipated changes within other elements.
 	
 ----------------------------------------------------------------------------
 
+LEFT JOIN
+	SELECT Customers.CustomerName, Orders.OrderID
+	FROM Customers
+	LEFT JOIN Orders
+	ON Customers.CustomerID=Orders.CustomerID
+	
+	- First, start from "FROM x LEFT JOIN y ON z=z2"
+	- you'll get multiple rows with the same value of CustomerID, (w/ some differences in other fields)
+	- this means "for each table, whenever there is a CustomerID value find the same CustomerID value in the other table
+		if it exists in the right table, we have a match, so return all fields (or selected fields)
+		if it exists or not in the left table return all fields
+	- The LEFT JOIN keyword returns all records from the left table (Customers), even if there are no matches in the 
+right table (Orders).
+
+OUTER JOIN
+	SELECT Customers.CustomerName, Orders.OrderID
+	FROM Customers
+	FULL OUTER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
+	
+	- LEFT & RIGHT join, meaning you'll 
+	- The FULL OUTER JOIN keyword returns all matching records from both tables whether the other table matches or not. 
+So, if there are rows in "Customers" that do not have matches in "Orders", or if there are rows in "Orders" that do not 
+have matches in "Customers", those rows will be listed as well.
+
+SELF JOIN
+	SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City
+	FROM Customers A, Customers B
+	WHERE A.CustomerID <> B.CustomerID
+	AND A.City = B.City 
+	
+	
+	-The following SQL statement matches customers that are from the same city:
+	-A self JOIN is a regular join, but the table is joined with itself.
+	-(Doesnt use JOIN)
+	
+UNION
+	The UNION operator is used to combine the result-set of two or more SELECT statements.
+	The columns must also have similar data types (int string?)
+		- should be the same field, otherwise it is like mixing data in a column
+		
+GROUP BY
+
+
+	SELECT COUNT(CustomerID), Country
+	FROM Customers
+	GROUP BY Country;
+	
+	- lists the number of customers in each country:
+	- The GROUP BY statement is often used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) 	
+HAVING
+	SELECT COUNT(CustomerID), Country
+	FROM Customers
+	GROUP BY Country
+	HAVING COUNT(CustomerID) > 5;
+	
+	-The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.
+
+STORED PROCEDURES
+	CREATE PROCEDURE SelectAllCustomers
+	AS
+	SELECT * FROM Customers
+	GO;	
+	(.....later)
+	EXEC SelectAllCustomers;
+	
+	prepared SQL code that you can save, so the code can be reused over and over again.
+	
+EXISTS
+
+	SELECT SupplierName
+	FROM Suppliers
+	WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+	
+	Returns TRUE and lists the suppliers with a product price<20
+	ie, it returns the single colum table of "SELECT SupplierName FROM Suppliers"
+	
+	
+	- The EXISTS operator returns true if the subquery returns one or more records.
+	- is used to test for the existence of any record in a subquery.
+	
+ANY and ALL
+	- like EXISTS but after WHERE and HAVING clauses
+	- returns TRUE and the first query if the subquery exists (Usually a condition (ProductsSold>10))
+	
+MIN / MAX
+	SELECT MIN(column_name)
+	FROM table_name
+	WHERE condition;
+	
+COUNT(), SUM(), AVG()	
+	SELECT SUM(column_name)
+	FROM table_name
+	WHERE condition;
+	
+IN
+	SELECT column_name(s)
+	FROM table_name
+	WHERE column_name IN (value1, value2, ...);
+
+	The IN operator is a shorthand for multiple OR conditions.
+	
+BETWEEN
+	WHERE column_name BETWEEN value1 AND value2;
+	
+UPDATE	
+	UPDATE Customers
+	SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
+	WHERE CustomerID = 1;
+
+DISTINCT
+	SELECT DISTINCT column1, column2, ...
+	FROM table_name;	
+
+AND / OR
+	WHERE condition1 AND condition2 AND condition3 ...;
+	
+INSERT
+	INSERT INTO table_name (column1, column2, column3, ...)
+	VALUES (value1, value2, value3, ...);	
+	
 NORMALIZATION
 	- Database normalization is typically a refinement process after the initial exercise of identifying 
 the data objects that should be in the relational database, identifying their relationships and defining 
