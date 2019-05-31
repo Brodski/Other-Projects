@@ -724,9 +724,97 @@ collections of related properties, that are immutable once created; for anything
 
 ----------------------------------------------------------------------------
 
+Single responsiblity principle
+	- every class & method has a single responsiblty
+	- makes it easy to quick and reason what each portion of the project is
+	- if a class or method is doing too much and its hard to tell what it's doing
+	
+/etc
+	system wide configurations
+	not user specfic config
+	
+/boot
+	system boot
+	where your system starts
+	
+/dev
+	device
+	keyboards, mice, network?
+
+/bin
+	binaries
+	ls, cd, chmod
+	
+/lib
+	library
+	librarys that apps could use to provide various function
+	
+/mnt
+/mount
+/media
+	other mounted drives
+	floppy disk, usb, network drive, external hd, (A: or B: drive in windows)
+	
+/opt
+	optional
+	where manually installed sw from venders resides
+	
+/proc
+	psudeo files that contain info about system processes and resources
+	# cat  /proc/cpuinfo
+	# cat /proc/uptime
+	
+/root
+	the root user's home folder
+	unlike users home folder it rsides not in the default home file
+	root always has access to its home directory in this area
+	
+/run
+	it runs in RAM, so everything is gone when the system restarts
+
+/sbin
+	system bin
+	
+/snap
+	snap packed (used by ubuntu)
+	
+/srv
+	service directory for syervice data
+	if you run a server like ftp then it has better security
+
+/sys
+	system
+	a way to interact to the kernal
+	could make changes to graphics card
+	
+/tmp
+	temporary
+	files are temp stored by application
+	an app might write to temp requently in case the app crashes
+	is usually emptied on system restart
+	
+/usr
+	apps installed by the user
+	non essential for basic system operations
+	
+/var
+	variable
+	files that are expected to grow
+	/var/crash holds info about stuff that crashed
+	/var/log contains log files about many system
+	
+/home
+	each user has own folder
+	store personal documents
+	store personal app's configs
+	
+	
+---------------------
 	DESIGN PATTERNS
 
 https://www.tutorialspoint.com/design_pattern/
+
+
 
 FACTORY
 	- related to object creation
@@ -760,6 +848,85 @@ will create unanticipated changes within other elements.
 	- (network, hardware, software, or other functional components)
 	
 ----------------------------------------------------------------------------
+NETWORKING
+
+nifi is a data flow managment system that come with a web ui to handle data flows
+
+
+flow based program: a series of nodes and edges that the data moves through.
+
+connectors = edges
+processes = nodes
+data stored w/ in a package of info called a flow file, = content, attributes and age
+
+Networking Devices: 
+	Modem
+	Hub
+	Switch 
+	Router
+	Gateway
+	
+hubs & switches are used to create networks
+	-hubs are older and worse, not used often
+	- hub & switches use mac address)
+	
+routers are used to connect networks
+	- routers use IP address, thus it can talk to outside world
+	
+Gateway: interconnects different networks
+
+
+	
+a modem is what brings the internet into your house
+	b/c there are only 2 types of signals
+A coputer only reads digital siganls
+the internet only reads analog singals
+	signals to your comp: the modem demodulates the analog singals into digital signals
+	signals from your comp: the domem modules the digital signals into analog siganls.
+		
+	
+NIC - Network Interface Card
+	- the card that allows you to connect to the internet
+	- manages network connection
+	- fits into a slot in motherboard, or external port
+	- often a cable (Cat5) connects NIC to another device OR a wireless thing built in computer
+	- all comps have a NIC
+	- NIC is connected to a hub/switch
+	- routers direct traffic
+	- the server uses high end connections to transmit data on internt
+
+Peer 2 Peer - a singel cable between 2 computers (not common)	
+
+networks usually require 3 pcies of hardware
+	- Network card
+	- cable
+	- device to connect to 
+	
+switch 
+WAN - Wide Area Network
+	- a network over a lorge geographical area (corparations business in NY to LA)
+		- Domain "Charter in NYC" to Domain "Charter in LA"
+	- it connectes diffrent small networks(LANs)
+		- so comps in one location can communicate w/ comps in ahtoer
+		- building to building, town to town, city to city
+		
+NAT - Network Addres Translation
+	- NAT Is used in routers
+	- translate a set of IP addres to another set of IP address
+	- helps preserve limited amount of IPv4 address
+	
+IPv4 - there are 2 types	
+	- Public or Private
+	- cannot access internet w/ private, your private is used internally/locally
+	- your router gives your internal devices a private IP
+	- public is publicly registered on internet, must have public IP to go on the internet
+	- router will gives private IP address to your internal devies
+	- the private IP will be tranaslted by NAT to public IP address
+	- the public IP will be translated by NAT to private
+	
+	
+----------------------------------------------------------------------------
+	
 
 LEFT JOIN
 	SELECT Customers.CustomerName, Orders.OrderID
@@ -854,6 +1021,10 @@ COUNT(), SUM(), AVG()
 	SELECT SUM(column_name)
 	FROM table_name
 	WHERE condition;
+	
+	(...returns this table)
+	COUNT(ProductID)
+	77
 	
 IN
 	SELECT column_name(s)
