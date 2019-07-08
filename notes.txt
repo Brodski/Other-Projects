@@ -848,8 +848,8 @@ will create unanticipated changes within other elements.
 	- (network, hardware, software, or other functional components)
 	
 ----------------------------------------------------------------------------
-NETWORKING
 
+NiFi
 nifi is a data flow managment system that come with a web ui to handle data flows
 
 
@@ -859,6 +859,12 @@ connectors = edges
 processes = nodes
 data stored w/ in a package of info called a flow file, = content, attributes and age
 
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+							NETWORKING
+----------------------------------------------------------------------------
+----------------------------------------------------------------------------
+
 Networking Devices: 
 	Modem
 	Hub
@@ -867,7 +873,7 @@ Networking Devices:
 	Gateway
 	
 hubs & switches are used to create networks
-	-hubs are older and worse, not used often
+	- hubs are older and worse, not used often
 	- hub & switches use mac address)
 	
 routers are used to connect networks
@@ -902,7 +908,27 @@ networks usually require 3 pcies of hardware
 	- cable
 	- device to connect to 
 	
-switch 
+HUBS, SWITCHES, and ROUTERS
+Hubs & Switches
+	- Both used to create internal network
+	- Both, the purpose, to connect all devices together on an internal network1
+	- Both doesnt exchanged data to an outside network
+	- Both does not read IP addresses
+	Hubs: 
+	- Not intelligent, b/c
+	- when a data packet comes in one port then the same data packet is broadcasted to all other ports
+	- secruity problems and wastes bandwidth
+	Switch :
+	- intelligent, b/c
+	- learns physical address of connected devices 
+		- ie, mac address is saved in a table
+	- data packets are sent to targeted device
+	
+Router 
+	- forwards data from 1 network to another based on IP address
+	- the router determines if the recieved data is for the router's (internal) network or another network
+	- router = gateway of a network
+	
 WAN - Wide Area Network
 	- a network over a lorge geographical area (corparations business in NY to LA)
 		- Domain "Charter in NYC" to Domain "Charter in LA"
@@ -923,8 +949,103 @@ IPv4 - there are 2 types
 	- router will gives private IP address to your internal devies
 	- the private IP will be tranaslted by NAT to public IP address
 	- the public IP will be translated by NAT to private
+
+HTTP - not secure
+	 - data is sent in plain text
+	 - hacker could listen to data (man in middle-ish)
+
+HTTPS - encrypts the data
+	 
+TCP - data is in order
+	- to make sure that data delivery over a network is carried out correctly
+	- Checksum, acknowledgement, order
+	
+UPD -	
+	UDP cannot guarantee packet delivery.
+
+	UDP is a faster and more efficient protocol than TCP because it dose not carry out all of the checks to make sure that the communication is perfect.
+
+	UDP is ideal for time sensitive applications, where lost packets are not as important as delayed packets.
+	
+	UDP works well with application broadcast needs, e.g. ARP, and multi-casting, i.e. communicating with selected clients on the network.
+
+	Common network applications that use UDP include:
+		Domain Name System (DNS)
+		Streaming media applications IPTV, i.e. watching TV on a computer system
+		Trivial File Transfer Protocol (TFTP)
+		Voice over IP (VoIP), i.e. using the network backbone and TCP/IP for telephone calls.
+
+
+Port is a logical connection used by programs & services to exchange information
+
+Recall an REST API (one guy called it Business API)
+	- simple for app developers
+	- exposes data or services for public consuption
+	- purpose: external app developers can use the API which grows the business.
+
+MICROSERVICES
+	Recall: service - repeatable business task
+	- he archeticture of a program is broken into parts
+	- Seperated into business logic chunks (eg, business might have Inventory Serivce, Shipping Service, Account Service)
+	- API; services communciate to each other via APIs
+	- if one microservice fails another service picks up
+	- containerized
+	Disadvantage
+	- complex networking
 	
 	
+note - Docker v VM
+	- VM has a guest operating system
+	- docker does not have a guest OS
+
+Microservice Archetiture
+	- apps are containerized
+	- need Containerization Orchestrator (CO)
+		- COs: Kubernetes, Azuere Container service, Amazon ECS, Marathon, Docker Swarm, Google Container Engine, 
+	Kubernetes:
+		- Node: 
+			- Instance of a computer
+			- it is running kubernetes, it is running a Kubelet (kubelet=application that communicates w/ master)
+		- Pod:
+			- 1+ container, exists on a node
+		- Service:
+			- Handels requres from inside or outside the cluster
+			- Usually a load balancer
+		- Deployment
+			- Defines desired state 
+			
+			
+			
+			
+----------------------------------------------------------------------------
+SaaS	
+	- On damand pay per use software
+	- dont need to install SW on user's computer
+	- the cloud runs an instance of the software
+	- End customers use SaaS
+	- Google docs, MS 365
+Paas
+	- made up of programming language environemnt, Operating system, webserver, database
+	- manage data and app resources
+	- Developers use SaaS
+	- Windows Azure, Google app engine, heroku, AWS Elastice Beanstalk
+	- Scaleable but developers are limted to the providers tools, and devs cannot migrate to another provider, ie they are locked into the (AWS) vendor
+
+IaaS
+	- offers computing resrouces but in a virtual environment
+	- resources like data storage, servers, networking, virtualization,
+	- AWS EC2s, rackspace
+	- 
+Infrastructure
+	- the resources built for you on the cloud
+	- the devices you are working on  load balancer, VPNs,servers
+		- the service part of it is the software mangement that lets you click/program 
+	- AWS = IaaS
+	- Platform = opearting system, programming language????
+	
+
+
+
 ----------------------------------------------------------------------------
 	
 
