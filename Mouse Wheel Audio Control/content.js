@@ -1,4 +1,4 @@
-//alert("hello from youtube kickass!")
+//alert("hello from youtube mouse wheel!")
 
 // content.js
 chrome.runtime.onMessage.addListener(
