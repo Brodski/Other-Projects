@@ -1,0 +1,25 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+reacttutorial/react2/node_modules
+reacttutorial/react2/*.pnp
+reacttutorial/react2/*.pnp.js
+*.vs*
+
+# testing
+reacttutorial/react2/coverage
+
+# production
+recttutorial/react2/build
+
+# misc
+reacttutorial/react2/.DS_Store
+reacttutorial/react2/.env.local
+reacttutorial/react2/.env.development.local
+reacttutorial/react2/.env.test.local
+reacttutorial/react2/.env.production.local
+
+reacttutorial/react2/npm-debug.log*
+reacttutorial/react2/yarn-debug.log*
+reacttutorial/react2/yarn-error.log*
+

@@ -1,0 +1,20 @@
+.navheader {
+  background-color: slategray;
+}
+
+.cool-border {
+  border-style: solid;
+  border-width: 3;
+  border-color: darkred;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+.basic-border {
+  border-style: solid;
+  border-width: 3;
+  border-color: black;
+}
