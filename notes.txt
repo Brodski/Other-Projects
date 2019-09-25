@@ -32,6 +32,11 @@ Literal:
 	-A literal can be a number, a character, or a string. For example, in the expression,
 		x = 3     x is a variable, and 3 is a literal.
 
+Method Signature:
+	Name + parameters
+	ex) public void setMapReference(int xCoordinate, int yCoordinate) { //method code }
+	- setMapReference(int, int) is the method signature
+	
 bytecode:
 	Bytecode is program code that has been compiled from source code into low-level code designed for a 
 software interpreter. It may be executed by a virtual machine (such as a JVM) or further compiled into 
@@ -161,7 +166,8 @@ Object Oriented Programing
 	- is the relationships and interactions between classes/objects, without specifying the final 
 application classes/objects that are involved
 	
-	- Encapsualtioon
+	- Encapsualtion
+	- Abstraction
 	- Polymorphism
 	- Inheritance
 
@@ -270,7 +276,7 @@ INTERFACE
 	- Typically, a company sells a software package that contains complex methods that another company 
 wants to use in its own software product.
 
-	- contains only the declaration of the members, no body 
+	- Contains only the declaration of the members, no body 
 	- Can contain: methods, properties, events, indexers (C#)
 	- Can't contain: constants, fields, operators, instance constructors, finalizers, or types. No static
 	
@@ -282,25 +288,43 @@ in the interface. The purpose, so you dont have to change the class that impleme
 	- A class or struct can implement multiple interfaces. A class can inherit a base class and also 
 implement one or more interfaces.
 
-	List a = new ArrayList();
-	List b = new LinkedList();
-	List c = new Vector(); 
-	List d = new Stack(); 
-	- The list Interface is implemented by ArrayList, LinkedList, Vecor and Stack classes, and more
+	- Below: The list Interface is implemented by ArrayList, LinkedList, Vecor and Stack classes, and more
+		List a = new ArrayList();
+		List b = new LinkedList();
+		List c = new Vector(); 
+		List d = new Stack(); 
+	 
+ABSTRACT CLASS
+	- for the sole purpose of making a class a subclass of another.
+	- can only be subclassed
+	- cannot be instantiated
+	- Abstract method is a method that is declared without an implementation 
+		Ex)	abstract void moveTo(double deltaX, double deltaY); { }
+	- (C#) virtual means that a method could overriden) .
+	- (Java) all non-static methods are by default "virtual functions." 
+		- Only final methods (cannot be overridden), along with private methods (which are not inherited)
+			are "non-virtual".
+	- (C#) Override - for each abstract method you must use the override keyword in the subclass that inherit the 
+		abstract  classes
 
-	public void setMapReference(int xCoordinate, int yCoordinate) { //method code }
-	- setMapReference(int, int) is the method signature
 
 ---------------------------------------------------------									
 
+FINAL in Java (sealed in C#)
+- "final" class 	to prevent inheritence, your class from being subclassed. 
+- "final" methos 	to prevent overriding, prevent certain methods within your class from being overriden. 
+- "final" variable	to create constants, prevent changes to a variable's value. A final variable can only be 
+initialized once,
+
 IMMUTABLE
- - is an object whose state cannot be modified after it is created.
+ - is an object whose state remains constant/cannot be modified after it was created.
  - Contains:
- - class & data members are private final.
- - a constructor
- - Getters
- - No setters
+	- class & data members are private final.
+	- a constructor
+	- Getters
+	- No setters
  Immutable vs Final
+ - final is just a keyword whereas Immutable is a pattern
  - By declaring a reference variable as final, we won’t get any immutability nature
  - final ensures that the address of the object remains the same whereas the Immutable suggests that we 
 can’t change the state of the object once created.
@@ -309,16 +333,10 @@ https://www.geeksforgeeks.org/final-vs-immutability-java/
 SINGLETON
 - a class that can have only one object of itself
 - Contains: 
-- private constructor (prevents instantiating the object )
-- public variable/setters
-- "getter" for the object (static  accessor method, ie, a factory method to return the class member)
-- creates  static object of itself (private static mySingleton st = null;)
-
-FINAL in Java (sealed in C#)
-- "final" class 	to prevent inheritence, your class from being subclassed. 
-- "final" methos 	to prevent overriding, prevent certain methods within your class from being overriden. 
-- "final" variable	to create constants, prevent changes to a variable's value. A final variable can only be 
-initialized once,
+	- private constructor (prevents instantiating the object )
+	- public variable/setters
+	- "getter" for the object (static  accessor method, ie, a factory method to return the class member)
+	- creates  static object of itself (private static mySingleton st = null;)
 
 
 Instance Initialization Blocks 
@@ -327,19 +345,8 @@ Instance Initialization Blocks
 	- They are typically placed above the constructors within braces.
 	https://www.geeksforgeeks.org/instance-initialization-block-iib-java/
  
- ---------------------------------------
- 
-Abstract class
-	- for the sole purpose of making a class a subclass of another.
-	- can only be subclassed
-	- cannot be instantiated
-	- (In C#, virtual means that a method could overriden)
-	- (In C#, for each abstract method you must use the override keyword in the subclass that inherit the 
-abstract  classes)
 
-	- Abstract method is a method that is declared without an implementation 
-	Ex)
-abstract void moveTo(double deltaX, double deltaY);
+	
 
 
 ----------------------------------------------------
@@ -351,11 +358,11 @@ abstract void moveTo(double deltaX, double deltaY);
 GENERICS
 	- Allows you to make "generic" methods or classes to whatever type
 	- Allows types to be a parameter to methods, classes and interfaces.
-	- generic method can be called with arguments of different types
+		- thus generic method can be called with arguments of different types
 	- can processes objects without stating what type the object is.
-	
+	Pros:
 	- Code Reuse: can write a method/class/interface once and use for any type we want.
-	- Type Safety: Generics make errors to appear at compile time than at run time
+	- Type Safety: Generics make errors to appear at compile time instead of run time
 	Ex) public class Box<T> {...}
 	
 	Bounded Type Parameterized
@@ -372,29 +379,26 @@ GENERICS
 --------------------------------------------------------------
 
 
-Access Modifiers:
-	public 		- this class, other classes (w/in package), subclasses, packages, the entire app
-	protected 	- this class, subclasses, packages
-	(no modifer)- this class, package
-	private 	- this class
+ACCESS MODIFIERS:
 
-Access Levels
-Modifier	
-			Class	Package	Subclass	Entire App
-public		Y		Y		Y			Y
-protected	Y		Y		Y			N
-no modifier	Y		Y		N			N
-private		Y		N		N			N
+	Access Levels
+	Modifier	
+				This Class	Package	Subclass	Entire App
+	public		Y			Y		Y			Y
+	protected	Y			Y		Y			N
+	no modifier	Y			Y		N			N
+	private		Y			N		N			N
 
+	The above can be interupted like this:
 	- Protected: Variables, methods, and constructors, which are declared protected in a superclass can 
 	be accessed only by the subclasses in other package or any class within the package of the 
-protected members' class.
+	protected members' class.
 
 PACKAGE
-	-  a namespace that organizes a set of related classes and interfaces.
+	-  A set of related classes and interfaces [organized] inside of a namespace
 	-  bundle of related types (classes, interfaces, enumerations, ect) 
 	-  software written in the Java programming language can be composed of hundreds or thousands of 
-individual classes, 
+	    individual classes, 
 	- keep things organized by placing related classes and interfaces into packages.
 	This allows you, the programmer, to focus on the design of your particular application, rather than the 
 infrastructure required to make it work.
@@ -413,13 +417,21 @@ STATIC
 members of a static class by using the class name it
 
 --------------------------------------------------------
+--------------------------------------------------------
+---------------     STACK & HEAP        ----------------
+--------------------------------------------------------
+--------------------------------------------------------
 
 STACK
-
-	- new block (called stack frame) is created in the stack memory whenever a method is invoked
-	- holds references to other objects in the heap
-	- holds local primatives
-	- when the foo() method terminates, the memory for the method foo() is freed
+	- A block of memory that holds:
+	1)	- references to other objects in the heap
+		- local primatives
+	2)	- data for current function call
+			- its parameters 
+			- return address
+			- local variables
+	- The new block (called stack frame) is created in the stack memory whenever a method is invoked
+	ex) when the foo() method terminates, the memory for the method foo() is freed
 
 	Heap memory is used by all the parts of the application whereas stack memory is used only by one thread of execution.
 	Stack memory is short-lived whereas heap memory lives from the start till the end of application execution.
@@ -440,8 +452,8 @@ HEAP
 	- hold JRE classes
 
 JRE (Java Runtime Environment )
-	-provides the minimum requirements for executing a Java application; it consists of the Java Virtual Machine (JVM), core classes, and 
-supporting files.	
+	-provides the minimum requirements for executing a Java application; it consists of the Java Virtual Machine 
+		(JVM), core classes, and supporting files.	
 	
 
 
@@ -449,9 +461,7 @@ int    *ip;    /* pointer to an integer */
 double *dp;    /* pointer to a double */
 float  *fp;    /* pointer to a float */
 char   *ch     /* pointer to a character */
--The actual data type of the value of all pointers, whether integer, float, character, or otherwise, is the 
-same, a long hexadecimal number that represents a memory address. The only difference between pointers of 
-different data types is the data type of the variable or constant that the pointer points to.
+
 
 
 	
@@ -459,9 +469,10 @@ Shallow/Deep Copy
 	-Deep: Any object pointed to by the source is copied and the copy is pointed to. 
 	So two completely separate objects will be created.
 	-Shallow: Copies references.
-	A shallow copy constructs a new compound object and then (to the extent possible) inserts references into it to the objects found in 
-the original.
-	A deep copy constructs a new compound object and then, recursively, inserts copies into it of the objects found in the original.
+	A shallow copy constructs a new compound object and then (to the extent possible) inserts references 
+into it to the objects found in the original.
+	A deep copy constructs a new compound object and then, recursively, inserts copies into it of the 
+objects found in the original.
 	
 	
 String Pool:
@@ -478,6 +489,7 @@ immutable.
 Design Patterns:
 	- It is a template for how to solve a problem that can be used in many different 
 situations/application or systems 
+	- defines how it's done
 	
 MVC
 	Model 	- Gets the data from the database or XML-file and processes it
@@ -487,8 +499,20 @@ MVC
 			- Templating engines
 	Contoler- Takes user input 
 			- Gets data from the model, passes data to the view
-			- does calculations and processes data sent to it
-			- logic
+
+Controller VS Router
+	- Routers are part of the controller layer
+	- Controller implements a »Controller pattern, 
+		- Controller Pattern has these things/entities: 
+			Dispatcher, Router, Action & more
+	- Routing is the process of taking a URI endpoint decomposing it into parameters then determine which module, 
+	controller, and action of that controller should receive the request.
+	The router takes the request and decides which controller/controller methods will handle the request.
+	The controller accepts the requests and handles it!
+	
+	
+	- Controller pattern: requests are intercepted by controller and dispatched to individual Action Controllers based on 
+the URL requested(that is routing request from Router).
 			
 MVC
 
@@ -497,26 +521,31 @@ frameworks that uses MVC concpets
 - Ruby on Rails
 - Angular JS
 
-Model
+Model - Database
+- BUSINESS LOGIC
 - gets and sends data
 - interacts with dataase (SQL or NOSQL or XML or JSON)
 - manipulates data
-- business logic
 - communicat with controller
 - sometimes can update the view (depends on framework
 
-View
+View - Client
 - The UI, what user see
 - HTML/CSS
 - Communicates with controller
 - Template Engines
 
-Controller
+Controller - Server
+- COMMUNICATES BETWEEN Users/View and the Model
+- 'middle man'
 - Receives input (from view, clicking link, forms)
 - contoler interaction between the model and view (user clicks, etc)
-- Gets data from model
-- passes data to the view
+- Gets data from model ; passes data to the view
 		
+Controller
+
+- Gets requets from View and sends to Model
+- Gets response form model and sneds to view
 
 --------------------------------------------------------
 REST
@@ -720,6 +749,165 @@ Struct Vs Class
 		- Purpose: The general rule to follow is that structs should be small, simple (one-level) 
 collections of related properties, that are immutable once created; for anything else, use a class.
 
+------------------------------------------------------------------------
+
+LIBRARY VS FRAMEWORK
+
+	Library
+
+		- It is a collection of objects/functions/methods (depending on your language) and your application links it 
+			and uses those objects/functions/methods
+		- A file containing re-usable code that can usually be shared among multiple application
+		- A library contains many pieces of functionality that you may pick and choose from 
+		
+		ex) Network protocols, compression, string utilities, regular expressions, math. 
+
+	Framework
+		- Embodies some abstract design, with more behavior built in. You need to insert your code inot the framework 
+			someway The framework's code then calls your code at these points.
+
+		- User still has code to link up but the most important work is done by the application.	
+		- Everything you use in application development. It can be a library, a collection of many libraries, a 
+collection of scripts, or any piece of software you need to create your application. Framework is just a very vague 
+term.
+
+	ex) Web application system, Plug-in manager, GUI system. 
+
+
+
+	- A library contains many pieces of functionality that you may pick and choose from 
+		- i.e. using one piece of technology doesn't mean you're locked into the rest. 
+		- you will have more work cut out for you, but more control.
+
+
+	- A framework however very much sets out how you will be working. 
+	- It provides a workflow that is hard to change (for better or worse). 
+
+	- This means rapid development/prototyping, but if significant changes are made in the future it may be 
+impossible (or very time consuming) to implement them.
+
+
+.NET v C#
+
+- C# is a programming language, 
+- .NET is the framework that the language is run on.
+- C# is a language created for use with .NET.
+ASP v ASP.NET
+
+ 	- ASP.NET is an extension of .NET
+
+	- Used for writing web-based applications and websites. 
+
+	- ASP is an older web framework and outdated technology, do not trouble yourself with it.	
+	- ASP and ASP.NET are quite different under the hood. Only language options are VBScript and JScript. 
+.NET 
+	- .NET is used to develop Form-based applications, Web-based applications, and Web services.
+	- .NET apps are in C#, F#, or Visual Basic.
+	- Different .NET implementation do diffrent things:
+
+	.NET Core 
+		- should be used for cross-platform needs
+
+		- should be used for containerized apps
+
+		- high performance and scalability 
+		- cross-platform for websites, servers, and console apps on macOS, Windows, and Linux.
+	.NET Framework 
+		- supports websites, services, desktop apps, and more on Windows.
+		- Provides Windows forms  (ASP.NET Web Forms , Windows Presentation Foundation (WPF))
+.NET Core offers significant benef(its for new applications and application patterns. However, the .NET Framework continues to be the natural choice for many existing scenarios and as such the .NET Framework isn't replaced by .NET Core for all server applications.
+
+
+
+
+
+- The combination of Operating System Architecture and CPU Architecture is known as the platform. 
+- A .NET application is platform dependent because of the .NET framework which is only able to run on the Windows-based operating system. The .Net application is platform independent also because of Mono framework
+
+- 	Visual Studio is the development tool which is used to design and develop the .NET applications. For using Visual Studio, the user has to first install the .NET framework on the system.
+
+
+
+.NET is a free, cross-platform, open source developer platform for building many different types of applications.
+
+With .NET, you can use multiple languages, editors, and libraries to build for web, mobile, desktop, gaming, and IoT.
+
+
+
+
+
+Partial Class
+
+A single class split into multiple files
+-  all files are combined into a single class file when the application is compiled. 
+
+-  partial keyword. 
+public partial Geeks 
+{ // code  }
+ combines Geeks1.cs and Geeks2.cs into a single file, i.e. Geeks
+
+PROS 
+With the help of partial class multiple developers can work simultaneously on the same class in different files.
+
+
+Inline Method
+
+eg) [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+- Inlining a method/property means that the compiler takes it and replaces the calls to it with its contents 
+
+- replaces a function call site with the body of the called function.
+- compiler optimization
+- improve performance
+
+- occurs during compilation, without changing the source code 
+- Related: (recommend the compiler to Inline via AggressiveInLining) https://www.dotnetperls.com/aggressiveinlining 
+
+Attribute
+	[ myAttribute]
+	- square brackets
+	- it associates metadata with code
+	- Reflection: After associattion, the attribute can be queried at run time by using reflection
+	SeializableAttribute:
+		[System.Serializable]
+		public class SampleClass
+		{	
+			// Objects of this type can be serialized.
+		}
+
+
+DYNAMICALLY LINKED LIBRARY - DLL
+	A library of code used by 2+ applications at the same time 
+		libraries/modules
+	Used by 2+ application.
+	Manageable smaller chunks of code
+	-Libraries can be loaded at runtime and thus shared between different concurrent applications. This is called 
+dynamic linking.
+	-In some cases the library can be included within the application itself. This is known as static linking. Static 
+linking makes deployment easier at the cost of flexibility as different application will each load the same copy of 
+the DLL.
+	-However, static linking is not always an option. E.g. you can't statically link a .NET application. The user 
+must have the .NET libraries in order to run a .NET application and libraries (or assemblies as they are called in 
+.NET) are loaded at runtime.
+	
+	Common methods (file processing or GUI) are made available in libraries 
+		- thus multi applications have the functionality. 
+		- Reduces code duplication (one fix/change effects all apps)
+		- Ensures comminality
+			ex) common dialogs are the same between applications.
+			
+	(2nd source)
+	links applications to libraries at run time. The libraries remain in their own files and are not copied into the executable files of the applications. DLLs link to an application when the application is run, rather than when it is created
+			
+ 
+
+-------------------------------------------------------------------------------
+
+volatile bool emulator_running = false;
+public bool IsCrashed => !emulator_running;
+	[...]
+if(!api.IsCrashed)
+		Frame++;
+		
 
 
 ----------------------------------------------------------------------------
@@ -848,18 +1036,6 @@ will create unanticipated changes within other elements.
 	- (network, hardware, software, or other functional components)
 	
 ----------------------------------------------------------------------------
-
-NiFi
-nifi is a data flow managment system that come with a web ui to handle data flows
-
-
-flow based program: a series of nodes and edges that the data moves through.
-
-connectors = edges
-processes = nodes
-data stored w/ in a package of info called a flow file, = content, attributes and age
-
-----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 							NETWORKING
 ----------------------------------------------------------------------------
@@ -986,7 +1162,8 @@ Recall an REST API (one guy called it Business API)
 MICROSERVICES
 	Recall: service - repeatable business task
 	- he archeticture of a program is broken into parts
-	- Seperated into business logic chunks (eg, business might have Inventory Serivce, Shipping Service, Account Service)
+	- Seperated into business logic chunks (eg, business might have Inventory Serivce, Shipping Service, Account 
+Service)
 	- API; services communciate to each other via APIs
 	- if one microservice fails another service picks up
 	- containerized
@@ -1014,7 +1191,21 @@ Microservice Archetiture
 		- Deployment
 			- Defines desired state 
 			
-			
+OSI Model
+	- standard for communciation between computers or telecommunications
+	- Computer A to Computer B; 
+			- data flows down the OSI media and up again at 2nd computer
+				- ComputerA: 7 to 1, 
+				- Then network media (eg internet)
+				- ComputerB: 7 to 1
+			- 7. Application
+			- 6. Presentation
+			- 5. Session
+			- 4. Transport
+			- 3. Network
+			- 2. Data Link
+			- 1. Physical
+		- 
 			
 			
 ----------------------------------------------------------------------------
@@ -1057,7 +1248,8 @@ LEFT JOIN
 	
 	- First, start from "FROM x LEFT JOIN y ON z=z2"
 	- you'll get multiple rows with the same value of CustomerID, (w/ some differences in other fields)
-	- this means "for each table, whenever there is a CustomerID value find the same CustomerID value in the other table
+	- this means "for each table, whenever there is a CustomerID value find the same CustomerID value in the other 
+table
 		if it exists in the right table, we have a match, so return all fields (or selected fields)
 		if it exists or not in the left table return all fields
 	- The LEFT JOIN keyword returns all records from the left table (Customers), even if there are no matches in the 
@@ -1069,8 +1261,10 @@ OUTER JOIN
 	FULL OUTER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
 	
 	- LEFT & RIGHT join, meaning you'll 
-	- The FULL OUTER JOIN keyword returns all matching records from both tables whether the other table matches or not. 
-So, if there are rows in "Customers" that do not have matches in "Orders", or if there are rows in "Orders" that do not 
+	- The FULL OUTER JOIN keyword returns all matching records from both tables whether the other table matches or 
+not. 
+So, if there are rows in "Customers" that do not have matches in "Orders", or if there are rows in "Orders" that do 
+not 
 have matches in "Customers", those rows will be listed as well.
 
 SELF JOIN
@@ -1221,12 +1415,9 @@ bean are classes that encapsulate many objects into a single object (thebean)
 ----------------------------------------------------------------------------
 
 
-
-
-
 '==' tests object reference in java
 
- DLL is a library that contains code and data that can be used by more than one program at the same time
+ 
  
  public is visible from wherever.
 
@@ -1234,3 +1425,150 @@ internal is visible only within an assembly
 
 assembly is a file that is automatically generated by the compiler upon successful compilation of every .NET 
 application. It can be either a Dynamic Link Library or an executable file. 
+
+
+----------------------------------------------------------------------------
+
+
+JAVASCRIPT 
+
+MAP
+ - calls the  function once for each element in an array
+ - like a for loop
+
+ ex)
+var numbers = [65, 44, 12, 4];
+var newarray = numbers.map(myFunction)
+// newarray = [650,440,120,40]
+
+FILTER 
+- calls a function that return those elements which satisfy a test condition
+
+ex)
+var nums = [32, -1, 16, 40];
+function isPositive(value) { return value > 0; };
+// posNums = nums.filter(x => x > 0);
+posNums = nums.filter(checkAdult);
+// ages2 = [32,16,40]
+
+ex)
+const animals = { name: 'dog', mammal: true},
+				{ name: 'bear', mammal: true}, 
+				{ name: 'salmon', mammal: false},]
+myArr =animals.filter(a => a.mammal)
+// myArr has 'dog' and 'bear'
+
+
+REDUCE
+- You have an array of amounts and you want to add them all up.
+- It's weird and complex, dont invest time into this
+ex)
+	const euros = [29.76, 41.85, 46.5];
+	const sum = euros.reduce((total, amount) => total + amount); 
+	// 118.11
+	
+	
+----------------------------------------------------------------------------------
+
+REACT JS
+
+JS library for creating UI
+
+Start up:
+$ npx create-react-app myreactproject
+$ cd myreactproject
+$ npm start
+
+- need index.js & index.html
+- hello = function() { return "Hello World!"; }
+- hello = (val) => "Hello " + val;
+- var myVar =  hello("World");
+note: because of the arrow => , then "changeColor = function() { ... }" is differetn from "changeColor = () => {"
+
+LET, CONST, VAR
+let - block scope, in braces {}
+	- can be updated but not re-declared.
+const - block scope & constant
+	  - cannot be updated or re-declared, must be initialized
+var - function scope
+	- if outside of function then it will be global
+
+reactDom.render()
+- takes two arguments, HTML code and an HTML element.
+ex)	const myelement = <p>Hello</p>
+	ReactDOM.render(myelement, document.getElementById('root'));
+	
+JSX
+- Assigning html element into variables is b/c of JSX
+- mMst have ONLY ONE top level element.
+	ex) const myelement = <h1>I Love JSX!</h1>; 
+	ex) const myelement = (
+						  <div>
+							<h1>I am a Header.</h1>
+							<h1>I am a Header too.</h1>
+						  </div>
+						);
+- Write expressions inside curly braces { }
+	ex) const myelement = <h1>React is {5 + 5} times better with JSX</h1>; // 10
+
+COMPONENTS
+	- are independent and reusable bits of code that returns HTML
+	- data is stored and handled using state and props.
+	- Two types, Class-components and Function-components
+		- function components does not have state
+			- myFunctionName() { [Javascript code] return { [JSX code] }
+		- class have state
+			- class will have "extends React.Component" & and render method
+			- class with state will have "constructor()"
+		
+	 
+	- must have render() method. "render() { [...] return (html code) }"
+	- A component takes in parameters, called props.
+	- can have components in components
+	- can have components in files
+	Note the two are same: function() {alert("Hey dog!")
+                                  () => alert("Hey dog!")
+	- props comes from Parameters      ex) <Student age=14 />
+	- state come from the class data   ex) this.state = { age: 14 }
+	- key is a special and reserved property in React
+	- key cannot be referenced using this.props.key
+PROPS
+- are passed to components via HTML attributes.	
+	ex) 
+		const myelement = <Car brand="Ford" />;
+			[...]
+		class Car extends React.Component {
+			render() { return <h2>I am a {this.props.brand}!</h2> }	}
+STATE
+- are the variables of the class
+- defined in constuctor()
+- can pass data from one component to another, as parameters.
+	1st) const carinfo = {name: "Ford", model: "Mustang"};
+	2nd) return <Car brand={carinfo} />
+	3rd) return <h2>I am a {this.props.brand.model}!</h2>;
+
+LIFECYCLE
+	- Each component has a lifecycle of 3 phases:
+	- Mounting, Updating, and Unmounting.
+		Mounting - putting elements into the DOM. Four are methods are called.
+		Updating - whenever there is a change in the component's state or props. Five methods are called.
+		Unmounting - when a component is removed from the DOM. One method	
+OTHERS
+
+- Don't use var anymore
+- key is a special and reserved property in React
+- key cannot be referenced using this.props.key
+
+
+ 
+ 
+
+	
+	
+	
+	
+	
+	
+	
+	Sourcing a file is nothing but executing the file (line by line), but
+The difference between sourcing and executing a file is : executing a file does not make any changes in the current shell
