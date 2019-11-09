@@ -499,6 +499,7 @@ MVC
 			- Templating engines
 	Contoler- Takes user input 
 			- Gets data from the model, passes data to the view
+			- The controller accepts the requests and handles it!
 
 Controller VS Router
 	- Routers are part of the controller layer
@@ -1175,10 +1176,30 @@ note - Docker v VM
 	- VM has a guest operating system
 	- docker does not have a guest OS
 
+MONOLITHIC- 
+	- obstacle to scaling development. 
+		- to update one component you have to redeploy the entire applicat
+		- difficult for seperate teams to work independently (the UI team, accounting team, inventory team, etc.)
+		- The teams must coordinate their development efforts and redeployments. 
+	- compromise on the choice of hardware. ... memory database or cpu image processing
+		
 Microservice Archetiture
+	- Each microservice performs a single task
+	- microservice components are loosely coupled and communicate via APIs
 	- apps are containerized
 	- need Containerization Orchestrator (CO)
 		- COs: Kubernetes, Azuere Container service, Amazon ECS, Marathon, Docker Swarm, Google Container Engine, 
+	-  business logic is decomposed into a collection of small, loosely coupled, distributed components that collectively form the 
+larger application. 
+	- apps that follow MS arch are: 
+		self-healing
+		cost efficient
+		easily updated and maintained through CI/CD.
+		easy to automate the infrastructure 
+		components should be stateless (user data)
+	- expect an API gateway
+	- An API gateway is programming that sits in front of an application programming interface (API) and acts as a single point of 
+entry for a defined group of microservices	
 	Kubernetes:
 		- Node: 
 			- Instance of a computer
@@ -1190,8 +1211,55 @@ Microservice Archetiture
 			- Usually a load balancer
 		- Deployment
 			- Defines desired state 
+
+
+Service Discovery
+	- how apps get the IP of the service
+	- how services make their IP known for applications
+  Service Registry 
+	- is a database of available service instances
+  Client Side Service Discovery, 
+	 - clients query the service registry, select an available instance, and make a request.
+	 - the client obtains the location of a service instance by querying a Service Registry, which knows the locations of all service instances.
+	 - netflix eureka
+	 - heart beats - eurka client pings the euerka server which pings the services
+	 - if service goes down the disc service will eventually be noticed
+		 - if (the disc service) goes down, the client will use the cached data
+  Server Side Service Discovery
+	 - clients make requests to a discovery server (load balancer), which queries the service registry and forwards the request to an available instance. - aws elb
+	 - libraries that facility server side discvoery will resid eont he client
+	 - ssd = less hops
+
+	 AWS Elastic Load Balancer (ELB) is an example of a server-side discovery
+	 
+	 How does the client of a service - the API gateway or another service - discover the location of a service instance?
+note: Load Bs vs API Gateway
+- Load balancers and API gateways both handle network traffic
+- LBs distributes incoming network traffic
+- (Internet Request Traffic) ---> LB ----> Server 1 -
+									 ----> Server 2 ----> Database
+									 ----> Server 3 -
+
+SERVICE ORIENTED ARCHETITURE (SOA)
+ -is a mechanism for integrating multiple larger components, typically applications, together so they form an interoperable suite. 
+Each component typically performs a complete piece of business logic from start to finish, usually involving a variety of specific 
+tasks and functions needed to complete an entire larger action
+ -A development organization using SOA would typically break the shopping site up into major sets of business logic and develop each 
+as a separate application to be integrated together.
+ -An organization using a microservices architecture would take that shopping cart and break it up into smaller task-oriented 
+services. Instead of a shopping cart application there might be a tax calculation service, an add/remove item service, a shipping 
+service, a billing service, and a compose final order service
+
+ Feature				SOA									Microservices
+component size		large piece of business logic		single task or small piece of business logic
+coupling			generally loosely coupled			always loosely coupled
+
+Modular programming is a software design technique that emphasizes separating the functionality of a program into independent, 
+interchangeable modules, such that each contains everything necessary to execute only one aspect of the desired 
+functionality.			
 			
-OSI Model
+OSI Model (Open Systems Interconnection)
+
 	- standard for communciation between computers or telecommunications
 	- Computer A to Computer B; 
 			- data flows down the OSI media and up again at 2nd computer
@@ -1206,8 +1274,51 @@ OSI Model
 			- 2. Data Link
 			- 1. Physical
 		- 
+	
 			
-			
+n tier
+  3 tier:
+	- Presntaion layer 
+		- UI, client
+		- translate data/tasks to s/t the user can understand
+	- Business/Logic layer
+		- coordinates the commands recieved from the presentation layer
+		- moves data from the presentation & data tier
+		- makes logical decisions
+		- calculates
+	- Data Layer 
+		- Queries and operations 
+		- data is stored and retrieved
+		
+	
+	
+Integration testing = modules are combined and tsested
+	
+Note: high level elements that we as software architects are trained to consider:
+
+Functional requirements of a system (what it should do, e.g 'process orders in this format...')
+
+Non-functional requirements (how it should perform e.g. 'process at least 200 orders a minute')
+
+Constraints (what is out-of-scope to change e.g. 'orders must be updated on our existing mainframe system').
+
+Dev Ops 
+	- ppl in operations knoww what ppl in developmetn are doing
+	- development: writes codes, features, tests
+	- operations: manages servers, traffic, scaling, RAM, cloud 
+	- devops manager mearges the deveopment & oper4ations together
+ 
+ 
+ Clould Native Apps:
+	- applications and services built specifically to exist in the cloud.
+	- Clould Native Apps =  Microservice archeticture
+	- 
+
+ cloud native system, on the other hand, should be largely self-healing, cost efficient, and easily updated and maintained through 
+Continuous Integration/Continuous Delivery (CI/CD).
+ \
+ 1 automation cloud makes it easier than ever to automate the infrastructure 
+ 2  design components to be stateless (user data)
 ----------------------------------------------------------------------------
 SaaS	
 	- On damand pay per use software
@@ -1467,7 +1578,70 @@ ex)
 	const sum = euros.reduce((total, amount) => total + amount); 
 	// 118.11
 	
+
+PROMISE
+- Good for async programming
+- use "new Promise(function(resolve,reject) { code }"
+- resolve() in the promise is what will be returned in the ".then"
+- reject() in the promise is what will be returned to the ".catch" of the implimentation
+- Can do Promise.all([arry of promises])
+ex)
+let promiseToCleanTheRoom = new Promise( function(resolve, reject) {
+  //Clean the room logic
+  let isClean = false;  ////THIS
+  if (isClean) {
+	resolve('Clean')
+  } else {
+    reject('NOT clean')
+  }
+  });
+  
+promiseToCleanTheRoom.then( function(fromRes){
+	console.log('the room is' + fromRes); // prints "the room is Clean" if isClean==true
+}).cath(fucntion(fromRej){
+	console.log('the room is' + fromRej) //  prints "the room is NOT clean" if isClean==false
+}
+
+EVENT
+- target.addEventListener(*type*, *listener[, options]*);
+- addEventListener() sets up a function that will be called whenever the specified event is delivered to the target.
+- events are sent to all elements of the same type. ie, he browser checks to see if the element's outer-most ancestor (<html>) has an onclick event handler
+	- bubbling: events propagate outwards, from the element -> it's parent -> parent's parent -> root
+	- capturing: events propagate in. root -> reaches the clicked element
+	- solution: e.stopPropagation()
+the event handler recieves the event object, that has data about the event "left click, right click, etc"
+
+AJAX
+- not a language or tool
+- it's web development technique used to send/retrieve data in the backgorund w/o refreshing
+- it is the use of the XMLHttpRequest object to communicate with servers
+-  most appealing characteristic is its "asynchronous" nature
+ 
+HTML BODY:
+
+x-www-form-urlencoded:  simple text/ ASCII
+						is the same as the one used in URL parameters.
+form-data: binary data or non-ASCII text
+			same as <form>, data is key/value
+			it’s the object to represent HTML form data.
+			(in js) let fd = new FormData();
+			
+Raw: A raw request can contain anything.  
+	sends your raw string data as it is without modifications. 
+	it will send plain text or JSON or any other kind of string
+	The type of data that you are sending can be set by using the content-type header 
+Binary: non-textual data 
+		video, audio, images
+		
+HTTP POST
+	POST method sends data to the server. The type of the body of the request is indicated by the Content-Type header.
 	
+HTTP PUT
+	for update
+	
+	
+
+
 ----------------------------------------------------------------------------------
 
 REACT JS
@@ -1559,16 +1733,139 @@ OTHERS
 - key is a special and reserved property in React
 - key cannot be referenced using this.props.key
 
+random docker
+	docker run -p 3306:3306 your-sql-container
+	Will publish the 3306 port of your container to the 3306 port of your VM.
+	Connection con = DriverManager.getConnection("jdbc:mysql://10.0.2.15:3306/databaseName","root","myrootpassword");
+	
+	
+when you have the power to call your code whenever you want that is library, otherhand, your framework calls your code	
+----------------------------------------------------------
+##########################################
+ useEffect()
+useEffect(() => { console.log('useEffect hook ran', songs) }, [songs]) 
+		// 2 paramaters, 1st = code that runs when *it* renders/re-renders. 2nd = array of variables, if 1 variable is updated then it 
+		//	triggers 1st param's code
 
- 
- 
+##########################################
+ useState()
+- creates state variables.
+- the object now has this.state.songs data.
+- useState returns 2 values, 
+- 1st is the array, 2nd is a function (arbitrary name) to change the data
+	- The initial value will be assigned only on the initial render (if it’s a function, it will be executed only on the initial render).
+	- In subsequent renders (due to a change of state in the component or a parent component), the argument of the useState hook will be ignored and the current value will be retrieved.
+ex)
+const [songs, set] = useState([ 
+	{ title: 'Brand new Rollers', id: 1 },
+    { title: 'Revive', id: 2 } ])
+ [...]
+	set([...songs, { title, id: uuid() }])   
+			//Everything inside of "set"'s paratheses will replace "songs"
+			// "title" is ES6 shorthand for "title: title" (since same name)
+	
+##########################################
+useContext()
+- gains access to the data (the context), which wraps this object
+- Gets values from (below) "<ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme }} >"
+ex)
+	[Nav.js]
+const { isLightTheme, dark, light } = useContext(ThemeContext)  //magically matches dark, light and isLight
+	[ThemeContext.js]
+export const ThemeContext = createContext();
 
+export class ThemeContextProvider extends Component {
+  state = { isLightTheme: true,  light: { color: '#555'}, dark: { color: '#ddd',} }
+
+  toggleTheme = () => { console.log("clicked!!!") }
+
+  render() {
+    return (
+      <ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme }} >
+        {this.props.children} 
+      </ThemeContext.Provider>
+	  		    // "this.props.children" refers to to <Nav /> & everything esle that <themeContext.provider> is wrapped around
+				// in the App.js file
+    );
+  }
+}
+----------------------------------------------------------
+SPRINGBOOT
+-In a few words, we can say that the Spring Boot is simply an extension of Spring itself to make the development, testing, and 
+deployment more convenient.
+-To all the problems that arise from the Spring framework, Spring Boot is the solution. 
+-faster and more efficient development eco-system.
+
+- Header key="Content-Type" is http standard to say that the body is JSON
+	- value="application/json" is read by spring mvc knowing it's json object
+
+
+- in CONTROLLER, it's a java class that maps a URI and an HTTP Method to some functionality (some methods)
+DEPENDENCY 
+- Class A uses methods from Class  B
+
+
+Dep Inj
+- DI generally means passing a dependent object as a parameter to a method, rather than having the method create the dependent object
+- thus the method doesnt have a direct dependecny on a particual implemenation
+- classic example: passing a database object in the parameters of a object
+ 
+- makes code testable
+
+- sub diff depencies as long as they satisfy the interface
+- prevents hard coding ... off loading the instatiation of some objects
+- Dep Inversion princ: rely on abstractons rather than concreted implemenations
+- di is arche design pattern
+- abstract classes to interface, when we do, we decouple our implementations from each other
+-DI => Abstraction = more modular = more flexible
+
+Inversion of Control = 
+	the framework does most of the work. 
+	It coordinates the applications activity. IoC determines what to inject into the code. 
+	User inserts his code (behavior and objects) into the framework. 
+	The framework calls your code (not visa vera)
+	in traditional programming, the custom code that expresses the purpose of the program calls into reusable libraries to take care of generic tasks, but with inversion of control, it is the framework that calls into the custom, 
+
+
+ Cookies V LocalStorage vs SessionStorage
+  . Cookies are mainly for reading server-side, local storage can only be read by the client-side
+  Cookies 4KB
+	- sessionStorage expires when the tab is closed!
+	Cookies are pretty much a convenient way to carry information from one session on a website to another, or 
+between sessions on related websites, without having to burden a server machine with massive amounts of data 
+storage. If 
 	
 	
 	
-	
+(Maven )
+- its a build and dependency managment tool
+- Group ID = package name 
+- Artifact ID = project name
+- with spring, you only nned to care about the version of the parent and that parent will download all the correct version
 	
 	
 	
 	Sourcing a file is nothing but executing the file (line by line), but
 The difference between sourcing and executing a file is : executing a file does not make any changes in the current shell
+
+
+-----------------------------------------
+CORS (Cross Origin Resource Sharing)
+	- security feature in browsers
+	- used by browers to give web apps access to selected resources.
+	- server will responded regardess AND YET browser can get error
+	- web apps on http://brodski-domain.com could only request resources from brodski-domain.com 
+		- Access-Control-Allow-Origin: brodski-domain.com <== the server must set in response header.
+		- browsers restrict cross-origin HTTP requests initiated from scripts. 
+	-
+	
+API Key vs CORS
+	- API Keys have limitations for a project, the server limits the projects use (ie, brodski.com is limited to 5,000/day)
+	- CORS limit which domains could access the server 
+	- CORS 
+	
+API keys are for projects, authentication is for users
+
+
+
+	

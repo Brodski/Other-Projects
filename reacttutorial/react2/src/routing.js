@@ -1,23 +1,30 @@
 import React from 'react'
-import { Route, Link, BrowserRouter, Switch } from 'react-router-dom'
+import { Route, Link, BrowserRouter, Switch } from 'react-router-dom';
+import { ThemeToggle } from './contexts/ThemeToggle';
+import { ThemeContextProvider } from './contexts/ThemeContext';
+import { Nav } from './contexts/Nav';
+import { BookContextProvider } from './contexts/BookContext';
+import { BookList } from './contexts/BookList'
+
 //import Contact from './rContacts';
 //import Contact from './rContacts.js'
 
 export class RoutingTut extends React.Component {
   render() { return (
     <BrowserRouter>
-      <div>
-        <ul>
-          <li> <Link to="/"> Home </Link> </li>
-          <li> <Link to="/user"> Userz </Link> </li>
-          <li> <Link to="/nonexistentlink"> dead link </Link> </li>
-        </ul>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route exact path='/user' component={AllUser} />
-          <Route component={NotFound} />
+      <ThemeContextProvider>
+        <div>
+          <Nav />
+          <BookContextProvider>
+            <BookList />
+          </BookContextProvider>
+          <Switch>
+            <Route exact path='/' component={Home} />
+            <Route exact path='/user' component={AllUser} />
+            <Route component={NotFound} />
           </Switch>
-      </div>
+        </div>
+      </ThemeContextProvider>
     </BrowserRouter>
     )
   }
