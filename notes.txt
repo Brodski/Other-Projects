@@ -38,16 +38,16 @@ Method Signature:
 	- setMapReference(int, int) is the method signature
 	
 bytecode:
-	Bytecode is program code that has been compiled from source code into low-level code designed for a 
-software interpreter. It may be executed by a virtual machine (such as a JVM) or further compiled into 
-machine code, which is recognized by the processor.
-	bytecode is compiled programming code that targets a virtual machine rather than a specific 
-computer architecture
-	- if compiled into bytecode, then its a comiopled language (java, C)
-	- if interpreted, then executing a program means reading the source file a line at a time, and doing 
-what it says
-	- interpreted is where the instructions are not directly executed by the target machine, but instead read and executed 
-by some other program 
+		Bytecode is program code that has been compiled from source code into low-level code designed for a 
+	software interpreter. It may be executed by a virtual machine (such as a JVM) or further compiled into 
+	machine code, which is recognized by the processor.
+		bytecode is compiled programming code that targets a virtual machine rather than a specific 
+	computer architecture
+		- if compiled into bytecode, then its a comiopled language (java, C)
+		- if interpreted, then executing a program means reading the source file a line at a time, and doing 
+	what it says
+		- interpreted is where the instructions are not directly executed by the target machine, but instead read and executed 
+	by some other program 
 
 JVM:
 	- Java Virtual Machine
@@ -103,13 +103,14 @@ Dynamically typed languages:
 
 	
 Scripting Language
+	-  is a computer language with a series of commands within a file that is capable of being executed 
+without being compiled
 	-scripts: programs written for a special run-time environment that automate the execution of tasks
 that could alternatively be executed by a human operator
 	- are often interpreted (rather than compiled).
 	- a programming language is typically compiled first before being allowed to run, 
 	- scripting languages are interpreted from source code or bytecode one command at a time.
-	-  is a computer language with a series of commands within a file that is capable of being executed 
-without being compiled
+
 ----------------------------------------------------------
 
 Value: 
@@ -141,6 +142,12 @@ Lambda
 	Ex) args.foreach(arg => println(arg))
 	- the argument to the foreach method is an expression for an anonymous function. 
 	- lambda = anonymous function
+
+
+Lambda's/anonymous
+
+a convenient way of defining anonymous functions that can be passed as a variable to a method.
+  Can also be passed to a method that accepts the delegate as a parameter
 
 	
 ------------------------------------------------------
@@ -192,32 +199,33 @@ their data type.
 	- method overloading 
 	- method overriding
 	- subtyping
-	- (when you access a object or type, the code determines which exact type it is and calls the associated 
-code.)
+	- (when the language accesses a object the code determines which exact type it is and calls the associated 
+       code.)
 	https://stackoverflow.com/questions/1031273/what-is-polymorphism-what-is-it-for-and-how-is-it-used
 
 ------------------------------------------------------------
 ENCAPSULATION
-	- a data-hiding mechanism that restricts access to the objects
+	- a  mechanism that restricts access to the objects
+	- allows you to encapsulate things that shouldnt be modified by other parts of your code
 	- It a mechanism of wrapping the variables and the methods that act on the data together as a single unit
-		
-	- Java's basic unit of encapsulation is the class. ... package 2nd example
-	
-	- Access Modifiers (public private) ... define the visibility of classes, methods, and attributes 
-	- the variables of a class will be hidden from other classes, and can be accessed only 
-through the methods of their current class. 
+
 	Purpose: 
 	- keeps code and data safe from outisde interferance and misuse.
 	- prevents the data from being accessed from the outside
 	- protect data
 	- (flexible easier to change?)
 	
+	
+	ex)
+	- Java's basic unit of encapsulation is the class. ... package 2nd example
+	- Access Modifiers (public private) ... define the visibility of classes, methods, and attributes 
+
 --------------------------------------------------------------	
 	
 ABSTRACTION 
+	- making the programming simpler, reduce complexity.
 	- where you show only “relevant/essential” data and “hide” unnecessary details of an object from the user
 	- "abstracting away the details"
-	- making the programming simpler, reduce complexity.
 	- generalizting, via abstract class & interface
 	- Abstraction is about simplicity (removing & generalizing), Encapsualtioon is about security.
 	
@@ -263,12 +271,11 @@ private properties of the superclass
 	- Dog is the subclass of booth Mammal and Animal ... Dog IS A Mammal
 	
 	Ex)
-public class mySuperClass {  }
-public class subClass extends mySuperClass { }
-public static void main(String(args[]){
-	// The subclass will have at least all the properties of the superclass.
-	// Thus this is possible
-	mySuperClass superClassX = new subClass();
+	- The subclass will have at least all the properties of the superclass.
+	- Thus this is possible
+	public class subClass extends mySuperClass { }
+	
+	mySuperClass x = new subClass();
 }
 ----------------------------
 INTERFACE
@@ -307,6 +314,9 @@ ABSTRACT CLASS
 	- (C#) Override - for each abstract method you must use the override keyword in the subclass that inherit the 
 		abstract  classes
 
+		ABSTRACT VS INTERFACE
+		- abstract implements only 1 | interface can have multiple
+		
 
 ---------------------------------------------------------									
 
@@ -317,7 +327,8 @@ FINAL in Java (sealed in C#)
 initialized once,
 
 IMMUTABLE
- - is an object whose state remains constant/cannot be modified after it was created.
+ - is an object whose state remains constant
+ - cannot be modified after it was created.
  - Contains:
 	- class & data members are private final.
 	- a constructor
@@ -423,20 +434,23 @@ members of a static class by using the class name it
 --------------------------------------------------------
 
 STACK
+	- data for current function call
 	- A block of memory that holds:
-	1)	- references to other objects in the heap
+		- references to other objects in the heap
 		- local primatives
-	2)	- data for current function call
-			- its parameters 
-			- return address
-			- local variables
-	- The new block (called stack frame) is created in the stack memory whenever a method is invoked
+		- function's parameters 
+		- return address
+		
+	- A new block (called stack frame) is created in the stack memory whenever a method is invoked
 	ex) when the foo() method terminates, the memory for the method foo() is freed
+	
 
 	Heap memory is used by all the parts of the application whereas stack memory is used only by one thread of execution.
 	Stack memory is short-lived whereas heap memory lives from the start till the end of application execution.
 	
-	The run-time stack, consisting of stack frames, is responsible for program execution and function calls. 
+	
+	The run-time stack consists of stack frames, 
+	The run-time stack is responsible for program execution and function calls. 
 	A stack frame contains all the data for one function call: its parameters, the return address, and its local variables. 
 
 	The stack frame only exists during the execution time of a function, and so do the objects on the stack frame
@@ -449,7 +463,7 @@ against the word "pointer". Whatever. Just know that the address of the object g
 	
 HEAP
 	- holds all objects & its data
-	- hold JRE classes
+	- if you see "new [object] then it's going on the heap
 
 JRE (Java Runtime Environment )
 	-provides the minimum requirements for executing a Java application; it consists of the Java Virtual Machine 
@@ -550,35 +564,40 @@ Controller
 
 --------------------------------------------------------
 REST
-	-In the REST architectural style, the implementation of the client and the implementation of the server 
-can be done independently without each knowing about the other. This means that the code on the client side 
-can be changed at any time without affecting the operation of the server, and the code on the server side 
-can be changed without affecting the operation of the client.
+	- The implementation of the client and the implementation of the server can be done independently without 
+	  each knowing about the other. 
+	- This means that the code on the client side can be changed at any time without affecting the operation 
+	  of the server (and visa versa)
+	  
 	- stateless : the server does not need to know anything about what state the client is in and vice versa.
+	- client-server is all rest API
+		
 	GET 	— return 200 (OK)
 	POST 	— return 201 (OK CREATED)
 	PUT 	— return 200 (OK)
 	DELETE 	— return 204 (NO CONTENT) 
+	
 REST API
-- the messenger that takes requests adn tells a system what you want and then returns the response.
-- a piece of software that plugs one application directly into the data and services of 
-another, granting it access to specific parts of a server. 
+	- the messenger that takes requests and tells a system what you want and then returns the response.
+	- a piece of software that plugs one application directly into the data and services of 
+	another, granting it access to specific parts of a server. 
+
 
 
 API
-- APIs are the 'middle man', they can sit between your program and the hardware (or other software)
-- helps two different layers (software/hardware) talk to each other w/o having tons of code in common.
-- these software layers help standardize the programing process so program can interact with lots 
-of others easily
--makes it possible for all the disparate devices and software work well with each other
-- device layer
-	- APIs are used for communication between services
-	- APIs let two pieces of software communicate
-	- EX) An API for a website is code that allows two software programs to communicate with each another
-	- APIs also control access to resources
-	- APIs are also used to control access to hardware devices and software functions that an application 
-	may not necessarily have permission to use. 
-	- APIs often play a big role in security.
+	- APIs are the 'middle man', they can sit between your program and the hardware (or other software)
+	- helps two different layers (software/hardware) talk to each other w/o having tons of code in common.
+	- these software layers help standardize the programing process so program can interact with lots 
+	of others easily
+	-makes it possible for all the disparate devices and software work well with each other
+	- device layer
+		- APIs are used for communication between services
+		- APIs let two pieces of software communicate
+		- EX) An API for a website is code that allows two software programs to communicate with each another
+		- APIs also control access to resources
+		- APIs are also used to control access to hardware devices and software functions that an application 
+		may not necessarily have permission to use. 
+		- APIs often play a big role in security.
 
 Driver
 	- software that allows your computer to communicate with hadware or devices. (sound card)
@@ -589,48 +608,45 @@ Processes and Threads
 	- Threads exist within a process — every process has at least one. 
 	- Threads share the process's resources, including memory and open files. 
 
-
-
-
-
 --------------------------------------------------------
 
+Firmware
+	- Firmware is software written directly into our hardware devices.
+	- Firmware is stored on flash ROM (special types of memory) 
+		- written once, by the manufacturer 
+	-exmpale
+		There's firmware in computer motherboards (it's called BIOS or UEFI), there's firmware in hard disks, solid-state drives (SSDs), 
+	CD/DVD/Blu-Ray drives, there's firmware in network cards, routers, access points, range extenders, there's even firmware in your 
+	gaming mouse and keyboard. These are just some examples that are related to computers.
+	
+	
+	Firmware vs Drivers
+		- firmware on hardware
+		- drivers installed on OS
+		- firmware is stored on the hardware device itself while drivers are installed inside the operating system. 
+		- Also, firmware can start on its own and do what it is programmed to do while drivers must be run by the operating system. 
+		  The biggest difference between the two is that the firmware tells the devices what they should do, while the driver tells 
+		  the operating system how to communicate with the same devices.
+		- provides the low-level control for the device's specific hardware.
 
-- Firmware is software written directly into our hardware devices.
-- Firmware is stored on flash ROM (special types of memory) 
-	- written once, by the manufacturer 
--exmpale
-	There's firmware in computer motherboards (it's called BIOS or UEFI), there's firmware in hard disks, solid-state drives (SSDs), 
-CD/DVD/Blu-Ray drives, there's firmware in network cards, routers, access points, range extenders, there's even firmware in your 
-gaming mouse and keyboard. These are just some examples that are related to computers.
-firmware VS operating system
-	firmware is stored on the hardware device itself while drivers are installed inside the operating system. Also, firmware can start 
-on its own and do what it is programmed to do while drivers must be run by the operating system. The biggest difference between the 
-two is that the firmware tells the devices what they should do, while the driver tells the operating system how to communicate with 
-the same devices.
-- provides the low-level control for the device's specific hardware. 
 --------------------------------------------------------
 
 CONTAINERS
 
-	- It allow you to package your application together with libraries and other dependencies, providing 
-isolated environments for running your software services.
-	- Instead of virtualizing the hardware stack as with the virtual machines approach, containers 
-virtualize at the operating system level, with multiple containers running atop the OS kernel directly. 
-	- Containers virtualize the operating system instead of hardware. 
+	- provides isolated environments for running your software services.
+	- create predictable environments that are isolated from other applications. 
+	- Containers virtualize the operating system instead of hardware (VMs virtualize hardware). 
+		- with multiple containers running atop the OS kernel directly. 
 	- containers are far more lightweight: they share the OS kernel, start much faster, and use a fraction 
-of the memory  
-	create predictable environments that are isolated from other applications. 
-	allow you to package your application and its dependencies together into one succinct manifest that can 
-be version controlledI
-	Containers can also include software dependencies needed by the application, such as specific versions 
-of programming language runtimes and other software libraries.
-less time debugging and diagnosing 
+		of the memory  
+	- allow you to package your application and its dependencies together into one succinct manifest that can 
+		be version controlled
+	- software dependencies: specific versions of programming language runtimes and other software libraries.
 
 
 --------------------------------------------------------
 
- Agile
+Agile
 	- iterative development
 	- flexible, adaptive planning
 	- frequenlt delievery
@@ -659,8 +675,7 @@ Software Cycle
 	- is a process that produces software with the highest quality and lowest cost in the shortest time
 	- Requirement gathering and analysis -Meetings with managers, stake holders and users are held in order 
 to determine the requirements
-	- Design - specifying hardware and system requirements and also helps in defining overall system 
-architecture
+	- Design - specifying hardware and system requirements and also helps in defining overall system architecture
 	- Implementation - work is divided in modules/units and actual coding is started. 
 	- Testing - unit testing, integration testing, system testing, acceptance testing, non-functional testing 
 	- Deployment 
@@ -669,9 +684,13 @@ architecture
 --------------------------------------------------------
 
 Threads & Processes
-	a process is a collection of virtual memory space, code, data, and system resources. a thread is code that is to be 
-serially executed within a process. a processor executes threads, process always has at least one thread of execution, 
-known as the primary thread
+	- Processes are often seen as synonymous with programs
+	- Threads exist within a process — every process has at least one. 
+	- a process is; memory space, code, data, and system resources. 
+	- a thread is code that is to be executed serially within a process. 
+	- a processor executes threads, process always has at least one thread of execution, known as the primary 
+	- Threads share the process's resources, including memory and open files. 
+
 
 SDK (Software Development Kit)
 	- a set of software development tools that allows the creation of applications for a certain software 
@@ -700,10 +719,10 @@ PREPROCESSOR DIRECTIVE
 	- eg) #if (DEBUG && !MYTEST)
 	
 STA Thread
-- tells the compiler to use a Single Thread Apartment model
-- If not present, the application uses the multithreaded apartment model, which is not supported for Windows Forms.
-- used for Windows Forms (GUI's) as that uses Win32 for its drawing, which is implemented as STA. If you are using something that's STA model from multiple threads then you get corrupted objects
-- don't worry about it, just accept that Windows GUI threads must be marked as STA otherwise weird stuff happens
+	- tells the compiler to use a Single Thread Apartment model
+	- If not present, the application uses the multithreaded apartment model, which is not supported for Windows Forms.
+	- used for Windows Forms (GUI's) as that uses Win32 for its drawing, which is implemented as STA. If you are using something that's STA model from multiple threads then you get corrupted objects
+	- don't worry about it, just accept that Windows GUI threads must be marked as STA otherwise weird stuff happens
 
 Win32 = Window's (API) for developing 32-bit applications,  available in the Microsoft WIndows operating systems
 
@@ -724,7 +743,6 @@ COM (Component Object Model)
 ASSEMBLY
 	- In C# terms, it's basically a single C# project.
 	- An assembly is the compiled output of your code, typically a DLL or EXE 
-	- Assembly is the smallest unit of deployment of a .net application. It can be a dll or an exe.
 	- Ttwo types: Private Assembly, Public/Shared Assembly, Satellite Assembly
 		- Assemblies are the building blocks of .NET Framework applications; they form the fundamental unit of deployment, version 
 control, reuse, activation scoping, and security permissions. An assembly is a collection of types and resources that are built to 
@@ -750,61 +768,212 @@ Struct Vs Class
 		- Purpose: The general rule to follow is that structs should be small, simple (one-level) 
 collections of related properties, that are immutable once created; for anything else, use a class.
 
+DYNAMICALLY LINKED LIBRARY - DLL
+	- A library of code 
+	- could be used by 2+ applications at the same time 
+	- links to an application when the application is run, rather than when it is created
+	- application will each load the same copy of the DLL.
+	- The libraries remain in their own files and are not copied into the executable files of the applications.
+	
+	- Uses fewer resources
+	- DLLs aren't loaded into RAM when application starts
+	- When a DLL is needed then it is loaded
+	ex) 
+		- the Printer-DLL is not loaded until the user prints a doc
+		- COMDLG32.DLL − Controls the dialog boxes.
+		- GDI32.DLL − Draws graphics, displaying text, and managing fonts.
+		- KERNEL32.DLL − Manages memory and various processes.
+		- USER32.DLL − Creates program windows and manages their interactions with each other.
+	
+
+	
+	- static linking: library can be included within the application itself.	
+		- makes deployment easier at the cost of flexibility as different 
+		- However, static linking is not always an option. 
+		- The user must have the .NET libraries in order to run a .NET application and libraries are loaded at runtime.			
+ 
+
+HANDLE -
+	- It is an  reference to a resource. 
+	- used when application software references blocks of memory 
+	- Common resource handles are file descriptors, network sockets, database connections, process identifiers (PIDs), and job IDs.
+	- are obaque data types?
+
+
+Delegates
+	ex)
+	public delegate int myDelegate(string s)
+
+	- An object which holds a reference to a method 
+	- A reference type variable that can hold a reference to the methods 
+	- Can be the parameter of a method, in which a lamda could also be used (lambda is a delegate) 
+	- Can be used to tell which method is to be called when an event is triggered.
+	- Can be used as event handlers:
+	  ex) https://www.tutorialsteacher.com/csharp/csharp-delegates (at mid/bottom)
+ 
+Null-conditional operators: 
+	?.  
+	?[]
+	If the object is not null, then continue.
+	ex)
+	  A) x = setOfPeople?.Count()
+	  C) if (people != null)
+			return people.Count()
+		
+Null-coalescing 
+	  ??
+	Returns the leftside if it is not null, else rightside
+	ex)  
+	  A) x = people ?? "default"
+	  B) if (people != null)
+	  return people
+	  else
+	  return "Default'"
+
+
+BizHawk.Client.Common/rewind/rewinder.cs
+Rewinder.cs
+
+public bool RewindActive => RewindEnabled && !SuspendRewind;
+
+private bool RewindEnabled { get; set; }
+
+public bool SuspendRewind { get; set; }
+
+public float FullnessRatio => _rewindBuffer?.FullnessRatio ?? 0;
+
+public int Count => _rewindBuffer?.Count ?? 0;
+
+public long Size => _rewindBuffer?.Size ?? 0;
+
+public bool HasBuffer => _rewindBuffer != null;
+
+public int RewindFrequency { get; private set; }
+
+
+
+
+
+Sourcing a file is nothing but executing the file (line by line), but
+The difference between sourcing and executing a file is : executing a file does not make any changes in the current shell
+
+---------------------------------------
+
+ENV
+Environment variables hold values related to the current environmen
+
+
+HOME
+The user's home directory. On linux, ~ is shorthand for HOME.
+
+PATH
+The list of directories searched to find executable programs
+directories in which executable programs (.exe) are located that can be started without typing the whole path to the file on the command line.
+On Linux and Mac OS X, it holds all bin and sbin
+On Windows, it holds C:\Windows and C:\Windows\system32 
+
+PYTHONPATH
+The list of directories that is added to Python's standard search list when importing packages and modules
+
+
+PATH variable prevents us from having to write out the entire path to a program on the CLI every time we run it. Essentially, 
+	it’s just a variable that stores a bunch of shortcuts.
+When you enter a command without using the absolute path, the operating system checks the PATH variable. It reads through values 
+	assigned to the PATH variable (seperated by ; or :) until it finds the value that contains the path to your program.
+
+~/.bash_profile
+       The personal initialization file, executed for login shells (used on start up, where you write your alias)
+~/.bashrc
+       The individual per-interactive-shell startup file (not used on )
+
+
+
+API
+Tip: keep backward compatibility so that if you change the API version, consumers get enough time to move to the next version.
+TIp: should return JSON, old apps use XML
+
+
+layered system - multiple layers of sw can be in the mix, in between client server
+- client cant assume direct connection to server 
+- improces scalability
+
+
+
+web frameworks provide libraries for database access, templating frameworks, and session management, and they often promote code reuse.
+webframeworks provide; security, routing, caching, url mapping, templating
+
+
+-----------------
+git for-each-ref --sort=committerdate refs/heads/ --format='(%(color:green)%(committerdate:relative)%(color:reset)) %(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname)'
+
+
+[gets author + date]
+
+
+git for-each-ref --sort=committerdate refs/heads/ --format='  %(committerdate:short) %(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(authorname) %cd ' ​
+
+----------------------------------------
+
+Dynamic types
+	A dynamic type escapes type checking at compile time; instead, it resolves type at run time.
+	dynamic dynamicVariable = 1;
+
+	The object type can crash at run time if it is not converted to the correct data type. 
+	It cannot show an error at compile time but it will show an error on run time.
+	The actual type of dynamic would resolve at runtime. 
+	- casting is required for objects
+
+Implicily Typed Variable:
+	- based on right side
+	int i = 100;// explicitly typed 
+	var j = 100; // implicitly typed
+
+StringBuilder
+	A memory optimized string-object. Doesnt create a new object in memory but instead appends.
+	Strings will created new objects in memory
+
+Namespace
+	They organize large code projects.
+	declaring your own namespaces can help you control the scope of your code
+
+
+
 ------------------------------------------------------------------------
 
 LIBRARY VS FRAMEWORK
 
 	Library
-
-		- It is a collection of objects/functions/methods (depending on your language) and your application links it 
-			and uses those objects/functions/methods
-		- A file containing re-usable code that can usually be shared among multiple application
 		- A library contains many pieces of functionality that you may pick and choose from 
+		- It is a collection of objects/functions/methods your application links to
 		
 		ex) Network protocols, compression, string utilities, regular expressions, math. 
 
 	Framework
-		- Embodies some abstract design, with more behavior built in. You need to insert your code inot the framework 
-			someway The framework's code then calls your code at these points.
-
+		- You insert your code inot the framework.  The framework's code then calls your code at these points.
 		- User still has code to link up but the most important work is done by the application.	
-		- Everything you use in application development. It can be a library, a collection of many libraries, a 
-collection of scripts, or any piece of software you need to create your application. Framework is just a very vague 
-term.
-
+		- It provides a workflow that is hard to change (for better or worse). 
+		- This means rapid development/prototyping, but if significant changes are made in the future it may be 
+		  impossible (or very time consuming) to implement them.
 	ex) Web application system, Plug-in manager, GUI system. 
+	
+	
+-------------------------------------------------------------------
 
+	.NET v C#
 
+		- C# is a programming language, 
+		- .NET is the framework that the language is run on.
+		- C# is a language created for use with .NET.
+	ASP v ASP.NET
 
-	- A library contains many pieces of functionality that you may pick and choose from 
-		- i.e. using one piece of technology doesn't mean you're locked into the rest. 
-		- you will have more work cut out for you, but more control.
-
-
-	- A framework however very much sets out how you will be working. 
-	- It provides a workflow that is hard to change (for better or worse). 
-
-	- This means rapid development/prototyping, but if significant changes are made in the future it may be 
-impossible (or very time consuming) to implement them.
-
-
-.NET v C#
-
-- C# is a programming language, 
-- .NET is the framework that the language is run on.
-- C# is a language created for use with .NET.
-ASP v ASP.NET
-
- 	- ASP.NET is an extension of .NET
-
-	- Used for writing web-based applications and websites. 
-
-	- ASP is an older web framework and outdated technology, do not trouble yourself with it.	
-	- ASP and ASP.NET are quite different under the hood. Only language options are VBScript and JScript. 
-.NET 
-	- .NET is used to develop Form-based applications, Web-based applications, and Web services.
-	- .NET apps are in C#, F#, or Visual Basic.
-	- Different .NET implementation do diffrent things:
+		- ASP.NET is an extension of .NET
+		- ASP is an older web framework and outdated technology, do not trouble yourself with it.	
+		- Used for writing web-based applications and websites. 
+		- ASP and ASP.NET are quite different under the hood.
+	.NET 
+		- .NET is used to develop Form-based applications, Web-based applications, and Web services.
+		- .NET apps are in C#, F#, or Visual Basic.
+		- Different .NET implementation do diffrent things:
 
 	.NET Core 
 		- should be used for cross-platform needs
@@ -816,20 +985,12 @@ ASP v ASP.NET
 	.NET Framework 
 		- supports websites, services, desktop apps, and more on Windows.
 		- Provides Windows forms  (ASP.NET Web Forms , Windows Presentation Foundation (WPF))
-.NET Core offers significant benef(its for new applications and application patterns. However, the .NET Framework continues to be the natural choice for many existing scenarios and as such the .NET Framework isn't replaced by .NET Core for all server applications.
+		
+.NET Core offers significant benef(its for new applications and application patterns. However, the .NET Framework continues to be the 
+natural choice for many existing scenarios and as such the .NET Framework isn't replaced by .NET Core for all server applications.
 
-
-
-
-
-- The combination of Operating System Architecture and CPU Architecture is known as the platform. 
-- A .NET application is platform dependent because of the .NET framework which is only able to run on the Windows-based operating system. The .Net application is platform independent also because of Mono framework
-
-- 	Visual Studio is the development tool which is used to design and develop the .NET applications. For using Visual Studio, the user has to first install the .NET framework on the system.
-
-
-
-.NET is a free, cross-platform, open source developer platform for building many different types of applications.
+- A .NET application is platform dependent because of the .NET framework which is only able to run on the Windows-based operating 
+system. The .Net application is platform independent also because of Mono framework
 
 With .NET, you can use multiple languages, editors, and libraries to build for web, mobile, desktop, gaming, and IoT.
 
@@ -839,29 +1000,29 @@ With .NET, you can use multiple languages, editors, and libraries to build for w
 
 Partial Class
 
-A single class split into multiple files
--  all files are combined into a single class file when the application is compiled. 
+	A single class split into multiple files
+	-  all files are combined into a single class file when the application is compiled. 
 
--  partial keyword. 
-public partial Geeks 
-{ // code  }
- combines Geeks1.cs and Geeks2.cs into a single file, i.e. Geeks
+	-  partial keyword. 
+	public partial Geeks 
+	{ // code  }
+	 combines Geeks1.cs and Geeks2.cs into a single file, i.e. Geeks
 
-PROS 
-With the help of partial class multiple developers can work simultaneously on the same class in different files.
+	PROS 
+	With the help of partial class multiple developers can work simultaneously on the same class in different files.
 
 
 Inline Method
 
-eg) [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
-- Inlining a method/property means that the compiler takes it and replaces the calls to it with its contents 
+	eg) [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+	- Inlining a method/property means that the compiler takes it and replaces the calls to it with its contents 
 
-- replaces a function call site with the body of the called function.
-- compiler optimization
-- improve performance
+	- replaces a function call site with the body of the called function.
+	- compiler optimization
+	- improve performance
 
-- occurs during compilation, without changing the source code 
-- Related: (recommend the compiler to Inline via AggressiveInLining) https://www.dotnetperls.com/aggressiveinlining 
+	- occurs during compilation, without changing the source code 
+	- Related: (recommend the compiler to Inline via AggressiveInLining) https://www.dotnetperls.com/aggressiveinlining 
 
 Attribute
 	[ myAttribute]
@@ -875,33 +1036,7 @@ Attribute
 			// Objects of this type can be serialized.
 		}
 
-
-DYNAMICALLY LINKED LIBRARY - DLL
-	A library of code used by 2+ applications at the same time 
-		libraries/modules
-	Used by 2+ application.
-	Manageable smaller chunks of code
-	-Libraries can be loaded at runtime and thus shared between different concurrent applications. This is called 
-dynamic linking.
-	-In some cases the library can be included within the application itself. This is known as static linking. Static 
-linking makes deployment easier at the cost of flexibility as different application will each load the same copy of 
-the DLL.
-	-However, static linking is not always an option. E.g. you can't statically link a .NET application. The user 
-must have the .NET libraries in order to run a .NET application and libraries (or assemblies as they are called in 
-.NET) are loaded at runtime.
-	
-	Common methods (file processing or GUI) are made available in libraries 
-		- thus multi applications have the functionality. 
-		- Reduces code duplication (one fix/change effects all apps)
-		- Ensures comminality
-			ex) common dialogs are the same between applications.
-			
-	(2nd source)
-	links applications to libraries at run time. The libraries remain in their own files and are not copied into the executable files of the applications. DLLs link to an application when the application is run, rather than when it is created
-			
- 
-
--------------------------------------------------------------------------------
+--------------------------------------------------------
 
 volatile bool emulator_running = false;
 public bool IsCrashed => !emulator_running;
@@ -910,13 +1045,7 @@ if(!api.IsCrashed)
 		Frame++;
 		
 
-
-----------------------------------------------------------------------------
-
-Single responsiblity principle
-	- every class & method has a single responsiblty
-	- makes it easy to quick and reason what each portion of the project is
-	- if a class or method is doing too much and its hard to tell what it's doing
+------------------------------------------------------------------------------	
 	
 /etc
 	system wide configurations
@@ -1029,12 +1158,26 @@ automatically of any state changes, usually by calling one of their methods.
 	https://www.geeksforgeeks.org/observer-pattern-set-2-implementation/
 
 (LOOSE COUPLING)
-	-  is an approach to interconnecting the components in a system so that those components, depend on each 
-other to the least extent practicable.
+	- is an approach to interconnecting the components in a system 
+	- components depend on each other to the least extent practicable.
 	- hardware and software may interact but they are not dependant on each other to work
 	-The goal of a loose coupling architecture is to reduce the risk that a change made within one element 
 will create unanticipated changes within other elements.
 	- (network, hardware, software, or other functional components)
+
+
+MODULAR PROGRAMMING
+
+	- a software design technique that emphasizes separating the functionality of a program into independent, 
+	interchangeable modules, such that each contains everything necessary to execute only one aspect of the desired 
+	functionality.			
+
+
+Single responsiblity principle
+	- every class & method has a single responsiblty
+	- makes it easy to quick and reason what each portion of the project is
+	- if a class or method is doing too much and its hard to tell what it's doing
+	
 	
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
@@ -1042,6 +1185,16 @@ will create unanticipated changes within other elements.
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 
+
+URL vs URI vs URN 
+	- URI is URLs and URNs
+		- nothing special about URI, it a word to say "URLs and URNs"
+	- URL is by location 
+		- URL is everything (protocol + domain + query + etc)
+		- URL is usually what we talk about
+	- URN is by name
+		- not that popular
+		
 Networking Devices: 
 	Modem
 	Hub
@@ -1058,14 +1211,15 @@ routers are used to connect networks
 	
 Gateway: interconnects different networks
 
-
 	
-a modem is what brings the internet into your house
+	
+modem 
+	is what brings the internet into your house
 	b/c there are only 2 types of signals
-A coputer only reads digital siganls
-the internet only reads analog singals
+	A coputer only reads digital siganls
+	the internet only reads analog singals
 	signals to your comp: the modem demodulates the analog singals into digital signals
-	signals from your comp: the domem modules the digital signals into analog siganls.
+	signals from your comp: the modem modulates the digital signals into analog siganls.
 		
 	
 NIC - Network Interface Card
@@ -1073,10 +1227,7 @@ NIC - Network Interface Card
 	- manages network connection
 	- fits into a slot in motherboard, or external port
 	- often a cable (Cat5) connects NIC to another device OR a wireless thing built in computer
-	- all comps have a NIC
 	- NIC is connected to a hub/switch
-	- routers direct traffic
-	- the server uses high end connections to transmit data on internt
 
 Peer 2 Peer - a singel cable between 2 computers (not common)	
 
@@ -1086,25 +1237,24 @@ networks usually require 3 pcies of hardware
 	- device to connect to 
 	
 HUBS, SWITCHES, and ROUTERS
-Hubs & Switches
-	- Both used to create internal network
-	- Both, the purpose, to connect all devices together on an internal network1
-	- Both doesnt exchanged data to an outside network
-	- Both does not read IP addresses
+	Hubs & Switches
+		- Both used to create internal network
+		- Both, the purpose, to connect all devices together on an internal network1
+		- Both doesnt exchanged data to an outside network
+		- Both does not read IP addresses
 	Hubs: 
-	- Not intelligent, b/c
-	- when a data packet comes in one port then the same data packet is broadcasted to all other ports
-	- secruity problems and wastes bandwidth
+		- Not intelligent, b/c
+		- when a data packet comes in one port then the same data packet is broadcasted to all other ports
+		- secruity problems and wastes bandwidth
 	Switch :
-	- intelligent, b/c
-	- learns physical address of connected devices 
-		- ie, mac address is saved in a table
-	- data packets are sent to targeted device
-	
-Router 
-	- forwards data from 1 network to another based on IP address
-	- the router determines if the recieved data is for the router's (internal) network or another network
-	- router = gateway of a network
+		- intelligent, b/c
+		- learns physical address of connected devices 
+			- ie, mac address is saved in a table
+		- data packets are sent to targeted device
+	Router 
+		- forwards data from 1 network to another based on IP address
+		- the router determines if the recieved data is for the router's (internal) network or another network
+		- router = gateway of a network
 	
 WAN - Wide Area Network
 	- a network over a lorge geographical area (corparations business in NY to LA)
@@ -1117,6 +1267,15 @@ NAT - Network Addres Translation
 	- NAT Is used in routers
 	- translate a set of IP addres to another set of IP address
 	- helps preserve limited amount of IPv4 address
+	- Recall:  when a computer talks to another computer it must translate its own private IP to a public IP, and visa vera, 
+	- Private IP to public
+	- Public IP to private
+
+NAT v Router
+  - Routing is the act of moving packets from one destination to another on different networks. 
+  - NAT is the act of translating a private IP to a public 
+IP to allow for the routing/communication with outside networks.
+	
 	
 IPv4 - there are 2 types	
 	- Public or Private
@@ -1140,11 +1299,13 @@ TCP - data is in order
 UPD -	
 	UDP cannot guarantee packet delivery.
 
-	UDP is a faster and more efficient protocol than TCP because it dose not carry out all of the checks to make sure that the communication is perfect.
+	UDP is a faster and more efficient protocol than TCP because it dose not carry out all of the checks to make sure that the 
+communication is perfect.
 
 	UDP is ideal for time sensitive applications, where lost packets are not as important as delayed packets.
 	
-	UDP works well with application broadcast needs, e.g. ARP, and multi-casting, i.e. communicating with selected clients on the network.
+	UDP works well with application broadcast needs, e.g. ARP, and multi-casting, i.e. communicating with selected clients on the 
+network.
 
 	Common network applications that use UDP include:
 		Domain Name System (DNS)
@@ -1153,16 +1314,62 @@ UPD -
 		Voice over IP (VoIP), i.e. using the network backbone and TCP/IP for telephone calls.
 
 
-Port is a logical connection used by programs & services to exchange information
+- Port is a logical connection used by programs & services to exchange information
 
 Recall an REST API (one guy called it Business API)
 	- simple for app developers
 	- exposes data or services for public consuption
 	- purpose: external app developers can use the API which grows the business.
 
+
+
+Socket
+	- A connection between two computers uses a socket.
+	- Each end of the conecton will have a socket
+	- socket = IP address plus port
+
+	The connection to Google would be:
+	(Your PC IP)+port 60200 ——– (Google IP) +port 80 (standard port)
+	The connection to Yahoo would be:
+	(Your PC IP)+port 60201 ——– (Yahoo IP) +port 80 (standard port)
+	- 2 sockets per
+
+
+Proxy Server
+  - similar to broweser
+  - when you look at a webpage it is stored in cache
+  - a proxy server does rhe same
+  - eg, if u want to retreied a webpage then when  a user wants to retreive a webpage it uses the cached
+
+Broadcast -
+	single transmitter of data to everything (wireless)
+Unicast -
+	data sent to a singl destimation
+Multicast  
+	data sent to multiple destimaiton at the same time
+
+Routing Table: a table path that contian a set of rules that shows information on what path a data packet takes to its destination.
+  - Destination, subnet mask, gateway, interface, next hop, metric.
+
+Packet
+	- recall, data is sent over the internet via small packets
+    - Packet Switching: data take different routes to their destination (prob not in order), once all data arrives it is then then recompiled. 
+	     Aka connectionless, most of internt uses switching
+    - Circuit Switching: data takes same route, ie telephone lines.
+
+VPN (Virtual Private Network)
+	- provides a dedicated link between two points over the internet.
+	- encrypts data
+	- a vpn concentrator creates VPN connections & delivery
+	- authenticates users, encrpts data and assigns tunnel / IP addresses
+	- not necessary but used by organizations
+	- originally used by business
+	
+-------------------------------------------------------------------------
+
 MICROSERVICES
 	Recall: service - repeatable business task
-	- he archeticture of a program is broken into parts
+	- the archeticture of a program is broken into parts
 	- Seperated into business logic chunks (eg, business might have Inventory Serivce, Shipping Service, Account 
 Service)
 	- API; services communciate to each other via APIs
@@ -1176,6 +1383,8 @@ note - Docker v VM
 	- VM has a guest operating system
 	- docker does not have a guest OS
 
+
+
 MONOLITHIC- 
 	- obstacle to scaling development. 
 		- to update one component you have to redeploy the entire applicat
@@ -1183,7 +1392,14 @@ MONOLITHIC-
 		- The teams must coordinate their development efforts and redeployments. 
 	- compromise on the choice of hardware. ... memory database or cpu image processing
 		
-Microservice Archetiture
+	disadvantages:
+	- so big no one understand it
+	- scalability
+	- any small release or patch requires a full re-deployment of the application 
+	https://docs.microsoft.com/en-us/dotnet/architecture/cloud-native/introduction
+	
+MICROSERVICE ARCHITECTURE
+
 	- Each microservice performs a single task
 	- microservice components are loosely coupled and communicate via APIs
 	- apps are containerized
@@ -1197,9 +1413,13 @@ larger application.
 		easily updated and maintained through CI/CD.
 		easy to automate the infrastructure 
 		components should be stateless (user data)
+	- An organization using  microservices architecture would take that shopping cart and break it up into smaller tasks. 
+ Instead of a shopping cart application there might be a tax calculation service, an add/remove item service, a shipping 
+ service, a billing service, and a compose final order service
+ 
 	- expect an API gateway
-	- An API gateway is programming that sits in front of an application programming interface (API) and acts as a single point of 
-entry for a defined group of microservices	
+	- An API gateway sits in front of an app and acts as a single point of entry for microservices.
+		- it sends requests from API gateway to the microsevice back to user
 	Kubernetes:
 		- Node: 
 			- Instance of a computer
@@ -1212,51 +1432,72 @@ entry for a defined group of microservices
 		- Deployment
 			- Defines desired state 
 
-
-Service Discovery
-	- how apps get the IP of the service
-	- how services make their IP known for applications
-  Service Registry 
-	- is a database of available service instances
-  Client Side Service Discovery, 
-	 - clients query the service registry, select an available instance, and make a request.
-	 - the client obtains the location of a service instance by querying a Service Registry, which knows the locations of all service instances.
-	 - netflix eureka
-	 - heart beats - eurka client pings the euerka server which pings the services
-	 - if service goes down the disc service will eventually be noticed
-		 - if (the disc service) goes down, the client will use the cached data
-  Server Side Service Discovery
-	 - clients make requests to a discovery server (load balancer), which queries the service registry and forwards the request to an available instance. - aws elb
-	 - libraries that facility server side discvoery will resid eont he client
-	 - ssd = less hops
-
-	 AWS Elastic Load Balancer (ELB) is an example of a server-side discovery
-	 
-	 How does the client of a service - the API gateway or another service - discover the location of a service instance?
-note: Load Bs vs API Gateway
-- Load balancers and API gateways both handle network traffic
-- LBs distributes incoming network traffic
-- (Internet Request Traffic) ---> LB ----> Server 1 -
-									 ----> Server 2 ----> Database
-									 ----> Server 3 -
-
+			
+-------------------------------------------------------------------------
+									 
 SERVICE ORIENTED ARCHETITURE (SOA)
- -is a mechanism for integrating multiple larger components, typically applications, together so they form an interoperable suite. 
-Each component typically performs a complete piece of business logic from start to finish, usually involving a variety of specific 
-tasks and functions needed to complete an entire larger action
- -A development organization using SOA would typically break the shopping site up into major sets of business logic and develop each 
-as a separate application to be integrated together.
- -An organization using a microservices architecture would take that shopping cart and break it up into smaller task-oriented 
-services. Instead of a shopping cart application there might be a tax calculation service, an add/remove item service, a shipping 
-service, a billing service, and a compose final order service
+ - when applications make use of services available in a network.
+ - Each service performs a piece of business logic. 
+	ex) Payment service (credit card) + User Authentication + Google's map service
+
+ - a dev team might create an app by spliting the business logic into separate services, to be later integrated together.
+ - or the dev team might use available services already created (google maps)
+ 
 
  Feature				SOA									Microservices
 component size		large piece of business logic		single task or small piece of business logic
 coupling			generally loosely coupled			always loosely coupled
+			
+-------------------------------------------------------------------------
 
-Modular programming is a software design technique that emphasizes separating the functionality of a program into independent, 
-interchangeable modules, such that each contains everything necessary to execute only one aspect of the desired 
-functionality.			
+Service Discovery
+	- solves the problem of hardcorded URLs/addresses
+	- how apps get the IP of the service
+	- how services make their IP known for applications
+	
+  Service Registry 
+	- is a database of available service instances
+	
+Client Side Service Discovery, 
+  
+	step 1) Client ---> Discovery Server 	 Service 1
+			       <---				         Service 2
+								             Service 3					 
+									
+	step 2) Client      Discovery Server       Service 1
+			  |------------------------------> Service 2
+				      					       Service 3					 
+										  
+	 - *The client finds the URLs*
+	 - clients query the service registry, select an available instance, and make a request.
+	 - the client finds the address by querying a Service Registry. The service registry responds w/ address
+	 
+	 - if service goes down the disc service will eventually be noticed
+		 - if (the disc service) goes down, the client will use the cached data
+		 
+Server Side Service Discovery
+  
+    step 1)	Client ---> Discovery Server ----> Service 1
+										 ----> Service 2
+										 ----> Service 3					 
+								 
+	 - Client doesn't find a URL.
+	 - Client sends message/data to a server (ie Server Side Service), and that server (which already has done the discovery 
+	 work) then sends the message
+	 - clients make requests to a discovery server which forwards the request to an available instance.
+	 - less hops
+
+	 AWS Elastic Load Balancer (ELB) is an example of a server-side discovery
+	 
+	 
+Load Bs vs API Gateway
+	- Load balancers and API gateways both handle network traffic
+	- LBs distributes incoming network traffic
+	- (Internet Request Traffic) ---> LB ----> Server 1 -
+										 ----> Server 2 ----> Database
+										 ----> Server 3 -
+
+-------------------------------------------------------------------------
 			
 OSI Model (Open Systems Interconnection)
 
@@ -1273,7 +1514,6 @@ OSI Model (Open Systems Interconnection)
 			- 3. Network
 			- 2. Data Link
 			- 1. Physical
-		- 
 	
 			
 n tier
@@ -1291,18 +1531,21 @@ n tier
 		- data is stored and retrieved
 		
 	
+Integration testing 
+	- modules are combined and tsested
+
+Functional requirements 
+	- what it should do, e.g 'process orders in x format...' 'y occurs every 24 hours' 'clicking a button starts z'
 	
-Integration testing = modules are combined and tsested
+Non-functional requirements 
+	- how it should perform e.g. 'process at least 200 orders a minute', or scalability, or security, type of database/language
+
+Constraints 
+	- what is out-of-scope to change 
+
+----------------------------------------------------------------------------
 	
-Note: high level elements that we as software architects are trained to consider:
-
-Functional requirements of a system (what it should do, e.g 'process orders in this format...')
-
-Non-functional requirements (how it should perform e.g. 'process at least 200 orders a minute')
-
-Constraints (what is out-of-scope to change e.g. 'orders must be updated on our existing mainframe system').
-
-Dev Ops 
+DEV OPS
 	- ppl in operations knoww what ppl in developmetn are doing
 	- development: writes codes, features, tests
 	- operations: manages servers, traffic, scaling, RAM, cloud 
@@ -1310,13 +1553,15 @@ Dev Ops
  
  
  Clould Native Apps:
+	- apps in the cloud that leverage all the greatness of the cloud which is primary micro services
 	- applications and services built specifically to exist in the cloud.
-	- Clould Native Apps =  Microservice archeticture
-	- 
+	- Cloud-native applications are a collection of small, independent, and loosely coupled services.
+	- Clould Native Apps ~=  Microservice archeticture
+	- ppl keep mentioning Pets vs Cattle
 
  cloud native system, on the other hand, should be largely self-healing, cost efficient, and easily updated and maintained through 
 Continuous Integration/Continuous Delivery (CI/CD).
- \
+ 
  1 automation cloud makes it easier than ever to automate the infrastructure 
  2  design components to be stateless (user data)
 ----------------------------------------------------------------------------
@@ -1324,189 +1569,34 @@ SaaS
 	- On damand pay per use software
 	- dont need to install SW on user's computer
 	- the cloud runs an instance of the software
+	- Developers build SaaS
 	- End customers use SaaS
 	- Google docs, MS 365
 Paas
-	- made up of programming language environemnt, Operating system, webserver, database
+	- PaaS is IaaS + Operating System + mangment and business analytics
 	- manage data and app resources
-	- Developers use SaaS
+	
 	- Windows Azure, Google app engine, heroku, AWS Elastice Beanstalk
-	- Scaleable but developers are limted to the providers tools, and devs cannot migrate to another provider, ie they are locked into the (AWS) vendor
-
+	- Scaleable but developers are limted to the providers tools, and devs cannot migrate to another provider, 
+	ie they are locked into the (AWS) vendor
+	
 IaaS
 	- offers computing resrouces but in a virtual environment
 	- resources like data storage, servers, networking, virtualization,
 	- AWS EC2s, rackspace
 	- 
 Infrastructure
+	- IaaS = Actual Computers/Data center + networking firewalls/security + storage
 	- the resources built for you on the cloud
-	- the devices you are working on  load balancer, VPNs,servers
-		- the service part of it is the software mangement that lets you click/program 
+	- the devices you are working on; load balancer, VPNs,servers
+	- ! the service part of it is the software mangement that lets you click/program 
 	- AWS = IaaS
 	- Platform = opearting system, programming language????
 	
+https://azure.microsoft.com/en-us/overview/what-is-paas/
 
 
-
-----------------------------------------------------------------------------
 	
-
-LEFT JOIN
-	SELECT Customers.CustomerName, Orders.OrderID
-	FROM Customers
-	LEFT JOIN Orders
-	ON Customers.CustomerID=Orders.CustomerID
-	
-	- First, start from "FROM x LEFT JOIN y ON z=z2"
-	- you'll get multiple rows with the same value of CustomerID, (w/ some differences in other fields)
-	- this means "for each table, whenever there is a CustomerID value find the same CustomerID value in the other 
-table
-		if it exists in the right table, we have a match, so return all fields (or selected fields)
-		if it exists or not in the left table return all fields
-	- The LEFT JOIN keyword returns all records from the left table (Customers), even if there are no matches in the 
-right table (Orders).
-
-OUTER JOIN
-	SELECT Customers.CustomerName, Orders.OrderID
-	FROM Customers
-	FULL OUTER JOIN Orders ON Customers.CustomerID=Orders.CustomerID
-	
-	- LEFT & RIGHT join, meaning you'll 
-	- The FULL OUTER JOIN keyword returns all matching records from both tables whether the other table matches or 
-not. 
-So, if there are rows in "Customers" that do not have matches in "Orders", or if there are rows in "Orders" that do 
-not 
-have matches in "Customers", those rows will be listed as well.
-
-SELF JOIN
-	SELECT A.CustomerName AS CustomerName1, B.CustomerName AS CustomerName2, A.City
-	FROM Customers A, Customers B
-	WHERE A.CustomerID <> B.CustomerID
-	AND A.City = B.City 
-	
-	
-	-The following SQL statement matches customers that are from the same city:
-	-A self JOIN is a regular join, but the table is joined with itself.
-	-(Doesnt use JOIN)
-	
-UNION
-	The UNION operator is used to combine the result-set of two or more SELECT statements.
-	The columns must also have similar data types (int string?)
-		- should be the same field, otherwise it is like mixing data in a column
-		
-GROUP BY
-
-
-	SELECT COUNT(CustomerID), Country
-	FROM Customers
-	GROUP BY Country;
-	
-	- lists the number of customers in each country:
-	- The GROUP BY statement is often used with aggregate functions (COUNT, MAX, MIN, SUM, AVG) 	
-HAVING
-	SELECT COUNT(CustomerID), Country
-	FROM Customers
-	GROUP BY Country
-	HAVING COUNT(CustomerID) > 5;
-	
-	-The HAVING clause was added to SQL because the WHERE keyword could not be used with aggregate functions.
-
-STORED PROCEDURES
-	CREATE PROCEDURE SelectAllCustomers
-	AS
-	SELECT * FROM Customers
-	GO;	
-	(.....later)
-	EXEC SelectAllCustomers;
-	
-	prepared SQL code that you can save, so the code can be reused over and over again.
-	
-EXISTS
-
-	SELECT SupplierName
-	FROM Suppliers
-	WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
-	
-	Returns TRUE and lists the suppliers with a product price<20
-	ie, it returns the single colum table of "SELECT SupplierName FROM Suppliers"
-	
-	
-	- The EXISTS operator returns true if the subquery returns one or more records.
-	- is used to test for the existence of any record in a subquery.
-	
-ANY and ALL
-	- like EXISTS but after WHERE and HAVING clauses
-	- returns TRUE and the first query if the subquery exists (Usually a condition (ProductsSold>10))
-	
-MIN / MAX
-	SELECT MIN(column_name)
-	FROM table_name
-	WHERE condition;
-	
-COUNT(), SUM(), AVG()	
-	SELECT SUM(column_name)
-	FROM table_name
-	WHERE condition;
-	
-	(...returns this table)
-	COUNT(ProductID)
-	77
-	
-IN
-	SELECT column_name(s)
-	FROM table_name
-	WHERE column_name IN (value1, value2, ...);
-
-	The IN operator is a shorthand for multiple OR conditions.
-	
-BETWEEN
-	WHERE column_name BETWEEN value1 AND value2;
-	
-UPDATE	
-	UPDATE Customers
-	SET ContactName = 'Alfred Schmidt', City= 'Frankfurt'
-	WHERE CustomerID = 1;
-
-DISTINCT
-	SELECT DISTINCT column1, column2, ...
-	FROM table_name;	
-
-AND / OR
-	WHERE condition1 AND condition2 AND condition3 ...;
-	
-INSERT
-	INSERT INTO table_name (column1, column2, column3, ...)
-	VALUES (value1, value2, value3, ...);	
-	
-NORMALIZATION
-	- Database normalization is typically a refinement process after the initial exercise of identifying 
-the data objects that should be in the relational database, identifying their relationships and defining 
-the tables required and the columns within each table.
-	- Normalization entails organizing the columns (attributes) and tables (relations) of a database to 
-ensure that their dependencies (logical constraints, FK, PK) are properly enforced by database integrity 
-constraints
-
-DENORMALIZTION
-	- is intended to speed query execution (reading faster, at the cost of write speed)
-	- is used on a previously-normalized 
-	
-STAR SCHEMA
-	- The Star schema is easy to understand and provides optimal disk usage.
-	- The star schema consists of one or more fact tables referencing any number of dimension tables. 
-	- facts are FKs referencing dimension tables
-	- The dimension table contain the set of attributes. (date, product, or customer)
-	- The dimension table is joined to the fact table using a foreign key
-	- The dimension table are not joined to each other
-	- The dimension tables are NOT normalized. 
-	
-	
-	
-SNOWFLAKE SCHEMA
-	- A Snowflake Schema is an extension of a Star Schema, and it adds additional dimensions
-	- fact table in the middle
-	- The dimension tables are normalized which splits data into additional tables.
-	- The main benefit of the snowflake schema it uses smaller disk space.
-		https://www.guru99.com/star-snowflake-data-warehousing.html
 ----------------------------------------------------------------------------
 
 
@@ -1523,20 +1613,6 @@ passing boolean into function is bad
 high level methods should do high level work and not low level work
 
 bean are classes that encapsulate many objects into a single object (thebean)
-----------------------------------------------------------------------------
-
-
-'==' tests object reference in java
-
- 
- 
- public is visible from wherever.
-
-internal is visible only within an assembly
-
-assembly is a file that is automatically generated by the compiler upon successful compilation of every .NET 
-application. It can be either a Dynamic Link Library or an executable file. 
-
 
 ----------------------------------------------------------------------------
 
@@ -1546,28 +1622,12 @@ JAVASCRIPT
 MAP
  - calls the  function once for each element in an array
  - like a for loop
+ - returns an array!!
+ - the .forEach() does the same but doesnt return an array
 
- ex)
-var numbers = [65, 44, 12, 4];
-var newarray = numbers.map(myFunction)
-// newarray = [650,440,120,40]
 
 FILTER 
-- calls a function that return those elements which satisfy a test condition
-
-ex)
-var nums = [32, -1, 16, 40];
-function isPositive(value) { return value > 0; };
-// posNums = nums.filter(x => x > 0);
-posNums = nums.filter(checkAdult);
-// ages2 = [32,16,40]
-
-ex)
-const animals = { name: 'dog', mammal: true},
-				{ name: 'bear', mammal: true}, 
-				{ name: 'salmon', mammal: false},]
-myArr =animals.filter(a => a.mammal)
-// myArr has 'dog' and 'bear'
+- calls a function that return array of elements which satisfy a test condition
 
 
 REDUCE
@@ -1580,36 +1640,43 @@ ex)
 	
 
 PROMISE
-- Good for async programming
-- use "new Promise(function(resolve,reject) { code }"
-- resolve() in the promise is what will be returned in the ".then"
-- reject() in the promise is what will be returned to the ".catch" of the implimentation
-- Can do Promise.all([arry of promises])
-ex)
-let promiseToCleanTheRoom = new Promise( function(resolve, reject) {
-  //Clean the room logic
-  let isClean = false;  ////THIS
-  if (isClean) {
-	resolve('Clean')
-  } else {
-    reject('NOT clean')
-  }
-  });
-  
-promiseToCleanTheRoom.then( function(fromRes){
-	console.log('the room is' + fromRes); // prints "the room is Clean" if isClean==true
-}).cath(fucntion(fromRej){
-	console.log('the room is' + fromRej) //  prints "the room is NOT clean" if isClean==false
-}
+	- Used for async programming
+	- 3 values: fulfilled, rejected, pending
+	- a promise runs a block of code. 
+		-that code is written by the programer so that when that code successfully finished it it will respond with 'resolve' and possibly 
+			return data. 
+		- If the code fails it will respond with 'rejected' and the reason why
+	- the programer can use .then and .catch to write follow up code if the promise fulfills or rejects
+
+	- "new Promise(function(resolve,reject) { code }"
+	- resolve() in the promise is what will be returned in the ".then"
+	- reject() in the promise is what will be returned to the ".catch" of the implimentation
+
+
+	ex)
+
+	  var promise = new Promise(function(resolve, reject) {
+	  // do a thing, possibly async, then…
+
+	  if (/* everything turned out fine */) {
+		resolve("Stuff worked!");
+	  }
+	  else {
+		reject(Error("It broke"));
+	  }
+	  });
+
+	  promise.then(function(result) {
+	    console.log(result); // "Stuff worked!"
+	  }, function(err) {
+	    console.log(err); // Error: "It broke"
+	  });
 
 EVENT
-- target.addEventListener(*type*, *listener[, options]*);
-- addEventListener() sets up a function that will be called whenever the specified event is delivered to the target.
-- events are sent to all elements of the same type. ie, he browser checks to see if the element's outer-most ancestor (<html>) has an onclick event handler
-	- bubbling: events propagate outwards, from the element -> it's parent -> parent's parent -> root
-	- capturing: events propagate in. root -> reaches the clicked element
-	- solution: e.stopPropagation()
-the event handler recieves the event object, that has data about the event "left click, right click, etc"
+- actions that occur when a crietria is met
+- bubbling: events propagate outwards, from the element -> it's parent -> parent's parent -> root
+- capturing: events propagate in. root -> reaches the clicked element
+- solution: e.stopPropagation()
 
 AJAX
 - not a language or tool
@@ -1619,20 +1686,20 @@ AJAX
  
 HTML BODY:
 
-x-www-form-urlencoded:  simple text/ ASCII
-						is the same as the one used in URL parameters.
-form-data: binary data or non-ASCII text
-			same as <form>, data is key/value
-			it’s the object to represent HTML form data.
-			(in js) let fd = new FormData();
+	x-www-form-urlencoded:  simple text/ ASCII
+							is the same as the one used in URL parameters.
+	form-data: binary data or non-ASCII text
+				same as <form>, data is key/value
+				it’s the object to represent HTML form data.
+				(in js) let fd = new FormData();
+				
+	Raw: A raw request can contain anything.  
+		sends your raw string data as it is without modifications. 
+		it will send plain text or JSON or any other kind of string
+		The type of data that you are sending can be set by using the content-type header 
+	Binary: non-textual data 
+			video, audio, images
 			
-Raw: A raw request can contain anything.  
-	sends your raw string data as it is without modifications. 
-	it will send plain text or JSON or any other kind of string
-	The type of data that you are sending can be set by using the content-type header 
-Binary: non-textual data 
-		video, audio, images
-		
 HTTP POST
 	POST method sends data to the server. The type of the body of the request is indicated by the Content-Type header.
 	
@@ -1640,6 +1707,29 @@ HTTP PUT
 	for update
 	
 	
+
+ Boiler Plate Code
+	- boilerplate code" is any seemingly repetitive code that shows up again and again in order to get some result that seems like it 
+ought to be much simpler. 
+	- the programmer must write a lot of code to do minimal jobs.
+
+Javascript
+	Modules are JavaScript files. 
+	they should pertain to some related functionality.
+	Packages are 1+ modules. They are hosted by a package manager, like NPM
+	
+	
+Maven
+	- its a build and dependency managment tool
+	- Group ID = package name 
+	- Artifact ID = project name	
+	
+- Sourcing a file is nothing but executing the file (line by line), but
+ - The difference between sourcing and executing a file is : executing a file does not make any changes in the current shell
+
+	rnd note: 
+	- you paste <script tags> in body tags (at bottom) b/c you dont want javascript to load prior to your css or the html
+	- authentication refers to who you are, and authorization refers to what you can do.
 
 
 ----------------------------------------------------------------------------------
@@ -1653,73 +1743,40 @@ $ npx create-react-app myreactproject
 $ cd myreactproject
 $ npm start
 
-- need index.js & index.html
-- hello = function() { return "Hello World!"; }
-- hello = (val) => "Hello " + val;
-- var myVar =  hello("World");
-note: because of the arrow => , then "changeColor = function() { ... }" is differetn from "changeColor = () => {"
+
+React - page built on components
+Redux - page built on a single tree/component, 1 single update
+
 
 LET, CONST, VAR
-let - block scope, in braces {}
-	- can be updated but not re-declared.
-const - block scope & constant
-	  - cannot be updated or re-declared, must be initialized
-var - function scope
-	- if outside of function then it will be global
+	let - block scope, in braces {}
+		- can be updated but not re-declared.
+	const - block scope & constant
+		  - cannot be updated or re-declared, must be initialized
+	var - function scope
+		- hoisted!!!
+		- dont use
 
-reactDom.render()
-- takes two arguments, HTML code and an HTML element.
-ex)	const myelement = <p>Hello</p>
-	ReactDOM.render(myelement, document.getElementById('root'));
-	
 JSX
-- Assigning html element into variables is b/c of JSX
-- mMst have ONLY ONE top level element.
-	ex) const myelement = <h1>I Love JSX!</h1>; 
-	ex) const myelement = (
-						  <div>
-							<h1>I am a Header.</h1>
-							<h1>I am a Header too.</h1>
-						  </div>
-						);
-- Write expressions inside curly braces { }
-	ex) const myelement = <h1>React is {5 + 5} times better with JSX</h1>; // 10
-
-COMPONENTS
-	- are independent and reusable bits of code that returns HTML
-	- data is stored and handled using state and props.
-	- Two types, Class-components and Function-components
-		- function components does not have state
-			- myFunctionName() { [Javascript code] return { [JSX code] }
-		- class have state
-			- class will have "extends React.Component" & and render method
-			- class with state will have "constructor()"
+	- lets you write HTML-like code along side your Javascript code.
+	- preprocessors (transpilers like Bable) to transform HTML-like code into javascript code which results in your React app
+	- Assigning html element into variables is b/c of JSX
+	- Mist have ONLY ONE top level element.
+		ex) const myelement = <h1>I Love JSX!</h1>; 
 		
-	 
-	- must have render() method. "render() { [...] return (html code) }"
-	- A component takes in parameters, called props.
-	- can have components in components
-	- can have components in files
-	Note the two are same: function() {alert("Hey dog!")
-                                  () => alert("Hey dog!")
-	- props comes from Parameters      ex) <Student age=14 />
-	- state come from the class data   ex) this.state = { age: 14 }
-	- key is a special and reserved property in React
-	- key cannot be referenced using this.props.key
+	- Write expressions inside curly braces { }
+		ex) const myelement = <h1>React is {5 + 5} times better with JSX</h1>; // 10
+
 PROPS
-- are passed to components via HTML attributes.	
-	ex) 
-		const myelement = <Car brand="Ford" />;
-			[...]
-		class Car extends React.Component {
-			render() { return <h2>I am a {this.props.brand}!</h2> }	}
-STATE
-- are the variables of the class
-- defined in constuctor()
-- can pass data from one component to another, as parameters.
-	1st) const carinfo = {name: "Ford", model: "Mustang"};
-	2nd) return <Car brand={carinfo} />
-	3rd) return <h2>I am a {this.props.brand.model}!</h2>;
+	- are passed to components via HTML attributes.	
+		ex) const myelement = <Car brand="Ford" />;
+		
+	- are the variables of the class
+	- defined in constuctor()
+	- can pass data from one component to another, as parameters.
+		1st) const carinfo = {name: "Ford", model: "Mustang"};
+		2nd) return <Car brand={carinfo} />
+		3rd) return <h2>I am a {this.props.brand.model}!</h2>;
 
 LIFECYCLE
 	- Each component has a lifecycle of 3 phases:
@@ -1727,108 +1784,122 @@ LIFECYCLE
 		Mounting - putting elements into the DOM. Four are methods are called.
 		Updating - whenever there is a change in the component's state or props. Five methods are called.
 		Unmounting - when a component is removed from the DOM. One method	
+
+
+COMPONENTS
+	- are independent and reusable bits of code that returns HTML
+	- data is stored and handled using state and props.
+	- Two types, Class-components and Function-components
+		- functional components have:
+			- no state
+			- no lifecycle methods
+			- no render method
+			- is stateless
+			- is a javascript function 
+		- class compoenents:
+			- has a state
+			- marginally slower than function ( b/c creating class)
+			- more code
+			- has "extends React.Component" 
+			- render method
+			- will have "constructor()"
+			
+	Which one?
+		Use functional if you can
+		If your component needs some data which cannot be passed as a prop use class component to get that data. 
+		If you need to keep UI state in your component(expandable blocks) 
+	
 OTHERS
+	- Don't use var anymore
+	- key is a special and reserved property in React
+	- key cannot be referenced using this.props.key
 
-- Don't use var anymore
-- key is a special and reserved property in React
-- key cannot be referenced using this.props.key
 
+Link vs a-tag
+	- can do mroe with Link, a dynamic url with /page/:id
+	- Link wont refresh page, a-tag will
+
+	
 random docker
 	docker run -p 3306:3306 your-sql-container
 	Will publish the 3306 port of your container to the 3306 port of your VM.
 	Connection con = DriverManager.getConnection("jdbc:mysql://10.0.2.15:3306/databaseName","root","myrootpassword");
 	
 	
-when you have the power to call your code whenever you want that is library, otherhand, your framework calls your code	
 ----------------------------------------------------------
-##########################################
- useEffect()
-useEffect(() => { console.log('useEffect hook ran', songs) }, [songs]) 
-		// 2 paramaters, 1st = code that runs when *it* renders/re-renders. 2nd = array of variables, if 1 variable is updated then it 
-		//	triggers 1st param's code
 
-##########################################
- useState()
-- creates state variables.
-- the object now has this.state.songs data.
-- useState returns 2 values, 
-- 1st is the array, 2nd is a function (arbitrary name) to change the data
-	- The initial value will be assigned only on the initial render (if it’s a function, it will be executed only on the initial render).
-	- In subsequent renders (due to a change of state in the component or a parent component), the argument of the useState hook will be ignored and the current value will be retrieved.
-ex)
-const [songs, set] = useState([ 
-	{ title: 'Brand new Rollers', id: 1 },
-    { title: 'Revive', id: 2 } ])
- [...]
-	set([...songs, { title, id: uuid() }])   
-			//Everything inside of "set"'s paratheses will replace "songs"
-			// "title" is ES6 shorthand for "title: title" (since same name)
-	
-##########################################
+useEffect()
+	- 2 paramaters, 
+		1st = code that runs when *it* renders/re-renders. 
+		2nd = array of variables, if a variable is updated then useEffect is ran again 
+	- triggers 1st param's code
+	- If the 2nd argument is "[]" means 'only run after first render'
+
+
+useState()
+	- creates state variables.
+	- useState returns 2 values, 
+	- the variable & function to change that variable
+
 useContext()
-- gains access to the data (the context), which wraps this object
-- Gets values from (below) "<ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme }} >"
-ex)
-	[Nav.js]
-const { isLightTheme, dark, light } = useContext(ThemeContext)  //magically matches dark, light and isLight
-	[ThemeContext.js]
-export const ThemeContext = createContext();
+	- pass the state-data of a class between components. ie [name, setNames]
 
-export class ThemeContextProvider extends Component {
-  state = { isLightTheme: true,  light: { color: '#555'}, dark: { color: '#ddd',} }
 
-  toggleTheme = () => { console.log("clicked!!!") }
+Other
+	 - In React, props flow downward, from parent to child.
+	 - The React philosophy is that props should be immutable and top-down. This means that a parent can send whatever prop values it likes 
+	to a child, but the child cannot modify its own props. 
 
-  render() {
-    return (
-      <ThemeContext.Provider value={{...this.state, toggleTheme: this.toggleTheme }} >
-        {this.props.children} 
-      </ThemeContext.Provider>
-	  		    // "this.props.children" refers to to <Nav /> & everything esle that <themeContext.provider> is wrapped around
-				// in the App.js file
-    );
-  }
-}
+	- props are passed by parents to child component
+	- a componentn should never modifity it's own props (it's immutable, so you cant)
+	- state can be modifired using setstate and when value of state chagnes render is called
+
+
 ----------------------------------------------------------
 SPRINGBOOT
--In a few words, we can say that the Spring Boot is simply an extension of Spring itself to make the development, testing, and 
-deployment more convenient.
--To all the problems that arise from the Spring framework, Spring Boot is the solution. 
--faster and more efficient development eco-system.
-
-- Header key="Content-Type" is http standard to say that the body is JSON
-	- value="application/json" is read by spring mvc knowing it's json object
-
+- Spring Boot is an extension of Spring. 
+- Makes development, testing, and deployment more convenient.
+- To all the problems that arise from the Spring framework, Spring Boot is the solution. 
+- faster and more efficient development eco-system.
 
 - in CONTROLLER, it's a java class that maps a URI and an HTTP Method to some functionality (some methods)
+
+
+SLF4J 
+	- Simple Logging Facade 4 Java
+
+	
+----------------------------------------------------------
 DEPENDENCY 
-- Class A uses methods from Class  B
+	- Class A uses methods from Class  B
 
 
-Dep Inj
-- DI generally means passing a dependent object as a parameter to a method, rather than having the method create the dependent object
-- thus the method doesnt have a direct dependecny on a particual implemenation
-- classic example: passing a database object in the parameters of a object
- 
-- makes code testable
+DEPENDENCY INJECTION
+	- di is arche design pattern
+	- DI generally means passing a dependent object as a parameter to a method, rather than having the method create the dependent object
+	- thus the method doesnt have a direct dependecny on a particual implemenation
+	- classic example: passing a database object in the parameters of a object
+	 
+	- makes code testable
 
-- sub diff depencies as long as they satisfy the interface
-- prevents hard coding ... off loading the instatiation of some objects
-- Dep Inversion princ: rely on abstractons rather than concreted implemenations
-- di is arche design pattern
-- abstract classes to interface, when we do, we decouple our implementations from each other
--DI => Abstraction = more modular = more flexible
+	- sub diff depencies as long as they satisfy the interface
+	- prevents hard coding ... off loading the instatiation of some objects
+	- Dep Inversion princ: rely on abstractons rather than concreted implemenations
+	- abstract classes to interface, when we do, we decouple our implementations from each other
+	-DI => Abstraction = more modular = more flexible
 
 Inversion of Control = 
-	the framework does most of the work. 
-	It coordinates the applications activity. IoC determines what to inject into the code. 
-	User inserts his code (behavior and objects) into the framework. 
-	The framework calls your code (not visa vera)
-	in traditional programming, the custom code that expresses the purpose of the program calls into reusable libraries to take care of generic tasks, but with inversion of control, it is the framework that calls into the custom, 
-
+	- programming principle
+	- the framework does most of the work. 
+	- IoC determines what to inject into the code. 
+	-User inserts his code (behavior and objects) into the framework. 
+	-The framework calls your code (not visa vera)
+	-in traditional programming, the custom code that expresses the purpose of the program calls into reusable libraries to take care of generic 
+tasks, but with inversion of control, it is the framework that calls into the custom, 
+	-when you have the power to call your code whenever you want that is library, otherhand, your framework calls your code	
 
  Cookies V LocalStorage vs SessionStorage
-  . Cookies are mainly for reading server-side, local storage can only be read by the client-side
+   -Cookies are mainly for reading server-side, local storage can only be read by the client-side
   Cookies 4KB
 	- sessionStorage expires when the tab is closed!
 	Cookies are pretty much a convenient way to carry information from one session on a website to another, or 
@@ -1836,28 +1907,26 @@ between sessions on related websites, without having to burden a server machine 
 storage. If 
 	
 	
-	
-(Maven )
-- its a build and dependency managment tool
-- Group ID = package name 
-- Artifact ID = project name
-- with spring, you only nned to care about the version of the parent and that parent will download all the correct version
-	
-	
-	
-	Sourcing a file is nothing but executing the file (line by line), but
-The difference between sourcing and executing a file is : executing a file does not make any changes in the current shell
 
 
 -----------------------------------------
 CORS (Cross Origin Resource Sharing)
 	- security feature in browsers
+	- prevents scripts on one website from making calls to another website.
 	- used by browers to give web apps access to selected resources.
-	- server will responded regardess AND YET browser can get error
-	- web apps on http://brodski-domain.com could only request resources from brodski-domain.com 
-		- Access-Control-Allow-Origin: brodski-domain.com <== the server must set in response header.
-		- browsers restrict cross-origin HTTP requests initiated from scripts. 
-	-
+	- This restriction exists because requests made at other domains by your browser would carry along your 
+		cookies which often means you'd be logged in to the other site. So, without same-origin, any site could host 
+		JavaScript that called logout on stackoverflow.com for example, and it would log you out. Now imagine the 
+		complications when we talk about social networks, banking sites, etc.
+	- sends a pre-flight request to the server to determine if the browser origin is allowed to make requests
+	- Access-Control-Allow-Origin: brodski-domain.com <== the server must set in response header.
+	- cross domain check is performed by the browse
+	
+AJAX v XHR
+	- AJAX allows async programing in the browser. 
+		- not a single technology, but rather a group of technologies.
+		- AJAX enables sending data in the background or recieving data and updating the page w/o refreshing.
+	- XHR is the name of the object that browser use to send requests
 	
 API Key vs CORS
 	- API Keys have limitations for a project, the server limits the projects use (ie, brodski.com is limited to 5,000/day)
@@ -1866,6 +1935,78 @@ API Key vs CORS
 	
 API keys are for projects, authentication is for users
 
+Client ID : Is used to identify the application
+Client Secret : This is the true secret key, which is stored on server side securely & not available to public
+
+ Mine type:
+	(google api) a request that uses the mine parameter must be authorized using OAuth 2.0
+ 
+ -------------------------------------------------------------------
+ 
+DEVELOPMENT, STAGE, PRODUCTION
+
+	Development: 
+		3 ppl writing code. After it looks good it moves to Stage environment. 
+	Stage 
+		is a little more robust than devlopement. It's close to production but not exactly b/c money. Want to test in Stage
+
+Node server vs Apache
+	- A node.js web application is a full-fledged web server just like Nginx or Apache.
+	- Node is newer, which means newer ideas have been incorporated from the onset.
+	- Apache is more mature, but slower to change.
+	- The (node) http.Server module is now fairly well battle-tested on the internet to be trusted.
+
+static & dynamic websites
+	- dynamic websites recieve data from a server, and make modifications with the new data, which can vary from user to user.
+	- It can display different content and provide user interaction, by making use of advanced programming and databases in 
+	addition to HTML
+	- Static websites are ones that are fixed and display the same content for every user
 
 
-	
+OracleJDK vs OpenJDK
+
+	OpenJDK is an open source implementation of the Java Standard Edition
+	OpenJDK is the official reference implementation for Java Standard Edition from Java SE 7.
+	Oracle JDK’s builds from OpenJDK source code => no major difference
+
+	 JDK - consists of JRE, tools to compile, debuging tools,.
+	 JRE - consists of JVM, Java Pluging. (Doesnt contain compile tool or debug tools)
+	 
+
+-------------------------------------------------------------------------
+
+UI:
+						PROS								CONS
+	Vanilla CSS 	Full Control							Slow dev b/c AF, build from scratch
+					Name classes as you want				risks bad code
+
+	Component 		Rapid Dev
+	 Framework		Easy to learn/use						Low control
+	 (Material, 											Unneccessary overhead code
+	 BootSrap)												"all websites look the same"
+	 
+	 
+	Utility			Faster Development (not as fast)		Low control
+	 Framework		Fasy to learn							Unneccessary overhead code
+	 (tailwind)		More options/customization
+
+Responsive
+	- the page adjusts intelligently to the screen's size
+
+ 
+Native - Hybrid - Web App
+
+	Native App = phone apps build for the specific phone type, ie Android or Apple 
+	Hybrid App = phone apps that (sorta) are built for all phones (via WebView)
+	Web App	   = traditional web pages. https://google.com
+
+ 
+
+What is Materialize?
+	- A CSS Framework based on material design.
+	- materialize: library that lets you create websites based on google design concepts
+	- Material-UI: React components for faster and easier web development. Build your own design system, or start with Material Design. 
+	- React components for faster and easier web development. Build your own design system, or start with Material Design.
+ 
+ robot.txt
+  - a file read by web crawls. Usually for search engine crawlers
