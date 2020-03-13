@@ -1178,6 +1178,23 @@ Single responsiblity principle
 	- makes it easy to quick and reason what each portion of the project is
 	- if a class or method is doing too much and its hard to tell what it's doing
 	
+----------------------------------------------------------------------------
+
+
+
+every one function sould have one entrance and one exit
+
+command-query specation; every method should be either a command or a query, not both. The answer 
+to a question should not change the answer
+
+method should do 1 thing (but erroneously it does multiple things)
+
+passing boolean into function is bad
+
+high level methods should do high level work and not low level work
+
+bean are classes that encapsulate many objects into a single object (thebean)
+
 	
 ----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
@@ -1600,23 +1617,6 @@ https://azure.microsoft.com/en-us/overview/what-is-paas/
 ----------------------------------------------------------------------------
 
 
-
-every one function sould have one entrance and one exit
-
-command-query specation; every method should be either a command or a query, not both. The answer 
-to a question should not change the answer
-
-method should do 1 thing (but erroneously it does multiple things)
-
-passing boolean into function is bad
-
-high level methods should do high level work and not low level work
-
-bean are classes that encapsulate many objects into a single object (thebean)
-
-----------------------------------------------------------------------------
-
-
 JAVASCRIPT 
 
 MAP
@@ -2010,3 +2010,13 @@ What is Materialize?
  
  robot.txt
   - a file read by web crawls. Usually for search engine crawlers
+  
+Static Website:
+	- pre built pages are sent from the server
+	- all pages are the same for each user
+Dynamic Website:
+	- pages are created for each reqeust on the server then sent 
+	- pages use data from a database on the server
+Single Page Website:
+	- single page with a lot of javascript is sent from server
+	- webpage/HTML re-renders itself using that javascript
