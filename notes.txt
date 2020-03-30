@@ -313,11 +313,26 @@ ABSTRACT CLASS
 			are "non-virtual".
 	- (C#) Override - for each abstract method you must use the override keyword in the subclass that inherit the 
 		abstract  classes
+		
+	- Yes, abstracts can have constructors. The constructor will be called when the subclass is instantiated.
 
 		ABSTRACT VS INTERFACE
-		- abstract implements only 1 | interface can have multiple
+		- abstract extends only 1 | interface can have multiple
+		- abstract can impliment it's members (eg methods) | interface cant
+		- abstract can have variables (fiels) | interface cant
+		- abtract can have access modifiers (public, ect) | interface cant
+		- abstract can inherit from other abstract classes OR other interfaces | interface only other interfaces 
 		
-
+  Abstract or Interface or (unmodified) Class
+  - abstract or (unmodified) class is good if you want implemented code. Ie non-empty bodies
+	- implemented code = reduce repeated code
+  - abstract is useful if you do not want the class created.
+  - interface is useful to describe behavior.
+  - interface for bahavior among multiple classes but with different logic / implemenation
+  -> Interfaces only share behavior (no code)
+  -> abstract can share behavior, code
+  -> Classes share clode but can be created
+  
 ---------------------------------------------------------									
 
 FINAL in Java (sealed in C#)
@@ -753,12 +768,45 @@ other code in your assembly or other assemblies
 	https://social.msdn.microsoft.com/Forums/en-US/088ce8ed-ef9b-4dea-88b3-ca016885e26d/what-is-an-assembly-in-terms-of-c?forum=csharplanguage
 	
 
-BOXING
+BOXING (C#)
 	- boxing and unboxing are computationally expensive processes.
 	int i = 123;      // a value type
 	object o = i;     // boxing
 	int j = (int)o;   // unboxing
-
+	
+BOXING (JAVA)	
+	- Autoboxing & Unboxing
+	- recall:  int and Integer. double and Double. float and Float
+		int x = 12   .......... Integer x = new Integer(x)
+	- primative and wrapper classe  
+	- the automatic conversion from a primitive types and their wrapper classes		
+	- java compile does this automatically
+	
+	- Autoboxing  - wrapper to primative
+		- compile converts 42 to an instance of an Integer class
+			int ---> Integer
+			Integer myInt = Integer(42)  <----autoboxing
+			void coolMethod(Integer i) ....... coolMethod(41)  <----autoboxing			
+	- Unboxing - primative to wrapper
+		- ex)
+			Integer i = new Integer(44)
+			if (i > 41) { //code } <---- Unboxing i
+		- ex)
+			Integer intValue = null
+			if (i > 41) { //code } <---- Unboxing i
+			// gets null pointer  b/c this happens =>  if (myInt.intValue() <--- instance is null
+		- primative only has it's value
+		- many classes/methods expect an Object as a parameter.
+		- ie List<Integer> list = new ArrayList<Integer>()
+		-    list.add(51)
+	- Wrapper Class
+		- wrapper class "wraps" the functionaly of another class or component (to add functionaity to existing class w/o using 
+			inheritance)
+		- wrapper class has defined constants and methods (Integer.MAX_VALUE or Interger.equals() or Integer.toHexademical() (or s/t)
+		
+	- use primatives when possible
+	- When we autobox or unbox a method is being called, this slows program.
+	
 Struct Vs Class
 		- struct: all members are public by default
 		- class: all members are private by default
@@ -1310,6 +1358,7 @@ HTTP - not secure
 HTTPS - encrypts the data
 	 
 TCP - data is in order
+	- data packets have info about the order
 	- to make sure that data delivery over a network is carried out correctly
 	- Checksum, acknowledgement, order
 	
@@ -2020,3 +2069,253 @@ Dynamic Website:
 Single Page Website:
 	- single page with a lot of javascript is sent from server
 	- webpage/HTML re-renders itself using that javascript
+	
+	
+	
+-------------------------------------------------------
+	
+Kotlin
+	$ kotlinc hello.kt -include-runtime -d hello.jar
+    $ java -jar hello.jar
+	- runs on the jvm
+	- a bit faster than java
+	- no Null Pointer Exception 
+		- Kotlin's type system is aimed to eliminate NullPointerException
+	- designed with Java Interoperability in mind. 
+		- Existing Java code can be called.
+		- Existing Kotlin code can be used from Java as well. 
+	fun function_name(param1: data_type, param2: data_type, ...): return_type
+	- const is used for variables that are known at compile-time.
+	- val is defined at run time
+	
+Access Modifier
+	by default variables are public
+	a module is a set of Kotlin files compiled together, ex) an IntelliJ IDEA module, a Maven project, & more
+	
+	internal - Accessible within the same modul
+				This Class	Module		Subclass	Entire App
+	public			Y		  Y            Y            Y
+	protected 		Y		  ?            Y            
+	internal		Y		  Y            ?            
+	private			Y
+	
+let, run, and with return the lambda result.
+	let, in scope, "it" is the object. x.let { // it == x true}
+	with, in scope, "it" is hidden. with(x) { add(55) == x.add(55) true}
+	run is same as with, but written diff. x.run { add(55) == x.add(55) true}
+	apply has no return type
+	also in the code, you can read it as “and also do the following”.
+	
+	function	object reference
+	let			it
+	run			this
+	with		this
+	apply		this
+	also		it
+
+classes	
+By default all classes in Kotlin are final so you have to use the open annotation in the parent class, this tells the compiler that 
+	this class can be inherited by other classes.	
+
+if you override protected members in child class without specifying modifier then they are by default protected
+	
+Any subclass that extends the abstract class must implement all of its abstract methods and properties, or the subclass should also be declared as abstract.	
+
+ outer class does not see private members of its inner classes.
+ use "inner" keyword to access outer members
+ 
+ Sealed class
+ A Sealed Class have specific number of sub-classes
+is abstract.
+cannot be instantiated
+
+- use "is" to check type 
+- use "as" or "as?" to cast
+
+
+Delegates (by keyword) 
+(beginner) https://kotlinlang.org/docs/reference/delegation.html
+(advance) https://kotlinlang.org/docs/reference/delegated-properties.html
+
+
+- like inheritence but w/o inheritence syntax
+- code reuseablity 
+- Storing Properties in a Map
+
+Lazy
+the value gets computed only upon first access;
+- var pi: Float by lazy {
+	3.14f
+	}
+	
+Observable
+	- use Delegates.observable(intial value)  { // handler }
+	- takes two arguments: the initial value and a handler for modifications. 
+	- The handler is called after every time we assign to the property 
+	- handler has three parameters: a property being assigned to, old value, new value
+///////////////////////////	
+import kotlin.properties.Delegates
+
+class User {
+    var name: String by Delegates.observable("<no name>") {
+        prop, old, new ->
+        println("$old -> $new")
+    }
+}
+
+fun main() {
+    val user = User()
+    user.name = "first"
+    user.name = "second"
+}
+
+use the map instance as the delegate for delegate property
+///////////////////////////
+
+class User(val map: Map<String, Any?>) {
+    val name: String by map
+    val age: Int     by map
+	}
+val user = User(mapOf(
+    "name" to "John Doe",
+    "age"  to 25
+))
+println(user.name) // Prints "John Doe"
+println(user.age)  // Prints 25
+
+
+///////////////////////////
+
+open - opitionally overidden by the child
+abstract - no body, must be overridden by child
+	
+interface - You can have two methods with the same name	(when double inheritence)
+			- in java you cannot
+			
+. By default nested class is static so we can access the nested class property or variables using captain.innerCapt().methodszz
+	
+Higher order function or higher level function can have another function as a parameter or return a function or can do both.
+
+primary constructor - vanilla, has variables in params
+					- part of the class header
+					- can omit the constructor keyword from the primary constructor if it does not have any annotations or 
+						visibility modifiers (public, private or protected) 
+					- contain any code (logic steps). So all the initialization logic is written inside an 
+						initializer block (init)
+					- but you can directly initialize them in the class body itself like this (Human below)
+					- Or (consicely) using the var or val keyword, (frees us from boilerplate code). (Human2)
+	class Human (n : String) {
+		var name = n 
+	}
+	class Huamn2 (var n : String) //same as above
+	
+Secondary constructor - uses constructor keyword inside the class body. good for inheritance 
+					  - can use secondary and primary together
+
+	class Person { // just secondary
+		var lastName: String
+		constructor(lastName: String)  {
+			this.lastName = lastName
+		}
+	}
+	
+	class Person(var lastName: String) {
+		var age: Int? = null
+		constructor(lastName: String, age: Int): this(lastName)  {
+			//stuff
+    }
+}
+	
+	
+	
+	
+	
+	fun main(args: Array<String>){
+		val stu = Student("Harry", 24)
+	}
+
+	open class College{
+
+		constructor(name: String, age: Int){
+			println("parent class constructor")
+			println("Student Name: ${name.toUpperCase()}")
+			println("Student Age: $age")
+		}
+	}
+	class Student: College{
+		constructor(name: String, age: Int): super(name,age){
+			println("child class constructor")
+			println("Student Name: $name")
+			println("Student Age: $age")
+		}
+	}
+
+	
+----------------------------------------------------------------------------------
+CQRS (Command Query Responsibitly Seperation)
+	-  command is a method that mutates state and query is a method that returns state. 
+	- methods should either query & return data OR act on data, NOT BOTH
+	
+	- in microservices, a service might be split into query and write/action services
+	- Often, reads & writes will go into a database 
+	- Separation of the read and write stores also allows each to be scaled appropriately to match the load.
+		- read stores typically encounter a much higher load than write stores
+		- write take mroe time (user autherization)
+	- so read mikght have cachign and respond w/ data
+	- write might respond with just pass/fail
+	- coould create many specific request-handlers for indivual requests 
+	
+	Benefits
+	
+	Independent scaling. CQRS allows the read and write workloads to scale independently, and may result in fewer lock contentions
+	Optimized data schemas. The read side can use a schema that is optimized for queries, while the write side uses a schema that is optimized for updates.
+	Security. It's easier to ensure that only the right domain entities are performing writes on the data.
+	Separation of concerns. Segregating the read and write sides can result in models that are more maintainable and flexible. Most of the complex business logic goes into the write model. The read model can be relatively simple.
+	Simpler queries. By storing a materialized view in the read database, the application can avoid complex joins when querying.
+	
+	
+ Event Sourcing pattern. 
+
+ With this pattern, application state is stored as a sequence of events. Each event represents a set of 
+changes to the data. The current state is constructed by replaying the events. In a CQRS context, one benefit of Event Sourcing is 
+that the same events can be used to notify other components — in particular, to notify the read model. The read model uses the events 
+to create a snapshot of the current state, which is more efficient for queries. However, Event Sourcing adds complexity to the design.	
+
+Publisher - Subscriber Pattern
+
+In a pub/sub model, any message published to a topic is immediately received by all of the subscribers to the topic. 
+Pub/sub messaging can be used to enable event-driven architectures, 
+pub/sub can decouple applications in order to increase performance, reliability and scalability.
+
+- senders of messages, called publishers, do not program the messages to be sent directly to specific receivers, called subscribers, but 
+instead categorize published messages into classes without knowledge of which subscribers, if any, there may be. Similarly, 
+subscribers express interest in one or more classes and only receive messages that are of interest, without knowledge of which 
+publishers, 
+
+----------------------------------------------------------------------------------
+string immutable
+As applications grow, it’s very common for String literals to occupy large area of memory, which can even cause redundancy. So, in 
+order to make Java more efficient, the JVM sets aside a special area of memory called the “String constant pool“.
+
+When the compiler sees a String literal, it looks for the String in the pool. If a match is found, the reference to the new literal is 
+directed to the existing String and no new String object is created. The existing String simply has one more reference. Here comes the 
+point of making String objects immutable:
+
+In the String constant pool, a String object is likely to have one or many references. If several references point to same String 
+without even knowing it, it would be bad if one of the references modified that String value. That’s why String objects are immutable.
+
+- StringBuilder is mutable (jav and C#)
+
+- Read-only fields may be calculated when the program runs (unlike constants, which are known beforehand), but never change after they 
+are initialized.
+
+- in javascrip "const" isnt truley immutable for non-primative types
+
+final means that you can't change the object's reference to point to another reference or another object, but you can still mutate its 
+state (using setter methods e.g). Where immutable means that the object's actual value can't be changed, but you can change its 
+reference to another one.
+
+final ensure that the address of the object remains the same. Where as the Immutable suggests that we can't change the state of the 
+object once created.
+
+final is just a keyword whereas Immutable is a pattern.
