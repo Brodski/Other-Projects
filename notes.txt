@@ -807,6 +807,48 @@ BOXING (JAVA)
 	- use primatives when possible
 	- When we autobox or unbox a method is being called, this slows program.
 	
+method reference operator 	(double colon)
+
+ special type of lambda expressions, 
+ - used to create simple lambda expressions by referencing existing methods.
+ - used to call a method by referring to it with the help of its class directly.
+ - can reference a constructor in the same way that we referenced a method or constructor,
+ - (ClassName::methodName)
+ 
+ ///////////////////////////////////////////////////
+ 
+ ex)
+	List<Integer> numbers = Arrays.asList(5, 3, 50, 24, 40, 2, 9, 18);
+	
+A)	numbers.stream()
+	  .sorted((a, b) -> a.compareTo(b));
+   // Above can be rewritten as: 
+B)	numbers.stream()
+	  .sorted(Integer::compareTo);
+	  
+////////////////////////////////////////////////////////
+class GFG { 
+  
+    void someFunction(String s) 
+    { 
+        System.out.println(s); 
+    } 
+  
+    public static void main(String[] args) 
+    { 
+  
+        List<String> list = new ArrayList<String>(); 
+        list.add("Geeks"); 
+        list.add("For"); 
+        list.add("GEEKS"); 
+  
+        // call the instance method 
+        // using double colon operator 
+        list.forEach((new GFG())::someFunction); 
+    } 
+////////////////////////////////////////////////
+
+	
 Struct Vs Class
 		- struct: all members are public by default
 		- class: all members are private by default
@@ -1827,6 +1869,21 @@ PROPS
 		2nd) return <Car brand={carinfo} />
 		3rd) return <h2>I am a {this.props.brand.model}!</h2>;
 
+PROPS vs STATE
+	- both are plain JavaScript objects. 
+	- props get passed to the component (like parameters) 
+	- state is managed within the component (similar to variables declared within a function).
+	
+	- state is optional. increases complexity and reduces predictability, a Component without state is preferable. 
+
+Why is setState giving me the wrong value?
+	- In React, both this.props and this.state represent the rendered values, i.e. what’s currently on the screen.
+	- setState are asynchronous - don’t rely on this.state to reflect the new value immediately after calling setState
+	- Think of setState() as a request rather than an immediate command to update the component. For better perceived performance, 
+	   React may delay it, and then update several components in a single pass. React does not guarantee that the state changes 
+	   are applied immediately.
+	- setState() will always lead to a re-render unless shouldComponentUpdate() returns false.
+
 LIFECYCLE
 	- Each component has a lifecycle of 3 phases:
 	- Mounting, Updating, and Unmounting.
@@ -2319,3 +2376,63 @@ final ensure that the address of the object remains the same. Where as the Immut
 object once created.
 
 final is just a keyword whereas Immutable is a pattern.
+
+
+
+-----------------------------------------------------------------
+
+ANDROID
+
+Activity 
+	- a screen
+	- An activity provides the window in which the app draws its UI.
+	- combo of java code & xml
+	- If the main activity can open any other activities (screens) these activities will go through the same 3 states when they are 
+	  opened.
+	  When one app invokes another, the calling app invokes an activity in the other app, rather than the app as an atomic whole
+	  This window typically fills the screen, but may be smaller than the screen and float on top of other windows. Generally, one 
+activity implements one screen in an app. For instance, one of an app’s activities may implement a Preferences screen, while another 
+activity implements a Select Photo screen.
+		Most apps contain multiple screens, which means they comprise multiple activities. Typically, one activity in an app is 
+specified as the main activity, which is the first screen to appear when the user launches the app. Each activity can then start 
+another activity in order to perform different actions.
+		To use activities in your app, you must register information about them in the app’s manifest, and you must manage activity 
+lifecycles appropriately. via open your manifest file
+Intent
+
+	an implicit request tells the system to “Start a Send Email screen in any activity that can do the job." 
+	- An action being requrested taht the device should try to perform
+	- some part of process
+	- tap or swipe
+	- 
+	
+Fragment
+		- A Fragment represents a behavior or a portion of user interface
+	-. You can combine multiple fragments in a single activity to build a multi-pane UI and reuse a fragment in multiple activitie
+	A fragment must always be hosted in an activity and the fragment's lifecycle is directly affected by the host activity's 
+lifecycle. For example, when the activity is paused, so are all fragments in it, 
+	- fragment elements are useful b/c you can have a tablet that shows 2 fragments then have a phone that shows 1 fragment 
+		divided accross 2 pages
+
+Context
+	- Context represents environment data It provides access to things such as databases
+		Loading a resource.
+Launching a new activity.
+Creating views.
+	TextView tv = new TextView(this);
+	The keyword this refers to the context of the current activity.
+	Interface to global information about an application environment
+	allows access to application-specific resources and classes, as well as up-calls for application-level operations such as 
+launching activities, broadcasting and receiving intents, etc
+	Context provides the answer to the components question of “where the hell am I in relation to app generally and how do I 
+access/communicate with the rest of the app?”
+
+
+IntentService
+	- s/t tht can perform the task that the intest requested
+	- Sevices that handel Intent request and process the work
+	- does work while user can still interact w/ device
+
+BroadcastReceiver
+	- Recieves an Intent from a sendBroadcast method often indication that soem work has been completed
+	- 'hey i'm done w/ something'
