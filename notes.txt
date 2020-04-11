@@ -2131,9 +2131,13 @@ Single Page Website:
 	
 -------------------------------------------------------
 	
-Kotlin
+KOTLIN
+
+-------------------------------------------------------
+
 	$ kotlinc hello.kt -include-runtime -d hello.jar
     $ java -jar hello.jar
+Overview
 	- runs on the jvm
 	- a bit faster than java
 	- no Null Pointer Exception 
@@ -2152,8 +2156,8 @@ Access Modifier
 	internal - Accessible within the same modul
 				This Class	Module		Subclass	Entire App
 	public			Y		  Y            Y            Y
-	protected 		Y		  ?            Y            
-	internal		Y		  Y            ?            
+	protected 		Y		               Y            
+	internal		Y		  Y                        
 	private			Y
 	
 let, run, and with return the lambda result.
@@ -2171,212 +2175,183 @@ let, run, and with return the lambda result.
 	also		it
 
 classes	
-By default all classes in Kotlin are final so you have to use the open annotation in the parent class, this tells the compiler that 
-	this class can be inherited by other classes.	
+	- all classes are final by default 
+	- use "open" keyword to allow a class to be inherited
+	- if you override protected members without specifying modifier then they are by default protected	
+	- Any class that extends an abstract class must implement all of its abstract methods and properties, 
+		- (unless that class too is suppose to be an abstract class)	
 
-if you override protected members in child class without specifying modifier then they are by default protected
+	abstract 
+		- no body, must be overridden by child
 	
-Any subclass that extends the abstract class must implement all of its abstract methods and properties, or the subclass should also be declared as abstract.	
+	interface 
+		- You can have two methods with the same name	(when double inheritence)
+		- in java you cannot
 
- outer class does not see private members of its inner classes.
- use "inner" keyword to access outer members
- 
- Sealed class
- A Sealed Class have specific number of sub-classes
-is abstract.
-cannot be instantiated
+	Sealed class
+		- new thing not found in java!
+		- you have classes inside of the sealed class, each which inherit thee sealed class
+		- google for more
 
-- use "is" to check type 
-- use "as" or "as?" to cast
+					
+	- By default nested classes are static so we can access the nested class property or variables 
+		using captain.innerCapt().methodszz
+	- Higher order function or higher level function can have another function as a parameter or return 
+		a function or can do both.
+
+Lazy
+	the value gets computed only upon first access;
+	- var pi: Float by lazy {
+		3.14f
+	}
 
 
 Delegates (by keyword) 
-(beginner) https://kotlinlang.org/docs/reference/delegation.html
-(advance) https://kotlinlang.org/docs/reference/delegated-properties.html
+	- achieves the same code reuse as inheritance.
+	- like inheritence but w/o inheritence syntax
+	- code reuseablity 
+	- Storing Properties in a Map (https://kotlinlang.org/docs/reference/delegated-properties.html#storing-properties-in-a-map )
 
+	(beginner) https://kotlinlang.org/docs/reference/delegation.html
+	(advance) https://kotlinlang.org/docs/reference/delegated-properties.html
 
-- like inheritence but w/o inheritence syntax
-- code reuseablity 
-- Storing Properties in a Map
-
-Lazy
-the value gets computed only upon first access;
-- var pi: Float by lazy {
-	3.14f
+ ex)
+	//use the map instance as the delegate for delegate property
+	class User(val map: Map<String, Any?>) {
+		val name: String by map
+		val age: Int     by map
 	}
+	val user = User(mapOf(
+		"name" to "John Doe",
+		"age"  to 25
+	))
+	println(user.name) // Prints "John Doe"
+	println(user.age)  // Prints 25
+
 	
 Observable
-	- use Delegates.observable(intial value)  { // handler }
 	- takes two arguments: the initial value and a handler for modifications. 
 	- The handler is called after every time we assign to the property 
 	- handler has three parameters: a property being assigned to, old value, new value
-///////////////////////////	
-import kotlin.properties.Delegates
+  ex)
+	import kotlin.properties.Delegates
 
-class User {
-    var name: String by Delegates.observable("<no name>") {
-        prop, old, new ->
-        println("$old -> $new")
-    }
-}
+	class User {
+		// use "Delegates.observable(intial value)  { // handler }"
+		var name: String by Delegates.observable("<no name>") {
+			prop, old, new ->
+			println("$old -> $new")
+		} }
+	fun main() {
+		val user = User()
+		user.name = "first"
+		user.name = "second" }
 
-fun main() {
-    val user = User()
-    user.name = "first"
-    user.name = "second"
-}
-
-use the map instance as the delegate for delegate property
-///////////////////////////
-
-class User(val map: Map<String, Any?>) {
-    val name: String by map
-    val age: Int     by map
-	}
-val user = User(mapOf(
-    "name" to "John Doe",
-    "age"  to 25
-))
-println(user.name) // Prints "John Doe"
-println(user.age)  // Prints 25
-
-
-///////////////////////////
-
-open - opitionally overidden by the child
-abstract - no body, must be overridden by child
-	
-interface - You can have two methods with the same name	(when double inheritence)
-			- in java you cannot
-			
-. By default nested class is static so we can access the nested class property or variables using captain.innerCapt().methodszz
-	
-Higher order function or higher level function can have another function as a parameter or return a function or can do both.
-
-primary constructor - vanilla, has variables in params
-					- part of the class header
-					- can omit the constructor keyword from the primary constructor if it does not have any annotations or 
-						visibility modifiers (public, private or protected) 
-					- contain any code (logic steps). So all the initialization logic is written inside an 
-						initializer block (init)
-					- but you can directly initialize them in the class body itself like this (Human below)
-					- Or (consicely) using the var or val keyword, (frees us from boilerplate code). (Human2)
+primary constructor 
+	- has variables in params
+	- part of the class header
+	- can omit the constructor keyword sometimes
+	- all the initialization logic is written inside "init" (initializer block)
+	ex)
 	class Human (n : String) {
-		var name = n 
-	}
+		var name = n  }
 	class Huamn2 (var n : String) //same as above
 	
-Secondary constructor - uses constructor keyword inside the class body. good for inheritance 
-					  - can use secondary and primary together
+Secondary constructor 
+	- uses constructor keyword inside the class body. good for inheritance 
+	- can use secondary and primary together
 
-	class Person { // just secondary
+	// just secondary constructor
+	class Person { 
 		var lastName: String
 		constructor(lastName: String)  {
 			this.lastName = lastName
-		}
-	}
-	
+		} }
+		
+	// both
 	class Person(var lastName: String) {
 		var age: Int? = null
 		constructor(lastName: String, age: Int): this(lastName)  {
 			//stuff
-    }
-}
-	
-	
-	
-	
-	
-	fun main(args: Array<String>){
-		val stu = Student("Harry", 24)
-	}
-
-	open class College{
-
-		constructor(name: String, age: Int){
-			println("parent class constructor")
-			println("Student Name: ${name.toUpperCase()}")
-			println("Student Age: $age")
-		}
-	}
-	class Student: College{
-		constructor(name: String, age: Int): super(name,age){
-			println("child class constructor")
-			println("Student Name: $name")
-			println("Student Age: $age")
-		}
-	}
-
+    } }	
 	
 ----------------------------------------------------------------------------------
 CQRS (Command Query Responsibitly Seperation)
-	-  command is a method that mutates state and query is a method that returns state. 
-	- methods should either query & return data OR act on data, NOT BOTH
-	
-	- in microservices, a service might be split into query and write/action services
-	- Often, reads & writes will go into a database 
-	- Separation of the read and write stores also allows each to be scaled appropriately to match the load.
-		- read stores typically encounter a much higher load than write stores
-		- write take mroe time (user autherization)
-	- so read mikght have cachign and respond w/ data
-	- write might respond with just pass/fail
-	- coould create many specific request-handlers for indivual requests 
-	
-	Benefits
-	
-	Independent scaling. CQRS allows the read and write workloads to scale independently, and may result in fewer lock contentions
-	Optimized data schemas. The read side can use a schema that is optimized for queries, while the write side uses a schema that is optimized for updates.
-	Security. It's easier to ensure that only the right domain entities are performing writes on the data.
-	Separation of concerns. Segregating the read and write sides can result in models that are more maintainable and flexible. Most of the complex business logic goes into the write model. The read model can be relatively simple.
-	Simpler queries. By storing a materialized view in the read database, the application can avoid complex joins when querying.
-	
-	
- Event Sourcing pattern. 
+	- command is a method that mutates state and 
+	- query is a method that returns state. 
+	- methods should either query data OR act on data, NOT BOTH
 
- With this pattern, application state is stored as a sequence of events. Each event represents a set of 
-changes to the data. The current state is constructed by replaying the events. In a CQRS context, one benefit of Event Sourcing is 
-that the same events can be used to notify other components — in particular, to notify the read model. The read model uses the events 
-to create a snapshot of the current state, which is more efficient for queries. However, Event Sourcing adds complexity to the design.	
+	- in microservices, a service might be split into query and write/action services
+	
+	Benefits:
+	
+	Independent scaling. 
+		- CQRS allows the read and write workloads to scale independently
+	Optimized data schemas. 
+		- The read side can use a schema that is optimized for queries, 
+		- the write side uses a schema that is optimized for updates.
+	Security. 
+		- It's easier to ensure that only the right domain entities are performing writes on the data.
+	Simpler queries. 
+		- By storing a read database, the application can avoid complex joins when querying.
+	
+	
+Event Sourcing pattern. 
+
+	 - application state is stored as a sequence of events. 
+	 - Each event represents a set of changes to the data. 
+	 - The current state is constructed by replaying the events. 
+	 - In a CQRS context, one benefit of Event Sourcing is that the same events can be used to notify other components, eg the read model. 
+	 - The read model uses the events to create a snapshot of the current state, which is more efficient for queries. 
+	 - github or multiplayer video game servers
 
 Publisher - Subscriber Pattern
 
-In a pub/sub model, any message published to a topic is immediately received by all of the subscribers to the topic. 
-Pub/sub messaging can be used to enable event-driven architectures, 
-pub/sub can decouple applications in order to increase performance, reliability and scalability.
+	 - messages published to a topic is immediately received by all subscribers to the topic. 
 
-- senders of messages, called publishers, do not program the messages to be sent directly to specific receivers, called subscribers, but 
-instead categorize published messages into classes without knowledge of which subscribers, if any, there may be. Similarly, 
-subscribers express interest in one or more classes and only receive messages that are of interest, without knowledge of which 
-publishers, 
+	 - publishers send messages 
+	 - subscribers recieve messages
+	 - publishers categorize messages into classes without knowledge of which subscribers, if any, 
+	 - subscribers express interest in one or more classes and only receive messages that are of interest
 
 ----------------------------------------------------------------------------------
 string immutable
-As applications grow, it’s very common for String literals to occupy large area of memory, which can even cause redundancy. So, in 
-order to make Java more efficient, the JVM sets aside a special area of memory called the “String constant pool“.
+	- As applications grow, it’s very common for String literals to occupy large area of memory, which can even cause redundancy. 
+	- So the JVM sets aside a special area of memory called the “String constant pool“, in order to make Java more efficient
 
-When the compiler sees a String literal, it looks for the String in the pool. If a match is found, the reference to the new literal is 
-directed to the existing String and no new String object is created. The existing String simply has one more reference. Here comes the 
-point of making String objects immutable:
+	- When the compiler sees a String literal it looks for the String in the pool. 
+		- If a match is found the reference to the new literal is pointed to the existing String (so no new String object is created) 
+	- The existing String now has one more reference. Here comes the point of making String objects immutable:
 
-In the String constant pool, a String object is likely to have one or many references. If several references point to same String 
-without even knowing it, it would be bad if one of the references modified that String value. That’s why String objects are immutable.
+	- In the String constant pool, a String object is likely to have one or many references. 
+	- Sine several references could point to same String, it would be bad if one of the references modified 
+		that String value. That’s why String objects are immutable.
 
-- StringBuilder is mutable (jav and C#)
+	- StringBuilder is mutable (jav and C#)
 
-- Read-only fields may be calculated when the program runs (unlike constants, which are known beforehand), but never change after they 
-are initialized.
 
-- in javascrip "const" isnt truley immutable for non-primative types
-
-final means that you can't change the object's reference to point to another reference or another object, but you can still mutate its 
-state (using setter methods e.g). Where immutable means that the object's actual value can't be changed, but you can change its 
-reference to another one.
-
-final ensure that the address of the object remains the same. Where as the Immutable suggests that we can't change the state of the 
-object once created.
-
-final is just a keyword whereas Immutable is a pattern.
-
+Final/Const vs Immutable
+	- cosnt for javascript 
+	- final for java
+	- const keyword doesnt exist in java, keyword final not in javascript
+	
+	
+	- final is a keyword 
+	- Immutable is a pattern.
+	- Final means that you can't change the object's reference, but you can still mutate its state (using setter methods e.g). 
+	- Final ensure that the address of the object remains the same. 
+	- const (and final) are not immutable for non-primative types
+	- Immutable means we can't change the state of the object once created.
+	- use final for non-object varibles is good
+	- use immutable pattern for objects is good
+	
+	- KOTLIN 
+	- final vs const:
+		- final is used only for methods (prevent overriding)
+		- const is used for variable's known at compile time (known before)
+		- val is used for variables who's value is calcuated at run time  (known during)
+			- both const and val never change after initialized
+		- By default, Kotlin classes are final
 
 
 -----------------------------------------------------------------
@@ -2385,47 +2360,40 @@ ANDROID
 
 Activity 
 	- a screen
-	- An activity provides the window in which the app draws its UI.
-	- combo of java code & xml
-	- If the main activity can open any other activities (screens) these activities will go through the same 3 states when they are 
-	  opened.
-	  When one app invokes another, the calling app invokes an activity in the other app, rather than the app as an atomic whole
-	  This window typically fills the screen, but may be smaller than the screen and float on top of other windows. Generally, one 
-activity implements one screen in an app. For instance, one of an app’s activities may implement a Preferences screen, while another 
-activity implements a Select Photo screen.
-		Most apps contain multiple screens, which means they comprise multiple activities. Typically, one activity in an app is 
-specified as the main activity, which is the first screen to appear when the user launches the app. Each activity can then start 
-another activity in order to perform different actions.
-		To use activities in your app, you must register information about them in the app’s manifest, and you must manage activity 
-lifecycles appropriately. via open your manifest file
-Intent
-
-	an implicit request tells the system to “Start a Send Email screen in any activity that can do the job." 
-	- An action being requrested taht the device should try to perform
-	- some part of process
-	- tap or swipe
-	- 
+	- An activity is a window in which the app draws its UI.
+	- is java code + xml
+	- when opening other activities (screens) these activities will go through the same 3 states when they are opened.
+	- When one app invokes another, the calling app invokes an activity in the other app, rather than the app as an atomic whole
+	- This window typically fills the screen, but may be smaller than the screen and float on top of other windows. 
+	- Generally, one activity implements one screen in an app.
+		- one of an app’s activities may implement a Preferences or a Select Photo screen.
+	- Most apps contain multiple screens/activities, the main activity is the first screen to appear when the user launches the app. 
+		- Each activity can then start another activity in order to perform different actions.
+	- use your manifest file
 	
+Intent
+	- A request for an action to perform
+	- an implicit request tells the system to “Start a Send Email screen in any activity that can do the job." 
+	- Verify there is an app to receive the intent 
+		- app with crash if NOTHING CAN RECIEVE!	
 Fragment
-		- A Fragment represents a behavior or a portion of user interface
-	-. You can combine multiple fragments in a single activity to build a multi-pane UI and reuse a fragment in multiple activitie
-	A fragment must always be hosted in an activity and the fragment's lifecycle is directly affected by the host activity's 
-lifecycle. For example, when the activity is paused, so are all fragments in it, 
+	- A Fragment represents a behavior or a portion of the UI
+	- You can combine multiple fragments in a single activity to build a multi-pane UI and reuse a fragment in multiple activitie
+	- A fragment must always be hosted in an activity 
+	- the fragment's lifecycle is directly affected by the host activity's lifecycle. 
+		- when the activity is paused, so are all fragments in it, 
 	- fragment elements are useful b/c you can have a tablet that shows 2 fragments then have a phone that shows 1 fragment 
 		divided accross 2 pages
 
 Context
-	- Context represents environment data It provides access to things such as databases
-		Loading a resource.
-Launching a new activity.
-Creating views.
-	TextView tv = new TextView(this);
-	The keyword this refers to the context of the current activity.
-	Interface to global information about an application environment
-	allows access to application-specific resources and classes, as well as up-calls for application-level operations such as 
-launching activities, broadcasting and receiving intents, etc
-	Context provides the answer to the components question of “where the hell am I in relation to app generally and how do I 
-access/communicate with the rest of the app?”
+	- Context represents environment data.
+	- it identifies where the programmer is in the app and how to communicate with the rest of the app.
+	- Interface to global information about an application environment
+	- It provides access to things such as databases, loading a resource, launching a new activity, creating views.
+	- allows access to application-level resources and classes, & operations such as launching activities, broadcasting and 
+		receiving intents, etc
+	- consider: "TextView tv = new TextView(this);"
+		- The keyword "this" refers to the context of the current activity.
 
 
 IntentService
@@ -2436,3 +2404,4 @@ IntentService
 BroadcastReceiver
 	- Recieves an Intent from a sendBroadcast method often indication that soem work has been completed
 	- 'hey i'm done w/ something'
+	
