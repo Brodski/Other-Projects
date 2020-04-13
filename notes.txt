@@ -1982,13 +1982,13 @@ DEPENDENCY
 
 DEPENDENCY INJECTION
 	- di is arche design pattern
-	- DI generally means passing a dependent object as a parameter to a method, rather than having the method create the dependent object
+	- DI generally means passing a dependent object as a parameter to a method, rather than having the method create the 
+		dependent object
 	- thus the method doesnt have a direct dependecny on a particual implemenation
 	- classic example: passing a database object in the parameters of a object
 	 
 	- makes code testable
-
-	- sub diff depencies as long as they satisfy the interface
+	
 	- prevents hard coding ... off loading the instatiation of some objects
 	- Dep Inversion princ: rely on abstractons rather than concreted implemenations
 	- abstract classes to interface, when we do, we decouple our implementations from each other
@@ -2003,18 +2003,16 @@ Inversion of Control =
 	-in traditional programming, the custom code that expresses the purpose of the program calls into reusable libraries to take care of generic 
 tasks, but with inversion of control, it is the framework that calls into the custom, 
 	-when you have the power to call your code whenever you want that is library, otherhand, your framework calls your code	
-
- Cookies V LocalStorage vs SessionStorage
-   -Cookies are mainly for reading server-side, local storage can only be read by the client-side
-  Cookies 4KB
-	- sessionStorage expires when the tab is closed!
-	Cookies are pretty much a convenient way to carry information from one session on a website to another, or 
-between sessions on related websites, without having to burden a server machine with massive amounts of data 
-storage. If 
 	
 	
+-----------------------------------------
 
-
+Cookies V LocalStorage vs SessionStorage
+    - Cookies are mainly for reading server-side (very small)
+    - local storage can only be read by the client-side
+    - sessionStorage expires when the tab is closed!
+	- Cookies carry information from one session on a website to another session	
+	
 -----------------------------------------
 CORS (Cross Origin Resource Sharing)
 	- security feature in browsers
@@ -2055,6 +2053,8 @@ DEVELOPMENT, STAGE, PRODUCTION
 		3 ppl writing code. After it looks good it moves to Stage environment. 
 	Stage 
 		is a little more robust than devlopement. It's close to production but not exactly b/c money. Want to test in Stage
+		
+ -------------------------------------------------------------------
 
 Node server vs Apache
 	- A node.js web application is a full-fledged web server just like Nginx or Apache.
@@ -2142,12 +2142,14 @@ Overview
 	- a bit faster than java
 	- no Null Pointer Exception 
 		- Kotlin's type system is aimed to eliminate NullPointerException
+	- removes boiler plate code
 	- designed with Java Interoperability in mind. 
 		- Existing Java code can be called.
 		- Existing Kotlin code can be used from Java as well. 
 	fun function_name(param1: data_type, param2: data_type, ...): return_type
 	- const is used for variables that are known at compile-time.
 	- val is defined at run time
+	
 	
 Access Modifier
 	by default variables are public
@@ -2181,6 +2183,11 @@ classes
 	- Any class that extends an abstract class must implement all of its abstract methods and properties, 
 		- (unless that class too is suppose to be an abstract class)	
 
+	data class
+		- simple class (kinda like a POJO)
+		- gets rid of lots of boiler plate code
+		- toString(), equals(), hashCode(), copy(), componentN() (N=1,2,3..) (getters and setters too duh)
+		
 	abstract 
 		- no body, must be overridden by child
 	
