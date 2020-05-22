@@ -2382,7 +2382,7 @@ Intent
 	- A request for an action to perform
 	- an implicit request tells the system to “Start a Send Email screen in any activity that can do the job." 
 	- Verify there is an app to receive the intent 
-		- app with crash if NOTHING CAN RECIEVE!	
+		- app will crash if NOTHING CAN RECIEVE!	
 Fragment
 	- A Fragment represents a behavior or a portion of the UI
 	- You can combine multiple fragments in a single activity to build a multi-pane UI and reuse a fragment in multiple activitie
@@ -2402,7 +2402,11 @@ Context
 	- consider: "TextView tv = new TextView(this);"
 		- The keyword "this" refers to the context of the current activity.
 
-
+JobScheduler
+	- does background jobs
+	- does jobs during relative times like: when charging, idle, network is active, every 10 min when network
+	- very smart api
+		
 IntentService
 	- s/t tht can perform the task that the intest requested
 	- Sevices that handel Intent request and process the work
@@ -2412,3 +2416,112 @@ BroadcastReceiver
 	- Recieves an Intent from a sendBroadcast method often indication that soem work has been completed
 	- 'hey i'm done w/ something'
 	
+Service
+	- does something in th backgroudn even when user is not interacting with your app
+	- its not a thread, dont use service when you should use a thread
+	- must use explicit intent 
+	- uses your application's main thread by default, which can slow the activity
+	When a service is started, it has a lifecycle that's independent of the component that started it
+	Foreground Service 
+		- performs some operation that is noticeable to the user. 
+		- must display a Notification
+		- eg) an audio app would use a foreground Service to play an audio track. 
+		
+	
+User Agent String 
+- in android, A UserAgent is just a string that is generated for you based on the given application name and library version.
+
+- information about that your browser passes to servers/websites, benign info about the browser itself
+- this info is used to optimize the user experience
+	- what web browser
+	- screen resolution
+	- if javascript is enabled
+	- ect
+	
+UI runtime changes (rotating & stuff)
+	- not best idea to use "android:configChanges"  b/c the OS might restart your app for many more reasons than just it being in background (memory ect)
+	https://developer.android.com/guide/topics/resources/runtime-changes#HandlingTheChange
+	
+
+Storage
+	Internal vs External
+		Internal storage 
+			- private
+			- created by Android OS for your app
+			- only be accessible from the app
+			- no other app, or even the user, can see what's in the folder.
+			- always available on all devices, more reliable
+			- small size
+			- getFilesDir() => data/data/app_packageName
+		External Storage
+			- possible to be accessed by other apps 
+			- though data public, the files stored in these directories are meant for use only by your ap
+			- can be a removable storage media (such as an SD card) or an internal (non-removable) storage
+			- Removable volumes, such as an SD card, appear in the file system as part of external storage. 
+				- Android represents these devices using a path, such as /sdcard.
+			- getExternalFilesDirs 
+			
+			- If you specifically intend to create files that other apps should be able to access, your app should store these files 
+in the shared storage part of external storage instead.
+	- Int & Ext data gets deleted with your app (dont store camera photos here)
+	
+	Enironment returns user data directory. And getFilesDir returns application data directory
+	
+	Context.getFilesDir() returns a path that is bound to your package and the Context is required to access the package name.
+
+	getContentResolver() - does SQL-like selections
+Environment is different as there's only constants that are common to all apps running on the same runtime.
+
+Fragment: onCreate vs onCreateView
+	onCreate 
+		- called on initial creation of the fragment. You do your non graphical initializations here. It finishes even 
+		before the layout is inflated and the fragment is visible.
+		- anything else that doesn't involve the View hierarchy
+	onCreateView 
+		- called to inflate the layout of the fragment i.e graphical initialization usually takes place here. It is always 
+		called sometimes after the onCreate method.
+		
+Bundle vs Extras
+	- both are key value 
+	- bundle is faster
+	- bundle can be a stand alone object.
+	- extras are attatched/binded to the intent
+	- bundle is often recieved
+	- extras is often sent
+	- bundle; you create a seperate bundle object then attatch & send. 
+	- fragment.arguments = bundle
+	-  intent.setExtras
+	
+Styles:
+
+we are inheriting built-in platform style Widget.TextView using parent attribute in <style> element.
+. To inherit our styles we don’t need to use parent attribute instead, we can use dot notation 
+
+From styles outside: <style name="TextviewStyle" parent="@android:style/Widget.TextView">
+From our styles: <style name="TextviewStyle.Blue">
+		
+//REACT_APP_SPRINGB_ADDRESS='https://customyoutube.com:8443'
+
+Comparable vs Comparator
+	- both interfaces
+	- custom sorting logic for your objects or any other object
+	Comparable
+		- implements compareTo(myClass y)
+		- enables custom comparison logic for your objects that you control
+		- Song, Person, Bicycle
+		- collections.sort(Song) will use your Comparable, your compareTo()
+		- inorder to sort, the sort() method calls .compareTo(), but the class must implement Comparable first
+			ex) public class Runner implements Comparable<Runner>
+		- but if youre using someone elses library then you cant access Runner, then cant use Comparable :(
+		- "this" used
+		- "this.name.compareTo(o.name)"  vs "obj1.name.compareTo(obj2"
+		- since you 
+		
+	Comparator
+		- enables custom comparison logic for data-types tha you have no control over
+		- Int, String, Long, etc
+		- You can call Collections.sort(List<T>, Comparable<>)
+		- Thus you can create Compable
+		- implements compare(myClass x, myClass2 y) for your custom logic
+		- used for Collections.sort(<insert compare implementation>)
+		
