@@ -2525,3 +2525,25 @@ Comparable vs Comparator
 		- implements compare(myClass x, myClass2 y) for your custom logic
 		- used for Collections.sort(<insert compare implementation>)
 		
+		
+
+Serialization/marshalling :
+	- Note: When a program is executing code the objects are in some format, in memory, readable by the
+		language (maybe bytecode for the JVM). (ie, executable code)
+	- A serialized object can be used for communication; for storage or sent over the internet
+	- Cannot be processed by a computer program. 		
+	- serialization converts object to stream of bytes,
+	- but in serialization, it's more like the object's members are 'flattened' to a string.
+	- JSON, YAML, or XML
+Deserialization/unmarshalling:
+
+	- Unmarshalling takes the serialized object and transforms it into an executable form.
+		
+		
+		
+		
+		
+		
+		
+		
+		
