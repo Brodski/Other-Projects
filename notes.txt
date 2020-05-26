@@ -2537,7 +2537,7 @@ Serialization/marshalling :
 	- JSON, YAML, or XML
 Deserialization/unmarshalling:
 
-	- Unmarshalling takes the serialized object and transforms it into an executable form.
+	- Unmarshalling takes the serialized object and transforms it into an executable form
 		
 		
 		
