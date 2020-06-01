@@ -89,6 +89,8 @@ Prototype objects
 	- Polymorphism NO
 	- Inheritance NO
 	- Encapsualtioon Yes
+	
+	- class keyword is introduced in ES2015, but is syntactical sugar, JavaScript remains prototype-based
 		
 Statically typed language:
 	- Java
@@ -1034,7 +1036,7 @@ Namespace
 LIBRARY VS FRAMEWORK
 
 	Library
-		- A library contains many pieces of functionality that you may pick and choose from 
+		- A library contains many pieces of functionality/stand-alone-code that you may pick and choose from 
 		- It is a collection of objects/functions/methods your application links to
 		
 		ex) Network protocols, compression, string utilities, regular expressions, math. 
@@ -2195,7 +2197,10 @@ classes
 	
 	interface 
 		- You can have two methods with the same name	(when double inheritence)
-		- in java you cannot
+			- in java you cannot
+		- We can have code but not state.
+			-  we can’t create a property and store the state in it
+			- thid code is 'default implementation'
 
 	Sealed class
 		- new thing not found in java!
@@ -2551,9 +2556,70 @@ Deserialization/unmarshalling:
 		
 		
 		
+??		
+	-Babel is simply a translator, who translates your 'fancy' (ES6+) JS code into 'not-so-fancy' (ES5) ones that browser 
+(front-end) or Node.js (back-end) understands.
+	- @autowired in spring is for implicit dependecy injection
+	- concurrency = multiple threads in parrael
 		
-		Babel is simply a translator, who translates your 'fancy' (ES6+) JS code into 'not-so-fancy' (ES5) ones that browser (front-end) or Node.js (back-end) understands.
+Checked vs Unchecked		
+	(recall)
+		- when an error occurs within a method, the method creates an object (of subtype Throwable) and hands it off to the 
+			runtime system. The object, called an exception object.
+	Checked
+		- Java compiler forces you to handle checked expections. 
+		- "throws" "try-catch"
+		- Checked exceptions are checked at compile-time. It means if a method is throwing a checked exception then it should handle the 
+	exception using try-catch block or it should declare the exception using throws keyword, 
+		- denotes errors outside the control of the program. 
+			- They occur when interacting with outside resources/network resources 
+			- e.g. database, network, missing files etc.
+		
+	Unchecked
+		- Uncheck are exceptions that occur in the programs but are not handled. Usually null errors
 		
 		
+DEPENDENCY INJECTION II
+	- dependcy = a class needs/requires/depends another object inotrdder to function properly
+	- Dependency injection is all about removing hard-coded dependencies from your classes
+	https://www.c-sharpcorner.com/article/dependency-injection-part-3/
+	
+	Explicit Dependencies
+	- the class exposes it's dependencies in it's constructor. (sometimes in method parameter)
+	- an explicit dependency is often an interface in the class constructor.
+		- so it's loosely coupled
+		- so the depeendency cn be swapped out easily with other implementations, wherhe production, testing, or debugging.
+	Implicit Dependencies
+	- the class's dependencies are created in the class, and exist only in the code within that class.
+		- tightly coupled
+		- more difficult to test and more to maintain
 		
+	- in Spring, Autowired is useful for dependency injection, saves you time by automatically doing the wiring
+		(instead of you doing the work in the XML)
+	- https://stackoverflow.com/questions/19414734/understanding-spring-autowired-usage
 		
+	ex)
+	public class Customer {
+	
+		//dependencey
+		Service service;
+		
+		public Customer(Service service){
+			this.service = service
+		}
+		
+		public String writeCustomerService(){
+			println(service.getName()) // assume getName() exists elsewhere
+			return service.getName()
+		}
+	}
+		
+INVERSION OF CONTROL II
+	- classes should configure it's dependencies from the outside
+	- recall, ideally java classes should be as independent as possible
+		- reuse and test
+	
+	
+	
+	
+	
