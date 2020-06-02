@@ -2375,6 +2375,11 @@ Final/Const vs Immutable
 
 ANDROID
 
+Android Framework
+	- The android framework is the set of API's that allow developers to quickly and easily write apps for android phones
+	- This procedure of developing the applications on Android platform in java programming language using the tools and API 
+		libraries provided by Android SDK is called as Android Application Framework.
+
 Activity 
 	- a screen
 	- An activity is a window in which the app draws its UI.
