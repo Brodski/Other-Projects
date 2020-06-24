@@ -324,9 +324,11 @@ ABSTRACT CLASS
 		ABSTRACT VS INTERFACE
 		- abstract extends only 1 | interface can have multiple
 		- abstract can impliment it's members (eg methods) | interface cant
-		- abstract can have variables (fiels) | interface cant
+		- abstract can have variables (fields) | interface cant
 		- abtract can have access modifiers (public, ect) | interface cant
 		- abstract can inherit from other abstract classes OR other interfaces | interface only other interfaces 
+		
+		- interface shares behavior but not same code (abstract has some optionally code and some behavior)
 		
   Abstract or Interface or (unmodified) Class
   - abstract or (unmodified) class is good if you want implemented code. Ie non-empty bodies
@@ -778,19 +780,30 @@ BOXING (C#)
 	int j = (int)o;   // unboxing
 	
 BOXING (JAVA)	
-	- Autoboxing & Unboxing
-	- recall:  int and Integer. double and Double. float and Float
-		int x = 12   .......... Integer x = new Integer(x)
-	- primative and wrapper class
+	Recall:
+	Wrapper Class
+		- eg) Integer, Float, Long  - vs - int, float, long
+		      int x = 12   
+		      Integer x = new Integer(x)
+		- wrapper class "wraps" the functionaly of another class or component (to add functionaity to existing class w/o 
+			using inheritance)
+		- wrapper class has defined constants and methods (Integer.MAX_VALUE or Interger.equals() or 
+			Integer.toHexademical() (or s/t)
+		- some classes expect an object instead of a primative. eg, List<Integer> list
+			
+	AUTOBOXING & UNBOXING
 	- the automatic conversion from a primitive types and their wrapper classes		
 	- java compile does this automatically
 	
-	- Autoboxing  - wrapper to primative
+	- Autoboxing  
+		- wrapper to primative
 		- compile converts 42 to an instance of an Integer class
 			int ---> Integer
 			Integer myInt = Integer(42)  <----autoboxing
 			void coolMethod(Integer i) ....... coolMethod(41)  <----autoboxing			
-	- Unboxing - primative to wrapper
+	- Unboxing 
+		- primative to wrapper
+		   Integer ----> int
 		- ex)
 			Integer i = new Integer(44)
 			if (i > 41)  <---- Unboxing i
@@ -801,11 +814,7 @@ BOXING (JAVA)
 		- many classes/methods expect an Object as a parameter.
 		- ie List<Integer> list = new ArrayList<Integer>()
 		-    list.add(51)
-	- Wrapper Class
-		- wrapper class "wraps" the functionaly of another class or component (to add functionaity to existing class w/o 
-			using inheritance)
-		- wrapper class has defined constants and methods (Integer.MAX_VALUE or Interger.equals() or 
-			Integer.toHexademical() (or s/t)
+
 		
 	- use primatives when possible
 	- When we autobox or unbox a method is being called, this slows program.
@@ -1862,6 +1871,12 @@ JSX
 	- Write expressions inside curly braces { }
 		ex) const myelement = <h1>React is {5 + 5} times better with JSX</h1>; // 10
 
+What is the difference between JS and JSX?
+	- JSX = JavaScript Extension, mostly it will 
+	- used along with reactJS. It is a combination of HTML and JavaScript. 
+	- when react application loads the babel loader used to transpile the JSX to HTML and JavaScript.
+		
+		
 PROPS
 	- are passed to components via HTML attributes.	
 		ex) const myelement = <Car brand="Ford" />;
@@ -2315,7 +2330,8 @@ Event Sourcing pattern.
 	 - application state is stored as a sequence of events. 
 	 - Each event represents a set of changes to the data. 
 	 - The current state is constructed by replaying the events. 
-	 - In a CQRS context, one benefit of Event Sourcing is that the same events can be used to notify other components, eg the read model. 
+	 - In a CQRS context, one benefit of Event Sourcing is that the same events can be used to notify other components, eg the 
+        read model. 
 	 - The read model uses the events to create a snapshot of the current state, which is more efficient for queries. 
 	 - github or multiplayer video game servers
 
@@ -2535,7 +2551,6 @@ Comparable vs Comparator
 		- but if youre using someone elses library then you cant access Runner, then cant use Comparable :(
 		- "this" used
 		- "this.name.compareTo(o.name)"  vs "obj1.name.compareTo(obj2"
-		- since you 
 		
 	Comparator
 		- enables custom comparison logic for data-types tha you have no control over
@@ -2556,7 +2571,6 @@ Serialization/marshalling :
 	- but in serialization, it's more like the object's members are 'flattened' to a string.
 	- JSON, YAML, or XML
 Deserialization/unmarshalling:
-
 	- Unmarshalling takes the serialized object and transforms it into an executable form.
 		
 		
