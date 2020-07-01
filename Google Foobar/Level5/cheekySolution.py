@@ -122,39 +122,54 @@ def runLexxer2(cycString, i=0): #Pretend it's a lexxer
     i = 0
     myCycStuct = CycleStructure()
     
-    
     subscript = ""
     power = ""
     coefficient = ""
     while i < len(cycString) :
+        p = ""
         if cycString[i].upper() == "X":
             i = i + 1
             p = getNext( cycString[i:])            
             i = i + len(p)
             subscript = p
-        if i < len(cycString) and cycString[i].upper() == "^":
+            if i == len(cycString):
+                pwoer = 1
+                cycleVar = CycleStructure.Cycle(subscript, power)
+                myCycStuct.cycles.append(cycleVar)
+
+            
+            continue
+        if cycString[i].upper() == "^":
             i = i + 1
             p = getNext( cycString[i:])
             i = i + len(p)
             power = p if p != "" else 1
-        
-        if i < len(cycString) and (cycString[i] == "*" or cycString[i] == ")" or (cycString[i] == "/" and cycString[i-1] != ")") ):  #and subscript != ""):
-            print "    power", power
-            print "    subscript", subscript
+
+            # print "    power", power
+            # print "    subscript", subscript
             cycleVar = CycleStructure.Cycle(subscript, power)
             myCycStuct.cycles.append(cycleVar)
             subscript = ""
             power = ""
-        if i < len(cycString) and cycString[i].upper() == "/":
+            continue
+        if subscript != "" and power == "":
+            # print "    power", power
+            # print "    subscript", subscript
+            power = 1
+            cycleVar = CycleStructure.Cycle(subscript, power)
+            myCycStuct.cycles.append(cycleVar)
+            subscript = ""
+            power = ""
+        #if i == len(cycString) or (cycString[i] == "*" or cycString[i] == ")" or cycString[i] == "/" and cycString[i-1] != ")")):  #and subscript != ""):
+        if cycString[i].upper() == "/":
             i = i + 1
             p = getNext( cycString[i:])
             i = i + len(p)
-            coefficient = p if p != "" else 1
+            
+            coefficient = p #if p != "" else 1
             myCycStuct.coefficient = int(coefficient)
-            print "    coefficient", coefficient
-        elif i == len(cycString):
-            coefficient = p if p != "" else 1
-            myCycStuct.coefficient = int(coefficient)
+            continue
+            #print "    coefficient", coefficient
         i = i + 1
         # elif i == len(cycString):
         #     myCycStuct.coefficient = 1
@@ -203,8 +218,9 @@ if __name__ == '__main__':
     starGrid = StarGrid()
     
     #ns = "x1^4/24 + (x1^2*x2)/4 + x2^2/8 + (x1*x3)/3 + x4/4"
-    ns = "x1^5 + (x1^3*x2) + (x1*x2^2)/8 + (x1^2*x3)/6 + (x2*x3)/6 + (x1*x4)/4 + x5/5"
-    #ns = "x1^12/479001600 + (x1^2*x10)/20 + (x1*x11)/11 + x12/12 + (x1^10*x2)/7257600 + (x10*x2)/20 + (x1^8*x2^2)/322560 + (x1^6*x2^3)/34560 + (x1^4*x2^4)/9216 + (x1^2*x2^5)/7680 + x2^6/46080 + (x1^9*x3)/1088640 + (x1^7*x2*x3)/30240 + (x1^5*x2^2*x3)/2880 + 1/864*x1^3*x2^3*x3 + (x1*x2^4*x3)/1152 + (x1^6*x3^2)/12960 + 1/864*x1^4*x2*x3^2 + 1/288*x1^2*x2^2*x3^2 + (x2^3*x3^2)/864 + (x1^3*x3^3)/972 + 1/324*x1*x2*x3^3 + x3^4/1944 + (x1^8*x4)/161280 + (x1^6*x2*x4)/5760 + 1/768*x1^4*x2^2*x4 + 1/384*x1^2*x2^3*x4 + (x2^4*x4)/1536 + (x1^5*x3*x4)/1440 + 1/144*x1^3*x2*x3*x4 + 1/96*x1*x2^2*x3*x4 + 1/144*x1^2*x3^2*x4 + 1/144*x2*x3^2*x4 + (x1^4*x4^2)/768 + 1/128*x1^2*x2*x4^2 + (x2^2*x4^2)/256 + 1/96*x1*x3*x4^2 + x4^3/384 + (x1^7*x5)/25200 + (x1^5*x2*x5)/1200 + 1/240*x1^3*x2^2*x5 + 1/240*x1*x2^3*x5 + 1/360*x1^4*x3*x5 + 1/60*x1^2*x2*x3*x5 + 1/120*x2^2*x3*x5 + 1/90*x1*x3^2*x5 + 1/120*x1^3*x4*x5 + 1/40*x1*x2*x4*x5 + (x3*x4*x5)/60 + (x1^2*x5^2)/100 + (x2*x5^2)/100 + (x1^6*x6)/4320 + 1/288*x1^4*x2*x6 + 1/96*x1^2*x2^2*x6 + (x2^3*x6)/288 + 1/108*x1^3*x3*x6 + 1/36*x1*x2*x3*x6 + (x3^2*x6)/108 + 1/48*x1^2*x4*x6 + (x2*x4*x6)/48 + (x1*x5*x6)/30 + x6^2/72 + (x1^5*x7)/840 + 1/84*x1^3*x2*x7 + 1/56*x1*x2^2*x7 + 1/42*x1^2*x3*x7 + (x2*x3*x7)/42 + (x1*x4*x7)/28 + (x5*x7)/35 + (x1^4*x8)/192 + 1/32*x1^2*x2*x8 + (x2^2*x8)/64 + (x1*x3*x8)/24 + (x4*x8)/32 + (x1^3*x9)/54 + (x1*x2*x9)/18 + (x3*x9)/27"
+    #ns = "x1^5 + (x1^3*x2) + (x1*x2^2)/8 + (x1^2*x3)/6 + (x2*x3)/6 + (x1*x4)/4 + x5/5"
+    #ns = "x1^6/720 + (x1^4*x2)/48 + (x1^2*x2^2)/16 + x2^3/48 + (x1^3*x3)/18 + (*x1*x2*x3)/6 + x3^2/18 + (x1^2*x4)/8 + (x2*x4)/8 + (x1*x5)/5 + x6/6"
+    ns = "x1^12/479001600 + (x1^2*x10)/20 + (x1*x11)/11 + x12/12 + (x1^10*x2)/7257600 + (x10*x2)/20 + (x1^8*x2^2)/322560 + (x1^6*x2^3)/34560 + (x1^4*x2^4)/9216 + (x1^2*x2^5)/7680 + x2^6/46080 + (x1^9*x3)/1088640 + (x1^7*x2*x3)/30240 + (x1^5*x2^2*x3)/2880 + 1/864*x1^3*x2^3*x3 + (x1*x2^4*x3)/1152 + (x1^6*x3^2)/12960 + 1/864*x1^4*x2*x3^2 + 1/288*x1^2*x2^2*x3^2 + (x2^3*x3^2)/864 + (x1^3*x3^3)/972 + 1/324*x1*x2*x3^3 + x3^4/1944 + (x1^8*x4)/161280 + (x1^6*x2*x4)/5760 + 1/768*x1^4*x2^2*x4 + 1/384*x1^2*x2^3*x4 + (x2^4*x4)/1536 + (x1^5*x3*x4)/1440 + 1/144*x1^3*x2*x3*x4 + 1/96*x1*x2^2*x3*x4 + 1/144*x1^2*x3^2*x4 + 1/144*x2*x3^2*x4 + (x1^4*x4^2)/768 + 1/128*x1^2*x2*x4^2 + (x2^2*x4^2)/256 + 1/96*x1*x3*x4^2 + x4^3/384 + (x1^7*x5)/25200 + (x1^5*x2*x5)/1200 + 1/240*x1^3*x2^2*x5 + 1/240*x1*x2^3*x5 + 1/360*x1^4*x3*x5 + 1/60*x1^2*x2*x3*x5 + 1/120*x2^2*x3*x5 + 1/90*x1*x3^2*x5 + 1/120*x1^3*x4*x5 + 1/40*x1*x2*x4*x5 + (x3*x4*x5)/60 + (x1^2*x5^2)/100 + (x2*x5^2)/100 + (x1^6*x6)/4320 + 1/288*x1^4*x2*x6 + 1/96*x1^2*x2^2*x6 + (x2^3*x6)/288 + 1/108*x1^3*x3*x6 + 1/36*x1*x2*x3*x6 + (x3^2*x6)/108 + 1/48*x1^2*x4*x6 + (x2*x4*x6)/48 + (x1*x5*x6)/30 + x6^2/72 + (x1^5*x7)/840 + 1/84*x1^3*x2*x7 + 1/56*x1*x2^2*x7 + 1/42*x1^2*x3*x7 + (x2*x3*x7)/42 + (x1*x4*x7)/28 + (x5*x7)/35 + (x1^4*x8)/192 + 1/32*x1^2*x2*x8 + (x2^2*x8)/64 + (x1*x3*x8)/24 + (x4*x8)/32 + (x1^3*x9)/54 + (x1*x2*x9)/18 + (x3*x9)/27"
     starGrid.sym2 = ns
     
     splited = starGrid.sym2.split('+')
@@ -217,6 +233,8 @@ if __name__ == '__main__':
         retVal = runLexxer2(x.strip())
   #      retVal = runLexxer(x.strip())
     #    print "     "
+        if i == 13:
+             print 'woah'
         print i,
         retVal.coolPrint()
         i = i + 1
