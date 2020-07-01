@@ -1,5 +1,14 @@
-
 import math 
+
+# https://mathematica.wolframcloud.com/
+# wolfram SymmetricGroup https://mathworld.wolfram.com/SymmetricGroup.html
+#
+# # Combinatorics 16.12 The Pattern Inventory  Polyas Method of Enumeration https://www.youtube.com/watch?v=Tkz8QGPHxdA
+# Polya Theorem (Part 2) https://www.youtube.com/watch?v=zQZ4kTiaqQI
+# How many distinct unsolvable Rubik's cubes exist? https://puzzling.stackexchange.com/questions/525/how-many-distinct-unsolvable-rubiks-cubes-exist
+# (crl + f = matrices)     https://math.meta.stackexchange.com/questions/1868/list-of-generalizations-of-common-questions#13335
+    
+
 
 # @1 --> 1
 # @2 --> x1^2/2 + x2/2
@@ -43,7 +52,7 @@ class StarGrid:
             for cycle2  in cycleStruct1:
                 subscript = self.lcm(cycle1.subscript, cycle2.subscript)
                 power = self.gcd(cycle1.subscript, cycle2.subscript) * cycle1.power * cycle2.power
-                newCycle = CycleStructure(subscript, power)
+                newCycle = CycleStructure.Cycle(subscript, power)
                 newCycleStruct.cycles.append(newCycle)
         return newCycleStruct
 
@@ -60,128 +69,157 @@ class StarGrid:
 
 # I'm using the vocab from http://www.cs.columbia.edu/~cs4205/files/CM9.pdf (Section 9.1, page 13)
 # this is equivalent to a term in a cycle index. So if a cycle Index = "(x_1 x_2)/2 + x_3/3" then (x_1*x_2/2) is a Cycle Structure
-class CycleStructure(object): 
+class CycleStructure: 
 
-    def __init__(self, coefficient=None, cycles = []):
+    def __init__(self, coefficient=1):
         # eg, if cycle = (1/6) * [(t_2)^5 + (t_3)]  --> cVars = [cycleVar1, cycleVar1], coefficient = 1/6
         self.coefficient = coefficient 
-        self.cycles = cycles 
-
-    class Cycle(object):
+        self.cycles = []
+    def coolPrint(self):
+        s = "[ "
+        for i,c in enumerate(self.cycles):
+            if i is not len(self.cycles)-1:
+                s = s + str(c) + "*"
+            else:
+                s = s + str(c) + " ] /" + str(self.coefficient)
+                print s
+                s = ""
+    class Cycle:
         def __init__(self, subscript, power):   
             #eg (t_2)^5 --> subscript = 2, power = 5
-            self.subscript = subscript # cycle length
-            self.power = power # is the number of cycles with length x in the permutation. Is number of occurences in the permutaton
+            if power == "":
+                power = 1
+            self.subscript = int(subscript) # cycle length
+            self.power = int(power) # is the number of cycles with length x in the permutation. Is number of occurences in the permutaton
+        def __repr__(self):
+            return "(X{0})^{1}".format(self.subscript, self.power)
+            #return "[Subscript: {0}, Power {1}], self {2}".format(self.subscript, self.power, self)
+
 
 #gram enumeration: http://www.cs.columbia.edu/~cs4205/files/CM9.pdf
 
+            #while (cycString[i] not in [")", "*", "/","^" ]):
+            #  #   if cycString[i].isdigit():
+            #         subscript = subscript + cycString[i] 
+            #     i = i + 1
+            # while (cycString[i] not in [")", "*", "/" ]):
+            #     if cycString[i].isdigit():
+            #         power = power + cycString[i]
+                    # i = i + 1
 
-# @2 --> x1^2/2 + x2/2
 
+#getNext("^", cycString[i:])
+def getNext(cycString):
+    builder = ""
+    i = 0
+    sym = cycString[i]
+    while i < len(cycString) and  cycString[i].isdigit() :#and cycString[i] != stopSym:
+        builder = builder + cycString[i]
+        i = i + 1
+    return builder
 
-class Lexxer:
-    def __init__(self):
-        self.ass = None
-
-class Token:
-    def __init__(self, kind=None, data=None):
-        self.kind = kind
-        self.data = data
-    def __repr__(self):
-        return "[Kind: {0}, Data {1}]".format(self.kind, self.data)
-
-    def processToken(self):
-        if self.kind.upper() == "CYCLE":
-            pass
-        if self.kind.upper() == "COEFFICIENT":
-            pass
-        
-def processRawToken(data):
-    coeff = ""
+def runLexxer2(cycString, i=0): #Pretend it's a lexxer
+    i = 0
+    myCycStuct = CycleStructure()
+    
+    
+    subscript = ""
     power = ""
-    for i,e in enumerate(data):
-        if e.upper == "X":
-            continue
-        elif e == "^":
-            coeff = data[i+1:]
-
+    coefficient = ""
+    while i < len(cycString) :
+        if cycString[i].upper() == "X":
+            i = i + 1
+            p = getNext( cycString[i:])            
+            i = i + len(p)
+            subscript = p
+        if i < len(cycString) and cycString[i].upper() == "^":
+            i = i + 1
+            p = getNext( cycString[i:])
+            i = i + len(p)
+            power = p if p != "" else 1
         
-    #CycleStructure.Cycle()
+        if i < len(cycString) and (cycString[i] == "*" or cycString[i] == ")" or (cycString[i] == "/" and cycString[i-1] != ")") ):  #and subscript != ""):
+            print "    power", power
+            print "    subscript", subscript
+            cycleVar = CycleStructure.Cycle(subscript, power)
+            myCycStuct.cycles.append(cycleVar)
+            subscript = ""
+            power = ""
+        if i < len(cycString) and cycString[i].upper() == "/":
+            i = i + 1
+            p = getNext( cycString[i:])
+            i = i + len(p)
+            coefficient = p if p != "" else 1
+            myCycStuct.coefficient = int(coefficient)
+            print "    coefficient", coefficient
+        elif i == len(cycString):
+            coefficient = p if p != "" else 1
+            myCycStuct.coefficient = int(coefficient)
+        i = i + 1
+        # elif i == len(cycString):
+        #     myCycStuct.coefficient = 1
+    return myCycStuct
+
 
 def runLexxer(cycString, i=0): #Pretend it's a lexxer
     i = 0
     raw_cycles = []
+    myCycStuct = CycleStructure()
     while i < len(cycString) :
         if cycString[i].upper() == "X":
+            i = i + 1
+            p = getNext( cycString[i:])
+            print "subscript", p
             subscript = ""
             power = ""
-            xvar= ""
-            coeff = ""
-            while (cycString[i] not in [")", "*", "/","^" ]):
-                if cycString[i].isdigit():
-                    subscript = subscript + cycString[i]
+            coefficient = ""
+            while i < len(cycString) and cycString[i].isdigit() :
+                subscript = subscript + cycString[i] 
                 i = i + 1
-            while (cycString[i] not in [")", "*", "/" ]):
-                if cycString[i].isdigit():
-                    power = power + cycString[i]
-                i = i + 1
-                #if cycString[i] == "^":
-                  #  i = i + 1
-                 #   continue
-                # if cycString[i] == " ":
-                #     i = i + 1
-                #     continue
-            print "subscript", subscript
-            print "power", power
-        if cycString[i] == "/":
-            #i = i + 1
-            coeff = cycString[i+1:]
+                if cycString[i] == "^":
+                    i = i + 1
+                    while i < len(cycString) and cycString[i].isdigit():
+                        p = getNext( cycString[i:])
+                        print "power", p
+                        power = power + cycString[i]
+                        i = i + 1
+            cycleVar = CycleStructure.Cycle(subscript, power)
+            myCycStuct.cycles.append(cycleVar)
+        if i < len(cycString) and cycString[i] == "/": 
+            i = i + 1
+            p = getNext( cycString[i:])
+            print "    coeff", p
+            coefficient = cycString[i+1:] if cycString[i+1:] != "" else 1
+            myCycStuct.coefficient = int(coefficient)
             break
-            # while (i < len(cycString) ):
-            #     coeff = coeff + cycString[i]
-            #     i = i + 1
-            # toke = Token("coefficient", coeff)
-            # raw_cycles.append(toke)
-
-        # toke = Token("cycle", xvar)
-        # processRawToken(xvar)
-        # raw_cycles.append(toke)
-        
+        elif i == len(cycString):
+            myCycStuct.coefficient = 1
         i = i +1
-    return tokens
-
-
-        # while cycleStuctStr[i]
-
-
-        
+    return myCycStuct
 
 
 if __name__ == '__main__':
     
     starGrid = StarGrid()
-    print starGrid.myCycleStruct.coefficient
-    ns = "x1^4/24 + (x1^2*x2)/4 + x2^2/8 + (x1*x3)/3 + x4/4"
+    
+    #ns = "x1^4/24 + (x1^2*x2)/4 + x2^2/8 + (x1*x3)/3 + x4/4"
+    ns = "x1^5 + (x1^3*x2) + (x1*x2^2)/8 + (x1^2*x3)/6 + (x2*x3)/6 + (x1*x4)/4 + x5/5"
+    #ns = "x1^12/479001600 + (x1^2*x10)/20 + (x1*x11)/11 + x12/12 + (x1^10*x2)/7257600 + (x10*x2)/20 + (x1^8*x2^2)/322560 + (x1^6*x2^3)/34560 + (x1^4*x2^4)/9216 + (x1^2*x2^5)/7680 + x2^6/46080 + (x1^9*x3)/1088640 + (x1^7*x2*x3)/30240 + (x1^5*x2^2*x3)/2880 + 1/864*x1^3*x2^3*x3 + (x1*x2^4*x3)/1152 + (x1^6*x3^2)/12960 + 1/864*x1^4*x2*x3^2 + 1/288*x1^2*x2^2*x3^2 + (x2^3*x3^2)/864 + (x1^3*x3^3)/972 + 1/324*x1*x2*x3^3 + x3^4/1944 + (x1^8*x4)/161280 + (x1^6*x2*x4)/5760 + 1/768*x1^4*x2^2*x4 + 1/384*x1^2*x2^3*x4 + (x2^4*x4)/1536 + (x1^5*x3*x4)/1440 + 1/144*x1^3*x2*x3*x4 + 1/96*x1*x2^2*x3*x4 + 1/144*x1^2*x3^2*x4 + 1/144*x2*x3^2*x4 + (x1^4*x4^2)/768 + 1/128*x1^2*x2*x4^2 + (x2^2*x4^2)/256 + 1/96*x1*x3*x4^2 + x4^3/384 + (x1^7*x5)/25200 + (x1^5*x2*x5)/1200 + 1/240*x1^3*x2^2*x5 + 1/240*x1*x2^3*x5 + 1/360*x1^4*x3*x5 + 1/60*x1^2*x2*x3*x5 + 1/120*x2^2*x3*x5 + 1/90*x1*x3^2*x5 + 1/120*x1^3*x4*x5 + 1/40*x1*x2*x4*x5 + (x3*x4*x5)/60 + (x1^2*x5^2)/100 + (x2*x5^2)/100 + (x1^6*x6)/4320 + 1/288*x1^4*x2*x6 + 1/96*x1^2*x2^2*x6 + (x2^3*x6)/288 + 1/108*x1^3*x3*x6 + 1/36*x1*x2*x3*x6 + (x3^2*x6)/108 + 1/48*x1^2*x4*x6 + (x2*x4*x6)/48 + (x1*x5*x6)/30 + x6^2/72 + (x1^5*x7)/840 + 1/84*x1^3*x2*x7 + 1/56*x1*x2^2*x7 + 1/42*x1^2*x3*x7 + (x2*x3*x7)/42 + (x1*x4*x7)/28 + (x5*x7)/35 + (x1^4*x8)/192 + 1/32*x1^2*x2*x8 + (x2^2*x8)/64 + (x1*x3*x8)/24 + (x4*x8)/32 + (x1^3*x9)/54 + (x1*x2*x9)/18 + (x3*x9)/27"
     starGrid.sym2 = ns
-    print starGrid.sym2
+    
     splited = starGrid.sym2.split('+')
     print "GOING IN"
     tokens = []
+    print splited
+    i = 0
     for x in splited:
         
-        print x
-        tokens = runLexxer(x.strip())
-        cysStruct = CycleStructure()
-
-        #print x.find('/')
-
-
-    # print splited
-    # for cycleStuctStr in splited:
-    #     print cycleStuctStr
-    #     for i,l in enumerate(cycleStuctStr):
-    #         sym = getNextSymbol(i, cycleStuctStr )
-    #         print l,
+        retVal = runLexxer2(x.strip())
+  #      retVal = runLexxer(x.strip())
+    #    print "     "
+        print i,
+        retVal.coolPrint()
+        i = i + 1
 
 
 
