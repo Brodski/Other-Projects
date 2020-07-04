@@ -1,4 +1,4 @@
-###############################################################################################
+##############################################################################################################################################################################################
 # Overview:
 #
 # We will use Polya's Enumeration Theorem.
@@ -12,13 +12,13 @@
 # the possible permutations for the action forms a symmetical group. Meaning the resulting cycle
 # index from the symmetrical group of size X will always be the same. 
 #
-# So for this program we will treat the cycle indicies like 12 known equations, (like the Free-Fall equation from physics, 
-# but instead there are 12 different equations)
-# Meaning this program has hard coded the cycle indicies for the symmetical groups of size 1 to 12.
+# So for this program we will treat the cycle indicies like 12 known equations, (like the Free-Fall 
+# equation from physics, but instead there are 12 different equations)
+# So this program has hard coded the cycle indicies for the symmetical groups of size 1 to 12.
 #
 # The cycle indicies of size 1 to 12 were obtained from Mathematica. See link below at (2) and my work at (3)
 # I ran CycleIndexPolynomial[ SymmetricGroup[3], {x1,x2,x3}] from size 1 to 12 and copy & pasted the polynomial.
-# The program reads and converts the pasted/hard-coded string into meaningful data to compute the actual solution.
+# This program reads and converts the pasted/hard-coded string into meaningful data to compute the actual solution.
 #
 # Might sound odd but given the scope of the problem it works perfectly and is very efficent computationally and for development.
 #
@@ -55,24 +55,12 @@ import decimal
 # Using the vocab from http://www.cs.columbia.edu/~cs4205/files/CM9.pdf (Section 9.1, page 13)
 # If a cycle Index = (x_1 x_2)/2 + x_3/3 ----> (x_1*x_2 / 2) is one of the two Cycle Structures
 class CycleStructure: 
-
     # ex) my_cycle_struct = (1/6) * [(t_2)^5 + (t_3)]  ---> cycles = [(t_2)^3 , t_3], coefficient = 1/6
     def __init__(self, coefficient=1):
         self.coefficient = coefficient 
         self.cycles = []
-    def coolPrint(self):
-        s = "[ "
-        for i,c in enumerate(self.cycles):
-            if i < len(self.cycles)-1:
-                s = s + str(c) + "*"
-            else:
-                s = s + str(c) + " ] /" + str(self.coefficient)
-                print s
-                s = ""
-        return
 
     class Cycle:
-
         # ex) (t_2)^5 --> subscript = 2, power = 5
         def __init__(self, subscript, power):  
             if power == "":
@@ -107,22 +95,15 @@ class StarGrid:
     # Essentially it's plug and chug math
     def calculate_orbits(self, cycle_index): 
         total_orbits = long(0)
-        i = 0
         sum_remainder = 0
 
         for cyc_struct in cycle_index:
             # Numerator
-            print
-            k = 0
             orbits = long(1)
             for cyc in cyc_struct.cycles:
-                print i,k, " --->", 
-                cyc_struct.coolPrint()
                 num = self.num_states ** cyc.power
                 orbits = orbits * num
-                print "    Big Num", orbits
-                k += 1
-
+                
             # Denominator
             quotient, remainder = divmod(orbits, cyc_struct.coefficient)
             fraction = remainder / decimal.Decimal(cyc_struct.coefficient)
@@ -130,18 +111,9 @@ class StarGrid:
 
             # Sumation    
             total_orbits = total_orbits + quotient
-            i = i + 1
-
-            print "    ! Quotient", quotient
-            print "    ! remainder", remainder
-            print "    ! sum_remainder", sum_remainder
-            print "    !!! Super Big", total_orbits
             
         # Final Sumation
         total_orbits = total_orbits + long(round(sum_remainder))
-        print "\n\nhere it is \n\n", 
-        print type(total_orbits)
-        print str(total_orbits)
         return total_orbits
 
     # https://math.stackexchange.com/questions/2056708/number-of-equivalence-classes-of-w-times-h-matrices-under-switching-rows-and
@@ -162,19 +134,10 @@ class StarGrid:
     # Returns the cycle index for our HxW matrix. Product is of two permutations
     def create_cartesian_product(self, cycle_index_1, cycle_index_2):
         product = [] # I represent "a + b + c" as [a,b,c]
-        i = 0
-        print "length of cycle_index_1", len(cycle_index_1)
         for cyc_struct_1 in cycle_index_1:
-            print 
-            k = 0
             for cyc_struct_2 in cycle_index_2:
                 newcycleStuct = self.computePair(cyc_struct_1, cyc_struct_2)
                 product.append(newcycleStuct)
-                
-                print '{0},{1} ---> '.format(i,k),
-                newcycleStuct.coolPrint()
-                k += 1
-            i = i + 1
         return product
 
     # String --> data types
@@ -182,19 +145,9 @@ class StarGrid:
         if self.cycle_indecies[p]:
             return
         raw_indecies = self.raw_cycle_indecies[p].split('+')
-        print "Indicies: "
-        print raw_indecies
-        print
-        i = 0
         for x in raw_indecies:
             cyc_struct = self.run_lexer(x.strip())
             self.cycle_indecies[p].append(cyc_struct)
-
-            print i,
-            cyc_struct.coolPrint()
-            i = i + 1
-        print "Finished index", p
-        print ""
 
     def getNext(self, cyc_string, i):
         i = i + 1
@@ -215,7 +168,6 @@ class StarGrid:
             if cyc_string[i].upper() == "X":
                 data,i = self.getNext(cyc_string, i)    
                 subscript = data
-                print subscript
                 if i == len(cyc_string):
                     cycleVar = CycleStructure.Cycle(subscript, power)
                     cyc_struct.cycles.append(cycleVar)
@@ -256,28 +208,21 @@ def gcd(a, b):
 def lcm(a, b):
     return a*b/gcd(a,b)
 
-
 def solution(h,w,s):
     
     starGrid = StarGrid()
     starGrid.num_states = s
 
-    print "\n ========== CONVERTING HEIGHT-{0} TO DATA ==========\n".format(h)
     starGrid.convert_raw_cycle_index_to_objects(h-1)
-
-    print "\n ========== CONVERTING WIDTH-{0} TO DATA ==========\n".format(w)
     starGrid.convert_raw_cycle_index_to_objects(w-1)
 
-    print "\n ++++++++++ CREATING CARESIAN PRODUCT ++++++++++\n"
     cycle_index_1 = starGrid.cycle_indecies[h-1] 
     cycle_index_2 = starGrid.cycle_indecies[w-1] 
     product_cycle_index = starGrid.create_cartesian_product(cycle_index_1, cycle_index_2)
 
-    print "\n `````````` RUNNING THE CALCULATIONS ``````````\n"
     total_orbits = starGrid.calculate_orbits(product_cycle_index)
 
     return str(total_orbits)
-
 
 if __name__ == '__main__':
     # good precsion example.  20021086[0] @  h = 7,  w = 3, s = 4 is 0
@@ -286,5 +231,6 @@ if __name__ == '__main__':
     w = 12
     s = 20
 
-    solution(h,w,s)
+    x = solution(h,w,s)
+    print x
 

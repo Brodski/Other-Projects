@@ -112,11 +112,15 @@ class StarGrid:
 
         for cyc_struct in cycle_index:
             # Numerator
+            print
             k = 0
             orbits = long(1)
             for cyc in cyc_struct.cycles:
+                print i,k, " --->", 
+                cyc_struct.coolPrint()
                 num = self.num_states ** cyc.power
                 orbits = orbits * num
+                print "    Big Num", orbits
                 k += 1
 
             # Denominator
@@ -127,9 +131,17 @@ class StarGrid:
             # Sumation    
             total_orbits = total_orbits + quotient
             i = i + 1
+
+            print "    ! Quotient", quotient
+            print "    ! remainder", remainder
+            print "    ! sum_remainder", sum_remainder
+            print "    !!! Super Big", total_orbits
             
         # Final Sumation
         total_orbits = total_orbits + long(round(sum_remainder))
+        print "\n\nhere it is \n\n", 
+        print type(total_orbits)
+        print str(total_orbits)
         return total_orbits
 
     # https://math.stackexchange.com/questions/2056708/number-of-equivalence-classes-of-w-times-h-matrices-under-switching-rows-and
@@ -151,11 +163,16 @@ class StarGrid:
     def create_cartesian_product(self, cycle_index_1, cycle_index_2):
         product = [] # I represent "a + b + c" as [a,b,c]
         i = 0
+        print "length of cycle_index_1", len(cycle_index_1)
         for cyc_struct_1 in cycle_index_1:
+            print 
             k = 0
             for cyc_struct_2 in cycle_index_2:
                 newcycleStuct = self.computePair(cyc_struct_1, cyc_struct_2)
                 product.append(newcycleStuct)
+                
+                print '{0},{1} ---> '.format(i,k),
+                newcycleStuct.coolPrint()
                 k += 1
             i = i + 1
         return product
@@ -165,10 +182,19 @@ class StarGrid:
         if self.cycle_indecies[p]:
             return
         raw_indecies = self.raw_cycle_indecies[p].split('+')
+        print "Indicies: "
+        print raw_indecies
+        print
         i = 0
         for x in raw_indecies:
             cyc_struct = self.run_lexer(x.strip())
             self.cycle_indecies[p].append(cyc_struct)
+
+            print i,
+            cyc_struct.coolPrint()
+            i = i + 1
+        print "Finished index", p
+        print ""
 
     def getNext(self, cyc_string, i):
         i = i + 1
@@ -189,6 +215,7 @@ class StarGrid:
             if cyc_string[i].upper() == "X":
                 data,i = self.getNext(cyc_string, i)    
                 subscript = data
+                print subscript
                 if i == len(cyc_string):
                     cycleVar = CycleStructure.Cycle(subscript, power)
                     cyc_struct.cycles.append(cycleVar)
@@ -229,21 +256,28 @@ def gcd(a, b):
 def lcm(a, b):
     return a*b/gcd(a,b)
 
+
 def solution(h,w,s):
     
     starGrid = StarGrid()
     starGrid.num_states = s
 
+    print "\n ========== CONVERTING HEIGHT-{0} TO DATA ==========\n".format(h)
     starGrid.convert_raw_cycle_index_to_objects(h-1)
+
+    print "\n ========== CONVERTING WIDTH-{0} TO DATA ==========\n".format(w)
     starGrid.convert_raw_cycle_index_to_objects(w-1)
 
+    print "\n ++++++++++ CREATING CARESIAN PRODUCT ++++++++++\n"
     cycle_index_1 = starGrid.cycle_indecies[h-1] 
     cycle_index_2 = starGrid.cycle_indecies[w-1] 
     product_cycle_index = starGrid.create_cartesian_product(cycle_index_1, cycle_index_2)
 
+    print "\n `````````` RUNNING THE CALCULATIONS ``````````\n"
     total_orbits = starGrid.calculate_orbits(product_cycle_index)
 
     return str(total_orbits)
+
 
 if __name__ == '__main__':
     # good precsion example.  20021086[0] @  h = 7,  w = 3, s = 4 is 0
@@ -252,6 +286,6 @@ if __name__ == '__main__':
     w = 12
     s = 20
 
-    x = solution(h,w,s)
-    print x
+    solution(h,w,s)
 
+# Measure-Command { start-process python .\cheekyNoPrint.py -Wait}

@@ -1,0 +1,153 @@
+from itertools import combinations
+import itertools
+
+def solution1(num_buns, num_required):
+    r = []
+
+    #Applying pegion rule
+    f = list(itertools.combinations(range(num_buns),num_required))
+    total = len(f)*num_required
+    repeat_times = num_buns - num_required + 1
+    print "REPEAT", repeat_times
+    f1 = list(itertools.combinations(range(num_buns),repeat_times))
+    for i in range(num_buns):
+        r.append([])
+
+    for i in range(total/repeat_times):
+        print "---"
+        for j in f1[i]:
+            print " ++++ "
+            print "f1[i]", f1[i]
+            print "adding ", i, " on to ->", r[j]
+            print " ++++ "
+            r[j].append(i)
+            for k in r:
+                print k
+            print " ++++ \n"
+
+    return r
+    
+def solution(num_buns, num_required):
+
+    '''
+    n > m
+    k + 1 = [n - 1 / m] + 1 = ceil( n / m)
+    
+    n = (r-1)*k + 1
+    r = n / k
+    
+    r = desired output
+    n = # of items
+    k = # of spaces (req)
+    
+    '''
+    bunnyKeys = [[] for num in range(num_buns)]
+
+    height = num_buns - num_required + 1
+    
+    print 
+    print "height"
+    print height
+    print range(num_buns)
+    print "?????"
+    cmbo = combinations(range(num_buns), height)
+
+    shitCnt = 0
+    for c in cmbo:
+        print c
+        shitCnt += 1
+    print shitCnt
+    print shitCnt
+    print shitCnt
+    print shitCnt
+    print shitCnt
+    print shitCnt
+    print shitCnt
+    print shitCnt
+    print "?????"
+    cmbo = combinations(range(num_buns), height)
+    for key, bunnies in enumerate(cmbo): 
+        print "----"
+        for bunny in bunnies:
+            print " ++++ "
+            print "bunnies,", bunnies
+            print "adding ", key, " on to ->", bunnyKeys[bunny], "bunnyKeys[bunny]"
+            print " ++++ "
+            bunnyKeys[bunny].append(key)
+            print '++++'
+            for k in bunnyKeys:
+                print k
+    print "ANSWER "
+    print bunnyKeys
+
+    return bunnyKeys
+    
+def solutionMe(num_buns, num_required):
+
+    '''
+    (Recall: pigeon hole principle)
+    Goal: We evenly distribute x keys to n bunnies such that any required "r" number of those bunnies
+    will always have x unique keys and no set of r-1 bunnies has x unique keys.
+    
+    Observe:  r = width = buns - req + 1
+    (chart below) Use num buns to gaurantue each item appears in any required "r" number of sets. We 
+    subtract r since r-1 bunnies cannot have x unique keys and +1 to avoid double counting last element 
+    from r variable
+    
+    
+               width
+             ____________
+            | x x x ... r  \
+buns=height | x x x ... r    require number
+            | x x x ... r  /
+            | x x x ... x
+    
+    So n Choose r = num_buns Choose req
+                  = x number of keys.
+    
+    
+    Embedded in this n choose r is the answer of how to evenly distribute to the bunnies.
+    Each item in a set = each bunny who holds the key. 
+    Look at the set's combinations. We distribute items (keys) each bunny as
+    specified by the cobmination
+    
+                 Bunny at row:
+    key # 0 --> (0, 1, 2, 3, 4)
+    key # 1 --> (0, 1, 2, 3, 5)
+    key # 2 --> (0, 1, 2, 3, 6)
+    key # 3 --> (0, 1, 2, 4, 5)
+              ...
+    '''
+    bunnyKeys = [[] for num in range(num_buns)]
+
+    width = num_buns - num_required + 1
+    print 
+    print "width"
+    print width
+    print range(num_buns)
+    print "?????"
+    cmbo = combinations(range(num_buns), width)
+    for idx, c in enumerate(cmbo):
+        print "key #",idx, "-->", c
+    print "?????"
+    cmbo = combinations(range(num_buns), width)
+    for key, bunnies in enumerate(cmbo): 
+       # print "----"
+        for bunny in bunnies:
+        #    print " ++++ "
+       #     print "bunnies,", bunnies
+      #      print "adding ", key, " on to ->", bunnyKeys[bunny], "bunnyKeys[bunny]"
+     #       print " ++++ "
+            bunnyKeys[bunny].append(key)
+    #        print '++++'
+   #         for k in bunnyKeys:
+  #              print k
+    print "ANSWER "
+    print bunnyKeys
+
+    return bunnyKeys
+    
+    
+if __name__ == "__main__":
+    solutionMe( 7, 3)
+    #solution1( 5, 3)
