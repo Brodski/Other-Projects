@@ -2639,6 +2639,107 @@ INVERSION OF CONTROL II
 		- reuse and test
 	
 	
+SQL vs NoSQL
+    SQL 
+        difficult to scale 
+            - requires bigger machines (vertical) cant than multiple machines
+            - more CPU, RAM or SSD
+        schemas
+            - structure of data is known in advacne
+            - (need to define schemas before hand)
+        - flexibility
+            good for complex queries
+        EX) PostgreSQL, Cassandra Microsoft SQL Server, MySQL, Oracle Database
+    NoSQL  
+        no schemas
+            - can add fields as you go, do not need to define their strucutre
+            - simple low level queries (simple)
+            - data is nested, like JSON feel
+            
+Latency = time to get from point a to b ---> lower = good --->  ping 
+bandwidth = amount transfered over time (like bigger width ---> more stuff passes through the pipes)
+IOPs = number of transfers per second = Input/Output Per Second 
+            
+            
+        
+
+    
 	
-	
-	
+####################	
+windows measure process runtime 
+ Measure-Command { start-process python .\cheekyNoPrint.py -Wait}
+ ###############
+ 
+ 
+ Javascript (random)
+    .call()
+    
+    With call(), an object can use a method belonging to another object.
+    The call() method calls a function with a given *this* value and arguments provided individually.
+    .call(thisArg) ---> thisArg = The value to use as *this* when calling func.
+    
+            var person = {
+              fullName: function() {
+                return this.firstName + " " + this.lastName;
+              }
+            }
+            var person1 = {
+              firstName:"John",
+              lastName: "Doe"
+            }
+            var person2 = {
+              firstName:"Mary",
+              lastName: "Doe"
+            }
+            person.fullName.call(person2);  // Will return "Mary Doe"
+
+    Callback:
+    A callback is a function that is to be executed after another function has finished executing
+
+    freeze():
+    - Object.freeze() method freezes an object. 
+    - can't be changed, prevents new properties to be added, prevnet existing properties from being removed,
+    const vs freeze()
+    - const should be used on primatives.
+    - const makes the address unchangable (iirc), but this means you can mess with properties, "myUser.name = 'john'"    
+    - freeze should be used on objects.
+    - properties on an objecnt cant be changed "myUser.name = 'john'" // doesnt work
+    
+ 
+ 
+ 
+ DESIGN PATTERNS II
+    Design patterns - solutions  to common problems
+                    - template that could be modified to solve your problem
+                    - 3 types: behavior, structrual, design
+ 
+    Factory Pattern:
+        - used to create objects 
+        - a creational design pattern that uses factory methods to create objects — rather than by calling a 
+            constructor.
+        - likely uses a personFactory() object, with a .create(name, type)  method.
+    
+    Singleton Pattern:
+        - 1 instance only
+        - if you try to create two singletons, you will actually only get 1 object and they are both the same object
+        - likely, in the class there is an object which is created once (1st time) and the constructor* will check if 
+            that object exists, if does return it otherwise (in 1st run) create it. 
+            *(or s/t similar, depending on lanague)
+    
+    Strategy Pattern:
+        - group of interchangable functions, ie strategies. strategy = function
+        - can change behavior at runtime
+        - easy to swap 
+        - likely, an object, probably called myStrategy() will call a function. This strategy could be changed
+           by passing in a another new strategy object to  .setStrategy()
+        - likely, an object will call a function ( groceries.calcuateTax()) and the object groceries will implement
+           a interface (or some other object) that has various functionality for calcuateTax()
+    
+    
+    
+    
+    
+    
+    
+    
+    
