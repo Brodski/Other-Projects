@@ -256,7 +256,7 @@ INHERITANCE	: IS-A
 	- Members = Variables, Methods, Inner class, or (the super class's constructor)
 	
 	- Recall: When you create an object, that object will inherit fields from all of the class's 
-superclasses.
+        superclasses.
 	- methods or constructors of same field; problematic.
 	- super class  = base class = parent class
 	- subclass = derived class = extended class = child class
@@ -264,7 +264,7 @@ superclasses.
 	
 	-Subclass will have more methods and variables than super class
 	-Subclass will inherit all the properties of the superclass except the 
-private properties of the superclass
+        private properties of the superclass
 	- SubClass IS-A SuperClass
 	
 	Ex)
@@ -285,8 +285,6 @@ private properties of the superclass
 ----------------------------
 INTERFACE
 	- The set of behaviours/controls on an object.
-	- Typically, a company sells a software package that contains complex methods that another company 
-wants to use in its own software product.
 
 	- Contains only the declaration of the members, no body 
 	- Can contain: methods, properties, events, indexers (C#)
@@ -294,11 +292,11 @@ wants to use in its own software product.
 	
 	- Could implement mutliple interfaces to a class
 	- In Java, Static methods and Default methods could be used in an interface to define a methods body 
-in the interface. The purpose, so you dont have to change the class that implements the interfaec
+        in the interface. The purpose, so you dont have to change the class that implements the interfaec
 	- Interfaces contain no implementation of methods. 
 	- classes that implement interfaces must implement all its members.
 	- A class or struct can implement multiple interfaces. A class can inherit a base class and also 
-implement one or more interfaces.
+        implement one or more interfaces.
 
 	- Below: The list Interface is implemented by ArrayList, LinkedList, Vecor and Stack classes, and more
 		List a = new ArrayList();
@@ -511,7 +509,7 @@ Shallow/Deep Copy
 	
 String Pool:
 	-The string pool allows string constants to be reused, which is possible because strings in Java are 
-immutable.
+        immutable.      
 
 
 
@@ -551,36 +549,36 @@ the URL requested(that is routing request from Router).
 			
 MVC
 
-frameworks that uses MVC concpets
-- Flask
-- Ruby on Rails
-- Angular JS
+    frameworks that uses MVC concpets
+    - Flask
+    - Ruby on Rails
+    - Angular JS
 
-Model - Database
-- BUSINESS LOGIC
-- gets and sends data
-- interacts with dataase (SQL or NOSQL or XML or JSON)
-- manipulates data
-- communicat with controller
-- sometimes can update the view (depends on framework
+    Model - Database
+    - BUSINESS LOGIC
+    - gets and sends data
+    - interacts with dataase (SQL or NOSQL or XML or JSON)
+    - manipulates data
+    - communicat with controller
+    - sometimes can update the view (depends on framework
 
-View - Client
-- The UI, what user see
-- HTML/CSS
-- Communicates with controller
-- Template Engines
+    View - Client
+    - The UI, what user see
+    - HTML/CSS
+    - Communicates with controller
+    - Template Engines
 
-Controller - Server
-- COMMUNICATES BETWEEN Users/View and the Model
-- 'middle man'
-- Receives input (from view, clicking link, forms)
-- contoler interaction between the model and view (user clicks, etc)
-- Gets data from model ; passes data to the view
-		
-Controller
+    Controller - Server
+    - COMMUNICATES BETWEEN Users/View and the Model
+    - 'middle man'
+    - Receives input (from view, clicking link, forms)
+    - contoler interaction between the model and view (user clicks, etc)
+    - Gets data from model ; passes data to the view
+                
+    Controller
 
-- Gets requets from View and sends to Model
-- Gets response form model and sneds to view
+    - Gets requets from View and sends to Model
+    - Gets response form model and sneds to view
 
 --------------------------------------------------------
 REST
@@ -2401,15 +2399,15 @@ Activity
 	- An activity is a window in which the app draws its UI.
 	- is java code + xml
 	- when opening other activities (screens) these activities will go through the same 3 states when they are 
-opened.
+        opened.
 	- When one app invokes another, the calling app invokes an activity in the other app, rather than the app as 
-an atomic whole
+        an atomic whole
 	- This window typically fills the screen, but may be smaller than the screen and float on top of other 
-windows. 
+        windows. 
 	- Generally, one activity implements one screen in an app.
 		- one of an app’s activities may implement a Preferences or a Select Photo screen.
 	- Most apps contain multiple screens/activities, the main activity is the first screen to appear when the 
-user launches the app. 
+        user launches the app. 
 		- Each activity can then start another activity in order to perform different actions.
 	- use your manifest file
 	
@@ -2475,7 +2473,8 @@ library version.
 	- ect
 	
 UI runtime changes (rotating & stuff)
-	- not best idea to use "android:configChanges"  b/c the OS might restart your app for many more reasons than just it being in background (memory ect)
+	- not best idea to use "android:configChanges"  b/c the OS might restart your app for many more reasons than just it being in 
+background (memory ect)
 	https://developer.android.com/guide/topics/resources/runtime-changes#HandlingTheChange
 	
 
@@ -2661,10 +2660,36 @@ bandwidth = amount transfered over time (like bigger width ---> more stuff passe
 IOPs = number of transfers per second = Input/Output Per Second 
             
             
-        
+Static code Analysis vs Dynamic code Analysis        
+    Static:
+      - performed without actually executing programs, 
+    Dynamic:
+      - which is analysis performed on programs while they are executing
+    
+    
+Code Refactoring
+    - restructuring existing code without changing its functionality. 
+    - intended to improve the design and structure (its non-functional attributes)
+    - eg) improved code readability and reduced complexity;
+	
+Higher Order Functions
+    - a function that receives a function as an argument 
+    - or returns the function as output.
+    - eg)  Array.prototype.map, Array.prototype.filter and Array.prototype.reduce 
+ 
+Composition 
+    - instead of inheriting properties, the class is composed of objects with the properties built in
+    - you can change functionality of objects at runtime
+    
+SOLID
+    Single Responsibitly
+        - every module or class should have responsibility over a single part of the functionality
+    Open-Closed 
+        - Every class, module, function, ect should be open for extension but clsoed for modification
+        - adding new functionality by writing new  classes, methods, ect instead of chaning existing ones
+    L
 
     
-	
 ####################	
 windows measure process runtime 
  Measure-Command { start-process python .\cheekyNoPrint.py -Wait}
@@ -2705,8 +2730,63 @@ windows measure process runtime
     - freeze should be used on objects.
     - properties on an objecnt cant be changed "myUser.name = 'john'" // doesnt work
     
+    
+    Lambda vs Arrow Function
+    - Same thing, different syntax
+    - Javascript lambda: 
+        var anon = function (a, b) { return a + b };
+    - ES6 lambda
+        var anon = (a, b) => { return a + b };
+        
+    Treeshaking
+    - the removal of dead code.
+    - elies on the import and export statements in ES2015 to detect if code modules are exported and imported between files. 
  
+    Prototype
+    - every object has __proto__ (can verify in google/firefox webdebugger)
+    - the __proto__ has all the methods attatched to that object
+    - you can put functions in Prototype instead  of in the "class funky() { ... } "
+    - They both work on the function the same, but the Prototype allows for inheritence and possibly small objects (since they all 
+        point to prototype function instead of theri own internal function)
+    - calling a function will check __proto__ and chain up
+    eg) 
+        funky.Prototype.myCoolFunction = function(a,b) { ... }
+    
  
+ Java (random)
+    
+    Anonymous class:
+    - when you create an object you could make an new class on the fly
+    - the curly braces {} is the syntax that allows the program to extend & instantiate a new class
+    
+    eg) 
+        class MyClass() { ..... }
+        MyClass x = new MyClass() { .... }
+        // x is an extension of MyClass 
+        // this object x is a subclass and it has no name
+        
+    Anonymous class with interface:
+    - double braces
+    - create an object of IFaceman which also has the implemenation of  IFaceMan
+    - you create the anonymous class and it gets the implimentation
+    - good for when you use the interface only once
+    
+    eg)
+        interface IFaceman { 
+            void show() }
+        IFaceMan x = new IFaceman() { { public void show() {....} } }
+ 
+    Functional Interface
+    - java syntax 'trick' 
+    - when an interface has just 1 method, you could use a lambda 
+        
+        interface IFaceman { void show() }
+        IFaceMan x = () -> System.out.println("Hi");
+ 
+    Interface 
+    - in it, all functions are abstract. (even if they do not have the abstract keyword)
+        - unless the function is defined as a default method or static method
+        
  
  DESIGN PATTERNS II
     Design patterns - solutions  to common problems
@@ -2730,10 +2810,10 @@ windows measure process runtime
         - group of interchangable functions, ie strategies. strategy = function
         - can change behavior at runtime
         - easy to swap 
-        - likely, an object, probably called myStrategy() will call a function. This strategy could be changed
-           by passing in a another new strategy object to  .setStrategy()
-        - likely, an object will call a function ( groceries.calcuateTax()) and the object groceries will implement
-           a interface (or some other object) that has various functionality for calcuateTax()
+        - likely, you'll have multiple classes (a,b) which implements the same interface
+            - and you'll have another class (Strat) which implements those classes (a,b)
+            - Strat can swap strategies/alogithms/functions with setStrategy()
+            - recal OOP Composition
     
     
     
