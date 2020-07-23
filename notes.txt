@@ -2681,14 +2681,50 @@ Composition
     - instead of inheriting properties, the class is composed of objects with the properties built in
     - you can change functionality of objects at runtime
     
+    
+Severless (aka Faas - Function-aaS or Backend-aaS)
+    - Applications are hosted by a 3rd party service, eliminating the need for a server software or hardware
+    - eg) Amazon Lambda
+    - Pay for use
+    - Pros: apparently its cheapers, and scales
+    - Cons: get locked in to Vender (Lambda), not efficent for long-running applciations
+    
+Domain Driven Design
+    ???
+    
+
+    
 SOLID
     Single Responsibitly
         - every module or class should have responsibility over a single part of the functionality
     Open-Closed 
         - Every class, module, function, ect should be open for extension but clsoed for modification
-        - adding new functionality by writing new  classes, methods, ect instead of chaning existing ones
-    L
-
+        - adding new functionality by writing new  classes, methods, ect instead of changing existing ones
+    Liskov substitution principle
+        - every subclass class should be substitutable for their base class.
+        - Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that 
+            program
+    Interface segregation principle
+        - Many client-specific interfaces are better than one general-purpose interface
+        - no client should be forced to depend on methods it does not use.
+            - b/c the dev will be forced to implement methods (since interface) that are there only b/c the language requires it
+            - eg) @Override doSomething() { print("lol does nothing") }
+        - so you must define your interfaces so that they fit a specific client or task.
+        
+    Dependency Inversion principle
+        - Depend on Abstraction not on concretions
+        - High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g. interfaces).
+        - things should be modular and not tightly coupled and abstraction
+        - eg) strategy pattern, dependency injection (I think)
+        
+Build Automation 
+    - automating the creation of a software build 
+    - build = compiling and running automated tests
+    build automation utiltiy
+        - CMake, Maven, Gradle, ect 
+    build automation server
+        - Jenkins, CircleCI
+        
     
 ####################	
 windows measure process runtime 
@@ -2786,6 +2822,14 @@ windows measure process runtime
     Interface 
     - in it, all functions are abstract. (even if they do not have the abstract keyword)
         - unless the function is defined as a default method or static method
+    Interface as Type
+    - ie) Interface reference type
+    - like variables of class type, you can create variables of an interface type, but objects assigned to interface type 
+        variables must be instances of a class that implemented the interface
+    - But unlike class, you cannot create objects of an interface type, you can only refer objects using interface variable.
+    eg) IBlocker block;
+        block = new Tinfoil() // elsewhere... class Tinfoil implements block
+        // block has only the IBlocker methods in Tinfoil but not any more
         
  
  DESIGN PATTERNS II
@@ -2815,9 +2859,63 @@ windows measure process runtime
             - Strat can swap strategies/alogithms/functions with setStrategy()
             - recal OOP Composition
     
+    Iterator Pattern:
+        - lets to loops over a collection of objects (arrays, graph or tree)
+        - has this.items and this.index
+        - has two methods:
+            - hasNext() (if index < items.length)
+            - next() (get at index & increment)
     
-    
-    
+    Observer Pattern:
+        - the subject (publisher) notifies/triggers  many observers (subscribers)
+            - usually by calling 1 method "update()"
+        - 1 subject, many observers
+        - subject class has a list of observers and a 'notify' or 'updateAll' method
+        - will have a observer interface w/ "update()" method
+        - any class which you want to be notified/updateAll will implement Obsever interface 
+            - then add it to your subject object
+            
+    Proxy Pattern:
+        - is a wrapper that wraps around some api with a 'getData()' method
+        eg) 
+            class CryptoAPI() { getValue("money-money")}
+            class CryptoProxy() {   this.api = new CryptoApi("money-money"); 
+                                    this.hashMap = {}      
+                                   //code that checks if money-money exists before calling API  }
+        
+        - has a hash map or single variable for the getData("Micheal Jackson")
+        - checks if this.data["Micheal Jackson"] exists, if not then do fetch assign this.data["Micheal Jackson"]
+        - could interface to anything (presumably s/t expensive):
+            - a network connection, api calls, a file, or other resource e
+        
+    Mediator Pattern
+        - central autheority through which different components can communicate
+        - defines a object (mediator) that controls how some set of objects interacts w/ each other
+        - you have 3 objects that need to communicate w/ each other,
+            - instead of sending info directly to and from each other they send messages to 1 mediator object
+            - the mediator handles the logic & routing to do (mediate) the communication
+        - likely, you'll have a single mediator and few participants (name I coined)
+            - the participants has a mediator object, probably sent via constructor
+            - maybe the mediator also has a list of participants
+            
+        ex ) chatroom
+            
+            
+    Visitor Pattern
+        - 
+        
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
     
     
     
