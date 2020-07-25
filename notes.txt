@@ -2831,6 +2831,14 @@ windows measure process runtime
         block = new Tinfoil() // elsewhere... class Tinfoil implements block
         // block has only the IBlocker methods in Tinfoil but not any more
         
+    Reflection
+        - is a library 
+        - code that can look at itself
+        - refelction = class manipulator
+        - manipulates a class and everything in a class (private methods, private fields, ect)
+        - canot be used with applets b/c applets find reflection dangerous / not secure
+        - slow
+        
  
  DESIGN PATTERNS II
     Design patterns - solutions  to common problems
@@ -2902,15 +2910,47 @@ windows measure process runtime
             
             
     Visitor Pattern
-        - 
-        
+        - add new methods to a class without changing the class.
+        - the methods are kept in a visitor object
+            - the object that you want to extend with more methods must implement a accept() method
+        - you pass a visitor object that implements these operation are passed 
+        - likely you'll have mutliple visitor class types (gasVisitor, hotelVisitor) which extend some visitor interface
+        - and you'll have multple classes with an accept() method 
+            - the accept method takes a function/interface in its parameter as passes "this", the reference of the current Employee
 
+    Factory Pattern 
+        - creates objects at runtime.
+        - a CoolFactory class will build/return objects based on some string or int sent into the parameter.
+        - eg) CoolGuy snoop = CoolFactory.build("Snoop Dogg")
+        
+    Builder Pattern
+        - good for constructing complex objects 
+        - it builds the object step by step then a build() method will return the object.
+        - likely, lots of setName(), setAge(), each which returns "this", the UserBuilder object
+            - then build() returns this.user
+        - eg) let user = new UserBuilder("Bob").setAge(12).setPhone("3031123123").build()
             
+    Protype Pattern
+        - used when creation of object directly is costly
+        - clone objects via the .clone() method by extending the Clonable class
+        - its all via .clone() method instead of "dog = new Doggy()"
+        - likely use a hashmap that contains multiple pre-loaded object or maybe a cloneFactory that takes in the object 
+            - calls .clone() on these
+        - cache object and returns its clone on next request (thus reducing database calls).
+            - like an object that is created after a costly database operation.
             
-            
-            
-            
-            
+    Decorator Pattern 
+        - good for when you want to add functionality at run time
+        - more flexible than inheritance
+        - add fuctionality by using many many simple classes
+        - likely, you'll have 3 classes:
+            - a interface Car, BasicCar implements Car, and CarDecorator implements Car,
+            - then as many extra classes that extend the CarDecorator. LuxuryCare, SportCar, ect
+                - each with a 1 line constructor "super(myCar)"
+        - eg) Car sportsCar = new SportsCar(new BasicCar());
+              Car sportsLuxuryCar = new SportsCar(new LuxuryCar(new BasicCar()));
+              sportsCar.assemble();
+        - 
             
             
             
