@@ -2838,7 +2838,13 @@ windows measure process runtime
         - manipulates a class and everything in a class (private methods, private fields, ect)
         - canot be used with applets b/c applets find reflection dangerous / not secure
         - slow
-        
+    
+    When Static method?
+        1) If a method doesn't modify state of object, or not using any instance variables.
+        2) you want to call method without creating instances
+        3) if it only work on arguments provided 
+        4) If function of method will remain static across class hierarchy e.g. equals() method is not a good candidate of making 
+            static because every Class can redefine equality.
  
  DESIGN PATTERNS II
     Design patterns - solutions  to common problems
@@ -2950,8 +2956,17 @@ windows measure process runtime
         - eg) Car sportsCar = new SportsCar(new BasicCar());
               Car sportsLuxuryCar = new SportsCar(new LuxuryCar(new BasicCar()));
               sportsCar.assemble();
-        - 
-            
+         
+     Command Pattern
+        - (confusing/difficult pattern)
+        - command, receiver, invoker and client
+        - You can use the Command pattern to add work to a queue or remove commands from a queue w/o knwoing the class, methods, or parameters
+        - mirror higher-order functions in functional programming languages. 
+        
+        - all conceret classes must have Command
+        - the execute() method is a bridge 
+        - interface Command { public void execute(); } 
+  
             
             
             
