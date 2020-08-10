@@ -1,7 +1,10 @@
-import math
+################################################################################################################
+#
+# The problem is found here: https://github.com/Brodski/Google-Foobar-Problems/blob/master/Level_4_lazer/Problem.txt
+#
+################################################################################################################
 #
 # bringing-a-gun-to-a-guard-fight
-#
 # My solution was inspired from:    
 # https://www.physicsclassroom.com/class/refln/Lesson-2/Other-Multiple-Mirror-Systems
 # https://www.physicsclassroom.com/class/refln/Lesson-2/Ray-Diagrams-for-Plane-Mirrors
@@ -45,6 +48,7 @@ import math
 #
 #
 #
+import math
 
 class Game:
     def __init__(self, your_position=None, guard_position=None):

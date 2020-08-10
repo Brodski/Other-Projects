@@ -197,7 +197,7 @@ Object
 
 POLYMORPHISM 
 	- the programming language's ability to process objects differently depending on 
-their data type. 
+        their data type. 
 	- IS-A test is considered to be polymorphic.
 	- method overloading 
 	- method overriding
@@ -304,22 +304,22 @@ INTERFACE
 		List c = new Vector(); 
 		List d = new Stack(); 
 	 
-ABSTRACT CLASS
-	- for the sole purpose of making a class a subclass of another.
-	- can only be subclassed
-	- cannot be instantiated
-	- Abstract method is a method that is declared without an implementation 
-		Ex)	abstract void moveTo(double deltaX, double deltaY); { }
-	- (C#) virtual means that a method could overriden) .
-	- (Java) all non-static methods are by default "virtual functions." 
-		- Only final methods (cannot be overridden), along with private methods (which are not inherited)
-			are "non-virtual".
-	- (C#) Override - for each abstract method you must use the override keyword in the subclass that inherit the 
-		abstract  classes
-		
-	- Yes, abstracts can have constructors. The constructor will be called when the subclass is instantiated.
+    ABSTRACT CLASS
+        - for the sole purpose of making a class a subclass of another.
+        - can only be subclassed
+        - cannot be instantiated
+        - Abstract method is a method that is declared without an implementation 
+            Ex)	abstract void moveTo(double deltaX, double deltaY); { }
+        - (C#) virtual means that a method could overriden) .
+        - (Java) all non-static methods are by default "virtual functions." 
+            - Only final methods (cannot be overridden), along with private methods (which are not inherited)
+                are "non-virtual".
+        - (C#) Override - for each abstract method you must use the override keyword in the subclass that inherit the 
+            abstract  classes
+            
+        - Yes, abstracts can have constructors. The constructor will be called when the subclass is instantiated.
 
-		ABSTRACT VS INTERFACE
+    ABSTRACT VS INTERFACE
 		- abstract extends only 1 | interface can have multiple
 		- abstract can impliment it's members (eg methods) | interface cant
 		- abstract can have variables (fields) | interface cant
@@ -328,46 +328,46 @@ ABSTRACT CLASS
 		
 		- interface shares behavior but not same code (abstract has some optionally code and some behavior)
 		
-  Abstract or Interface or (unmodified) Class
-  - abstract or (unmodified) class is good if you want implemented code. Ie non-empty bodies
-	- implemented code = reduce repeated code
-  - abstract is useful if you do not want the class created.
-  - interface is useful to describe behavior.
-  - interface for bahavior among multiple classes but with different logic / implemenation
-  -> Interfaces only share behavior (no code)
-  -> abstract can share behavior, code
-  -> Classes share clode but can be created
+    When: ABSTRACT OR INTERFACE OR (unmodified) CLASS ???
+      - abstract or (unmodified) class is good if you want implemented code. Ie non-empty bodies
+        - implemented code = reduce repeated code
+      - abstract is useful if you do not want the class created.
+      - interface is useful to describe behavior.
+      - interface for bahavior among multiple classes but with different logic / implemenation
+      -> Interfaces only share behavior (no code)
+      -> abstract can share behavior, code
+      -> Classes share clode but can be created
   
 ---------------------------------------------------------									
 
 FINAL in Java (sealed in C#)
-- "final" class 	to prevent inheritence, your class from being subclassed. 
-- "final" methos 	to prevent overriding, prevent certain methods within your class from being overriden. 
-- "final" variable	to create constants, prevent changes to a variable's value. A final variable can only be 
-initialized once,
+    - "final" class 	to prevent inheritence, your class from being subclassed. 
+    - "final" methos 	to prevent overriding, prevent certain methods within your class from being overriden. 
+    - "final" variable	to create constants, prevent changes to a variable's value. A final variable can only be 
+    initialized once,
 
 IMMUTABLE
- - is an object whose state remains constant
- - cannot be modified after it was created.
- - Contains:
-	- class & data members are private final.
-	- a constructor
-	- Getters
-	- No setters
- Immutable vs Final
- - final is just a keyword whereas Immutable is a pattern
- - By declaring a reference variable as final, we won’t get any immutability nature
- - final ensures that the address of the object remains the same whereas the Immutable suggests that we 
-can’t change the state of the object once created.
-https://www.geeksforgeeks.org/final-vs-immutability-java/
+     - is an object whose state remains constant
+     - cannot be modified after it was created.
+     - Contains:
+        - class & data members are private final.
+        - a constructor
+        - Getters
+        - No setters
+     Immutable vs Final
+     - final is just a keyword whereas Immutable is a pattern
+     - By declaring a reference variable as final, we won’t get any immutability nature
+     - final ensures that the address of the object remains the same whereas the Immutable suggests that we 
+    can’t change the state of the object once created.
+    https://www.geeksforgeeks.org/final-vs-immutability-java/
 
 SINGLETON
-- a class that can have only one object of itself
-- Contains: 
-	- private constructor (prevents instantiating the object )
-	- public variable/setters
-	- "getter" for the object (static  accessor method, ie, a factory method to return the class member)
-	- creates  static object of itself (private static mySingleton st = null;)
+    - a class that can have only one object of itself
+    - Contains: 
+        - private constructor (prevents instantiating the object )
+        - public variable/setters
+        - "getter" for the object (static  accessor method, ie, a factory method to return the class member)
+        - creates  static object of itself (private static mySingleton st = null;)
 
 
 Instance Initialization Blocks 
@@ -1242,7 +1242,7 @@ FACTORY
 	ex)	 ShapeFactory shapeFactory = new ShapeFactory();
 		 Shape shape1 = shapeFactory.getShape("CIRCLE");
 		 Shape shape2 = shapeFactory.getShape("SQUARE");
-MVVC 
+MVVM 
 	- Model-view-ViewModel
 	- essential, the view does extra work on the data
 	- the ViewModel of MVVC s a value converter, meaning it is responsible for converting the data objects 
@@ -1919,7 +1919,7 @@ COMPONENTS
 			- no render method
 			- is stateless
 			- is a javascript function 
-		- class compoenents:
+		- class components:
 			- has a state
 			- marginally slower than function ( b/c creating class)
 			- more code
@@ -2966,6 +2966,41 @@ windows measure process runtime
         - all conceret classes must have Command
         - the execute() method is a bridge 
         - interface Command { public void execute(); } 
+        
+    Adaptor Pattern
+        - adapter lets classes work together that couldn't otherwise because of incompatible interfaces.
+        - Wrap an existing class with a new interface.
+        - lets you use any interface w/ another interface
+        - or lets you use any class w/ another interface
+        - Adapter pattern works as a bridge between two incompatible interfaces.
+        - This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces. 
+        - likely, you have some class[es] by itself, maybe w/ or w/o interfaces
+        - you have another 
+        - eg) you have vlcPlayer and mp3Player classes
+        -     you have a MediaAdapter class that implements MediaPlayer
+        -     public class AudioPlayer implements MediaPlayer {
+              MediaAdapter mediaAdapter; 
+              AudioPlayer(MediaPlayer mp) { //constructor
+                  mediaAdapter = mp;
+              }
+       [or!]  AudioPlayer(VlcPlayer vp, Mp3Player mp, M3pp m3p) { // consturotr (via composition, settin gall in)
+                    
+              // handle the logic so that the interface can use mediaAdapter
+
+    Fascade Pattern
+        - provides a simplified interface to a library, a framework, or any other complex set of classes.
+        - Ordinarily, you’d need to initialize all of those objects, keep track of dependencies, execute methods in the correct order, 
+            and so on. As a result, the business logic of your classes would become tightly coupled to the implementation details of \
+            3rd-party classes, making it hard to comprehend and maintain.
+        - The Facade Design Pattern decouples or separates the client from all of the sub components
+        - The Facades aim is to simplify interfaces so you don't have to worry about what is going on under the hood
+        - "hides all the complexities of the building and displays a friendly face"
+
+        
+
+---------------
+Firebase
+    Backend-aaS (Baas)
   
             
             
