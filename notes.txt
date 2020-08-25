@@ -2775,25 +2775,25 @@ windows measure process runtime
         var anon = (a, b) => { return a + b };
         
     Treeshaking
-    - the removal of dead code.
-    - elies on the import and export statements in ES2015 to detect if code modules are exported and imported between files. 
+        - the removal of dead code.
+        - elies on the import and export statements in ES2015 to detect if code modules are exported and imported between files. 
  
     Prototype
-    - every object has __proto__ (can verify in google/firefox webdebugger)
-    - the __proto__ has all the methods attatched to that object
-    - you can put functions in Prototype instead  of in the "class funky() { ... } "
-    - They both work on the function the same, but the Prototype allows for inheritence and possibly small objects (since they all 
-        point to prototype function instead of theri own internal function)
-    - calling a function will check __proto__ and chain up
-    eg) 
-        funky.Prototype.myCoolFunction = function(a,b) { ... }
-    
+        - every object has __proto__ (can verify in google/firefox webdebugger)
+        - the __proto__ has all the methods attatched to that object
+        - you can put functions in Prototype instead  of in the "class funky() { ... } "
+        - They both work on the function the same, but the Prototype allows for inheritence and possibly small objects (since they all 
+            point to prototype function instead of theri own internal function)
+        - calling a function will check __proto__ and chain up
+        eg) 
+            funky.Prototype.myCoolFunction = function(a,b) { ... }
+        
  
  Java (random)
     
     Anonymous class:
-    - when you create an object you could make an new class on the fly
-    - the curly braces {} is the syntax that allows the program to extend & instantiate a new class
+        - when you create an object you could make an new class on the fly
+        - the curly braces {} is the syntax that allows the program to extend & instantiate a new class
     
     eg) 
         class MyClass() { ..... }
@@ -2802,34 +2802,34 @@ windows measure process runtime
         // this object x is a subclass and it has no name
         
     Anonymous class with interface:
-    - double braces
-    - create an object of IFaceman which also has the implemenation of  IFaceMan
-    - you create the anonymous class and it gets the implimentation
-    - good for when you use the interface only once
-    
-    eg)
-        interface IFaceman { 
-            void show() }
-        IFaceMan x = new IFaceman() { { public void show() {....} } }
+        - double braces
+        - create an object of IFaceman which also has the implemenation of  IFaceMan
+        - you create the anonymous class and it gets the implimentation
+        - good for when you use the interface only once
+        
+        eg)
+            interface IFaceman { 
+                void show() }
+            IFaceMan x = new IFaceman() { { public void show() {....} } }
  
     Functional Interface
-    - java syntax 'trick' 
-    - when an interface has just 1 method, you could use a lambda 
-        
-        interface IFaceman { void show() }
-        IFaceMan x = () -> System.out.println("Hi");
+        - java syntax 'trick' 
+        - when an interface has just 1 method, you could use a lambda 
+            
+            interface IFaceman { void show() }
+            IFaceMan x = () -> System.out.println("Hi");
  
     Interface 
-    - in it, all functions are abstract. (even if they do not have the abstract keyword)
-        - unless the function is defined as a default method or static method
-    Interface as Type
-    - ie) Interface reference type
-    - like variables of class type, you can create variables of an interface type, but objects assigned to interface type 
-        variables must be instances of a class that implemented the interface
-    - But unlike class, you cannot create objects of an interface type, you can only refer objects using interface variable.
-    eg) IBlocker block;
-        block = new Tinfoil() // elsewhere... class Tinfoil implements block
-        // block has only the IBlocker methods in Tinfoil but not any more
+        - in it, all functions are abstract. (even if they do not have the abstract keyword)
+            - unless the function is defined as a default method or static method
+        Interface as Type
+        - ie) Interface reference type
+        - like variables of class type, you can create variables of an interface type, but objects assigned to interface type 
+            variables must be instances of a class that implemented the interface
+        - But unlike class, you cannot create objects of an interface type, you can only refer objects using interface variable.
+        eg) IBlocker block;
+            block = new Tinfoil() // elsewhere... class Tinfoil implements block
+            // block has only the IBlocker methods in Tinfoil but not any more
         
     Reflection
         - is a library 
@@ -2997,17 +2997,74 @@ windows measure process runtime
         - "hides all the complexities of the building and displays a friendly face"
 
         
-
 ---------------
 Firebase
     Backend-aaS (Baas)
-  
+    Cloud Firestore = new and better!
+    Realtime Databse = not as new
+
+Big O - Little O
+    Informally you can think of big-O as "grows no faster than g(x)" and little-o as "grows much slower than g(x)".
+
+
+HTTP    
+    A stateless protocol that follows the client / server model. Part of the Application layer (top most layer of OSI model)
+    - Client / Server model (or request / response)
+        - the client (user) communicates to servers like facebook and youtube
+    - Statless
+        - every transaction is indepedent and doesnt need to know anything about any previous transactions
+        - the client and server do not need to know anything about the other
+        - http is stateless but apps will still track the apps state w/ cookies & sessions
+        - HTTP is stateless but you get the funcationaltiy of state through other mechanism
+    - Application Layer
+        - sends data but does not define or work with how it is sent
+        - sits ontop of transport layer (uses TCP but doesnt care about those details)
+    - Headers
+        - Tiny bits of info that comes with request/response
+        - to tweak with the data
+            - content-type = txt, xml, or json file ... server will responed w/ this type
+            - cache-control =  
+
+    - Client Actions
+        - GET, POST, DELETE, ... PUT, OPTION, HEAD, PATCH
+    - Server Status Codes
+        - 200 OK, 300 Redirect, 400 Error on client, 500 Error on server
+
+
+What is CORS
+    - It is a security feature in the browser. It tells the backend server which domains it will accept requests from. So the backend 
+developers can determine which domains it will communicate with. Since cookies are stored in the browser when the user lands on another 
+website that website might be malicious and have scripts that uses those cookies. A cookie might exists that says "is user logged into 
+his gmail". If that feature did not exist then a malicous website can use those cookies and talk to gmail's backend API, however 
+gmail's backend can adjust for that.
+
+What is arrow fucntion  How does it differ from standard function notation?
+    - Arrow function is a lambda function but with different syntax. It is less wordy. It is available in ES6. It is useful for higher 
+order methods where one of the arguments is a function. Such as map, reduce, filter, setTimeout, or Promise, so when the developer 
+might use a function only once. It differs from a standard function because it is a function without a name
             
+Serverless can be cheaper than a hosted VM. Serverless is pay by use instead of the monthly fee of a hosted VM. Serverless is also auto-scaling. When traffic increases your BaaS provider takes care of everything and you the developer do not need to create more VMs and deal with networking, architecture, being a system admin, security, etc. They take care of the backend. New developments is also very easy to deploy. You do not have to redeploy and go though as thorough of a 'pipeline' process as with a hosted VM. Some cons is that the developer will be locked into the service provider, (Lambda, Firebase, ect), the developer has to learn the service provider's serverless technology, and it won't be less costly if you have a hosted VM that is constantly busy, ie taking in traffic and sending data, then it might not be less cost efficent.
             
-            
-            
+
+ GET for these actions can lead to issues with browser prefetching, cacheing (server wont look at get body), and search engine spidering
+
     
-    
-    
+ArrayList vs LinkedList (Java)
+    - ArrayList is an Array (recall c++) but implements List interface
+        - Fast read access O(1). 
+            - To read, to goes directly to mArray[15]
+        - Not so fast write O(n)
+            - To add elements to an Array thats already full (size 30 but adding the 31th elements) 
+                it copy everything to a new Array + the last ele
+        - removing ^ same O(n)
+        - Good if you know you will read more than write
+    - LinkedList points to the next and previous element
+        - Not fast read O(n)
+            - To read it must traverse. Traverses the list until it finds element
+        - very fast add.
+            - to add, it changes the .next element for the last element 
+        - Not fast remove O(n)
+            - Must first traverse the list, then unlink. Since traverse its O(n)
+        - Good for when adding lots of stuff to list AND you do not know the size of the list
     
     
