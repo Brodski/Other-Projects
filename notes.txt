@@ -103,6 +103,8 @@ Dynamically typed languages:
 	- variable types can change at run time. 
 	- you dont have to specify the data type of the variable before compile time
 	- advantage: faster programming
+    - (alt Definition) - variables do not have types; only values do. There are no type definitions in the language. All values carry their own type.
+
 
 	
 Scripting Language
@@ -526,6 +528,7 @@ situations/application or systems
 MVC
 	Model 	- Gets the data from the database or XML-file and processes it
 			- responds to view and controller
+            - data
 	View	- UI, What the user sees
 			- HTML/CSS
 			- Templating engines
@@ -3067,4 +3070,174 @@ ArrayList vs LinkedList (Java)
             - Must first traverse the list, then unlink. Since traverse its O(n)
         - Good for when adding lots of stuff to list AND you do not know the size of the list
     
+MX Record (Mail Exchange) 
+    - a dns record tgaht shows were your emails should be routed on the internet
+    - dns = website/domain name (you route were website traffic should go.)
+        - MX does the same for mail
+    - you can go to your domain provider (google.domains.com) and set the MX record
+    - When you send an email the MX record is read by the computer/internet and it sees the IP of where the email should go
+    - you can have 20 MX records if you want, these are various locations, so if 1 server goes down the emial will try the next
     
+difference between a service and a process is. 
+- In Linux a service is just another name for a daemon, which is a 
+client / server application that runs in the background. A service is continuously listening for incoming 
+requests and sends a response based on the request given. A process is simply an application or a script which 
+can be running in the foreground or the background.    
+
+ keytool -keystore src/main/resources/keystore.p12  -list -v
+
+
+Javascript Event: 
+ - When an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up 
+ - almsot all events bubble.
+    eg) a focus event does not bubble
+
+CONTENT DELIVERY SYSTEM
+
+CMS - content managment system - easy way to put pages on a website like blogs and managing images/assets, contnet and code are both separate parts
+    - users can click 'add page' and 'add component x' to build pages. All clicking and no code for content team (not devs).
+    
+CMA - content managment applications - the admininstrative part that editors use to create edit and publish conent w/o codeing
+CDA - content delivery applications - the 'backend' of the website which transers the content into visisble interface for the end use
+
+PROXY SERVER
+Forward proxy 
+    - [often called proxy server or web proxy.]
+    - sits in front of 1 or more client machines.
+    - when client computer make a request to a site, then the proxy server intercepts thsoe request then communites with the site  
+        on behalf of those clients
+    - like a middle man
+    Pros:
+        - avoid state or institution browsing (vpn)
+        - can block certain content (school block x websites)
+        - to protect online identity (vpn part 2)
+Reverse Proxy
+    - sits in front of one or more web servers
+    - when client sends request to a site/server, those requests are intercepted by the reverse proxy it will then send requests 
+        to and recieve from the orign server
+    - The client never directly communicates directly with that specific server.
+    Pros:
+        - load balancing
+        - DDos protection
+        - Caching
+        - SSL encryption (encryption and decrytion can be expensive. so reverse proxy can be configured to decrypt incoming and encrypt outgoing)
+
+
+
+JCR
+    - an object database, as opposed to a table or nonrelational database
+    - is hierarchical
+    - node = a thing
+
+Android NDK
+    - uses the Java Native Interface JNI
+    - set of tools that allows you to use C and C++ code with Android
+    - fast
+
+
+Java Native Interface
+    - and provides platform libraries you can use to manage native activities and access physical device components, such as sensors and touch input
+    - JNI is a Foriegn Function Interface 
+    Pros:
+        - Squeeze extra performance out of a device to achieve low latency or run computationally intensive applications, such as games or physics simulations.
+        - Reuse your own or other developers' C or C++ libraries.
+
+
+Foriegn Function Interface
+    - a mechanism by which a program written in one programming language can call routines or make use of services written in another.
+    - it is to mate the semantics and calling conventions of one programming language with the semantics and conventions of another 
+    - map the host language with the guest language. 
+
+native applications
+    - programs specific to a hardware and operating system platform
+
+
+he navigator property of a window (i.e. window.navigator) is a reference to a Navigator object; it is a read-only property which contains information about the user's browser.
+
+JSP
+    - java server pages 
+    - html and java
+
+
+
+Development/Debugging
+- https://stackoverflow.com/questions/38913799/how-to-open-the-correct-devtools-console-to-see-output-from-an-extension-script/38920982#38920982
+
+    Browser Toolbox <--- do this
+    - Browser Toolbox = web page + background + content
+    - Browser Toolbox is like the Web Console, but applied to the whole browser rather than a single content tab.
+    - Broswer Console = Browser Toolbox but JUST the console
+    - Ctrl + Alt +Shift + I
+    - The Browser Toolbox's context is the whole browser rather than just single page on a single tab.
+OR 
+    (Seems not that greate)
+    about:debugging
+    about:debugging#/runtime/this-firefox
+    
+    https://developer.mozilla.org/en-US/docs/Tools/Browser_Toolbox#enabling_the_browser_toolbox
+---------------------------
+
+
+BROWSER EXTENSIONS 
+
+Firefox uses "broswer" 
+Chrome uses "chrome"
+    but firefox allows "chorme" = "browser" for easy interporbility
+Firefox uses "promise"
+Chrome uses "callback"
+
+UI:
+https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface
+
+
+background scripts 
+    - the extension js
+    - Access the WebExtensino JS API
+    - not the 
+    - Background scripts are the place to put code that needs to maintain long-term state, or perform long-term operations, independently of the lifetime of any particular web pages or browser windows.
+    - Background scripts are loaded as soon as the extension is loaded and stay loaded until the extension is disabled or uninstalled, 
+contnet script B
+    - JavaScript included with your extension, that you will inject into web pages.
+    - the webpage context js
+    - DOM access
+        - standard DOM api, eg "window." "document."
+        - read and modify their pages using the standard DOM APIs
+    - access a small subset of the WebExtension APIs,
+        -ban can communicate with backgournd scripts
+    https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Content_scripts
+    - cannot see JavaScript properties added by content scripts.
+        - and visa versa
+    - cannot seeany JavaScript libraries loaded by the page
+    - HOWEVER - firefox does provide API  to access JS objected created by page scripts
+
+    - gets the same cross-domain privileges as the rest of the extension: 
+        - via "permissions" key in manifest.json
+        - BUT not in Chrome ... but can be made from extension background pages instead, 
+
+manifest -
+    The first three keys: manifest_version, name, and version, are mandatory and contain basic metadata for the extension.
+
+browser action
+   - Icon on bar
+    = Toolbar button
+page action
+    - icon on URL bar
+    = address bar button
+Extension page
+    - a web page within page or tab
+    - larger 
+
+
+
+ $ web-ext run     
+ # to run in chrome:
+ $ web-ext run -t chromium   
+ # Powerful command to run any Chromium browser:
+    https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/
+    https://www.youtube.com/watch?v=L4sLn1OD7vM
+ $ nodemon.cmd .\server.js        
+ 
+
+
+
+
