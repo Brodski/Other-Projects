@@ -1,4 +1,4 @@
-﻿
+
 
 Element: System
 	eg) System.out.println("Hello, World!");
@@ -3170,7 +3170,7 @@ Development/Debugging
     - Ctrl + Alt +Shift + I
     - The Browser Toolbox's context is the whole browser rather than just single page on a single tab.
 OR 
-    (Seems not that greate)
+    (Seems not that great)
     about:debugging
     about:debugging#/runtime/this-firefox
     
@@ -3227,17 +3227,128 @@ Extension page
     - a web page within page or tab
     - larger 
 
+	
+Blob URL
+	blob = a section of memeory that contians data, in the browser
+	blob uri = pointer to that memory
+		- 'sandboxed' to that domain
+	- file-like object of immutable, raw data; 
+	- read as text or binary data, 
+		- or converted into a ReadableStream
 
+Javascript this = what ever is calling the current function
+	- arrow function doesnt have it's own this scope
+	- arrow function inherits the nearest scope
+	
+		
+		
 
  $ web-ext run     
  # to run in chrome:
- $ web-ext run -t chromium   
- # Powerful command to run any Chromium browser:
+ $ web-ext run -t chromium    
+ # Good command to run any Chromium browser:
     https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/
     https://www.youtube.com/watch?v=L4sLn1OD7vM
  $ nodemon.cmd .\server.js        
  
+ 
+  web-ext build --overwrite-dest --ignore-files ./scripts/background.js ./scripts/script.js ./unused-assets
 
+
+ 
+ -----------------------------
+ 
+ 
+ Infrastructure Automation tools:
+	- teraform
+	- chef
+	- ansible
+	- puppet 
+	
+ Platform/Infrastructure Monitoring tool
+	Datadog
+	dynatrace
+	grafana?
+	new relic
+	amazon cloud trail
+ Databases
+	mySQL
+	PostgreSQL
+	mongoDB
+	Cassandra
+	
+AWS:
+	 Principal = specifies the user, account, service, or other entity
+		       => AWS account and root user
+                    - IAM roles
+                    - Role sessions
+                    - IAM users
+                    - Federated user sessions
+                    - AWS services
+                    - All principals
+
+AWS Kinesis 
+	- for processing stream data (logs, video streams, camera footage/stream)
+	-
+AWS Data Lake
+	- third-party data consumption
+	- third-party data sets, easily to integrate their data together
+	- is a service that makes it easy for AWS customers to securely exchange file-based data sets in the AWS Cloud
+	
+AWS SageMaker
+	- a cloud machine-learning platform
+	- enables developers to create, train, and deploy ml
+	
+	
+	
+NodeJS
+	- res.send() vs res.end()
+		- send() is smart
+		- send() checks your output and sets header information accordingly.
+			- eg) Content-Type: text/html
+			- eg) Content-Type: application/json
+
+			
+			
+Create cloudfront
+	- origin-domain = whatever you want (www.bski.one)
+					= lambda, beanstalk, ect
+	- route 53
+		- create record 
+		- select cloudfront distribution 
+		-	- note its empty
+		- populate it with the cloudfront Distribution domain name (d4loipw859aje.cloudfront.net) found in general tab
+			https://www.youtube.com/watch?v=Vr4N_ZA-uGo&t=374s
+
+DOCKER            
+- ENTRYPOINT vs CMD
+    ENTRYPOINT = main command that runs when the container starts, 
+    CMD = default arguments or a fallback command if no ENTRYPOINT  is specified. 
+    ENTRYPOINT + CMD = flexible Docker images with customizable behavior at runtime.
+EX
+ENTRYPOINT ["echo", "Hello,"]
+CMD ["world!"]
+1
+$ docker run my_image OpenAI
+Hello, OpenAI
+2
+$ docker run my_image
+Hello, world!
+
+
+
+
+----------------------
+
+        {
+            "Sid": "eb-58950a8c-feb6-11e2-89e0-0800277d041b",
+            "Effect": "Deny",
+            "Principal": {
+                "AWS": "*"
+            },
+            "Action": "s3:DeleteBucket",
+            "Resource": "arn:aws:s3:::elasticbeanstalk-us-east-1-144262561154"
+        }
 
 
 
