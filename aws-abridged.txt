@@ -1,0 +1,478 @@
+oes openAI have a open source project or something that does that? (Amazaon Comprehend)
+OpenAI has Whisper for speech to text, 
+but does openAI have something for text analysis?
+
+
+
+
+Amazon Cognito: identity (accounts) for web and mobile
+AWS KMS (Key Management Service):
+
+AWS CloudTrail: record of API calls made on an AWS account.
+AWS GuardDuty: Threat detection from internal malicious aws account activity. **INTERNAL**
+AWS Trusted Advisor: Optimizes AWS usage. **BROAD**
+AWS Artifact: Provides AWS compliance documents.
+
+AWS Guardrails: Compliance: Enforces best practices across AWS accounts using pre-configured rules.
+AWS Inspector: Automated security assessment.
+    Inspector vs Guardrails 
+        Gaurdrails part of Control Tower for policy enforcement
+        Inspector a standalone service for vulnerability scanning and assessment.
+
+AWS Config: Gives pass/fail report on compliance. Monitors resources for compliance.
+AWS Security Hub: Centralized security and compliance management
+    Config vs Security Hub
+        Config: Continuously monitors. Specifically compliance+
+        Security Hub: Aggregates security findings. Specifically all security
+        Inspector: Automated security assements.
+
+AWS Control Tower: for managing multi-account AWS environments
+AWS Account Factory: a feature within Control Tower, for creating new accounts.
+
+AWS Shield : DDoS protection. Free and premium verson.
+
+AWS Macie dicovers/protects sensitive data stored in Amazon S3 buckets.
+      
+Amazon Monitron 
+    - uses ML to detect abnormal behavior in industrial machinery. Device provided by aws
+
+Amazon Lookout
+    - Amazon Lookout for Equipment (machine)
+    - Amazon Lookout for Vision (video)
+    - Amazon Lookout for Metrics (software data)
+    - a suite of ML services to help businesses detect anomalies 
+
+Amazon DevOps Guru: monitors your cloud for improvments
+
+AWS Bedrock: Generative AI
+
+AWS CodeWhisperer: Co-Pilot coder
+AWS CodeGuru: a code analysis service.
+AWS Copilot: build containers for AWS apps easily. mostly cli. `$ copilot init`
+AWS Amplify: tools for building web/mobile apps. also mostly CLI Tool but also web UI. (don't really learn about AWS services)
+
+AWS Data Exchange: catalogue of third-party datasets
+AWS Lake Formation: building and managing data lakes.
+
+
+AWS Glue: a ETL (Extract, Transform, Load) service 
+
+Amazon Elastic MapReduce (EMR): for big data. Commonly used for data mining, log analysis, ML, and data warehousing.
+
+
+Amazon CloudSearch: A general-purpose search. you upload data.
+Amazon Kendra: uses natural language processing (NLP). Integrates with s3, databases, aws ect
+Amazon Athena: sql like query service on CSV/JSON. 
+
+Amazon Elastic Inference: attach/detach GPU to EC2 instances 
+
+Amazon Textract and OCR: extract text from scanned documents
+Amazon Lex: build voice and text chatbots
+
+CloudWatch Dashboard: custom dashboard based on metrics
+CloudWatch Metrics: A default dashboard
+
+
+AWS Migration Acceleration Program (MAP):
+    - help organizations accelerate their migration to AWS
+    - provides consulting support, training, and assist with every phase of migration
+    - aims to reduce the complexity and risk of cloud migration
+AWS Database Migration Service (DMS): helps you migrate databases
+    - On-Premises to AWS
+    - AWS to AWS
+    - Cloud to AWS
+
+
+AWS DynamoDB - is a serverless NoSQL key/value and document database. 
+AWS DocumentDB - the MongoDB database in aws
+
+AWS Data Pipeline
+    - helps you automate the movement of data between different AWS services and on-premises data sources
+    - integrates with S3, RDS, DynamoDB, and Redshift
+
+AWS CodeStar
+    - a nice package of 
+        - CodeCommit
+        - CodeBuild
+        - CodeDeploy
+        - CodePipeline
+        - CodeArtifact
+        - Cloud9
+        provides a unified user interface
+
+
+AWS Marketplace: catalog of software, data, and services from third-party vendors
+AWS Data Exchange:  catalogue of third-party datasets (better at data)
+
+
+AWS Quick Starts:
+    - catalog of AWS CloudFormation templates. Developed by AWS architects
+    - you might have a form to fill out in the UI
+
+AWS QuickSight:
+    is a Business Intelligence (BI) service.
+
+AWS OpsWorks
+    - AWS OpsWorks = Chef & Puppet
+AWS Pinpoint:
+    is a marketing campaign management service
+AWS Chime:
+    is video-conference service
+AWS WorkSpaces:
+    is virtual remote desktop
+AWS WorkDocs:
+    Document storage, sharing, and collaboration.
+
+
+AWS Systems Manager
+    - a interface for managing AWS resources and on-premises servers.
+
+
+AWS RDS on VMware:
+    - deploy AWS RDS on your premise
+    - (Relational Databases Service)
+AWS VMWare Cloud on AWS
+    - run VMware environment on AWS
+    - For customers who want to extend/migrate on-premises VMware environments to the AWS cloud 
+
+AWS App Runner
+    - like Elastic BeanStalk, or Heroku
+    - for containerized web applications and APIs. No infrastructure configs
+
+
+
+
+AWS Aurora 
+    - 6 copies of your data accross 3 AZs
+    - both SQL Engine by AWS and a service? idk exactly why they do that
+
+
+AWS AppSync:
+    - a fully managed GraphQL service. 
+        
+        
+           
+SNS vs SQS vs EventBridge
+    AWS SNS: 
+        - for simple pub/sub messaging and notifications. 
+        - It pushes messages to subscribers immediately.
+    AWS SQS: 
+        - for microservices, decoupling components
+    AWS EventBridge: 
+        - for complex event-driven architectures, 
+        - sophisticated routing and filtering capabilities
+        
+        
+        
+       
+AWS Single Sign-On (AWS SSO) 
+    - where you create or connect, your workforce identities in AWS 
+    
+LDAP (Lightweight Directory Access Protocol)
+    - a protocol for accessing directory information over an IP network. 
+    
+
+FedID - Broader identity management concept.
+        - trust between IdP's
+        - log into multiple sites with 1 set of credentials.
+        
+OpenID -  is a protocol. 
+        - Also, log into multiple sites with a 1 set of credentials. Decentralized authentication
+
+SAML - is a protocol, XML, complex
+    - for exchanging auth data between IdP and a service provider 
+    
+    
+    
+    
+Active Directory (AD): directory service for Windows environments.
+
+
+Directory Service: maps network reseoruces to their network addresses
+    
+    
+Capcity Reservations
+    - reserve EC2 instaces, incase AWS runs out of servers :O
+    - Zonal Reserved Instances (AZ)
+    - Region Reserved Instances (region)
+EC2 Reserved Instance Marketplace:
+    (aka) RI Marketplace
+        - allows you to sell your unused Standard RI
+        
+AWS Savings Plans
+    - measured in $/hour, that is how you can change
+    ! EC2, Fargate instances, and Lambda
+    - ‌commit to 1 or 3 years
+    - 3 saving plans:
+        Compute Savings Plans:
+            - any thing/where
+        EC2 Instance Savings Plans:
+            - specific region
+            - specific EC2 family
+        SageMaker Savings Plans:
+            - sagemaker
+            
+Reserved Instances
+    - Commit to 1 or 3 years
+    - EC2 only
+    - measured based on a specific instance configuration
+    - 2 plans:
+        - Standard:
+            - cannot modify instances once purchased. 
+        - Convertible
+            - flexible
+            - allows you to change the instance type, operating system, and tenancy
+            - can change AZ too
+            
+
+Elastic IP
+        - keep a consistent IP address despite instance restarts
+        
+
+    
+NACLs	                             Security Groups
+-apply to subnets	            -apply to individual instances
+-stateless	                    -stateful
+-evaluate rules in order	    -evaluate all rules
+-Allow & Deny rules	            -only Allow 
+-can block single IPs	        -cannot block single IPs
+        
+
+
+
+Cloud-Native Networking Services
+    Region: geo location
+    AZ: data center id
+    VPC: a virtual, isolated network for your AWS account
+    Subnets: partition of an IP addresses. public or private
+    Internet Gateway: Enable access to the Internet
+    Security Groups: firewall at the instance level **INSTANCE**
+        - inbound/outbound traffic. rules on protocols, ports, and IP ranges
+    NACLs:  firewalls at the subnet level **SUBNET**
+    Route Tables: controlls the routing of traffic within a VPC. 
+
+
+
+Amazon Timestreams:
+    - time series database. for IoT
+    
+AWS Neptune
+    - graph database
+    
+
+AWS ElastiCache:
+    - in memory and caching database
+        - Redis
+        - Memcached
+        
+AWS Redships 
+    - data warehous
+    - use case: quickly generate analytics from HUGE data
+    
+    
+    
+
+Key-Value Store Database
+    - stores data as key-value pairs
+    use case;
+        - cacheing
+        - session managment
+        - fast fast stuff
+        - user profiles
+        - hierarchical data
+    eg:
+        - Redis
+        - AWS DynamoDB, 
+        - Riak KV, 
+        - Memcached
+        
+
+AWS FSx
+    - a file systems in the cloud
+    - Same apps, tools, ect can continue to access it
+        - file server on your premise might fill up, or hit end of life
+        
+
+AWS Backup 
+    - automate the backup of data across various AWS services
+    - Backs up the entire instance/database/tables ect. It does the WHOLE thing essentially.  You dont point to files        
+    
+    
+    
+AWS Storage Gateway 
+    - hybrid cloud storage 
+    - on-premises applications can use AWS cloud storage
+    - allows you to store files as objects in S3 
+    - low-latency 
+    3 Options:
+        - File Gateway
+        - Volume Gateway
+        - Tape Gateway
+    Tape Gateway
+        - tape infrastructure 
+    File Gateway
+        - Supports NFS and SMB protocols
+        - usecase: Content Management, data analytics, backup solutions
+    Volume Gateway:     
+        - Block Storage
+        - provides snapshots for backup and disaster recovery
+            - Two Configurations: 
+                - cache data (storing in AWS with local caching) 
+                - stored volumes (keeping primary data on-premises with asynchronous backups to AWS).
+        - use case: Database Backups, disaster recovery
+            
+File System Storage
+    -Scalble
+    - muliplte instance can connect
+    
+        
+Block Storage
+    - raw
+    - you have to run some command to mount/partition it
+    
+
+EC2 Spot Instances,
+    - flexible about availability and interruption 
+EC2 Reserved Instanced 
+    - committing to a yearly contracts 
+EC2 Savings Plan
+    - committing to a yearly contracts 
+    
+EC2 Autoscaling Groups (ASGs)
+    - Automatically adds/remove EC2 servers to meet the current demand 
+AWS Batch 
+    - executes your batch computations, can utilize Spot Instance to save money.
+AWS Compute Optimizer 
+    - suggests how to reduce costs using machine learning via your previous usage
+    
+Lambda > Lambda@Edge > CloudFront Functions
+
+
+AWS ParallelCluster
+    - large-scale computational tasks (100,000 servers!)
+    
+
+The Nitro System - Sorta the hypervisor of EC2 instances.                  
+Bare Metal Instance -  EC2s with no hypervisor (to be fast)
+Bottlerocket - OS by AWS for running containers. (optimized)
+
+AWS LightSail:
+    - simplified VPS's. 
+    - easy DNS
+    - easy load balancing
+    - Blueprints like WordPress, LAMP stack, Node.js, and more.
+    
+    
+
+VMs: Full control, high scalability, complete isolation, used for complex applications.
+VPS: Cost-effective, partially isolated, managed by providers, ideal for web hosting and smaller applications.
+    
+Access Keys: 
+    - for programmatic access 
+    
+AWS Cloud Development Kit (CDK)
+    Imperative laC tool (Python, Ruby, JavaScript)
+    
+AWS CloudFormation (CFN)
+    Declarative laC tool
+    
+    
+    
+Business Continuity Plan (BCP): 
+    - unplanned disruptions, how to continue operating during 
+Recovery Point Objective (RPO): 
+    - max acceptable data that can be lost (express as time)
+    - data loss for entire interruptions
+Recovery Time Objective (RTO):
+    - (time) the max acceptable amount of time that a system can be down 
+    - data loss before interruptions
+    
+Disaster Recovery Options
+    Backup & Restore 
+        - RPO/RTO = hours
+        - you back up your data and restore it to new infrastructure
+    Pilot Light
+        -  RPO/RTO = 10 minutes
+        - Data is replicated to another region with the minimal services running
+    Warm Standby
+        - RPO/RTO = minutes
+        - scaled down copy of your infrastructure running ready to scale up
+    Multi-site Active/active
+        - RPO/RTO = real time
+        - scaled UP copy of your infrastructure in another region
+        
+
+Data Residency
+    - The physical or geographic location of where a server reside.
+    - 
+Compliance Boundaries
+    -  regulatory compliance by gov/orgs for where servers can reside    
+    
+Data Sovereignty 
+    - the laws the act on where data is is collected or processed.
+    - data must comply with the regulations
+    
+Public Sector:
+    military
+    law enforcement
+    infrastructure
+    public transit
+    public education
+    health care
+    the government itself
+
+AWS Ground Station: for satellite communications. Interfaces with a literal dish.
+AWS GovCloud: special regions for US regulations
+AWS Outpost
+    - a pyshical rack of servers in a data center you specify. ( 3 forms (42U, 1U, 2U)
+    
+AWS Wavelength Zones: place AWS services in a 5g network **5G ZONE**
+AWS Local Zones: edge datacenters located in urban zones **URBAN ZONES**
+
+
+
+Amazon Connect: customer service. provides voice and chat for your customers.
+
+
+AWS VPN:
+    - AWS Site-to-Site VPN: Secure connection between on-premise and AWS
+    - AWS Client VPN: Secure connection between remote locations (employees) and AWS or on-premises networks
+
+AWS DirectConnect: gagabit connection from on-premise to data-center
+AWS PrivateLinks:  Keeps traffic within the AWS network, avoiding exposure to the public internet. 
+    - All private
+    - easy to use
+    
+AWS Secrets Manager manages sensitive information
+
+
+Points of Presence (PoP) 
+    - an intermediate location between AWS Region and the end user
+        - could be a datacenter or collection of hardware.
+    -  related for content delivery or expediated upload.
+    
+Edge Locations 
+    - datacenters that hold cached (copy) on the most popular files
+    
+    
+fault domain: section of network vulnerable to damage (a rack, room, ect)
+fault level: a collection of fault domains.
+
+
+CC SS GRE
+SEVEN BENEFITS OF AWS 
+1 Cost-effective
+    On-demand pricing or Pay-as-you-go (PAYG) 
+    thousands of customers sharing the cost of the resources
+2 Global
+    Launch anywhere in the world
+3 Secure
+    And you have the ability to configure access down to a granular level
+4 Reliable
+    Data backup, disaster recovery, data replication, and fault tolerance
+5 Scalable
+    Increase or decrease resources and services based on demand
+6 Elastic
+    Automate scaling during spikes and drop in demand
+7 Current
+    The underlying hardware and software is patched without interruption to you.
