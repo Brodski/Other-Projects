@@ -126,7 +126,7 @@ AWS Config continuously monitors and records changes to your AWS resources
 AWS CloudWatch is a monitoring service that collects and tracks metrics for AWS resources.
 AWS CloudTrail logs API calls, changes to your AWS account.
 
-AWS Inspector is a security assessment service, checks vulnerabilities or deviations from best practices. 
+AWS Inspector is a security assessment service, checks vulnerabilities or deviations from best practices. ** EC2 ** only
 AWS Macie dicovers/protects sensitive data stored in Amazon S3 buckets.
 AWS GuardDuty detects threats across your entire AWS environment; your applications, from external and internal sources.
 AWS Trusted Advisor checks security groups for rules that allow unrestricted access to a resource.
@@ -484,7 +484,7 @@ Block Storage
     Use Cases: Ideal for databases, virtual machine file systems, and high-performance applications.
 
 File System Storage
-    -Scalble
+    - Scalble
     - muliplte instance can connect
     - like content management systems or home directories.
     
@@ -656,7 +656,9 @@ AWS DynamoDB:
         - simple query operations, with limited capabilities for complex queries.
         - better for simpler, flat data structures.
 
-
+AWS DynamoDB Accelerator (DAX):
+    - makes DynamoDB fast 
+    - single digit ms --> microsecond response!
 
 AWS DocumentDB
     - document database using **MongoDB** 
@@ -697,8 +699,8 @@ AWS RDS on VMware:
     - deploy AWS RDS on your premise
     - datacenter must be using VMware
     
-AWS Redships 
-    - data warehous
+AWS Redshift
+    - data warehouse
     - petabyte-size
     - OLAP (Online Analytical Processing)
     - expensive b/c they are 'hot' - can run fast
@@ -747,6 +749,7 @@ NOTE: ledger database
 
 
 AWS Database Migration Service (DMS) 
+    - Moves DATA not the database server
     - a database migration service. 
     - migrate from:
     . on-premise to AWS
@@ -873,9 +876,9 @@ Dedciated HOSTS
     
     
 Elastic IP
-        - a static IPv4 address designed for dynamic cloud computing. 
-        - allows you to maintain a consistent IP address despite instance restarts or changes.
-        - assigned to a EC2 instance, but sometimes could be a NAT gateway, load balacner, or aws lambda via VPC
+    - a static IPv4 address designed for dynamic cloud computing. 
+    - allows you to maintain a consistent IP address despite instance restarts or changes.
+    - assigned to a EC2 instance, but sometimes could be a NAT gateway, load balacner, or aws lambda via VPC
         
         
         
@@ -1639,6 +1642,24 @@ AWS Fargate:
     - Fargate handles the provisioning, configuration, scaling, and management of the compute resources, 
     - enabling you to focus on building and deploying applications
     
+Provisioning
+    - Creating resources
+    - Many services automatically provision resources for you, the customer.
+        - Beanstalk
+        - AWS Amplify
+        - App Runner
+        - AWS CodeStar
+        - AWS QuickStarts, (prebuilt templates)
+        - AWS Marketplace
+        helps you provision shit:
+            - AWS OpsWorks (Chef/Puppet thing)
+            - AWS CloudFormation 
+            - AWS Cloud Dev Kit (CDK)
+        
+    
+PaaS
+    - develop and run apps withough building/maintaining infrastructre.
+    
 AWS App Runner
     - PaaS
     - like Elastic BeanStalk, or Heroku
@@ -1698,7 +1719,7 @@ NOTE
         efficient creation and provisioning of new accounts.
 
 AWS Guardrails: 
-    - Governance rules that enforce and monitor security, compliance, and operational policies within your AWS environment.
+    - Governance rules that enforce security and compliance within your AWS environment.
     - pre-packaged governance rules for security, operations, and compliance that customers
         can select and apply enterprise-wide or to specific groups of accounts
     - Policy enforcement and monitor policy compliance within AWS environments.
@@ -1969,6 +1990,7 @@ Bring-Your-Own-License? (BYOL)
     
     
 AWS Migration Acceleration Program (MAP):
+    - automated lift-and-shift solution.
     - help organizations accelerate their migration to AWS
     - provides consulting support, training, and assist with every phase of migration
     - aims to reduce the complexity and risk of cloud migration
@@ -2079,7 +2101,6 @@ Amazon Comprehend
     - Use Case: Businesses use it to gain actionable insights from large volumes of unstructured text.
     - Text analysis and understanding. Not exactly like ChatGPT
 
-
 Amazon Forecast 
     - is a time-series forecasting service. 
     - Forecasts product demand, resource needs or financial performance.
@@ -2119,14 +2140,12 @@ Amazon Kendra
     - a search engine service. 
     - Uses NLP to suggest answers to question instead of just simple keyword matching
     - returns DOCUMENTS that you upload, not super intelligent stuff
-    
-    
+
 Amazon Athena 
     - a serverless query service. 
     - takes many CSV or JSON files in a S3 Bucket and load them into temporary SQL tables 
     - you can run SQL queries. 
     - use case: When you want to query CSV or JSON files
-    
     
 Amazon CloudSearch: 
     - full-text search service
@@ -2143,7 +2162,7 @@ Amazon Elasticsearch Service (ES)
     - Elasticsearch is a open-source full-text search engine.
     - It is more robust than CloudSearch but requires more server and operational maintaince.
 
-
+AWS Redshift: A petabyte sized data warehouse
 
 Amazon Elastic MapReduce (EMR) 
     - for big data
@@ -2151,7 +2170,12 @@ Amazon Elastic MapReduce (EMR)
     - for data processing and analysis. 
     - can create reports like Redshift, 
     - but is more suited when you need to transform unstructured data into structured data on the fly.
-
+EMR vs Glue
+     EMR for complex large-scale data 
+     EMR custom configurations and a variety of big data frameworks.
+     EMR Requires managing clusters
+     Glue simplier, automated, serverless ETL processes, 
+     
 AWS Kinesis Data Streams 
     - a real-time streaming data service. 
     - used for capturing, processing, and storing large streams of data
@@ -2188,11 +2212,10 @@ AWS Data Pipeline
 AWS Glue
     - a ETL (Extract, Transform, Load) service 
     - It automatically discovers and catalogs metadata from various data sources, 
-        - including S3, RDS, and Redshift, using the AWS Glue Data Catalog. 
+        - can extract and send to S3, RDS, and Redshift, using the AWS Glue Data Catalog. 
     - create ETL jobs to clean, transform, and enrich data using a serverless architecture. 
 
 ETL (Extract, Transform, Load):
-    
     - data integration that collects data from various sources, 
     - transform data into a suitable format or structure, 
     - and load it into a target database/data-warehouse for analysis and reporting
@@ -2341,13 +2364,10 @@ AWS Well Archetced Framework
         - Run and monitor systems
     2 Security Pillar
         - Protect data and systems, mitigate risk
-
     3 Reliability Pillar
         - Mitigate and recover from disruptions
-
     4 Performance Efficiency Pillar 
         - Use computing resources effectively
-
     5 Cost Optimization Pillar
         - Get the lowest price
 
@@ -2478,7 +2498,7 @@ AWS Migration Evaluator
     - for planned cloud migration
 
     -  uses an Agentless Collector/agentless-discovery-tool  to collect data from your on-premise
-        - Agentless Collector = Mage, easy to install, uses protocols such as SNMP, WMI, SSH, and APIs to collect information.
+        - Agentless Collector = Magic, easy to install, uses protocols such as SNMP, WMI, SSH, and APIs to collect information.
         
         
         
@@ -2496,6 +2516,7 @@ EC2 VM Import/Export
     3 Use the AWS CLI to Import your Image. It will generate an Amazon Machine Image (AMI)
     
 AWS Database Migration Service (DMS) 
+    - Moves DATA not the database server
     - helps you migrate databases
     - more than on-premises to AWS cloud
 
@@ -2521,6 +2542,7 @@ Volume Discounts
 AWS Trusted Advisor 
     - a cloud optimization service 
     - provides real-time guidance to help you follow AWS best practices. 
+    - checks security groups for rules that allow unrestricted access to a resource
     - it inspects your AWS environment and offers recommendations across five categories: 
         cost optimization, 
         performance
@@ -2614,7 +2636,7 @@ Integrity
 Availability
     - information needs to be made be available when needed
         Mitigating DDoS, Decryption access, ect
-        
+
 Cypher - algorithm that encodes/decods
 AES - Advanced Encryption Standrad = symmetic encryptions, 1 key
 RSA - Rivest-Shamir-Adleman = asymmetic encryption, 2 keys, pub/priv
@@ -2667,6 +2689,7 @@ PenTesting
     
     
 AWS Artifact 
+    - just DOCS, NO SCAN
     - provides on-demand access to AWS compliance documentation and agreements. 
     - to help customers meet regulatory requirements and prepare for audits.
     - offers downloadable compliance reports, 
@@ -2682,6 +2705,7 @@ AWS Inspector
     - helps with hardening
     - runs security benchmarks against specific EC2 instances.
     - Can perform both Network and Host Assessments
+    - ** EC2 **
     How to:
     . Install the AWS agent on your EC2 instances.
     . Run an assessments
@@ -2787,7 +2811,7 @@ AWS Key Management Service (KMS)
         - key 1 encrypts data, key-master encrypts key 1
 
 
-AWS CloudHSM (Managed Hardware Security)
+AWS CloudHSM (Hardware Security Module)
     - allows you to generate and use your own encryption keys on AWS. 
     - It provides dedicated, single-tenant HSM instances in the AWS Cloud, 
         ensuring high security for key management. 
@@ -2815,6 +2839,67 @@ AWS Elastic Transcoder
     - deprecated (sorta)
     
 
+AWS Cloud Map: creates and maintains a map of backend services
+    - a resource discovery service
+    -  constantly checks the health of registered resources and allows your app to discover changing resources
+
+AWS Organizations: manage mutliple accounts
+    - Consolidated billing
+    
+AWS Global Accelerator: a networking service that improves the network traffic by up to 60%. 
+    - uses the AWS global network infrastructure
+    - routes incoming traffic to the optimal AWS endpoints using 2 static IPs they give to you
+    - Example. Youre app is in us-west-1:
+        1. User in Europe
+        2. The request is directed to the nearest AWS edge location.
+        3. traffic is routed through AWS’s high-speed global network to your endpoint in us-west-1.
+        4. response is sent back via the same optimized path.
+        
+global file system:
+    - a unified file storage service accessible from multiple geographical locations
+    - Optimized for global access 
+        - with caching and replication.
+    - Multi-region
+    AWS sorta has one, but not exactly:
+        AWS FSx for Lustre with S3 Integration
+        Amazon EFS (Elastic File System):
+        AWS Storage Gateway (File Gateway):
+        
+AWS Cloud Adoption Framework    
+    The Operations Perspective:
+        - metrics, ops health, efficent usage
+        - principles for operating in the cloud by using agile best practices.
+    The Business Perspective:
+        - agile, disater recovery, costs
+        - moves a business from a model that separates business and IT strategies 
+            into a business model that integrates IT strategy.
+    The People Perspective:
+        - team's tech skills, developing
+        - helps HR employees prepare their teams for cloud adoption by updating 
+            organizational processes and staff skills to include cloud-based competencies.
+    The Governance Perspective:
+        - enforcing policies, risks, regulations/compliance, decision making, accountability
+        provides the capability to update the staff skills and organizational 
+            processes that are necessary to ensure business governance in the cloud.
 
 
-
+Repurchasing 
+    - replacing an existing application with a cloud-based version, 
+        such as software found in AWS Marketplace.
+Rehosting
+    - moving an application to the cloud with little to no modifications 
+        to the application itself. It is also known as 
+    - "lift and shift."
+Replatforming
+    - selectively optimizing aspects of an application to achieve benefits 
+        in the cloud without changing the core architecture of the application. 
+    - "lift, tinker, and shift."
+Refactoring
+    - changing how an application is architected and developed, 
+        typically by using cloud-native features
+Retire
+    - Get rid of.
+Retain
+    - Usually this means “revisit” or do nothing (for now).
+    
+    
