@@ -6,35 +6,61 @@ but does openAI have something for text analysis?
 
 
 Amazon Cognito: identity (accounts) for web and mobile
-AWS KMS (Key Management Service):
+AWS KMS (Key Management Service): genrate keys in aws
 
-AWS CloudTrail: record of API calls made on an AWS account.
-AWS GuardDuty: Threat detection from internal malicious aws account activity. **INTERNAL**
-AWS Trusted Advisor: Optimizes AWS usage. **BROAD**
-AWS Artifact: Provides AWS compliance documents.
+AWS CloudTrail: 
+    record of API calls made on an AWS account.
+AWS GuardDuty: 
+    Threat detection from external/internal malicious activity. 
+    **ALL THREATS**
+AWS Trusted Advisor: 
+    Optimizes AWS usage. Costs, security, performance.... 
+    **BROAD SCAN, OPTIMIZE ALL**
+AWS Artifact: 
+    Provides AWS compliance documents. 
+    ** DOCS, NO SCAN **
+AWS Guardrails:
+    Compliance as C. Enforces best practices across AWS accounts using pre-configured rules. 
+    ** CONTROL TOW util, COMPLIANCE **
+AWS Inspector: 
+    Automated security assessment, continously. 
+    **SINGLE RESOURCE, SECURITY**
+AWS Config: 
+    Compliance as C. Gives pass/fail report on compliance. Continuously scan compliance. 
+    **BROAD SCAN, COMPLIANCE **
+AWS Security Hub: 
+    Centralized security and compliance management 
+    **SCANS ALL, AGGREGATE**
+AWS Control Tower: 
+    for managing multi-account AWS environments
+AWS Account Factory: 
+    a feature within Control Tower, for creating new accounts, automate.
+AWS Shield: 
+    DDoS protection. Free and premium verson.
+AWS Macie:
+    dicovers/protects sensitive data stored in Amazon S3 buckets.
+ 
+AWS App Config:  
+    helps app's configuration variable changes
+    ! AWS AppConfig != AWS Config
 
-AWS Guardrails: Compliance: Enforces best practices across AWS accounts using pre-configured rules.
-AWS Inspector: Automated security assessment.
-    Inspector vs Guardrails 
-        Gaurdrails part of Control Tower for policy enforcement
-        Inspector a standalone service for vulnerability scanning and assessment.
+Inspector vs Guardrails 
+    Gaurdrails part of Control Tower for policy enforcement
+    Inspector  vulnerability scanning and assessment. points to resource
 
-AWS Config: Gives pass/fail report on compliance. Monitors resources for compliance.
-AWS Security Hub: Centralized security and compliance management
-    Config vs Security Hub
-        Config: Continuously monitors. Specifically compliance+
-        Security Hub: Aggregates security findings. Specifically all security
-        Inspector: Automated security assements.
-
-AWS Control Tower: for managing multi-account AWS environments
-AWS Account Factory: a feature within Control Tower, for creating new accounts.
-
-AWS Shield : DDoS protection. Free and premium verson.
-
-AWS Macie dicovers/protects sensitive data stored in Amazon S3 buckets.
-      
-Amazon Monitron 
-    - uses ML to detect abnormal behavior in industrial machinery. Device provided by aws
+Config vs Security Hub
+    Config: Continuously monitors resourcses. Specifically compliance+
+    Security Hub: Aggregates security findings. Specifically all security
+    Inspector: Automated security assements.
+    
+ControlTower Vs GaurdRails:
+    CT simplifies setup
+    GR Enfournces, continously
+    GR is a util in ControlTower
+    
+-- ML STUFF --
+     
+Amazon Monitron: uses ML to detect abnormal behavior in industrial machinery. Device provided by aws
 
 Amazon Lookout
     - Amazon Lookout for Equipment (machine)
@@ -42,42 +68,48 @@ Amazon Lookout
     - Amazon Lookout for Metrics (software data)
     - a suite of ML services to help businesses detect anomalies 
 
-Amazon DevOps Guru: monitors your cloud for improvments
+AWS Neuron: a SDK to run ML models on AWS Inferentia and Trainium chips
 
+AWS DevOps Guru: monitors your cloud for improvments
 AWS Bedrock: Generative AI
-
 AWS CodeWhisperer: Co-Pilot coder
 AWS CodeGuru: a code analysis service.
-AWS Copilot: build containers for AWS apps easily. mostly cli. `$ copilot init`
-AWS Amplify: tools for building web/mobile apps. also mostly CLI Tool but also web UI. (don't really learn about AWS services)
+~ AWS Copilot: build containers for AWS apps easily. mostly cli. `$ copilot init` (NOT ML)
 
-AWS Data Exchange: catalogue of third-party datasets
-AWS Lake Formation: building and managing data lakes.
-
-
-AWS Glue: a ETL (Extract, Transform, Load) service 
-
-Amazon Elastic MapReduce (EMR): for big data. Commonly used for data mining, log analysis, ML, and data warehousing.
-
-
-Amazon CloudSearch: A general-purpose search. you upload data.
-Amazon Kendra: uses natural language processing (NLP). Integrates with s3, databases, aws ect
-Amazon Athena: sql like query service on CSV/JSON. 
-
+Amazon Kendra: natural language search
 Amazon Elastic Inference: attach/detach GPU to EC2 instances 
-
 Amazon Textract and OCR: extract text from scanned documents
 Amazon Lex: build voice and text chatbots
+
+  -- DATA --
+AWS Data Exchange: catalogue of third-party datasets
+AWS Lake Formation: building and managing data lakes.
+AWS Redshift: A petabyte sized data warehouse. for "hot" data (fast analytics)
+Amazon Elastic MapReduce (EMR): for big data. Commonly used for data mining, log analysis, ML, and data warehousing.
+AWS Glue: a ETL (Extract, Transform, Load) service 
+AWS Kinesis Firehose: with min setup, load streaming data into AWS storage and analytics services
+AWS Kinesis DataStreams: for custom real-time analytics, event processing, applications that interact with streams.
+AWS Kinesis Video Streams: analyze or process video streams
+Amazon Kendra: uses natural language processing (NLP) as a search engine. Integrates with s3, databases, aws ect
+Amazon Athena: sql like query service on CSV/JSON. 
+Amazon CloudSearch: A general-purpose search. you upload data.
+
 
 CloudWatch Dashboard: custom dashboard based on metrics
 CloudWatch Metrics: A default dashboard
 
+AWS Migration Evaluator:
+    - an cost estimate tool to calc on-premise cost so it can compare it against AWS Costs 
+    - uses an Agentless Collector/agentless-discovery-tool to collect data from your on-premise
 
 AWS Migration Acceleration Program (MAP):
+    - automated lift-and-shift solution.
     - help organizations accelerate their migration to AWS
     - provides consulting support, training, and assist with every phase of migration
     - aims to reduce the complexity and risk of cloud migration
-AWS Database Migration Service (DMS): helps you migrate databases
+AWS Database Migration Service (DMS): 
+    - helps you migrate databases
+    - Moves DATA not the database server
     - On-Premises to AWS
     - AWS to AWS
     - Cloud to AWS
@@ -86,9 +118,11 @@ AWS Database Migration Service (DMS): helps you migrate databases
 AWS DynamoDB - is a serverless NoSQL key/value and document database. 
 AWS DocumentDB - the MongoDB database in aws
 
+
 AWS Data Pipeline
     - helps you automate the movement of data between different AWS services and on-premises data sources
     - integrates with S3, RDS, DynamoDB, and Redshift
+
 
 AWS CodeStar
     - a nice package of 
@@ -100,18 +134,12 @@ AWS CodeStar
         - Cloud9
         provides a unified user interface
 
-
+AWS Quick Start: are prebuilt templates by AWS (UI thing)
 AWS Marketplace: catalog of software, data, and services from third-party vendors
 AWS Data Exchange:  catalogue of third-party datasets (better at data)
 
-
-AWS Quick Starts:
-    - catalog of AWS CloudFormation templates. Developed by AWS architects
-    - you might have a form to fill out in the UI
-
 AWS QuickSight:
     is a Business Intelligence (BI) service.
-
 AWS OpsWorks
     - AWS OpsWorks = Chef & Puppet
 AWS Pinpoint:
@@ -123,11 +151,22 @@ AWS WorkSpaces:
 AWS WorkDocs:
     Document storage, sharing, and collaboration.
 
+AWS Keyspaces:
+    - nosql database
+    - CASANDRA
 
 AWS Systems Manager
     - a interface for managing AWS resources and on-premises servers.
-
-
+    - a bunch of useful tools you can click on
+    - eg:
+        OpsCenter
+        Run Command
+        Inventory
+        Patch Manager
+        State Manager
+        Automation
+        Session Manager
+        
 AWS RDS on VMware:
     - deploy AWS RDS on your premise
     - (Relational Databases Service)
@@ -138,6 +177,8 @@ AWS VMWare Cloud on AWS
 AWS App Runner
     - like Elastic BeanStalk, or Heroku
     - for containerized web applications and APIs. No infrastructure configs
+
+AWS Amplify: tools for building web/mobile apps. also mostly CLI Tool but also web UI. (don't really learn about AWS services)
 
 
 
@@ -253,20 +294,15 @@ Cloud-Native Networking Services
 
 
 
-Amazon Timestreams:
-    - time series database. for IoT
+AWS Timestreams: time series database. for IoT
     
-AWS Neptune
-    - graph database
+AWS Neptune: graph database
     
-
-AWS ElastiCache:
-    - in memory and caching database
+AWS ElastiCache: in memory and caching database
         - Redis
         - Memcached
         
-AWS Redships 
-    - data warehous
+AWS Redshift: data warehouse
     - use case: quickly generate analytics from HUGE data
     
     
@@ -367,14 +403,11 @@ AWS LightSail:
 VMs: Full control, high scalability, complete isolation, used for complex applications.
 VPS: Cost-effective, partially isolated, managed by providers, ideal for web hosting and smaller applications.
     
-Access Keys: 
-    - for programmatic access 
+Access Keys: for programmatic access 
     
-AWS Cloud Development Kit (CDK)
-    Imperative laC tool (Python, Ruby, JavaScript)
+AWS Cloud Development Kit (CDK): Imperative laC tool (Python, Ruby, JavaScript)
     
-AWS CloudFormation (CFN)
-    Declarative laC tool
+AWS CloudFormation (CFN): Declarative laC tool
     
     
     
@@ -400,7 +433,9 @@ Disaster Recovery Options
     Multi-site Active/active
         - RPO/RTO = real time
         - scaled UP copy of your infrastructure in another region
-        
+
+AWS Media Connect: Real-time transport of live video streams.
+AWS Media Convert: File-based transcoding of pre-recorded media. (overlay images, insert clips, ect)
 
 Data Residency
     - The physical or geographic location of where a server reside.
@@ -445,6 +480,11 @@ AWS PrivateLinks:  Keeps traffic within the AWS network, avoiding exposure to th
     
 AWS Secrets Manager manages sensitive information
 
+AWS Cloud Map: creates and maintains a map of backend services
+    - a resource discovery service
+    -  constantly checks the health of registered resources and allows your app to discover changing resources
+
+
 
 Points of Presence (PoP) 
     - an intermediate location between AWS Region and the end user
@@ -476,3 +516,5 @@ SEVEN BENEFITS OF AWS
     Automate scaling during spikes and drop in demand
 7 Current
     The underlying hardware and software is patched without interruption to you.
+
+
