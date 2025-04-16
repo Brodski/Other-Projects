@@ -146,6 +146,7 @@ AWS CodeBuild: service for compiling code, running tests, and creating packages.
     - eg) JAR files, WAR files, Docker images, or binary executables.
 AWS CodePipeline: builds, tests, and deploys. For automating software release workflows.
     - Orchestration of the Entire CI/CD Process
+    - ✅ CodePipeline is basically a wrapper/orchestrator
 AWS CodeCommit: source control service for Git repositories.
 AWS CodeDeploy deployment service that automates the process of deploying applications to a variety of compute services such as Amazon EC2, AWS Lambda, and on-premises servers. 
     - Specifically automating the deployment of applications
@@ -169,7 +170,7 @@ AWS Local Zones: deploys servers in large population centers.
 AWS Wavelength Zones: place AWS services in a 5g network (you select where, limited choices)
     - AWS partnered with some Telecom companies to utilze their 5g (urban areas)
     - low latency for 5g mobile/IoT
-        - Gaming, Autonomous cars, traffic cameras, (?)telemedicine
+        - Autonomous cars, traffic cameras, (?)telemedicine
         
 Data Residency
     - The physical or geographic location of where a server reside.
@@ -571,7 +572,8 @@ AWS FSx
 
 AWS Backup 
     - automate the backup of data across various AWS services
-    - Backs up the entire instance/database/tables ect. It does the WHOLE thing essentially.  You dont point to files
+    - Backs up the entire instance/database/tables ect. It does the WHOLE thing essentially.  
+        You dont point to files
     - simple: a single console to manage backups for various AWS services
         Amazon EC2 (Elastic Compute Cloud)
         Amazon EBS (Elastic Block Store)
@@ -880,53 +882,81 @@ Elastic IP
     - allows you to maintain a consistent IP address despite instance restarts or changes.
     - assigned to a EC2 instance, but sometimes could be a NAT gateway, load balacner, or aws lambda via VPC
         
+     
+
+
         
-        
-EC2 Pricing
+EC2 PRICING:
+    ==================
     On Demand
         - default
         - pay per seconds
         - good for short term, spikey, development, or unpredciatable workloads
+            -> you can start and stop whenever
+               no long-term commitment
         
-Reserved Instances
-    - Commit to 1 or 3 years
-    - measured based on a specific instance configuration
-    - 2 plans:
-        - Standard:
-            - cannot modify instances once purchased. 
-                - for predictable, steady-state workloads.
-                - best discount
-        - Convertible
-            - flexible
-            - allows you to change the instance type, operating system, and tenancy
-            - can change AZ too
-        - Payment options:
-            All Upfront
+    ==================
+    Spot Instances 
+        - reduced price EC2s
+        - for applications that can handle interruptions,
+        - two-minute notice, AWS will take over then
+        - up to 90% discount
+
+    ==================
+    AWS Savings Plans (EC2)
+        - a simplied purchasing process compared to Reserved Instances.
+            - specific, based on service types (ec2, fargate/lambda/ec2, or sagemaker)
+            - 2 options for duration (1,3 years)
+            - 3 payment options
+        Note: RIs and Saving Plans
+            - they don’t stack
+            - the two cannot be combined or overlap for the same usage — only one discount applies per usage-hour.
+            - Savings Plans are newer and more flexible than RIs.
+        Duration:
+            - ‌commit to 1 or 3 years
+            
+        Saving plans
+            1 Compute Savings Plans:
+                - you’re committing $$$ vefore
+                - any thing/where
+                    - Apply to any EC2 instance regardless of region, instance family, OS, or tenancy.
+                    - you do not lock in a specific EC2 instance, Lambda function, or Fargate servic
+                    - regardless of:
+                        Service: EC2, Lambda, or Fargate
+                        Region
+                        Instance family (e.g., c6g, m5, t3)
+                        OS
+                        Tenancy (dedicated or not)
+                        -> your locking money, term (1,3 year), payment (all, partial, no upfront)
+                - support AWS Lambda and AWS Fargate.
+                - 66% up to
+                Example: 
+                You commit to $100/hour. Any usage (EC2, Lambda, Fargate) up to that amount is charged at a discounted rate.
+
+
+            2 EC2 Instance Savings Plans:
+                - specific region
+                - specific EC2 family
+                - 72% up to
+            3 SageMaker Savings Plans:
+                - sagemaker
+                - 64% up to
+                
+        Payment options:
+            1 All Upfront
                 Full payment is made at the start
 
-            Partial Upfront
+            2 Partial Upfront
                 - portion of the cost paid upfront
                 - and the remaining hours are discount hourly rate
 
-            No Upfront
+            3 No Upfront
                 - billed a discounted hourly rate for every hour
+                - you're committing to always spend a specific amount per hour (eg, $20/hr), 
+                    regardless of whether you actually use that much. 
+                    In exchange, any usage that matches your plan gets charged at discounted rates.
+                - still better than On-Demand
                 - regardless of whether the Reserved Instance is being used
-
-    AWS Savings Plans
-        - applicable to EC2 and Fargate instances, and Lambda
-
-        - measured in $/hour, that is how you can change
-        ! EC2, Fargate instances, and Lambda
-        - ‌commit to 1 or 3 years
-        - 3 saving plans:
-            Compute Savings Plans:
-                - any thing/where
-                - support AWS Lambda and AWS Fargate.
-            EC2 Instance Savings Plans:
-                - specific region
-                - specific EC2 family
-            SageMaker Savings Plans:
-                - sagemaker
                 
         Both SP and RI:
             - Save up to 72% on Amazon EC2 usage by committing for 1 or 3 years, $/hour
@@ -934,52 +964,117 @@ Reserved Instances
             - SP: EC2 Farage and Lambda
             - SP: in a specific AWS Region and instance family.
             - money
+    ==================
+    Reserved Instances
+        - Commit to 1 or 3 years (Like Saving Plan)
+        - measured based on a specific instance configuration
+        - No Upfront / Partial / All Upfront, not an option
+        -> AWS recommends Saving Plans over RI, b/c same price and easier
+        - 2 plans:
+            - Standard:
+                - 75% reduced pricing
+                - cannot modify instances once purchased. 
+                    - for predictable, steady-state workloads.
+                    - best discount
+                    - Lock in:
+                        Instance type (e.g., m5.large)
+                        Region
+                        OS
+                        - Scope
+                - can be bought or sold on marketplace
+                    
+            - Convertible
+                - flexible
+                - 54% reduced pricing
+                - allows you to change the instance type, operating system, and tenancy
+                - can change AZ too
+                - dont choose a "Scope"
+                - can NOT be bought or sold on marketplace
+                    - b/c they are too flexible
+
+
+        - Options - "Scope":
+            - Standard, not COnvertible
+            -> DOES NOT EFFECT PRICE $$$
+            Regional instances
+                - Purchase for a region (us-east-1)
+                    Pros:
+                        - any AZ in region, flexible
+                        - change between size & family, flexible x2
+                    Cons:
+                        - does not reserve capcity (in case the AZ you want is full)
+                    
+            Zonal instances
+                - Purchase for an AZ
+                    Pros:
+                        - locks in your AZ choice
+                        - does reserver capacity in the AZ
+                    Cons:
+                        - no AZ flexibilty
+                        - no size & family flexibilty
+           
+        Zonal Reserved Instances (RIs):
+            - to a specific Availability Zone.
+            Capacity Reservation: Provide a capacity reservation within the specified AZ, ensuring instance availability.
+            Use Case: Suitable for applications that require dedicated capacity in a particular AZ.
             
-Zonal Reserved Instances (RIs):
-    - to a specific Availability Zone.
-    Capacity Reservation: Provide a capacity reservation within the specified AZ, ensuring instance availability.
-    Use Case: Suitable for applications that require dedicated capacity in a particular AZ.
-    
-Region Reserved Instances (RIs):
-    - to a specified AWS region.
-    - Automatically apply to matching instances in any AZ within the region, providing greater flexibility.
-    Use Case: Ideal for workloads that can run in multiple AZs or when you require flexibility across the region.
-    Benefit: Increases availability and fault tolerance by allowing instances to be spread across multiple AZs.
+        Region Reserved Instances (RIs):
+            - to a specified AWS region.
+            - Automatically apply to matching instances in any AZ within the region, providing greater flexibility.
+            Use Case: Ideal for workloads that can run in multiple AZs or when you require flexibility across the region.
+            Benefit: Increases availability and fault tolerance by allowing instances to be spread across multiple AZs.
 
-- can purachse 20 Region Reserved Instances per Region
-- can purcahse 20 Zonal Reserved instances per Availibty Zone
-- cannot exced your running on-demand instance limit
-- you can exceed your running on-demand instances by purchasing reserved isntances
+        RI Limits
+            per month:
+            - can purachse 20 Region Reserved Instances per Region
+            - can purcahse 20 Zonal Reserved instances per Availibty Zone
+            Regional:
+                - note, your RI counts towards your On-demand limit.
+                    -> 20 is on-demand default limit per AZ
+            Zonal
+                - apparently, you can exceed your on-demand limit by purchasing zonal RIs
+                    -> 40 of the same EC2 in on AZ :O
 
 
-Capcity Reservations
-    - it is possible AWS runs out of servers :O
-    - you can reserve EC2 instaces for a specific Region and AZ
-    - you will be charged during the reservation whether instacnes are running or not
-    - can used your regional resrve instances with capcity reservations to benfit from biling discount
-    
-    
-RI Marketplace
+    Capcity Reservations
+        - a feature that allows you to reserve compute in a AZ for any duration.
+            - b/c it is possible AWS runs out of servers :O
+            - so you can reserve EC2 instaces for a specific Region and AZ
+        - you will be charged during the reservation whether instacnes are running or not
+        - can used your regional resrve instances with capcity reservations to benfit from biling discount
+        - you reqeust to resereve EC2s of  your instance type for a specific Region & AZ
+        -> This is not a saving plan, its a feature that can be used with either
+            Convertible, Standard, or On-demand
+        
+        
+    RI Marketplace
 
-    EC2 Reserved Instance Marketplace:
-        - allows you to sell your unused Standard RI
+        EC2 Reserved Instance Marketplace:
+            - allows you to sell your unused Standard RI
 
-    . RIs can be sold after least 30 days and once AWS has received the upfront payment (if applicable).
-    . must have a US bank account
-    . must be at least one month remaining in the term
-    . You will retain the pricing and capacity benefit of your reservation until sold.
-    . Your company name (and address upon request) will be shared with the buyer for tax purposes.
-    . A seller can set only the upfront price for a RI. 
-        - usage price and configuration (eg, instance type, AZ, platform) will remain the same
-    . You can sell up to $20,000 in RI per year.
-    . RIs in GovCloud cannot be sold
-    
-Spot Instances 
-    - reduced price EC2s
-    - for applications that can handle interruptions,
-    - two-minute notice, AWS will take 
-    
-    
+        . RIs can be sold after least 30 days and once AWS has received the upfront payment (if applicable).
+        . must have a US bank account
+        . must be at least one month remaining in the term
+        . You will retain the pricing and capacity benefit of your reservation until sold.
+        . Your company name (and address upon request) will be shared with the buyer for tax purposes.
+        . A seller can set only the upfront price for a RI. 
+            - usage price and configuration (eg, instance type, AZ, platform) will remain the same
+        . You can sell up to $20,000 in RI per year.
+        . RIs in GovCloud cannot be sold
+        
+RI vs Saving Plans
+    Types:
+        Savings Plans - Compute, EC2 Instance, SageMaker
+        RIs - Standard - Convertible
+    Services Covered:
+        Savings Plans -EC2, Fargate, Lambda, and (with SageMaker SP) SageMaker
+        RIs - EC2 only
+    Flexibility:
+        Savings Plans - High (especially with Compute Savings Plans, which are instance-agnostic)
+        RIs - Low to medium, Standard RIs are rigid, Convertible RIs allow changes within some boundaries
+    Capacity Reservation:
+        Savings Plans - No (unless used with specific configurations like EC2 SP + Zonal placement)
+        RIs - Yes, but only with Zonal Reserved Instances — not with Regional RIs
     
 Zero Trust model:
     - "trust no one, verify everything."
@@ -1219,11 +1314,14 @@ Note:
         # resource-based
           "Principal": {
             "AWS": "arn:aws:iam::123456789012:user/Alice"
-          },
+          },    
+           "Action": "s3:*"
+            "Resource": "arn:aws:s3:::my-bucket/*"
         # Trust
         "Principal": {
             "Service": "ec2.amazonaws.com"
         },
+        "Action": "sts:AssumeRole"
   
   
     Principal is Not used for IAM Policies attached to IAM users, groups, or roles.
@@ -1468,7 +1566,7 @@ Scaling/Concurrency Controls:
         
 Conditional Message Processing:
 SNS:
-    - can use SNS message filtering
+    - 
         - invoke different subscriber based on values on message metadata and message content
 
 SQS: 
@@ -1689,7 +1787,7 @@ AWS X-Ray
     - a service that helps developers analyze and debug distributed applications, 
         - such as microservices and serverless architectures. 
     - It provides insights into how requests travel through an application, identifying performance bottlenecks and errors. X
-    
+
 AWS Step Functions is a fully managed service for orchestrating workflows using visual diagrams
 
 
@@ -2135,7 +2233,7 @@ Amazon Fraud Detector
     - identify potentially fraudulent activities
         - payment fraud 
         - creation of fake accounts.
-        
+
 Amazon Kendra 
     - a search engine service. 
     - Uses NLP to suggest answers to question instead of just simple keyword matching
@@ -2354,46 +2452,6 @@ cuDNN (CUDA Deep Neural Network library)
         NCCL 
         TensorRT
 
-
-AWS Well Archetced Framework
-    https://aws.amazon.com/architecture/well-architected
-    
-    - a set of best practices 
-    OSR PeC
-    1 Operational Excellent Pillar 
-        - Run and monitor systems
-    2 Security Pillar
-        - Protect data and systems, mitigate risk
-    3 Reliability Pillar
-        - Mitigate and recover from disruptions
-    4 Performance Efficiency Pillar 
-        - Use computing resources effectively
-    5 Cost Optimization Pillar
-        - Get the lowest price
-
-----------------
-
-AWS Well Archetced Framework
-    1 Operational Excellence: Focuses on running and monitoring systems to deliver business value and
-    continuously improve processes and procedures.
-         Best Practices: Automate changes, respond to events, define standards to manage daily operations.
-         
-    2 Security: Emphasizes protecting information, systems, and assets while delivering business value through
-    risk assessments and mitigation strategies.
-         Best Practices: Implement strong identity and access management, enable traceability, apply security at
-    all layers, automate security best practices.
-    
-    3 Reliability: Ensures a workload performs its intended function correctly and consistently when expected.
-        Best Practices: Plan for recovery from failures, test recovery procedures, automatically recover from
-    failure, scale horizontally to increase aggregate workload availability.
-    
-    4 Performance Efficiency: Focuses on using IT and computing resources efficiently.
-        Best Practices: Democratize advanced technologies, go global in minutes, use serverless architectures,
-    experiment more often.
-    
-    5 Cost Optimization: Aims to avoid unnecessary costs.
-        Best Practices: Adopt a consumption model, measure overall efficiency, stop spending money on
-undifferentiated heavy lifting, analyze and attribute expenditure.
 
 General Definitions
     Component - Code, Configuration and AWS Resource against a requirement
@@ -2864,7 +2922,53 @@ global file system:
         AWS FSx for Lustre with S3 Integration
         Amazon EFS (Elastic File System):
         AWS Storage Gateway (File Gateway):
-        
+
+
+
+AWS Well Archetced Framework
+    https://aws.amazon.com/architecture/well-architected
+    
+    - a set of best practices 
+    OSR PeC
+    1 Operational Excellent Pillar 
+        - Run and monitor systems
+    2 Security Pillar
+        - Protect data and systems, mitigate risk
+    3 Reliability Pillar
+        - Mitigate and recover from disruptions
+    4 Performance Efficiency Pillar 
+        - Use computing resources effectively
+    5 Cost Optimization Pillar
+        - Get the lowest price
+
+----------------
+
+AWS Well Archetced Framework
+    1 Operational Excellence: Focuses on running and monitoring systems to deliver business value and
+    continuously improve processes and procedures.
+         Best Practices: Automate changes, respond to events, define standards to manage daily operations.
+         
+    2 Security: Emphasizes protecting information, systems, and assets while delivering business value through
+    risk assessments and mitigation strategies.
+         Best Practices: Implement strong identity and access management, enable traceability, apply security at
+    all layers, automate security best practices.
+    
+    3 Reliability: Ensures a workload performs its intended function correctly and consistently when expected.
+        Best Practices: Plan for recovery from failures, test recovery procedures, automatically recover from
+    failure, scale horizontally to increase aggregate workload availability.
+    
+    4 Performance Efficiency: Focuses on using IT and computing resources efficiently.
+        Best Practices: Democratize advanced technologies, go global in minutes, use serverless architectures,
+    experiment more often.
+    
+    5 Cost Optimization: Aims to avoid unnecessary costs.
+        Best Practices: Adopt a consumption model, measure overall efficiency, stop spending money on
+        undifferentiated heavy lifting, analyze and attribute expenditure.
+
+
+------
+
+
 AWS Cloud Adoption Framework    
     The Operations Perspective:
         - metrics, ops health, efficent usage
@@ -2881,11 +2985,15 @@ AWS Cloud Adoption Framework
         - enforcing policies, risks, regulations/compliance, decision making, accountability
         provides the capability to update the staff skills and organizational 
             processes that are necessary to ensure business governance in the cloud.
-
-
-Repurchasing 
-    - replacing an existing application with a cloud-based version, 
-        such as software found in AWS Marketplace.
+    The Platform Perspective:
+        - Focus: Designing, building, and managing the cloud environment.
+        - replacing an existing application with a cloud-based version, 
+            such as software found in AWS Marketplace.
+    The Security Perspective:
+        Focus: Ensuring the security and compliance of cloud environments.
+        
+        
+        
 Rehosting
     - moving an application to the cloud with little to no modifications 
         to the application itself. It is also known as 
@@ -2901,5 +3009,3 @@ Retire
     - Get rid of.
 Retain
     - Usually this means “revisit” or do nothing (for now).
-    
-    
