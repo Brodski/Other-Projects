@@ -1937,6 +1937,8 @@ AWS Elastic Container Service (ECS)
             - ASG scales instances (ec2s)
             - if ECS wants to scale, but there is no room on ec2s, tasks will be stuck in PENDING
         Capacity Providers
+            - manages the scaling of infrastructure for tasks
+            - each cluster can have 1+ capacity providers
             - solution to ECS w/ ASG
             - manages infrastructure level auto scaling for ECS
             - now ASK will ask ASG to scale in/out
@@ -5399,16 +5401,19 @@ Athena
 
 AWS Quicksight
     - dashboards and visuals
-    - a "cloud-based bus int service"  
+    - it lets you make charts and dashboards from your data
+    - a "cloud-based bus integration service"  
     - connects to; S3, Redshift, RDS, Athena, Timestream, opensearch, and third-party services like Jira, Salesforce.
         - or connect to any on-premis database (using JDBC prob relational)
         - or import data to QS, supports xml, sjon, csv, tsv, xlsx, elf, ect
     - Integrates with AWS machine learning to offer anomaly detection, forecasting, and natural language queries.
     enterprise version 
-        - lets you set yo columnb level securty
+        - lets you set you column level securty
     SPICE 
         -  Super-fast, Parallel, In-memory Calculation Engine
+        - FASTer Quicksight
         - "an in memory computation engine" 
+        -  a cache that QuickSight uses to make your dashboards load faster
         - it only works if you import data into Quicksight
         - its QuickSights tech
         - it does:
@@ -5416,7 +5421,6 @@ AWS Quicksight
             - Speed up dashboards
             - handles offline
             - Handle many users at once
-        - its magic
         - it does the querying somehow without using any syntax
 
     Dashboard & Nalysis
@@ -5865,3 +5869,2193 @@ AWS CodeDeploy
         - Traffic shift begins (Cool UI in Console, traffic @ 30%)
 
 
+AWS CloudFormation
+    DeletionPolicy 
+        - it specifies what should happen to a resource when its stack is deleted
+        - By default, deleted stack = deleted resources
+        eg)
+            DeletionPolicy=Snapshot
+
+        Delete (default):
+            - The resource is deleted when the stack is deleted.
+            - for AWS::RDS::DBCluster, the default is Snapshot
+        Retain:
+            - The resource is not deleted
+            - remains in its current state, 
+            - must be manually deleted later if desired.
+            - Useful for data
+                S3 buckets or RDS databases.
+        Snapshot:
+            - A snapshot of the resource is created before it's deleted.
+            - Only applicable to certain resource types, such as 
+                EBS Volumns, ElastiCache Cluster, ElastiCache ReplicationGroups, RDS DBInstance, RDS DBCluster, Redshift Cluster
+                AWS::RDS::DBInstance
+                AWS::Redshift::Cluster
+                AWS::ElastiCache::CacheCluster.
+
+     Custom Resources 
+        - you extend the functionality of CloudFormation
+        - run custom logic during the stack lifecycle (create, update, delete) 
+            via a Lambda or other service.
+        - if you need to do something CloudFormation doesn't natively support 
+            - like calling an API, creating a user in a 3rd-party system, ect
+            - or like You want to inject dynamic values at deploy time.
+            - or on-prem something fetch
+        - Type of Custom::Whatever.
+        - you can go craaaaazy
+
+    StackSets
+        - a feature to deploy the same CF template on multiple AWS accounts and/or region 
+        - admin account creates the StackSet
+        - ALL stacks are updatred when admin upates a stackset, every account and region
+        How it works:
+            - You create a StackSet, pointing to your template.
+            - You tell it which accounts (via account IDs or via an AWS Organization OU) and which regions to deploy to.
+            - It creates a stack in each account/region combo.
+            - If you later update the StackSet, it updates all those stacks too.
+
+        Automatic Deployment 
+            - automatically push the stack to new AWS accounts that get added to your organization.
+            - another words ...
+            - When you add a new account into an OU (Org Unit) that a StackSet is targeting, 
+                CloudFormation auto deploys the stack to that account.
+                You don’t have to manually do anything after setting it up.
+            1. Admin: "Hey, deploy this stack to all accounts in OU dev-ou"
+            2. when a new AWS account is created in `dev-ou`
+            3. he gets all those stacksets for the OU dev-ou
+        
+    Drift detection
+        - when manual changes in AWS Console
+        Drift 
+            -  when someone modifies AWS resources outside of CloudFormation 
+            - eg. through the AWS console or CLI
+        Drift Detection
+            - checking whether your stack's actual resource configs
+                differ from the CF template.
+
+        - unauthorized or unintended changes to infrastructure
+    
+     AWS Secrets Manager Integrates 
+        -  manage secrets securely in your Cloudformation Templates
+            - database credentials, API keys, etc.
+
+        eg)
+            Resources:
+                MyDatabase:
+                    Type: AWS::RDS::DBInstance
+                    Properties:
+                    MasterUsername: !Sub '{{resolve:secretsmanager:MySecret:SecretString:username}}'
+                    MasterUserPassword: !Sub '{{resolve:secretsmanager:MySecret:SecretString:password}}'
+
+        - you can also create Secrets in SecretManager w/ Cloudformation
+        - you can also be pro and have cloudformation auto generate values/secrets (eg. passwords) at deployment
+            - Instead of hardcoding, use the GenerateSecretString property:
+            - no plaintext username/passwords in Cloudformation
+
+
+    Resource Import
+        - tell CF to start managing an existing AWS resource. 
+        - you pull it into a CF stack so it can be tracked / updated / deleted as part of that stack.
+
+        Use case:
+            - You created resources manually or with Terraform or CDK.
+            - You want to migrate stuff into CloudFormation without downtime.
+            - You want infra-as-code benefits (versioning, repeatability) but already have deployed resources.
+
+        - Not all resources are supported. AWS adds support slowly.
+        - It’s not automatic. You have to do the import explicitly for each resource.
+        - can't import the same resource into multiple stacks
+
+        - "during import operation, you ned a template that describes the entire stack
+            (original stack resources & target resource to import)" 
+            - im not sure what that means exactly
+            - must need a DeletionPolicy and identifier
+
+
+AWS Service Catalog
+    - a catalog of IT services that are approved on AWS
+    - "Products" are CF templates
+    -> "CloudFormation helps ensure consistency and standardization by Admins"
+    -> "Helps with governance, compliance, and consistency"
+    - users can launch products w/o deep AWS knowledge
+    - Service Catalog integrats with "self-service portals" such as ServiceNow
+    -> SC is good at giving more control to the Admin and less to the user
+
+AWS Serverless Application Model (SAM)
+    - framework for developing and deploying serverless apps
+    - yaml
+    - can help run lambda, api gw, and dynamodb locally
+    - SAM can use CodeDeploy to deploy lambda functions (dtraffic shifting)
+
+    CICD Arch for SAM
+
+    Code Pipeline:
+        CodeCommit/Github --> CodeBuild -------------------------> Code Deploy --------> Lambda v1
+                              ↑                                         ^   +-------------> Lambda v2
+                              |                                         |      
+                            $ sam build                                 |              
+                            $ sam package                      plugs in packaged.yaml into a Cloudformation call                 
+                            - output is package.yaml
+
+
+    - CODEDEPLOY DOES THE TRAFFIC SHIFTING
+    - packaged.yaml = CloudFormation template thats 'compiled' via sam (has local paths and artifacts uploaded/references to S3)
+
+AWS CDK (Cloud Development Kit)
+    How to:
+        - you write your infrastructure as code using CDK's library of components (they're called constructs).
+        - CDK translates that code into a CloudFormation template 
+            - this step is called synthesis 
+        - deploy the template using the cdk "deploy" command
+            - internally just uses CloudFormation to create/update your resources.    
+    Options:
+        - TypeScript (first-class support)
+        - JavaScript
+        - Python
+        - Java
+        - C# (.NET)
+        - Go 
+
+    Nice b/c:
+        - Functions, classes, modules.
+        – Loops, conditionals, variables.
+
+
+
+AWS Systems Manager:
+
+    - allows you to manage your cloud and on-premises infrastructure at scale.
+    - has a unified interface 
+    - "helps you centrally view, manage, and operate nodes at scale in AWS, on-premises, and multicloud environments."
+    - node = SSM Agent installed on the machine and the agent can communicate with the Systems Manager service
+        - installed by dfault on Amazon Linux AMIs & some Ubuntu AMIs
+        - EC2 must have proper IAM rols to allow actions from System Manager 
+    - "helps you manage your ECs and on-prem at scale"
+
+    - run commands (like a script) through Systems Manager
+        - via RunCommand
+        - this is nto Session Manager
+
+    SSM Automation
+        - a feature that enables you to automate common maintenance and deployment tasks 
+        - Automation Document (Runbook): A set of predefined actions written in YAML or JSON. These are stored as SSM documents
+        - Runbook
+            - aka Automatino Document
+            - Use predefined ones like AWS-StopEC2Instance, AWS-CreateImage, etc.            
+            options:
+                `aws:runCommand`                 - Run shell commands
+                `aws:executeAwsApi`              - Call AWS APIs  (e.g., create AMI, stop RDS, stop EC2)
+                `aws:invokeLambdaFunction`       - Invoke Lambda funct
+                `aws:waitForAwsResourceProperty` - Wait for states
+                `aws:approve`                    - Add approvals
+                `aws:branch`                     - Branch logic
+                `aws:executeAutomation`          - Fan-out automations
+
+        - Trigged by:
+            - EventBridge
+            - CloudWatch Alarms
+            - Lambda funct, step function?
+        
+    OpsCenter 
+        - a ticketing system for AWS operational issues. 
+            - like Jira or ServiceNow, but for AWS
+        - you have to turn it on and configure it
+
+        OpsItem            
+            - a ticket or issue.
+            - When something goes wrong OpsCenter creates an OpsItem. 
+            - you can assign the tickets, comment, status, ect
+            - eg. a CloudWatch alarm goes off, a Lambda function fails, or a patching operation bombs out
+             includes:
+                - What broke (eg, EC2 instance ID, alarm name)
+                - When 
+                - Why
+                - Links to logs, metrics, and config history
+                - Optionally, a suggested fix using a runbook (automation document)
+
+
+
+AWS Cloud Map
+    - service discovery  
+    - you register apps then they are discoverable  their locations and metadata through API calls.
+    
+    Service discovery 
+        - its how applications auto connect to each other within a network,
+        - good for dynamic environments like microservices or containerized systems.
+        Client-side discovery:
+            - The client queries a service registry (like AWS Cloud Map) to find the target service’s location.
+        Server-side discovery:
+            A load balancer or gateway queries the service registry on behalf of the client and forwards the request.
+
+    Use Cases:
+        Microservices needing dynamic service discovery.
+        Environments where IPs change frequently 
+
+    - suppose you want frontend to point to backend code at v2 instead of v1 (b/c you pushed out new code at backend)
+    - we can use cloudmap somehow to do a Dynamic lookup to find and use v2 instead
+
+
+Qs 
+    AWS Systems Manager SSM
+        - I guess SSM is just a patching service outside of its sub things
+
+        Q: You would like to deploy updates to your Windows instances using SSM. What do you recommend doing?
+        A: "In a maintenance window, use the AWS-RunPatchBaseline command and the AWS-WindowsDefaultPatchBaseline patch baseline"
+        - SSM document = AWS-RunPatchBaseline
+        - patch baseline = AWS-WindowsDefaultPatchBaseline
+        
+        - "patch baseline" defines which patches should be approved for installation on your managed instances (like EC2)
+            includes:
+                Which patches to approve (eg, security-only, critical updates)
+                Auto-approval rules (eg, approve all security patches after 7 days)
+                ect
+
+        Common SSM Documents
+            AWS-RunPatchBaseline
+            AWS-GatherSoftwareInventory
+                Collects data about installed applications and patches.
+            AWS-ApplyPatchBaseline (rarely used directly)
+                Internal to automation workflows; used in custom patching automation.
+            AWS-InstallApplication
+                Installs applications using SSM.
+            AWS-ConfigurePackage
+                Installs/updates software using Systems Manager Distributor.
+            AWS-ResetAccess
+                Regain administrative access to instances if credentials are lost.
+            AWS-RunPowerShellScript / AWS-RunShellScript
+                Run PowerShell or shell commands on Windows or Linux respectively.
+            AWSSupport-RunEC2RescueForWindowsTool
+                Diagnose and fix common issues on Windows instances.
+            AWSSupport-TroubleshootRDP
+                Fix Remote Desktop (RDP) issues on Windows.
+
+    - CloudFormation will not delete an S3 bucket if it contains objects. Attempting to delete a stack with such a bucket will result in a "BucketNotEmpty" error, 
+        - solutions:
+            a. Empty the bucket manually before deletion
+            b. Set a DeletionPolicy of Retain
+            c. Use a custom resource or Lambda-backed custom deletion logic
+
+
+AWS Cost Allocation Tags
+    - regular key-value tags but AWS tracks money $$$ cost on them
+    - You must activate these 
+    - "help you organize and track your AWS costs"
+    - "break down your AWS usage and costs by resource, project, environment, team, or any other category"
+    - two types:
+    1. AWS-Generated Tags
+        - Automatically created by AWS.
+        - starts with `aws`
+        - Example: aws:createdBy
+    2. User-Defined Tags
+        - you create
+        - starts with `user`
+        - user:Environment=Prod, user:Team=Analytics
+
+    - You must ACTIVATE them in Bill and Cost Managment Console
+        1. Billing > Cost Allocation Tags
+        2. Activate.
+        3. appears in:
+            Billing Console <----
+            Cost Explorer
+            AWS Budgets
+            Cost and Usage Reports (CUR)
+
+
+AWS Tag Editor 
+    - manage tags across multiple AWS resources and region
+    - search for resources in multiple regions by 
+        tag keys
+        tag values
+        resource types
+        specific resource IDs.
+    - Add, modify, or delete tags
+    - Supports bulk editing
+    - search for untagged serources (all regions)
+
+
+
+
+AWS Trusted Advisor 
+    - a cloud optimization service 
+    - provides real-time guidance to help you follow AWS best practices. 
+    - checks security groups for rules that allow unrestricted access to a resource
+    - it inspects your AWS environment and offers recommendations across five categories: 
+        cost optimization, 
+        performance
+        security
+        fault tolerance
+        service limits. 
+        Operational Excellence
+    - does more stuff based on Support plans
+    - identifies underutilized resources, security vulnerabilities, and opportunities to save money.
+    - helps make your AWS infrastructure is secure, performant, and cost-efficient
+
+    - Can enable weekly email notifications from the console
+
+    Full Trusted Advisor
+        - for Business & Enterprise support plans
+        - Programmatic access via the AWS Support API
+        - can set Cloudatch alrams when reaching limits
+    
+
+    - Everyone has with Basic Support (free)
+    - TA does Core Checks
+    -  the checks available to all AWS customers, regardless of their support plan.
+        1 S3 Bucket Permissions 
+            - NOTE doesnt check if objects are public, only check if entire bucket has public setting
+        2 Security Groups
+            - Flags security groups that allow unrestricted access (0.0.0.0/0) to specific ports, such as SSH (22) or RDP (3389).
+        3 IAM Use
+        4 MFA on Root Account
+        5 EBS Public Snapshots
+            Identifies EBS snapshots that are publicly accessible.
+        6 RDS Public Snapshots
+            Identifies RDS snapshots that are publicly accessible.
+        7 Service Limits
+            - Monitors your usage against service limits for various AWS services and warns when usage approaches thresholds.
+            - if you do hit limit you gotta do:
+                - AWS Support Center, write case to 
+                - AWS Service Quotas, use that
+
+AWS Service Quotas 
+    - the maximum number of resources or operations you can use for a specific AWS service
+    - These quotas exist to protect you from unintentional resource overuse or to ensure fair usage across AWS customers (GPUs).
+    types:
+        Soft quotas (adjustable): You can request increases via the Service Quotas console or the AWS Support Center.
+        Hard quotas (non-adjustable): Fixed limits that cannot be changed.
+            - eg 100 buckets 
+            - 1 default VPC per region
+            - 10,0000 iam roles
+            - 50 MB max size lambda package
+    Alarm
+        - in the Service Quotas Console you can create an alarm
+        - you set a threshold
+        - will trigger a Clouwatch Alarm 
+        - you configure a lambda to respond to the Alarm
+        Recall CW Alarms How To
+            1. In CloudWatch → Alarms → Create Alarm
+            2. Select the "Service Quotas" metric
+            3. Set the conditions:
+                - Example: "Trigger if used vCPUs > 80 for 2 consecutive 5-minute periods"
+                - Set evaluation period and datapoints (e.g., 1 out of 1)
+            4. Configure actions:
+                Choose or create an SNS topic (for email/SMS notifications).
+            5 Name and review the alarm
+            Create
+
+
+AWS Budgets 
+    - set budget thresholds 
+    - and monitor your AWS usage and costs. 
+    - When you're approaching your budget (eg, hitting 80%, 100%, or 120%), 
+        it can send you an alert - usually by email or via SNS. 
+        - It doesn't stop anything automatically unless you configure that explicitly.
+    - you can filter by Service, Account, Tag, Purchase Option, Instance type, Region, AZ, ect
+    - up to 5 SNS notificaiotns per budget
+
+    - 2 budges free, then $0.02 / day / budget :o
+
+    Budget types:
+        Cost Budgets
+            Track your dollar spend.
+        Usage Budgets
+            Track how much of a resource you use.
+        Reservation Budgets
+            Track Reserved Instance (RI) utilization and coverage.
+        Savings Plans Budgets
+            Track Savings Plan utilization and coverage.
+
+    Budget Actions
+        - automatically take specific actions when a budget threshold is crossed
+        - Budgets Actions can directly change AWS resource permissions 
+            or configurations to help you prevent overspending
+
+        Action Types:
+            IAM Policy Attachments:
+                Attach a restrictive IAM policy to a user, group, or role.
+                eg, block access to EC2 or CloudFormation.
+            Apply SCP (Serivce Control policy to an OU
+            Stop EC2 or RDS
+                - Trigger instance stops, terminations, or other automated steps 
+
+    Centralized Budged managment
+        - The managment Account can set a Budget to a member account
+        - if the member account goes beyond the budget, a notificaiton is sent 
+            and alerts the Managment account (their SNS, which can triggle a lambada if they want)
+        - and then you can add a SCP to it that caps the member account,
+             preventing them from creating new stuff
+
+AWS Cost Explorer 
+    - part of AWS Billing and Cost Management 
+    - shows cool graphs to track your AWS costs and usage
+    - Filtering and Grouping
+    -
+    -> Forecasting up to 12 months
+    - Free to use
+
+
+
+AWS Compute Optimizer 
+    - gives recommendations to optimize the performance and cost of your AWS resources.
+    - uses ML
+    - enable CW Agents on EC2s to get more metrics
+    - and thus you could get MORE from Compute Optimizer
+    - ie, memory optimization
+
+
+Reserved Instances in an AWS Organization
+    - all accounts share the RIs and Savings Plan
+    - The payer account (Management account) of an organization can turn off
+        sharing for the organization, including the payer account :o
+
+Renewal of Reserved Instances
+    - You can queue (schedule and reserve ahead of time) your RIs
+    - To renew a RI, just queue an RI purchase whenever the previous one expires
+
+
+Could Migration Strategires: The 7Rs
+    
+    1 Retire 
+        - shutting them down. turning off app
+        - Decommission obsolete or redundant applications.
+        - Saves cost and reduces complexity.
+        - Turn off things you don't need (maybe as a result of Re-architecting)
+        - Helps with reducing the surface areas for attacks (more security)
+        - Save cost, maybe up to 10% to 20%
+        - Focus your attention on resources that must be maintained
+
+    2 Retain
+        - Do nothing for now 
+        - Keep certain workloads on-premises for now 
+            - due to latency, Security, data compliance, performance, unresolved dependencies
+        - No business value to migrate
+            - or non-x86 Unix apps
+            - or too complicated
+        
+    3 Rehost 
+        - "lift and shift"
+        - Move applications without modifying them.
+        - Fastest approach; minimal risk.
+        - Often automated using tools like AWS Application Migration Service.
+        - Could save as much as 30% on cost
+        - You migrate individual applications 
+            - Moving an app from on-prem to EC2.
+        - NO CHANGES AT ALL
+
+
+    4 Relocate
+        - Move infrastructure without changing the app or architecture.
+        - Example: transfer servers from VMware Software-defined Data Center (SSDC) to VMware Cloud on AWS
+            - moving an entire environment as-is.
+        - Bulk move: You move entire environments or infrastructure without changing applications.
+        - NO CODE CHANGES ALSO
+
+    NOTE
+        Relocate = move the platform the app runs on, as-is. bulk move MANY THINGS and NOT CHANGE CHODE
+        Rehost = move the app.  NO CHANGES AT ALL
+
+    5 Repurchase 
+        - "Drop-and-Shop"
+        - Replace the application with a new, cloud-native solution (e.g., SaaS).
+        - expensive in short term, but quick to deploy
+        - Example: Move from a self-hosted CRM to Salesforce., HR to Workday, CMS to Drupal
+
+    6 Replatform 
+        - "Lift-tinker-and-Shift" or "lift and reshape"
+        - Make some optimizations without changing core architecture. 
+        - not changing full architecture, but use some cloud optimizations
+        - save time and money by moving to a fully managed service or serverless
+
+        Example: Migrate a database to Amazon RDS instead of self-managing it on EC2.
+
+    7 Refactor / Re-architect
+        - Redesign applications for cloud-native capabilities.
+        - Suitable for apps needing scalability, agility, or modern architectures (e.g., microservices).
+        - good for adding features and improving scalability, performacne, security, ect
+        - eg, move from monolithic app to microservices
+        - High effort but also high long-term benefit.
+
+        Note 
+            Replatform = SOME CHANGES
+            Refactor = BIG CHANGES
+
+
+        Least Changes       Retire ("negative change")
+            |               Retain
+            |               Rehost
+            |               Relocate
+            V               Replatform
+        Most Changes        Refactor  .... ( NA: Repurchase
+                            
+
+AWS Storage Gateway
+    -  extend your on-prem data onto AWS
+        - s3 File gateway
+        - FSx File Gateway - deprecated
+        - Volume Gateway
+        - Tape Gateway
+
+    S3 File Gateway
+        - let your on-prem apps write in S3. 
+        - You don't need to rewrite your apps to talk to S3's API. 
+        - you mount a network file share (NFS or SMB)
+        - gateway magically takes care of turning those files into S3 objects. 
+
+        - Can automatically map directories to S3 prefixes.
+        - it does cachcing 
+            - Cache improves read latency, but doesn’t provide high IOPS.
+        - supports Storage Tiers and Lifecycle policies
+        - interates with Active Directory (AD)
+
+        - you deploy a VM with the Gateway Host, its a image of some sort
+            - and do other setup
+            - it lives on premise and forwards all files to your
+        - feels like a NFS server, but its s3 behind the scenes
+
+        Limitations:
+            S3 buckets must be in the same AWS Region as the gateway.
+            Maximum file size supported is 5 TB (in line with S3’s limit).
+            Large files take lots memory and network (b/c uploaded using multipart upload)
+            dont use it for real-time databases (slow b/c writes are acknowledged)
+                - especially dont use for HPC, numb-nuts
+            no symbolic links, hard links
+            metadata is stored in s3, as s3 metadata
+
+
+
+    Storage Gateway Hardware Appliance
+        - a physical hardware server for Storage Gateway.
+        - software preinstalled. 
+        - you buy from aws console
+        - gg'd @ May 12, 2025
+
+Snowball
+    "Amazon s3 adapter for snowball"
+        - It allows you to use existing S3-compatible tools or applications to write data
+        directly to the Snowball device without having to modify your workflows significantly.
+        - probably faster. 250 - 400 MB/s
+
+    Snowball + Database Migration Service (DMS) combo migrat
+        Recall:
+            - Snowball is fast for bulk data, but not real-time.
+            - DMS is good for continuous syncing, but slow for massive initial loads.
+
+        consider:
+            - we want to transfer LOTS of data from on prem
+            - transferring it over the internet (even with DMS) is slow
+        Solution:
+            1. load data on Snowball
+                - this will take some time
+            2. Use DMS w/ Change Data Capture (CDC)
+                -> While the Snowball transfer is happening (and until it's imported into AWS), the on-prem database continues to change.
+                - CDC will to capture changes from the source database to AWS.
+            3. Eventaully, the bulk data from Snowball is restored to the target (eg, RDS or EC2-hosted DB)
+            5. DMS applies the captured changes to bring it up to date.
+
+AWS Cloud Adoption Readiness Tool (CART)
+    - a self-assessment tool to evaluate their preparedness for cloud adoption. 
+    - identify gaps in their cloud readiness across several dimensions.
+    Assement on
+        - Business
+        - People
+        - Governance
+        - Platform
+        - Security
+        - Operations
+
+Disaster Recovery 
+    Types
+        on prem ---> on prem  (traditional and expensive)
+        on prem ---> AWS cloud (hybrid recovery
+        AWS region A ---> AWS region B
+
+    Recovery Point Objective
+        - its how often you can recovery (how often you run backups)
+        - the time between your backup (RPO) and the disaster = your data loss
+            - if you backup every hour, distaster strikes, 
+                then you can go back 1 hour back in save, lose 1 hour of date
+
+
+    Recovery Time Objective
+        - its when your recovering from a disaster
+        - the downtime on your app
+
+              <------ RPO (Data Loss) ------->     <------ RTO (Downtime) ------>                                                
+            o─────────────────────────────────⚡───────────────────────────────────●>
+          RPO                              (Disaster)                              RTO
+
+            o = RPO (Recovery Point Objective)  
+            ⚡ = Disaster event  
+            ● = RTO (Recovery Time Objective)
+
+
+     Disaster Recovery Options (1/2): 
+        1 Backup and Restore 
+            - if you backup your data from on-prem to AWS Cloud, dumbing data and such into S3 (Storage Gatewasy and/or snowball)
+                - then long RPO, lots data loss, b/c thats a lot of data, very late
+            - if you backup your data from AWS cloud to AWS Cloud, 
+                eg) EVB / Resfhit / RDS ---> Snapshots (in s3)
+                - then also long RPO, not as bad b/c AWS -> AWS is fast
+            
+            - in either case, you'd rebuild EC2s, RDS, ect from the snapshots and the data
+            - this is SLOW, but cheap
+        
+        2 Pilot Light
+            - scaled down app running
+            - simliar to Backup & restore
+            - data is also frequently replicated to the cloud, eg the RDS
+
+                                ↓ ready to do dns swap
+            On prem app <------ R 53 ---------------> EC2 (not running)
+            on prem RDS -----> Data replcaiton -----> RDS (running)
+
+        3 Warm Standby
+            - full system is up and runninb but as minimum size
+            - we scale up to production load if disaster
+            - you'll probalby have an ELB with EC2s and ASG at minimum EC2 count
+            - R53 pointing to your on prem servers, ready to DNS swap to the ELB once distaster
+
+        4 Multi Site / Hot site approach
+            - very low RTO, very expensive $$$
+            - minutes or secons
+            - FULL production scale is running on the side
+            - eg, data replication from on prem DB to AWS RDS 
+            - R53 is probalby active active
+
+            - can do region A to region B too (not on prem)
+
+
+    Disaster Recovery Options (2/2)
+        Backup & Restore 
+            - RPO/RTO = hours
+            - you back up your data and restore it to new infrastructure
+        Pilot Light
+            -  RPO/RTO = 10 minutes to hours
+            - Data is replicated to another region with the minimal services running
+            - Only the core components are on
+        Warm Standby
+            - RPO/RTO = minutes
+            - scaled down copy of your infrastructure running ready to scale up
+            - smaller version of the full production system
+        Multi-site Active/active
+            - RPO/RTO = real time
+            - scaled UP copy of your infrastructure in another region
+
+
+    Disaster Recovery Tips
+        Backup
+            . EBS Snapshots, RDS automated backups / Snapshots, etc ...
+            . Regular pushes to S3 / S3 IA / Glacier, Lifecycle Policy, Cross Region Replication
+            . From On-Premise: Snowball or Storage Gateway
+        High Availability
+            . Use Route53 to migrate DNS over from Region to Region
+            . RDS Multi-AZ, ElastiCache Multi-AZ, EFS, S3
+            . Site to Site VPN as a recovery from Direct Connect
+        Replication
+            . RDS Replication (Cross Region), AWS Aurora + Global Databases
+            . Database replication from on-premise to RDS
+            . Storage Gateway
+        Automation
+            . CloudFormation / Elastic Beanstalk to re-create a whole new environment
+            . Recover / Reboot EC2 instances with CloudWatch if alarms fail
+            . AWS Lambda functions for customized automations
+        Chaos
+            . netflix runs nearly everything in AWS (not CDN), but A LOT of compute is
+            . Netflix has a "simian-army" randomly terminating EC2
+            . they randomly destory EC2s in production  -.- idk man
+
+
+AWS Fault Injection Simulator (FIS) 
+    - run controlled fault injection experiments on your app 
+    - test how your systems respond to disruptions
+        - "resilience, performance, and reliability."
+    - It applies chaos engineering principles by injecting faults to simulate real-world failures.
+            eg, latency, errors, instance termination
+            eg, huge increase in CPU or memory
+
+    Experiment Templates 
+        - predefined blueprints that describe what kind of chaos you want to inject into your system.
+            - supports EC2, ECS, EKS, RDS, Lambda, ect...
+        - you specify target, 
+        - You include stop conditions
+        - other configs, like duration
+        Example: 
+            - Action: Terminate 1 EC2 instance.
+            - Target: Any instance with tag env=prod.
+            - Stop condition: If error rate goes above 5%, stop the experiment.
+            
+
+AWS Application Discovery Service 
+    - figure out what's running in your on-prem environment so you can move it to AWS with less guesswork.            
+    - helps plan migration projects
+    - collects info about their on-premises data centers.
+    AWS Application Discovery Agent
+        -> Agent
+        - Installed on each machine, gives full detail.
+
+    AWS Application Discovery Agentless Connector
+        -> Agentless (eg VMware)
+        - Less detail, but good enough if you can’t install agents.
+        - Gathers metadata using VMware vCenter without installing agents.
+        - It is a virtual appliance (an OVA file) deployed in your VMware vCenter environment.
+
+    AWS Migration Hub Import (CSV Import)
+        Not an “agent” per se, but a manual option.
+        You can upload CSV files with server inventory details.
+        Useful for environments where neither agent nor connector is feasible.
+
+    AWS Hub Data Exploration 
+        - a feature within AWS Migration Hub 
+        - helps you visualize the data collected from:
+            - AWS Discovery Agent
+            - Agentless Connector
+            - CSV Import
+        features:
+            - Query collected data using Amazon Athena.
+                - pre-defined queries
+            - Visualize data in Amazon QuickSight.
+            - Export data to Amazon S3
+
+        - (HDE orchestrates this setup, to visualize and analyze).
+
+        Components used by Hub data Exploration
+
+        | AWS Service           | Role                                             |
+        | --------------------- | ------------------------------------------------ |
+        |   Amazon S3           | Stores the exported discovery data               |
+        |   AWS Glue            | Catalogs the data and defines table structure    |
+        |   Amazon Athena       | Enables SQL-based querying of the discovery data |
+        |   Amazon QuickSight   | Optional for creating visual dashboards          |
+
+
+
+
+
+
+AWS Application Migration Service (AWS MGN)
+    - service for lifting and shifting (rehosting) on-premises or cloud-based servers to AWS with minimal downtime.
+    - moves servers from wherever they are (on-prem, another cloud, etc.) to EC2 instances in AWS.
+    - It replicates the disk at the block level, clones the whole thing.
+    - Replication happens in near real-time, so your AWS copy stays up to date.
+    - The data lands in a staging area (hidden EC2 machines with attached volumes).
+    
+    1 Installing an agent on the source server.
+    2 Copying everything
+        - It copies the server’s disk block-by-block to AWS.
+    3 test'
+    4 cut over, gg done
+        - it can/will scale up to a production level
+
+    - good for standard x86 Linux/Windows servers.
+    - it struggles with weird hardware or non-standard OS setups.
+
+    - supports many cloud provider
+    - supports many OS types
+
+
+AWS Elastic Disaster Recovery (AWS DRS)
+    - replicates your servers to AWS continuously at the block level 
+    - it tracks every disk write and copies it over in near real time 
+        - copies to a lightweight replica running on AWS. 
+        - and copies data to an EBS
+        - continuous block-level replication in near real-time
+    - you can launch recovery instances with a few clicks or API calls
+        - testing or actual disaster
+    - you hit a button and spin up actual EC2 instances based on the latest replicated state.
+    - You can run disaster recovery drills without impacting production to test, validate RTO and RPO 
+    - RPO is usually < 1 minute.
+
+    1 a "staging area" holds EBS volumes and a lightweight EC2 instances (for replication coordination), 
+        but no full compute is provisioned until you initiate a recovery.
+    2 When disaster strikes (or drill), AWS DRS uses the replicated data to launch fully provisioned EC2s. 
+        - generated from the latest state or from a selected point in time.
+
+ 
+    Q: all it does is replicate my on-prem VMs and/or EC2s perfectly at the block level,
+        and then I could take those blocks and recover them onto new EC2s if a disaster occurs?
+    A: Yes, that's essentially
+
+    - on-prem or in the cloud. 
+    - formerly called "AWS CloudEndure Disaster Recovery"
+
+    - DRS does not replicate the memory (RAM) state of the source VMs.
+
+    AWS Backup VS DRS
+
+        DRS = Disaster recovery, near-zero downtime, server-level replication
+        AWS Backup = Scheduled data protection, compliance, resource-level snapshot/restore
+
+        - Use AWS DRS if you need minimal downtime and full system recovery capability.
+            - RPO = seconds to minutes
+            - RTO = Minutes
+            - Continuous, block level
+        - Use AWS Backup for regular backups, compliance requirements, or long-term data retention.
+            - RPO = Hours
+            - RTO = Minutes to hours
+            - Snapshot-Based
+
+        | Feature                  |   AWS Elastic Disaster Recovery (DRS)          |   AWS Backup                                        |
+        | ------------------------ | ---------------------------------------------- | --------------------------------------------------- |
+        | Primary Purpose          | Disaster recovery with minimal downtime        | Scheduled backup for data protection and compliance |
+        | Data Capture Method      | Continuous block-level replication             | Scheduled snapshot-based backups                    |
+        | Recovery Time Objective  | Minutes (fast failover)                        | Hours or more (manual or scheduled restore)         |
+        | Recovery Point Objective | Seconds to minutes (near real-time)            | Hours to days (based on backup frequency)           |
+        | What It Protects         | Full servers (VMs, physical servers, EC2)      | AWS resources (EBS, RDS, DynamoDB, EFS, etc.)       |
+        | Scope                    | Entire servers (OS + apps + data)              | Data only (e.g., EBS, RDS, DynamoDB)                |
+        | Target Environment       | Standby instances on AWS (for failover)        | AWS-managed backup vaults                           |
+        | Supported Sources        | On-prem & cloud VMs                            | AWS services (EBS, RDS, DynamoDB, etc.)             |
+        | Recovery Mechanism       | Boot standby instance in minutes               | Restore backups to original/alt. location           |
+        | Pricing Model            | Based on data replication & resources used     | Based on storage and requests                       |
+        | Best For                 | Business continuity, failover, disaster drills | Compliance, retention policies, regular data backup |
+        
+
+        | Scenario                              | Recommended Tool                  |
+        | ------------------------------------- | --------------------------------- |
+        | Compliance archiving / retention      | AWS Backup                        |
+        | Application-aware backup policies     | AWS Backup                        |
+        | Backup for RDS, DynamoDB, FSx         | AWS Backup                        |
+        | Disaster Recovery for EC2/On-prem VMs | AWS DRS                           |
+        | Low RTO/RPO                           | AWS DRS                           |
+        | Hot standby for critical workloads    | AWS DRS                           |
+
+
+AWS Backup
+    - snap shots on just about any AWS resource
+    - block level, you dont point to files or w/e
+
+    Backup Plans
+        - frequency
+        - time window
+        - transtion to cold storage (days, weeks, ect)
+        - retention period (days, weeks) then delete
+    Backup Vault Lock 
+        - a security feature 
+        - makes immutable backups
+        - cant be deleted or altered even by administrators or root users.
+        - regulatory requirements for Write-Once-Read-Many (WORM) data retention.
+    Use Case:
+        - Financial services, healthcare, or government sectors that need to adhere to strict compliance regulations.
+        - Defending against ransomware or malicious activity targeting backup deletion.
+
+
+
+RECAP - On-premises strategy with AWS
+    Ability to download Amazon Linux 2 AMI as a VM (.iso format)
+        - VMWare, KVM, VirtualBox (Oracle VM), Microsoft Hyper-V
+    AWS Application Discovery Service
+        - Gather information about your on-premises servers to plan a migration
+        - Server utilization and dependency mappings
+        - Track with AWS Migration Hub
+    AWS Application Migration Service (MGN)
+        - Replacing AWS Server Migration Services & CloudEndure Migration
+        - Incremental replication of on-premises live servers to AWS
+        - Migrates the entire VM into AWS
+    AWS Elastic Disaster Recovery (DRS)
+        - Replacing CloudEndure Disaster Recovery
+        - Recover VMs/EC2s onto AWS
+    AWS Database Migration Service (DMS)
+        - replicate on-premises => AWS , AWS => AWS, AWS => on-premises
+        - Works with various database technologies (Oracle, MySQL, DynamoDB, etc .. )
+    AWS Migration Hub
+        - can *monitor migration status* from:
+            - Application Migration Service (AMS)
+            - Database Migration Service (DMS)
+
+
+
+AWS Migration Evaluator 
+    - helps organizations plan their move to the AWS cloud.
+    - it tries to remove that guesswork by giving you data-based estimate beforehand.
+    - "It provides a data-driven business case for migrating workloads from on-premises or other environments to AWS."
+    - it says "Here’s your current cost. Here’s your AWS cost. Here’s what we recommend moving and how."
+
+    - It generates TCO (Total Cost of Ownership) comparisons between current infrastructure and AWS.
+    - It analyzes current cpu, memory, netwrok, ect to recommend appropriately sized AWS instances.
+    - Helps prioritize which workloads
+    - It can use a lightweight agent or manual data import 
+        -> Agentless Collector
+    - you can define your target state to help devleop a migration plan
+    - it outputs "Quick Insights" reports for you, has costs
+
+
+
+
+
+Qs 
+
+File Gateway is designed to expose an S3 bucket to:
+
+    On-prem systems via NFS/SMB, allowing them to interact with S3 as if it were a local file share.
+    purpose: extending S3 to on-prem. 
+
+    - we can create a Storage File Gateway on Premise
+        and mount the S3 bucket as a file system on your EC2 instances
+
+    - The on-prem File Gateway exposes the S3 bucket as an NFS share.
+    - EC2 instances can access the same S3 bucket directly (via S3 API or via mounting solutions like s3fs or AWS SDKs).
+    - This setup supports your hybrid and migration goals, without misusing the Gateway service.
+
+    you can do goofy shit like:
+        on prem ------> file GW 1 ----------> S3
+                                            ↑  
+        EC2 in AWS ---> file GW 2 -------------+
+
+        - the purpose is "so that you can easily migrate your on-premise applications to AWS in the future"
+            when starting with on-prem servers., the EC2s are a step 2 thing.
+
+                        
+- When using AWS Storage Gateway – Tape Gateway, virtual tapes are stored in Amazon S3 Glacier or Glacier Deep Archive. These tapes mimic physical tape backups 
+- You cannot retrieve individual files directly from a tape using the S3 API.
+    - To access a specific file, you must retrieve (restore) the entire virtual tape from Glacier to your backup application.
+
+- ADS in agentless mode: Collects basic system info (like hostnames, IPs, usage), but not running processes or network traffic.    
+- Agent-Based Discovery: If you want to collect information about running processes and map network traffic between servers, 
+        you need deep visibility into host-level activity, 
+-
+- AWS Application Migration Service (MGN) is specifically designed for lift-and-shift migrations (also called rehosting) 
+    of entire servers, virtual machines, and applications with minimal downtime
+    - Converts source machines (physical, virtual, or cloud) into native Amazon EC2 instances automatically.
+
+
+- AWS SCT (Schema Conversion Tool) is to convert database schemas from one engine (e.g., Oracle) to another 
+- AWS DMS (Database Migration Service) does not convert schemas - it transfers data after the schema is already in place. You must use SCT first before DMS.
+
+
+
+VPC 
+    Recall:
+        Private IP
+        - 10.0.0.0/8     = 10.0.0.0 - 10.255.255.255      <= big networks (corp)
+        - 172.16.0.0/12  = 172.16.0.0 - 172.31.255.255   
+        - 192.168.0.0/16 = 192.168.0.0 - 192.168.255.255  <= example: home networks
+        Public IP
+        - All the rest
+    
+    Public  Subnet = 0.0.0.0/0 ---> IGW
+    Private Subnet = 0.0.0.0/0 ---> NAT
+
+    NAT Instance = you manage (source/destiantion check = off). Traffic of other EC2s pass through this nat
+        - This NAT and regular NAT will have an Elastic IP (good for whitelisting)
+    NAT GW (general) 
+        - single AZ
+        - When you create a NAT Gateway, you must specify a subnet, and that subnet belongs to a single AZ.
+        - The NAT Gateway is deployed in that AZ only.
+        - If that AZ goes down, the NAT Gateway becomes unavailable, unless you do multi AZ thing
+
+    Route Table 
+        - ? is associated w/ subnets (or something) ?
+        - BTW its better to use 1 Route Table / per NAT. THough techincally you can do 1 RT w/ multi NAT
+
+    VPC Flow Logs
+        - logs traffic going through VPC. 
+        - good to find "denined traffic"
+        - can be sent to CW Logs and/or S3
+
+    Bastion Hosts
+        - SSH into private EC2 instances through a public EC2 isntance
+        - secured and tailored to you
+        -> USE Sessions Manager instead though!!
+
+    VPC Peering
+        - not transitive VPC
+        - can peer with another AWS account, or another region
+        - must updtea RTs in each VPCs subnets
+
+    VPC Peering Limitations:
+
+        - VPC peering does NOT support edge to edge routing for NAT or practically anything it seems
+        - If someone said they wanted a "central VPC with a central NAT" and they wanted to peer networks to that
+            - then NO you cannot with VPC peering
+            -> you'd have to use Transit GW instead
+        
+        ❌ No Edge to Edge routing
+            If VPC A has an internet gateway, resources in VPC B can't use the internet gateway in VPC A to access the internet.
+
+            VPC A w/ IGW <-----> VPC B cannot use IGW ❌ 
+            VPC A w/ NAT <-----> VPC B cannot use NAT ❌ 
+            VPC A w/ VPN to corp network <-----> VPC B cannot use VPN ❌ 
+            VPC A w/ Direct Connect  <-----> VPC B cannot ❌ 
+            VPC A w/ GW endpoint conncting an S3 or dynano <-----> VPC B cannot ❌ 
+        
+        ❌ Overlapping CIDR blocks, doesnt work
+            - VPC A @ 172.16.0.0/16 <--- ❌ ----> VPC B @ 172.16.0.0/16 
+        
+
+        note:
+            - MTU (Maximum Transmission Unit) is the maximum size (in bytes) of a single network packet that can be transmitted.
+            - AWS does not accept any packets OVER NINE THOUSAAAAAAAAAAAAAAAND (9000)
+            Jumbo frames:
+            "Jumbo frames (9001 MTU)" in AWS VPCs refer to network packets with a 
+                MTU size of 9001 bytes, as opposed to the default 1500 bytes used in standard Ethernet frames."
+    
+    Transit Gateway
+        - probably always better than VPC
+        - hub and spoke (star) connection
+        - can connect thousaddns of VPCs and on-premise :O
+        - Works with Resource Access Manager (RAM), Direct Connect Gateway, VPN connections
+
+        IP Multicast
+            - TGW supports this
+            - possibly nothing else supports iP Multicast
+            IP Multicast = sends a single stream of data to a group
+                - routers and switches handle replicating it only where need
+                - devices interested in the data, join a Multicast Group, eg 224.0.0.0 to 239.255.255.255
+                - The sender transmits one copy of the data, and routers replicate it only where needed, reducing bandwidth usage.
+
+        Edge to Edge routing
+            - even though 2 VPCs are using the TGW, doesnt mean the 2 can talk to each other, 
+                - you still need to configure the TGW route table correctly (ingress/egress)
+                eg) VPC 1 and VPC 2 use TGW to use 1 Central NAT GW
+
+            - TGW supports Edge to Edge routing (unlike VPC peering)
+            - you still must configure
+                - Routing tables on the TGW and VPCs must allow this path.
+                - Network ACLs and security groups must permit the traffic.
+
+        Inter & Intra Region peering
+            - you can have TGW to TGW in same region (Intra)
+            - you can have TGW to TGW in different region (Inter)
+            - you can connect them all together :o
+
+            Region1         Region2          Region 3
+               +---------------+----------------+
+               |               |                |
+            HUB TGW 1      HUB TGW 2        HUB TGW 3 
+            |      |       |         |       |      |
+        TGW-a     TGW-b   TGW-a    TGW-b   TGW-a   TGW-b
+
+        tip
+            - you can use different RTs to prvent VPCs from Communicating
+            eg)
+                VPC a = 10.1.0.0/16      <-- Account 1 Prod
+                VPC b = 10.2.0.0/16      <-- Account 2 pre-prod
+                VPC c = 10.3.0.0/16      <-- Account 3 stage
+                VPC d = 10.4.0.0/16      <-- Account 4 dev
+
+                Prod RT      <--------------  "Network Service Account A"
+                CIDR         |  Next Hop
+                10.1.0.0/16  |  TGW attachment-A     
+                10.2.0.0/16  |  TGW attachment-B
+                
+                Stage RT     <-------------- "Network Service Account A"
+                CIDR         |  Next Hop
+                10.3.0.0/16  |  TGW attachment-C
+                10.4.0.0/16  |  TGW attachment-D
+
+        Transit Gateway Attachment
+            - you create it
+            - It's a required step when connecting resources to the Transit Gateway.
+                - you do it manual, not AWS auto
+            
+
+
+VPC Endpoints
+    recall:
+        - PrivateLink thing
+        - VPC Endpoint Gateway
+            - S3 or DynamoDB
+        - VPC Endpoing Interface
+            - anything else
+    - if issues, debug at Route Tables or DNS Setting Resoluction
+        - DNS Seeting Resolution = DNS Resolution refers to the ability of instances within the VPC to resolve domain names to IP addresses using the Amazon-provided DNS server.
+
+    - Gateway Endpoints are strictly VPC-local
+        -> Traffic from outside that VPC — even from connected environments — cannot use the endpoint.
+        - It only works within the same VPC where it's created. 
+        - the following CANNOT use that gateway endpoint:
+            - Peered VPCs (even if peering is active)
+            - Transit Gateway (TGW)-attached VPCs
+            - Direct Connect (DX) from on-prem networks
+            - VPN connections
+        - b/c "Gateway endpoints are implemented using route table entries" or something like that
+
+
+    Private DNS for Interface Endpoints
+        Recall - Interface Endpoints:
+            - is an ENI (Elastic Network Interface) in your VPC.
+            - It privately connects your VPC to supported AWS services or PrivateLink-powered services.
+            - It always uses private IPs and lives in your subnets.
+
+        
+         When You Should Use Private DNS (Default Case)
+            - You're accessing AWS services from inside the same VPC.
+            - You want to keep traffic off the internet without rewriting service URLs.
+            - You don’t have conflicting DNS zones or policies.            
+            - you probably always 100% want to use Private DNS w/ Intertface Endpoints
+        -> Use Private DNS unless you have a specific reason not to 
+            — usually around DNS conflicts, cross-VPC routing, or custom name resolution logic.- It's the default for ease and security, but not mandatory.
+        - you can enable it and AWS gives you cool private DNS
+
+        WHAT IT IS:
+            - "Private DNS" is an option you can enable on the Interface Endpoint.
+            - It causes AWS to override the public DNS name of a service (like ec2.us-east-1.amazonaws.com) inside your VPC.
+            - meaning, any network calls from other EC2s in that VPC, that are directed to other EC2s
+                - will be magically directed to the Interface Endpoint, and keeps your traffic private
+
+VPC Endpoint Policies 
+    - policies that control what actions and resources are allowed through a specific VPC Endpoint.
+    - They do not replace IAM policies; instead, they work in conjunction
+    - Attached to a VPC Endpoint (not to IAM roles or users).
+    - Endpoint Policies do not override IAM policies. 
+        - The request must be permitted by both the IAM policy and the endpoint policy.
+
+    - In VPC Endpoint Policies, the Principal is not the VPC endpoint itself. 
+    - The Principal refers to the AWS IAM identities (users, roles, accounts) making requests through the endpoint.
+
+    eg)
+        { "Statement": [
+            {
+            "Principal": "*",
+            "Effect": "Allow",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::my-bucket/*"
+            }
+        ] }
+        --> This policy allows any principal to perform any S3 action, but only on my-bucket when using this VPC endpoint.
+
+    If you want to restrict access to a specific IAM role, for example:
+        "Principal": {
+            "AWS": "arn:aws:iam::123456789012:role/MyAppRole"
+        },
+
+    If VPC endpoint cannot reach S3, debug here:
+        - Security groups? outbound
+        - route table needs route to VPC endpoint
+        - VPC endpoint policy good?
+        - check VPC DNS settings? DNS resoltuion must be anabled
+        - S3 bucket policies?
+        - IAM policies?
+
+
+
+
+AWS Virtual Private Network
+    - AWS Client VPN -- OR -- Site to Site VPN
+
+    Site to Site VPN
+            +-------------------------------------------------------------+
+            |       (on prem)                           (your AWS VPC)    |
+            |   Customer Gateway <--(VPN Connection) --> VPN Gateway (VGW)|
+            +-------------------------------------------------------------+
+
+        - two VPN connections (called "tunnels") are created for redundency
+        - IPSec encryption
+        - can use Global Accelerator for speed
+
+        Route Propagation 
+            Recall
+                - When setting up everything, you will connect the VGW and the Customer GW,
+                    AND you have to configure the Route Table. 
+                - Route table must have all the IPs on-prem (VPC route table controls outbound traffic from subnets in your VPC.)
+                    eg)
+                        Destination                   Target
+                        192.168.0.0/24 (on-prem) ---> virtual private gateway
+                - if your on-prem network changes or you have lots of prefixes, that gets old fast. 
+                - Route propagation just tells AWS: “Let the VGW inject those routes automatically into this route table."
+
+
+            - Route Propagation = "Let the VPN tell the VPC route table what networks exist on the other side (your on-prem side), 
+                 so you don’t have to enter them manually."
+            - thus there are 2 says to set up site-to-site vpn
+                a. Static
+                    - manually add all on-prem IPs to the RT (yikes)
+                b. Route Propagation / Dynamic Routing (BGP)
+                    - uses BGP to share routes 
+                    - you specify the ASN (Autonomous System Number) of the CGW and VGW
+
+            NOTE:
+                can we? 
+                 [on-prem ----> VPN S2S Connection -----> VPC w/ NAT AWW] ------> Google
+                ❌ No. Your on-prem VMs cannot access the internet via the AWS NAT Gateway over a Site-to-Site VPN
+                    - NAT GW is designed to allow private subnets in your VPC internet access   
+                    - You can't route on-prem traffic through AWS’s NAT Gateway
+                        - b/c NAT GWs are only accessible from within the VPC
+                    -  Even if you try to add a route like 0.0.0.0/0 → NAT GW in a propagated route table 
+                        AWS will silently ignore it for VPN-originating traffic.
+                ✅
+                Option 1: Use a NAT instance (i.e., EC2-based NAT)
+                Option 2: On-prem uses its own local internet breakout (split tunnel?) and/or(?) use on-prem NAT
+
+
+    - if you have many VPCs that need to connect to corporate, AWS recommends creating a
+        separate VPN connection FOR EACH VPC
+        -> instead use Direct Connect
+        - or you can use a "shared service VPC"
+                                                                              +-----> VPC 1
+        on-prem ---VPN ---> Shared Service VPC <---> VPC Peering (or TGW) <---+-----> VPC 2
+                                                                              +-----> VPC 3
+AWS VPN CloudHub
+    - you connect your VPC with many different office (on-prem) locations. 
+    - up to 10 Customer Gatewasy / offices
+    - spoke-to-spoke communication
+
+    Use this approach if you have multiple branch offices and existing internet connections and would like to implement a convenient, potentially low-cost hub-and-spoke model for primary or backup connectivity between these remote offices.
+
+AWS Client VPN
+    - individuals (workers) connect to aws
+    - if the VPC your connected to also has a Site to Site VPN, then 
+         then you also connect to your on-prem (all form client vpn :o)
+    - if the VPC your connected to has VPC peering,
+        then you also connect to both VPCs
+    - if '' '' internet gateway, then get internet access
+    - if '' '' NAT gateway, then get 1 way nat
+    - ect
+    - infinfity transitivity
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ AWS Direct Connect
+    Private VIF 
+        - for private connectivity to your VPC.
+        - connecting to private AWS resources (EC2, RDS, or any resource in your VPC.)
+        -> Traffic does not traverse the public internet.
+        - usually for 	VPC resources access
+
+        - VPC Interface Endpoints can be accessed through Private VIFs
+            - That Private VIF connects your on-premises network to your VPC (via a Virtual Private Gateway (VGW) or Transit Gateway (TGW)).
+            - From your on-prem network, you can:
+                Access Interface Endpoints privately = Access AWS-managed services 
+                Avoid the public internet.
+                
+
+    Public VIF 
+        - for connectivity to public AWS services using public IPs.
+        - usually from on prem or for S3 or DynamoDB
+        - Even though you're accessing public AWS services, the traffic goes through your Direct Connect link—not the public internet.
+            This gives you:
+                - Lower latency
+                - More consistent performance
+                - Better security (fewer hops, stays within known providers)
+                - Controlled routing using BGP
+
+    Transit VIF
+        - connecting to resources in a VPC using a Transit GW
+
+
+    Dedicated Connection 
+        -  A physical Ethernet connection directly from your network to an AWS Direct Connect location.
+        - 1 / 10 / 100 Gbps
+    Hosted Connection
+        - A connection provisioned through an AWS Direct Connect Partner who already has a physical connection to AWS.
+        - You request the connection from the partner, not directly through AWS.
+        - 1 / 2 / 5 / 10 Gbps
+
+    NOTE
+        - Direct Connect is not encrypted by default but is private
+        - you can use VPN to encrypt it
+
+
+    Link Aggregation Group (LAG) 
+        - a group of multiple physical connections  that behave as a single, higher-bandwidth connection.
+        - up to 4
+        - aggregate connections
+        - increase speed and failover
+
+    Direct Connect Gateway (DX Gateway)
+        - connect your on-premises network to multiple VPCs in diff AWS Regions using a single Direct Connect connection.
+        Without it ❌:
+            - A Direct Connect connection is tied to one AWS Region.
+            - You'd need separate connections or VIFs for each Region or VPC.
+        With it ✅:
+            - You can reuse one DX Private VIF to reach multiple VPCs, even in different Regions.
+            - This reduces cost and complexity.
+                                                                        +------> VPC @ us-west-1
+            on prem ----> Direct Connection @ us-west-1 -----> DX GW ----+
+                                                                        +------> VPC @ us-east-2
+    Transit GW + Direct Connect GW
+        - Connect your on-premises network to multiple VPCs across AWS Regions via one Private VIF.
+        - regional hub-and-spoke VPC routing.
+        - DXGW lets you extend that to multiple Regions.
+        - When you connect your on-premises network to an AWS Transit Gateway (TGW) via Direct Connect (using a Transit VIF and Direct Connect Gateway), 
+            you effectively gain network-level connectivity to all VPCs attached to that TGW.
+
+    SiteLink
+        - connect on-premis TO on-premis (no AWS crazy networking requried)
+        - is a feature that allows Direct Connect locations to communicate directly with each other, without routing traffic through an AWS Region or VPC.
+        - Direct Connect locations talk to each other directly, over AWS’s private network — without going through a VPC, TGW, or Region.
+        - With SiteLink enabled, New York and Tokyo can just send traffic directly over AWS’s backbone — like a private WAN that you didn’t have to build.
+        W/o SiteLink you do this:
+            - Route that traffic through an AWS Region.
+            - Use Transit Gateway or some VPC in the middle.
+            - Set up routing between those VPCs or TGWs.
+            - Deal with extra hops, latency, and config.
+
+    VPC FLow Logs
+        - logs everyting in VPC
+        - use Athena or Cloudwatgh Logs Insights to query 
+        - you can use CW Logs + CW Contributor Insights ---> top 10 IPs
+        - you can use CW Logs + CW Alarms (find s/t fishy) ---> alarm --> SNS
+        - you can use S3 ---> Athena --> quicksight
+
+AWS Network Firewall 
+    - is a packet inspection engine on your VPC
+    - Layer 3 to Layer 7 protection 
+    - write rules on headers, payloads, TCP state, whatever.
+    - uses Suricata, an open-source IDS/IPS engine. 
+    - any traffic coming in:
+        VPC to VPC, Outbound, inbound, to/from direct connect & site to site
+    
+    - you can write stateless or stateful rules
+    - supports 1000s of rules
+        - ip and poprt
+        - protocol
+        - regex matching
+    - Allow, Drop, or Alert on match
+
+    - you can make an "Inspection VPC" that has the AWS netowrk firewall
+        and then other VPCs pass through it, wherhe Inspection/firewall-ing
+        occurs
+    - requires a Transit GW, a Inspection VPC, and then anything else you wish
+    - anything else's traffic passes though the TGW and the Inspection-VPC every time
+
+Qs
+    - want: allow your customers to access your SaaS without going through 
+        the public internet while ensuring your infrastructure is not public internet viewable
+    - solution "PrivateLink"
+    -> your service being exposed via a NLB, and customers connecting through Interface Endpoints 
+        = is what AWS calls PrivateLink.
+
+
+    - Virtual Private Gateway can only be associated with one VPC at a time.
+        - adding more VGW wont give more throughput
+
+    Equal-Cost Multi-Path (ECMP) routing
+        - means you can send traffic across multiple VPN tunnels at the same time. 
+        - which means it will round-robin or hash traffic across all 4 tunnels, assumin
+
+        -> TGW is the only VPN endpoint in AWS that supports ECMP. 
+        ECMP with TGW is essential if you need high-throughput, redundant VPN.
+
+
+
+AMazon Rekognition
+    - when you scan for sensitive content and it is flagged
+    - you can use Amazon Augmented AI (A2I) to have a person manually review it
+
+Amazon Transcribe
+    - audio to text
+    - supports auto removal of PII via Redaction
+    Use cases:
+        - customer calls
+        - closed captioning w/ subtitles
+        - generate meta data
+
+Amazon Polly
+    - Text to Speech
+    Lexicons
+        - customize pronunciation of words based on weird spelling
+            st3ph4ne ----> Stephane
+            AWS ---------> Amazon Web Services
+    Speech Synthesis Markup Language (SSML)
+        - xml
+        - breathing, whispsering, Newscaster, ect
+
+Amazon Translate
+    - Text to another language
+    - "localize content"
+
+Amazon Connect
+    - phone calls
+    - flows
+    - virtual contact center
+    - you combo Amazon Connect with Amazon Lex
+
+Amazon Comprehend Medical
+    - turns text into cool 'intelligent' data
+    - cool ui with boxes and arrows to keyword
+
+
+Amazon SageMaker
+    - ML service for devs and data scientists
+    - "use to build, train, and deploy machine learning models at scale"
+    - supports:
+        . Apache MXNet on AWS, open-source deep learning framework
+        . TensorFlow on AWS open-source machine intelligence library
+        . PyTorch on AWS open-source machine learning framework
+
+    has:
+        Jupyter Notebooks in the cloud
+        Training on big hardware:
+        Deploying models to an API
+    - It’s for people who need to train ML models and put them into production, but don’t want to waste time managing servers or writing infrastructure code.
+
+Amazon Kendra
+    - a document search service
+
+Amazon Lex
+    - text and audio logic flows
+    - speech and text, convosation
+    - Intent
+
+Alexa for Business
+    - for the workplace. 
+    - integrate Alexa into office environments to improve productivity and streamline tasks.
+    eg)
+        - Book a meeting room — Alexa could check if a room is free and schedule it via your calendar system.
+        - ask for stuff like the Wi-Fi password, IT help, or HR policies    
+        -  “Alexa, start my meeting” — it would connect to the room’s video conferencing setup (Zoom, Webex, etc.)
+
+
+
+
+CodeCommit
+    - Discontinued as of 2024
+
+CodePipeline
+    - orchestrate CICD pipelines. 
+
+GitHub Webhook
+    - when you push code or w/e, github notifies you, AWS CodePipeline
+
+    CodeStar Source Connection
+        - does the same thing but better
+        - is a Github application
+
+Amazon WorkSpaces
+    - Desktop as a Service
+    - Windows or linux
+    - by defautl Windows Updates are on.
+        - Maintence windoww are from 0:00 to 4:00 on sunday morning
+
+    - Amazon WorkSpaces Application Manager (Amazon WAM) is gg'd 2023, it allowed for apps on the desktop, like an App Store with your app (containerized)
+
+    WorkSpaces Cross-Region Redirection 
+        - when the user's primary WorkSpaces aren't available redirect to a working one
+        - For example, by using DNS failover routing policies, you can connect your users to 
+            WorkSpaces in your specified failover AWS Region when they can't access their 
+            WorkSpaces in the primary Region.
+        - You have R53 pointing to 2 Worksapces
+
+    Workspaces IP Access Control Groups
+        - you whitelist IPs / CIDR
+
+Amazon App Stream 2.0
+    - "stream" (interact with imo) desktop apps to users over the web
+    - runs windows
+    - it's not screen sharing or video streaming. It’s for interactive use, one person at a time per session.
+    - Run desktop apps on AWS infrastructure and deliver them via browser to any device (Windows, macOS, Chromebook, Linux).
+    - AppStream starts a virtual Windows machine just for them, runs the app on it, 
+        and sends the screen over the internet to their browser. 
+    - Their keyboard and mouse inputs are sent back. 
+    - It’s like remote-controlling a Windows PC in the cloud.
+
+    - AppStream 2.0 does not broadcast a single app session to multiple users like a livestream or shared screen.
+        - that just doesnt make sense for what it does
+    
+    -> Anyone on any OS, any browser, can use the app ("remotely") through the browser/App-Stream2.0
+
+
+Amazon Simple Email Service (Amazon SES)
+    - send emails
+    - Allows inbound/outbound emails
+
+    Domain Authentication (SPF, DKIM, DMARC)
+        - SPF, DKIM, DMARC
+        - ^ prevetns spoofing
+
+    - Reputation dashboard, performance insights, anti-spam feedback
+    - Provides statistics such as email deliveries, bounces, feedback loop results, email open
+
+    - Flexible IP deployment: shared, dedicated, and customer-owned IPs
+    - Send emails using your application using AWS Console, APIs, or SMTP
+
+    - SES is infrastructure, not a marketing platform. Think of it as the engine behind email, not the dashboard. 
+
+    - no email automation sending
+    - no ui for easy drag and drop ui stuff
+    - no UI for campaign reporting
+    - BUT it does A LOT of cool shit
+
+    - Use cases: 
+        transactional, marketing and bulk email communications
+
+    SES Configuration Sets 
+        - track your emails. 
+        - apply rules and collect metrics for specific groups of emails.
+        - A configuration set acts like a tag attached to an email. 
+            - It controls how SES processes and tracks that email.
+            
+        Event Publishing
+            - You can set up a Config Set to publish delivery events (like sends, bounces, opens, clicks) to services such as:
+                - Amazon CloudWatch (for metrics)
+                - Amazon SNS (for notifications)
+                - Amazon Kinesis Firehose (for real-time streaming)
+
+        IP Pool Assignment
+            - Assign specific dedicated IP pools to a config set — so certain emails go out through specific IPs.
+            - Use one IP pool for bulk marketing emails, another for critical account notifications — via separate config sets.
+
+        - can also use Conf Sets for how SES should handle suppressed (bounced or complained) addresses 
+
+
+Amazon Pinpoint 
+    - a customer engagement service
+    - has Web-based dashboard with campaign builder and analytics.
+    -> Marketing campaigns!
+    - User engagement workflows
+    - send targeted messages via:
+        Email
+        SMS
+        Push notifications
+        Voice messages
+        In-app messaging
+
+    - You can define who gets the messages (targeting), 
+    - when they get them (scheduling or triggered by events), 
+    - how they get them (channel: email, SMS, etc.).
+    - Mailchimp or Twilio, but AWS
+
+    Events
+        - events are sent to: 
+        Events sent to
+            - CloudWatch Logs
+            - Amazon Kinesis
+            - Analytics Dashboard
+
+        events: TEXT_SUCCESS, TEXT_SENT, EMAIL_OPEN, EMAIL_CLICK
+
+
+    | Feature              | SES                            | Pinpoint                        |
+    | -------------------- | ------------------------------ | ------------------------------- |
+    | Primary Focus        | Email delivery (transactional) | Multichannel user engagement    |
+    | Channels             | Email only                     | Email, SMS, push, in-app, voice |
+    | Audience Management  | No                             | Yes                             |
+    | Campaign Builder     | No                             | Yes                             |
+    | Engagement Analytics | Limited                        | Full (opens, clicks, etc.)      |
+    | SMTP Support         | Yes                            | No (uses SES internally)        |
+
+
+EC2 Image Builder 
+    - automate the process of creating AMIs or container images
+    - can run on a schedule or relatively when a package is updated, ect
+    - free (pay for services)
+    - publish AMIs to muliple regions and/or accounts
+    - has testing features (test suite), that runs the new AMI on a test ec2
+
+    EC2 Image Builder vs CodeDeploy
+        - They often work together, but not as replacements for each other.
+
+        EC2 Image Builder
+            - EC2 Image Builder is about building the environment
+            - Automates creation of machine images (AMIs, container images)
+        CodeDeploy  
+            - Automates deployment of applications to instances/servers
+            - CodeDeploy is about deploying the application into that environment. 
+
+
+
+
+AWS IOT
+    - lets devices (like sensors, machines, or smart home gadgets) connect to the cloud, send data, and receive commands.
+    - Your device talks to the cloud.
+    - MQTT/HTTPS
+    - devices sends data to you
+    - you can send data to it
+    - is pub-sub, back forth
+    - Serverless !! 
+     $ aws iot-data publish 
+        --topic "home/lightbulb1/commands" 
+        --payload '{"action": "turn_on"}' 
+        --endpoint-url https://<your-iot-endpoint>
+
+    - IoT Topic
+    - IoT Rules
+    - IoT Rules action
+
+    - you can define a Rules Action to pip data into Firehose
+        - and then firehoe pipes to s3, redshift, opensearch, ect
+    
+
+
+
+
+
+
+Qs
+
+    AWS SSO
+        - only 1 Identity Source.
+        - The source can only be 1 of these (not 2+ at once):
+            - AWS SSO
+            - Active Directory
+            - external source
+
+        - the master account of SSO doesnt have all the permissions 
+            of the accounts it manage
+
+    Q: You have Active Directory (on premise) w/ AWS SSO. There is a 3rd party monitoring 
+        thing that requries read only access across all AWS accounts.
+        The monitoring thing will run in its own AWS account
+        -> How can you give the monitoring thing the requried permissions????
+        
+    A: Create an AWS CloudFormation template that defines a new AWS IAM role for
+        the third-party monitoring solution with the account of the third party listed in the
+        trust policy. Create the IAM role across all linked AWS accounts by using a stack set.
+        - THe 3rd monitoring thing Asumes role of everything?
+
+
+    API Gateway - Errors
+
+    4xx means Client errors
+        - 400: Bad Request
+        - 403: Access Denied, WAF filtered
+        - 429: Quota exceeded, Throttle
+        - 413 Payload Too Large 
+             (10 MB for REST APIs, 256 KB for HTTP APIs in payloads).
+    5xx means Server errors
+        - 502: Bad Gateway Exception
+            API Gateway couldn't connect to the backend (e.g., a Lambda timeout or failure).
+            (or a server upstream, has received an invalid response)
+        - 503: Service Unavailable Exception
+            The backend service is unavailable. Could be throttled or down.
+        - 504: Integration Failure - Endpoint Request Timed-out Exception .
+            API Gateway requests time out after 29 second maximum
+
+
+    SSM Agent
+        - not all EC2 AMIs have SSM Agent pre installed
+        - EC2s also needs a Role that allows accessing SSM 
+
+    - cannot assign a IAM User to a IAM Group, cannot do it
+        - can creat user in dev account, and assign it to production account
+    - cannot create IAM Roles that have access to a another account.
+        - ❌ "create IAM Role that can x, y in the production account"  
+
+
+
+
+    - Graviton EC2s are not available for Windows instances
+
+
+    S3
+        - 100 buckets / account 
+        - no max bucket size
+        - no limit to objects
+        - a single objects max size = 5TB
+        S3 Express One Zone =  the folder hierarchy .. faster
+    
+    Durability
+        Definition: The likelihood that your data will not be lost or corrupted over time.
+
+    Availability
+        Definition: The ability to access your data when needed.
+
+
+    S3 Glacier  
+        - are not the same service as Amazon S3, although they are closely related
+        - a service for archival storage.
+        - S3 Glacier Vaults are part of Amazon S3 Glacier, 
+
+    Object Ownership
+        a Bucket owner enforced (recommended):
+            - All objects are owned by the bucket owner, regardless of who uploads them.
+
+        b Bucket owner preferred:
+            - All objects are owned by the bucket owner, only if ACLs grant full control to the bucket owner.
+
+        c Object writer:
+            - The uploader retains ownership of the objects they upload.
+
+
+    S# Access Grants 
+        - lets you map identities in a directory service (IAM Identify center, Active Directory, Okta) to access datasets in s3.
+
+    S3 CORS
+        - set CORS configs to your s3 bucket w/ static web hositing
+        - so your select origins can perform HTTP requets from your client, to the 
+    
+    - Server Side Encription (SSE-s3) only encrypts the data, not the meta dta
+    - SSE-KMS good for compliance, its when you name a key in KMS
+    - SSE-C you give key
+    - DSSE-KMS double encrypt, server and client, aws sends you a key from kms
+
+    Object versions
+        - you must get by version-id, ege 3_LudmLdiBEUci837KJ_JKjuyV
+        - ^ delete ^
+
+    S3 Multi region access points
+        - auto routes to nearly bucket
+        - uses Globabl Accelarator under the hood
+
+    S3 Object Lambda access points
+        - use case: good for scrubbing PII when sharing stuff
+        - GET HEAD LIST operations
+
+    S3 Archieved Objects
+        Archived objects = slow retrieval time, low storage cost
+
+        - 2 types
+            a. Archive Storage Classes
+                - MANUAL, you put it into a tier
+                eg)
+                    - S3 Glacier Flexible Retrieval
+                    - S3 Glacier Deep Archive
+            b. Archive Access Tiers
+                - AUTOMATICALLYmoves data
+                eg)
+                    - S3 Intelligent-Tier (archive or deep arhive)
+                    - S3
+        S3 Glacier:
+            Restoring from S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive
+                - Yes, for whatever reason, you must do this:
+
+                1. Make Temporary Copy
+                    - You must first restore a copy for X number of days
+                    $ aws s3api restore-object [...] --restore-request Days=25,GlacierJobParameters={"Tier"="Standard"}
+
+                2. Make a copy again!
+                    - by copying the temp object, you will now have a perament copy for the OG glacier object
+                    $ aws s3 cp  s3://mybucket/myfile     s3://mybucket/myfilecopy
+
+                - note, you will be paying both the archived object and the copy that you restored temporarily.
+        S3 Intelligent Tiering
+            - you just ask fo rit
+
+    Requester Pays
+        - easy to toggle on/off
+        - need IAM roles & authentication
+
+    - S3 Batch Operations
+        - 0.25$ per 1 mill + (Lambda runtime)
+        - a Lambda is being used on every object.
+        - so you are charge for that too
+
+
+
+    S3 Object tags
+        - tags on the object level
+        - opposed to resource tags, which are on the resource level
+        - up to 10 tags
+        good for : 
+            - analaytics 
+            - CW metrics 
+            - IAM policies (fine grained)
+            - lifcecycle managment
+
+    S3 Server (Access) Logs
+        - detailed records for requests made to your s3
+        - you enable on/off
+        - is a plain text file
+        - get all data
+        - goes to a destinatino bucket
+            - cant have Requester Pays
+            - cant have object locking
+        - when its off, you only get CloudTrail and CloudWatch
+        when off
+            - NO IP address, Requester identity (IAM user or role), Geographic source, User-Agent
+        When On
+            - IP, Referrer, User-Agenet,  IAM Requester, Time, GET/PUT/ect, Time, Key/object, 200/404/ect, Bytes sent, 
+
+    S3 Static Website Hosting
+        - Instead of serving files from the bucket, it redirects all incoming requests to another domain or path.
+        - the "Redirect requests" feature is an alternative mode to standard hosting. 
+        Use Cases
+            Redirecting example.com to www.example.com
+            Migrating a domain (e.g., oldsite.com → newsite.com)        
+
+        OAC > OAI
+
+
+AWS CLI - Wizards
+
+    - AWS CLI has a special wizard command for very specific services that allows you to go through a wizard process.
+    - When you enter the wizard it will prompt you with a GUI with multiple steps to easily provision
+
+$ aws iam wizard new-role
+$ aws dynamodb wizard new-table
+$ aws events wizard new-rule
+$ aws lambda wizard new-function
+$ aws configure wizard
+
+
+    $ wait 
+        - the `wait` command is used to pause execution until a resource reaches a desired state. 
+        - It polls the AWS service at intervals and waits until the specified condition is met or a timeout occurs.
+        - good for long running API actions (stopping ... deleting)
+        eg)
+            $ INSTANCE_ID=$(aws ec2 run-instances 
+                -- image-id "ami-079db87dc4c10ac91"|
+                -- instance-type t2.micro 
+                -- region us-east-1 
+                -- query Instances[]. InstanceId
+                -- output text)
+            $ aws ec2 wait instance-status-ok -- instance-ids $INSTANCE_ID -- region us-east-1
+
+    $ --filter
+        - filters the data serverside
+        - can speed up reqeusts only returng the data you need
+
+            $ aws ec2 describe-instances -- filters
+                "Name=instance-state-name, Values=running"
+                "Name=instance-type, Values=t2.micro"
+
+
+VPC
+    - andrew brown says he tries to delete VPCs in the console, b/c of all the extra stuff, and console will auto delete the associated resources
+
+
+AWS Quick Starts
+    - Prebuilt templates (cloudformation)
+    - help deploy a wide range of stacks
+    - usually overkill b/c they built for production
+    - has a cool UI for configs; with inputs, dropdownss & textfields
+
+Cloudformation
+CFN - Stack Updates
+    - When you submit an update, CloudFormation updates differently depending on the state of your resources and circumstances:
+    - When you use commands like `update-stack` or `deploy` via the AWS CLI,
+
+    Update with No Interruption
+        1.Updates the resource without disrupting operation
+        2. and without changing the resource's physical ID
+
+    Updates with Some Interruption
+        1. Updates the resource with some interruption
+        2. and retains the physical ID.
+
+    Replacement
+        1. recreates the resource during an update,
+        2. also generates new physical ID.
+
+
+CFN - Stack Policy
+    This is a protection mechanism applied to a stack to control what resources can or cannot be updated during a stack update.
+
+    It does not perform updates; instead, it restricts them.
+    - checks before, will allow or permit the stack operation.
+    Possible Actions:
+        $  Update:Modify - Update that do not require replacing, no interruption to service.
+        $  Update:Replace - Updates require deleting a resource and creating a new resource to replace it
+        $  Update:Delete - Updates the require deleting a resource altogether.
+        $  Update :* - For all above cases
+
+        aws cloudformation set-stack-policy 
+            --stack-name prevent-stack-update 
+            --stack-policy-body '{"Statement" : [{
+                "Effect" : "Deny"
+                "Action" : "Update :* ",
+                "Principal": "*"
+                "Resource" : "LogicalResourceId/MyEC2Instance"
+            }]}
+
+CFN - Nested Stacks
+    - can put a CFN in a CFN
+
+CFN - Rollbacks
+    - when a CFN operation fails/erros, you can "Rollback" the stack to where it was before the operation
+        - this is on by default
+        - operation like create update, destroy
+
+CFN - resource attributes
+    - when you write a CFN yaml file, you'll probably see and/or use these cool features/flags/attributes
+    Creation Policy
+        - when something/resource is created
+    Deletion Policy
+        - how to delete ("Retain" "Snapshot" "Delete")
+    Update Policy
+        - how to update
+    DependsOn
+        - force an order, but CFN is usually smart
+    MetaData
+        - add metadata
+    UpdateReplacePolicy
+        - ?
+
+CFN - IaC Generator
+    - you can select resources in your AWS account, and AWS will generate you a CFN template !!!
+    - COOL
+
+AWS Application Composer 
+    - plug in your CFN template ...
+    - See a cool UI of your resources with its name, ID ect
+    - boxes and arrows
+    Canvas | Template
+
+CFN - Init
+    - like "User Data" scripts, the start up scripts ran on EC2
+    - but they are in CFN yaml files, does the same thing, just alternate way
+
+
+CFN - Hup 
+    - a daemon that runs on EC2 instances. 
+    - it monitors metadata changes in AWS CloudFormation stacks and execute custom actions (hooks) when those changes occur.
+    (short for cfn-hup) 
+    - checks in 15 min intervals
+    - apparently freakin sucks says Andrew Brown
+
+CFN - Registry 
+    - you can use "custom resource types"
+    custom resource types = defining infrastructure components not natively supported by CFN,
+        but you treat it like normal AWS resources in your templates.
+    - very complex
+    - very developer
+
+EKS Elastic Kubernets Service
+    - for its compute nodes, EKS can use:
+        - EC2s (duh)
+        - Fargate instances
+        - on prem instances (external; google, ect)
+
+
+
+Open Telemetry - Instrumentation
+
+    - Instrumentation is the act of embedding a monitoring library into your existing application 
+        in order to capture monitoring data such as: metrics, traces or logging
+
+    supporta practically all lanagues, and has plug-and-play for Spring, ASP.NET CORE, Express
+
+
+Open Telemetry - Collector
+
+    - an agent installed on a machine, 
+    - receive and export telemetry data
+    - vendor agnostic
+    - It removes the need to run, operate, and maintain multiple agents/collectors.
+
+
+AWS Glue DataBrew 
+    is a visual data preparation tool that enables users to clean and normalize data without writing any code.
+
+- helps reduce the time it takes to prepare data for analytics
+and machine learning (ML) by up to 80 percent
+- choose from over 250 ready-made transformations to
+automate data preparation tasks
+- can more easily collaborate to get insights from raw data
+- Serverless offering so pay for what you use
+
+
+
+AWS Glue DataBrew 
+    - you clean and normalize data without writing code. 
+    - is a visual data preparation tool
+    - no code
+    - near UI 
+        - drag and drop, boxes and arrows
+
+
+Recall 
+    Transactions
+        - a change hat will occure to a database
+        - if any dpeendant condtion fails, then the transaction will rollback as if nothign happened
+        - are ACID
+            - Atomic
+            - Consistency
+            - Isolation
+            - Durability
+
+DynamoDB Transactions 
+        Calculating Reads
+            Read capacity units
+                1 RCU = 10 strongly consistent reads
+                1 RCU = 20 eventually consistent reads
+
+            How to calculate RCUs for strong            How to calculate RCUs for eventual
+                1. Round data up to nearest 4.              1. Round data up to nearest 4.
+                2. Divide data by 4                         2. Divide data by 4
+                3. Times by number of reads                 3. Times by number of reads
+                                                            4. Divide final number by 2 ( Round up
+
+            ex) 10 reads at 6KB per item  ===> (8kb/4) x 10reads = 20 RCUs
+                33 reads at 17KB per item. ===> (20/5) x 33 = 165 RCUs
+                
+        Calculating Write 
+            - 50 writes at 40KB per item ===> 40kb x 50 writes = 2000 WCU
+            - 11 writes at 1 KB per item ===>  1kb x 11 writes = 11 WCU
+    
+DynamoDB TTL
+    - Time to Live TTL lets you have items in DynamoDB to expire at a given time
+    - good for keeping databses small and manageable
+
+DynamoDB - Errors
+    - VERY COMMON:
+    a. ThrottlingException
+        - General throttling
+        - The rate of requests exceeds the allowed throughput. 
+        - Can happend in ON DEMAND mode
+        - occurs when rapidly doing these operations:
+            CreateTable, 
+            UpdateTable, 
+            DeleteTable
+
+    b. ProvisionedThroughputExceededException
+        - RCU/WCU throttle error
+        - You exceeded your maximum allowed provisioned throughput for a table or for one or more
+            global secondary indexes.
+        -  using provisioned mode
+        
+    - The AWS SDK will automatically retry with Exponential Backoffs when an error occurs:
+        It will attempt the request again 50ms, 100ms, 200ms, up to a minute before stopping.
+
+DynaomoDB Indexes
+    
+    - indexes are data structures 
+    - improves data retrieval. 
+    - allows you to query data on non-Primary Key attributes.
+    - two types
+    - you can use both LSI and GSI in the same table, but:
+        - LSIs must be defined at table creation.
+        - GSIs can be added anytime after table creation.
+
+    - LSI = (optional) ALL IT IS IS DIFFERENT SORTING STRATEGIES 
+    - GSI = (optional) BEING ABLE TO QUERY ON OTHER ATTRIBUTERS
+
+
+        1. Global Secondary Index (GSI)
+            - Can use ANY attribute 
+            - Independent of the main table's schema.
+            - Supports eventual or strongly consistent reads (with some limitations).
+            - Use case: Query data using a different attribute than the table’s primary key.
+            -> just sorting/filtering differently.
+
+        2. Local Secondary Index (LSI)
+            - same partition key BUT diff sort key.
+                - "Shares the same partition key as the base table but has a different sort key"
+            - Supports both eventual and strongly consistent reads.
+            Use case: You want different sort orders or filters on the same partition key.
+
+        | Feature          | Primary Key        | LSI                    | GSI                        |
+        | ---------------- | ------------------ | ---------------------- | -------------------------- |
+        | Partition Key    | Required           | Same as table          | Can be different           |
+        | Sort Key         | Optional           | Different from table's | Optional, can be different |
+        | Creation Time    | Table creation     | Table creation only    | Any time                   |
+        | Read Consistency | Strong or eventual | Strong or eventual     | Eventual only (usually)    |
+
+Dynamo PartiQL
+        - a SQL compatrible query lanague for DynamoDB
+
+Dynamo NoSQL WorkBench
+    - NoSQL Workbench for DynamoDB is a desktop GUI tool to help design, model, visualize, and query DynamoDB tables. 
+    - useful when working with NoSQL data models, which can be more complex and less intuitive than relational models.
+
+DynamoDB Local
+    - run a local verson of DynamoDB.
+    - easiest to run its docker
+
+API Gateway
+    REST Endpoint Types
+        - recall, with API GW, You’re routing to a managed service, not your own VM. but then you map a domain to AWS-managed infrastructure.
+        - API GW makes you chooise 1 of 3 special endpoints, each with unique characterstics
+    3 REST Endpoint types:
+        a.  Edge-Optimized Endpoint (default)
+                - Requests (from around the world) are routed to the nearest AWS edge location.
+                - CloudFront then sends the request to your API in the region you deployed it.
+                - Traffic flows through AWS CloudFront (CDN).
+                Use case: Public APIs with global clients.
+                eg) 
+                    https://abc123.execute-api.us-east-1.amazonaws.com/prod
+        b. Regional Endpoint
+            - Traffic goes directly to the AWS region where the API is deployed.
+            - the user's request goes directly to us-west-2, over the public internet — no edge acceleration.
+            -> public internet
+            Use case: If you want to manage your own CDN
+                If your clients are mostly in one region (???)
+
+        c. Private Endpoint
+            - Only accessible from within your VPC using AWS PrivateLink.
+            - no public internet.
+            -> VPC endpoint (interface type).
+            Use case: Internal services, microservices inside a private network.
+
+            | Type           | Internet Accessible? | CloudFront Used? | VPC Required? | Best For                   |
+            | -------------- | -------------------- | ---------------- | ------------- | -------------------------- |
+            | Edge-Optimized | ✅ Yes              | ✅ Yes           | ❌ No         | Global public APIs         
+            | Regional       | ✅ Yes              | ❌ No            | ❌ No         | Custom CDNs (or weird Regional traffic?)
+            | Private        | ❌ No               | ❌ No            | ✅ Yes        | Internal, Private VPC-only services 
+
+    REST API Throttling
+        - can happen here
+        - you are limited
+        - can do Quota per month
+        - can do Burst or Rate limits
+        ---> 429 Too Many Requests
+        a. AWS account
+            - 10,000 requests per seconds (RPS) per region on all your API GWs
+        b. Usage Plan (Per API)
+            - you set Usage Plans (throttling) 
+            - x-api-key header
+        c. Per client 
+            - clients limited
+
+    HTTP Throttling
+
+        a. AWS account
+            - 10,000 requests per seconds (RPS) per region on all your API GWs\
+            - yes repeat
+        b. Route level
+            - you can throttle pass on path `/dev/pets`
+
+    HTTP Cloudwatch Logging
+        - get super super detailed logs for every request
+        - is a pain to set up
+        - some config file thatyou write
+        
+
+AWS Cognito
+    - is a CIAM system (Customer Idenity and Access Management)
+        CIAM = managing the identities of external users (like customers, partners, or subscribers), as opposed to internal users (like employees).
+    - does authentication
+
+    Cognito User Pools
+        duties:
+        - User registration and login
+        - Authentication (with username/password or social/enterprise identity providers)
+        - MFA, email/phone verification
+        - User profile management
+
+    Cognito Identity Pools 
+        (also called Federated Identities)
+        - authorization to AWS resources via temporary AWS credentials.
+        - Maps authenticated users or unauthenticated users (guests) to IAM roles
+        - Issues temporary AWS credentials through STS (Security Token Service)
+        - Use case: When users (authenticated or guest) need to access AWS services (like S3, DynamoDB) directly from a frontend/mobile app.
+
+    Cognito Sync (Deprecated / Legacy)
+        - for syncing user data across devices
+        - Allowed key-value data sync for offline use
+        - Superseded by AWS AppSync, Amplify DataStore, or directly using services like S3/DynamoDB
+
+        | Type           | Examples                         | Protocols Used            |
+        | -------------- | -------------------------------- | ------------------------- |
+        | Social         | Google, Facebook, Twitter, Apple | OAuth 2.0, OpenID Connect |
+        | Enterprise     | Microsoft AD, Okta, Ping, Auth0  | SAML, OIDC                |
+        | Custom         | Your own backend auth system     | OIDC, SAML, custom tokens |
+
+
+    - IF YOUR DOING MULTI TENANCY with cognito, use seperate User Pools
+NOTE
+    Multi-tenancy 
+        - when a single instance of an application serves multiple customers (tenants), while keeping their data and configurations logically separated.
+            - Same database, tables, and application code.
+            - (sometimes, One codebase, but each tenant has its own database.)
+        Tenant = A distinct customer or user group (e.g., company A, company B).
+        
+    (not as important)
+    - Single tenency
+        eg)
+        - Enterprise Software (Self-Hosted or Dedicated Instances)
+        - typically deployed per customer:
+            - Atlassian Jira/Confluence (Data Center editions)
+            - SAP or Oracle ERP systems
+            - Salesforce Government Cloud (GovCloud) (can run in tenant-isolated mode)
+            - Elastic Stack (self-managed clusters per customer)
+            - Microsoft Exchange Server (when hosted per organization)
