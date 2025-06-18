@@ -1,17 +1,647 @@
-    
-    App2Container
-    efs elastic vs bursting
-    Tag Policy
-    Active-Passive application
-    active-active
-    Amazon QuickSight
-    
-    
-    
-    
-    
-    
+1. IAM
     IAM Access Advisor
+    IAM Access Analyzer
+    IAM Permission Boundaries
+    "NotAction" IAM keyword
+    IAM Roles vs Resource Based roles
+    Federated Identity in AWS
+        SAML
+        Web Identity Federation
+    Microsoft AD
+    AWS Directory Services
+        AWS Managed Microsoft AD
+        AD Connector
+        Simple AD
+    AWS Organizations
+        "OrganizationAccountAccessRole" IAM role
+        Feature Modes
+            a. Consolidated Billing Only
+            b. All Features
+        Moving Accounts
+        Service Control Policies (SCPs) 
+        aws:TagKeys 
+        Tag Policies
+        AI Services Opt-out policies
+        Back up Polcies
+    AWS IAM Idenity Center  
+    AWS Control Tower
+        Landing Zone 
+        Account Factory
+        AWS Service Catalog 
+        AWS Guardrails 
+            Types
+                a. Preventive Guardrails
+                b. Detective Guardrails
+            Levels
+                1. Mandatory Guardrails
+                2. Strongly Recommended Guardrails
+                3. Elective Guardrails
+    AWS Resource Access Manager (RAM) 
+
+2. SECURITY
+    CloudTrails
+        CloudTrail Insights
+        CloudTrail + EventBridge
+        Event type
+            Management Events
+            Data Events
+        Multi-Region Logging
+        Organization trail
+        "Programatic" Event arch
+            a. CloudTrail + EventBridge Integration
+            b. CloudTrail + CloudWatch Logs Integration
+    AWS Key Managment Server KMS
+        Key material Origin
+            a. KSM-Manged keys / AWS-Generated Keys
+            b. External
+            c. Custom Key Store (cloudHSM)
+        Multi Region Keys
+    AWS Systems Manager Parameter Store 
+        Secrets via Param Store
+        "Public Parameters"
+        Standard vs Advanced
+        Parameter Policies
+        "Rotation"
+    AWS Secrets Manager 
+        Secret Rotation
+        Secret Manager vs SSM Parameter Store
+    AWS RDS Security
+    Server Name Indication (SNI) 
+    (recall) Public and Private Certifcates
+    AWS Certificate Manager (ACM)
+    S3 Security
+        Encryption
+        S3 Access Logs (aka Server Access Logging) 
+        Policies
+            - aws:SourceIp  
+            - aws:SourceVpc
+            - awsSourceVpce
+        Glacier Vault Lock
+        Access Points
+            VPC only access
+    DDos protection
+    AWS WAF - Managed Rules
+        Rule Groups
+        WAF Logging 
+        Pro Tip
+    Random note
+        Amazon API Gateway (Private) 
+        VPC Private & Public subnet communication
+    AWS Firewall Manager
+    Amazon Inspector
+    AWS Config
+    AWS Managed Logs (topic)
+    Amazon GuardDuty
+    IAM Conditions
+        aws:sourceIP
+        aws:requestedRegion
+        ec2:ResourceTag + aws:PrincipleTag
+        aws:MultiFactorAuthPresent
+        aws:PrincipleOrgID
+        Null
+    AWS Security Hub
+    Amazon Detective
+    Solution Architecture on AWS (tip)
+
+3. COMPUTE
+    EC2 Placement Groups
+        Cluster
+        Partition
+        Spread
+        trick
+        Host Affinity
+        graviton 
+        EC2 default metrics
+        EC2 Enhanced Metrics 
+    Elastic File System (EFS)
+        EFS Throughput Modes
+            1. Bursting Throughput (default)
+            2. Provisioned Throughput
+        EFS Performance Modes 
+            1. General Purpose Mode (default)
+            2. Max I/O Mode
+    AWS ParallelCluster 
+    High Performance Computing (HPC)
+        Data managment
+        Compute & Networking
+        EC2 Enhanced netowrking (SR-IOV)
+            a. Elastic netowrk Adapter (ENA) 
+            b. Elastic Fabric Adapter (EFA)
+        Storage
+        Netowrk Storage
+        Automation & Orchestarton
+    Auto Scaling Groups
+        ASG + CloudWatch
+        Good metrics to scale on
+        Spot Fleet Support
+        Lifecycle hooks
+        EC2 Instance Refresh
+        Warm Up Time
+        Scaling Processes
+        Health checks
+        Updating app possible strategies
+    Spot Instance
+        User Defined Max Price
+        Spot Fleets
+    AWS Fargate
+    AWS Elastic Container Service (ECS)
+        ECS w/ ALB Integration
+        ECS Networking
+        ECS Service Auto Scaling 
+        ECS Task Placement Strategies
+        ECS Capacity Provider
+        ECS Draining Hooks
+        ECS Spot Instance
+        Fargate Spot
+        EC2 Spot
+    Elastic Container Repository (ECR)
+        Private Repo
+        Public Repo
+        Cross Region Replication
+        Image Scanning
+            Basic Scanning
+            Enhanced Scanning
+    Elastic Kubernetes Service
+        Node Types
+        Managed Node Groups
+        Self Manged Nodes
+        Fargate mode
+        Storage Class / Data Volumes
+        IAM Roles for Service Accounts (IRSA)
+        Dynamic Provisioning
+        Storage Access modes
+        EKS Anywhere
+    ECS Connector
+    AWS Lambda integration:    
+    Limits:
+    CodeDeploy with Lambda
+    Pre-Traffic and Post-Traffic Hooks
+    AWS Lambda Service
+        AWS Lambda Control Plan
+        Lambda Function URL
+        Lambda in a VPC
+        Lambda that's in VPC + IP public
+        Lambda Outbound Internet 
+            1. Default
+            1. Public Subnet (with IGW)
+            2. Private Subnet (no IGW)
+        Lambda w/ FIXED IP
+            1. NAT Gateway + VPC + Elastic IP (Most Common)
+            2. AWS NLB + Static IPs + Proxy
+            3 AWS VPC Endpoint
+        Lambda Event Source Mapping
+
+4. TRAFFIC
+    Elastic Load Balancers
+        Classic Load Balancer (V1) 
+        Application Load Balacner
+        Network load balancer
+            NLB cross-region balacning
+            a. Regional DNS name
+            b. Zonal DNS name for each AZ
+        Gateway Load Balancer (GLB)
+        Cross Zone Load Balancing 
+        Routing Algorithms
+            a. Least Outstanding Requests
+            b. Round Robin
+            c. Weighted Random
+            d. Flow Hash
+    (recall) Anycast IP
+    AWS API Gateway:
+        caching
+        Limits
+        PAYLOAD SIZE SOLUTION
+        TIME SOLUTION
+        API GW Authentication
+        API Gateway - Logging, Monitoring, Tracing
+        Usage Plans
+        API Keys
+        WebSocket API
+        Private APIs
+        API Gateway resource policy
+        API GW Codes
+        API GW Edge Optimized & CloudFront
+        API GW Edge vs Optimized Global Accelerator 
+    AWS AppSync 
+    AWS Route 53 
+        Alias Records Targets
+        Record TTL (Time To Live) 
+        Routing Policies
+        IP-Based Routing
+        Public Zones
+        Private Zones
+        R53 Health Checks
+        Calculated Health Checks
+        Monitoring an Endpoint
+        Situation:
+        Route 53 Resolver
+        Hybrid DNS
+    AWS Global Accelerator
+        Client IP address preservation
+    AWS Outposts
+    AWS WaveLength
+    AWS Local Zones
+
+5. STORAGE 
+    Elastic Block Storage
+        Amazon Data Lifecycle Manager (DLM)
+        Encryption - Account level setting
+        Instance store 
+    Elastic File System (EFS)
+        Mount Targets
+        Performance Characteristics
+            1. Performance Modes
+                a. General Purpose (default)
+                b. Max I/O
+            2. Throughput Modes
+                a. Bursting Throughput (default)
+                b. Provisioned Throughput
+                c. Elastic Throughput
+            Storage Tiers 
+                1. Standard (Primary Tier)
+                2. Infrequent Access (IA) Tier
+        Lifecycle Management Policy 
+        Mount EFS
+        EFS Access Points
+        File System Policies
+        Cross-Region Replication
+
+    S3 Buckets
+    S3 Replication Time Control (RTC) 
+    S3 Events
+    S3 Multipart upload
+    S3 Analytics / Storage Class Analytics
+    S3 Storage Lens
+    S3 Storage Lens: Free Vs Advanced (Paid)
+    S3 "indexing system" 
+
+    Amazon FSx
+        FSx for Windows (File Server)
+        FSx for Luster
+            Data Lazy Loading
+        FSx for NetApp ONTAP
+        FSx for OpenZF
+        FSx Deployment Options
+            a. Scratch File System
+            b. Persistent File System
+        Archetecture solutions
+
+    AWS DataSync
+    AWS Data Exchange
+    AWS Transfer Family
+        1. Public Endpoint
+        2. VPC Endpoint (Internal Access)
+        3. VPC Endpoint (Internet-facing Access)
+
+6. CACHE
+    AWS CloudFront
+        Origins
+        Access Control
+        Origin Groups
+        Geo Restriction 
+        Price Classes 
+        Signed Cookies
+        Signed URLs
+        Custom Error Pages
+
+    Lambda@Edge
+    Cloudfront Functions
+    ElastiCache
+    EXTREME Rates
+    AWS Elemental MediaConvert
+    AWS Elemental MediaPackage
+    AWS Elemental MediaStore
+    Questions
+        @cloudfront
+        Private ALB 
+
+7. DATABASE
+    DynanoDB
+        Primary Keys
+        Table Classes 
+        Indexes 
+            a. Global Secondary Index (GSI)
+            b. Local Secondary Index (LSI)
+        Time to Live (TTL)
+        dynamoDB Streams
+        dynamoDB Global Tables
+        Kinesis Data Streams for DynamoDB 
+        ACID
+        Indexing S3 
+            1. S3 + Lambda + DynamoDB (Serverless Metadata Index)
+            2. S3 + Amazon Athena + Glue Data Catalog
+            3. S3 + Lambda + Amazon OpenSearch Service
+            4. S3 Inventory + Athena
+            5. S3 + Lambda + External DB (MongoDB, PostgreSQL, etc.)
+    Elasticsearch
+    Amazon OpenSearch
+        a. Managed Cluster
+        b. Serverless Cluster
+    AWS RDS
+        RDS Security (reminder)
+        RDS Oracle
+        RDS MySQL
+        Cross Region Failover Architecture
+    AWS Aurora
+        Aurora Logs
+        Aurora Endpoints
+        1. Cluster Endpoint (Writer Endpoint)
+        2. Reader Endpoint
+        3. Instance Endpoint
+        4. Custom Endpoint
+        Debug Performance
+        RDS Proxy
+        Aurora Serverless Data API
+        Aurora Cross-Region Read Replicas 
+        Auora Global Databases - Write Forwarding
+        Convert RDS DB to Aurora DB
+    Qs
+
+8. MICROSERVICES
+    AWS Step Functions
+        Express Workflows
+        Standard 
+    AWS Simple Queueing Service (SQS)
+        Dead Letter Queue (DLQ)
+        Redrive to Source
+        Event Source Mapping (ESM) 
+        Request / Response queue
+    AWS Simple Notification Service (SNS)
+        Fan out trick
+        Cross-Region Delivery
+    Qs 5
+
+9. BIG DATA
+    AWS MQ
+    AWS Kinesis
+    AWS Firehose
+        Data Transformation
+        Comparison Chart 
+    Amazon Managed Streaming for Apache Kafka (Amazon MSK)
+    AWS Batch
+    Elastic MapReduce (EMR) 
+    Jobs on AWS
+    AWS Glue
+
+    AWS RedShift
+        Enhanced VPC Routing 
+        Snapshots
+        Disaster Recovery   
+        Redshift Workload Management (WLM)
+        Concurrency Scaling
+
+    Amazon TimeSeries
+    AWS Athena
+        Performance Improvement
+        Federated Query
+    AWS Quicksight
+        SPICE 
+        Dashboard & Analysis
+    EMR vs Athena vs Redshfit
+    Qs 7 
+
+10. OBSERVABILITY      
+    Cloudwatch Synthetics
+    CloudWatch Logs Insights 
+    CloudWatch Logs Metric Filter 
+    CloudWatch Logs S3 Exports 
+    CloudWatch Logs Subscriptions 
+    CloudWatch Log Aggregation. Multi Account & Multi region
+    CloudWatch Agent - Integration with SSM
+    Cloudwatch EventBridge
+        Resource-Based Policies 
+        Custom Event Bus
+        Default Event Bus
+        Partner Event Bus
+    X-Ray
+
+    AWS Personal Health Dashboard
+        Health Event Notifications
+    AWS Health API
+    Amazon Pinpoint 
+    Qs
+
+11. CI/CD
+    Elastic Beanstalk
+        "3 architecture models"
+        Blue / Green Deployment
+    AWS CodeDeploy
+        CodeDeploy agent
+        Two Deployment Modes
+            In-Place (EC2 & ASG/EC2):
+            Blue/Green (EC2, ASG/EC2, ECS, Lambda):
+        1. Code Deploy on EC2
+        2. Code Deploy on ASG
+        3. Code Deploy on Lambda
+        4. Code Deploy on ECS
+
+    AWS CloudFormation
+        DeletionPolicy 
+        Custom Resources 
+        StackSets
+        Automatic Deployment 
+        Drift detection
+        AWS Secrets Manager Integrates 
+        Resource Import
+
+    AWS Service Catalog
+    AWS Serverless Application Model (SAM)
+    AWS CDK (Cloud Development Kit)
+    AWS Systems Manager:
+        SSM Automation
+        OpsCenter 
+    AWS Cloud Map
+    Qs 
+
+12. BILLING 
+    AWS Cost Allocation Tags
+    AWS Tag Editor 
+    AWS Trusted Advisor 
+    AWS Service Quotas 
+    AWS Budgets 
+    AWS Cost Explorer 
+    AWS Compute Optimizer 
+    Reserved Instances in an AWS Organization
+    Renewal of Reserved Instances
+
+13. ON-PERM DATA & BACK UP 
+    Could Migration Strategires: The 7Rs
+        1 Retire 
+        2 Retain
+        3 Rehost 
+        4 Relocate
+        5 Repurchase 
+        6 Replatform 
+        7 Refactor / Re-architect
+    AWS Storage Gateway
+        S3 File Gateway
+        Storage Gateway Hardware Appliance
+    AWS Snowball
+        "Amazon s3 adapter for snowball"
+        Snowball + Database Migration Service (DMS) combo migrat
+    AWS Cloud Adoption Readiness Tool (CART)
+    Disaster Recovery 
+        Recovery Point Objective
+        Recovery Time Objective
+        Disaster Recovery Options
+            1 Backup and Restore 
+            2 Pilot Light
+            3 Warm Standby
+            4 Multi Site / Hot site approach
+        Disaster Recovery Tips
+    AWS Fault Injection Simulator (FIS) 
+    AWS Application Discovery Service 
+        AWS Application Discovery Agent
+        AWS Application Discovery Agentless Connector
+        AWS Migration Hub Import (CSV Import)
+        AWS Hub Data Exploration 
+    AWS Application Migration Service (AWS MGN)
+    AWS Elastic Disaster Recovery (AWS DRS)
+    AWS Backup
+    RECAP - On-premises strategy with AWS
+    AWS Migration Evaluator 
+    Qs 
+
+14. VPC NETWORKING
+    AWS VPC 
+        VPC Peering
+        Transit Gateway
+    VPC Endpoints
+    VPC Endpoint Policies 
+    AWS Virtual Private Network
+        Route Propagation 
+
+    AWS VPN CloudHub
+    AWS Client VPN
+    AWS Direct Connect
+        Private VIF 
+        Public VIF 
+        Transit VIF
+        Dedicated Connection 
+        Link Aggregation Group (LAG) 
+        Direct Connect Gateway (DX Gateway)
+        Transit GW + Direct Connect GW
+        SiteLink
+        VPC FLow Logs
+    AWS Network Firewall 
+    Qs
+
+15. MACHINE LEARNING
+    AMazon Rekognition
+    Amazon Transcribe
+    Amazon Polly
+    Amazon Translate
+    Amazon Connect
+    Amazon Comprehend Medical
+    Amazon SageMaker
+    Amazon Kendra
+    Amazon Lex
+    Alexa for Business
+    
+16. STUFF
+    CodeCommit
+    CodePipeline
+    GitHub Webhook
+    Amazon WorkSpaces
+    Amazon App Stream 2.0
+    Amazon Simple Email Service (Amazon SES)
+    Amazon Pinpoint 
+    EC2 Image Builder 
+    AWS IOT
+        1. AWS IoT Core
+        2. AWS IoT Device Defender
+        3. AWS IoT Device Management
+        4. AWS IoT Events
+        5. AWS IoT Greengrass
+        6. AWS IoT SiteWise
+        7. AWS IoT Things Graph (Deprecated – service no longer actively developed)
+        8. AWS IoT 1-Click
+
+    Qs
+    AWS Proton
+    AWS Service Quotas 
+    AWS App2Container (A2C) 
+    Active/active and active/passive
+    Amazon Managed Blockchain
+    AWS Tag Policies 
+---------------- 
+--ANDREW BROWN-- 
+----------------
+    API Gateway - Errors
+    SSM Agent
+    S3
+        Object Ownership
+        S3 Access Grants 
+        S3 CORS
+        Object versions
+        S3 Multi region access points
+        S3 Object Lambda access points
+        S3 Glacier  
+        S3 Archieved Objects
+            Restoring from S3 Glacier
+        S3 Intelligent Tiering
+        Requester Pays
+            - S3 Batch Operations
+        S3 Object tags
+        S3 Server (Access) Logs
+        S3 Static Website Hosting
+    AWS CLI - Wizards
+        $ wait 
+        $ --filter
+    AWS Quick Starts
+    Cloudformation
+        CFN - Stack Updates
+        CFN - Stack Policy
+        CFN - Nested Stacks
+        CFN - Rollbacks
+        CFN - resource attributes
+        CFN - IaC Generator
+        AWS Application Composer 
+        CFN - Init
+        CFN - Hup 
+        CFN - Registry 
+    EKS Elastic Kubernets Service
+    Open Telemetry - Instrumentation
+    Open Telemetry - Collector
+    AWS Glue DataBrew 
+    DynamoDB Transactions 
+    DynamoDB TTL
+    DynamoDB - Errors
+        a. ThrottlingException
+        b. ProvisionedThroughputExceededException
+    DynaomoDB Indexes
+        1. Global Secondary Index (GSI)
+        2. Local Secondary Index (LSI)
+    Dynamo PartiQL
+    Dynamo NoSQL WorkBench
+    DynamoDB Local
+    API Gateway
+        a.  Edge-Optimized Endpoint (default)
+        b. Regional Endpoint
+        c. Private Endpoint
+    REST API Throttling
+    HTTP Throttling
+    HTTP Cloudwatch Logging
+    AWS Cognito
+        Cognito User Pools
+        Cognito Identity Pools 
+        Cognito Sync (Deprecated / Legacy)
+    Multi-tenancy 
+
+
+
+
+
+
+
+
+###########################
+####                   ####
+####       IAM         ####
+####                   ####
+###########################
+
+IAM Access Advisor
     - view permissions granted and when last accessed
     -  helps you identify resources in your AWS environment that are shared with an external entity. 
     - When a resource is shared externally, IAM Access Analyzer generates a finding, which details what access is granted, to whom, and how.
@@ -32,17 +662,30 @@ IAM Permission Boundaries
     - intersection of 2 IAM polcies
         - if Policy A allows s3:*, Permissond Boundarie named Policy B allows ec2:* then NO PERMISSIONS
     
-NotAction
+"NotAction" IAM keyword
     - an IAM keyword
     - explicitly exclude specific actions from Allow or Deny
+    - you specify exceptions to the actions that are allowed or denied.
+    - NotAction works as the inverse of Action
     {
       "Effect": "Allow",
+      "Resource": "*"
       "NotAction": [
         "ec2:TerminateInstances",
         "ec2:DeleteVolume"
       ],
-      "Resource": "*"
     }
+    - this allows you to do ANYTHING but cannot deleteVolume or TerminateInstances
+
+    {
+    "Version": "2012-10-17",
+    "Statement": {
+        "Effect": "Deny",
+        "NotAction": "s3:*",
+        "Resource": "*"
+    }
+    - denies all actions except S3 actions
+
 
         Navigate Examples at: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_examples.html
 
@@ -54,7 +697,6 @@ IAM Roles vs Resource Based roles
     - Zone of Trust = accounts and orgs you own
     - outside Zone of T = 3rd party
         
-    
 Federated Identity in AWS
     - Give users outside of AWS permissions to your AWS resources WITHOUT creating IAM users
     Use cases
@@ -66,85 +708,84 @@ Federated Identity in AWS
         - Web ID Federatin with (or w/o) Cognito
         - IAM Identity Center (Formerly AWS SSO?)
             - ^ is easier to setup then doing SAML STS shenanigans
-            
-    SAML federation with AWS (API ACCESS)
-        - (Even though IAM ID Center is much easier, we still have to learn this he says)
-        1. User makes request to thier ID Provider (IdP, Okta?)
-        2. IdP authenticates, does magic, ect
-        3. IdP gives a "SAML Assertion" (some temp ID?)
-        4. User requests a token (via STS) using AssumeRoleWithSAML API
-        5. STS gives temp token
-        6. Done. You got token, wrap it up and accessyour s3 bucket or w/e
     
-    SAML federation with AWS (Console Access) 
-        - yes the Console like on the website
-        repeat 1-3
-        4. With your SAML Assertion "sign in" programmatically to https://signin.aws.amazon.com/saml, 
-        5. STS gives a special Sign-In URL 
-        6. Done
-    
-    SAML federation - Activree Directorty FS (ADFS)
-        - exactly the same, just the IdP provider uses Microsoft AD. (Under the hood imo)
-        - repeat 1-6 of Console Access
-    
-    Web Idenitty Federation - OpenID - without Cognito
-        - not recommend (but you need to know)
-        1. User logs in to Google/facebook/ect, programmatically
-        2. Gets Web ID Token
-        3. User requests a token (via STS) using AssumeRoleWithWebIdenity API
-        4. SSTS gives temp token
-        5. Down. You got token, ect, s3 buckets or /we
+    SAML
+        SAML federation with AWS (API ACCESS)
+            - (Even though IAM ID Center is much easier, we still have to learn this he says)
+            1. User makes request to thier ID Provider (IdP, Okta?)
+            2. IdP authenticates, does magic, ect
+            3. IdP gives a "SAML Assertion" (some temp ID?)
+            4. User requests a token (via STS) using AssumeRoleWithSAML API
+            5. STS gives temp token
+            6. Done. You got token, wrap it up and accessyour s3 bucket or w/e
+        
+        SAML federation with AWS (Console Access) 
+            - yes the Console like on the website
+            repeat 1-3
+            4. With your SAML Assertion "sign in" programmatically to https://signin.aws.amazon.com/saml, 
+            5. STS gives a special Sign-In URL 
+            6. Done
+        
+        SAML federation - Activree Directorty FS (ADFS)
+            - exactly the same, just the IdP provider uses Microsoft AD. (Under the hood imo)
+            - repeat 1-6 of Console Access
+        
+        Web Idenitty Federation - OpenID - without Cognito
+            - not recommend (but you need to know)
+            1. User logs in to Google/facebook/ect, programmatically
+            2. Gets Web ID Token
+            3. User requests a token (via STS) using AssumeRoleWithWebIdenity API
+            4. SSTS gives temp token
+            5. Down. You got token, ect, s3 buckets or /we
     
      
-    
-    Web Idenitty Federation - OpenID - WITH Cognito
-        - Practicaly same, but 
-        1. User takes Web ID Token to Cognito first, 
-        2. then Cognito gives you token that you 
-        3. then give to STS
-        - Cognito supports MFA, Anonymou susers, and Data Synchronatiion (?)
-        - Cognito replaces "Token Vending Machine" (TVM)
-    
-    Web Identity Federation - IAM Policy
+    Web Identity Federation
+        Web Identity Federation - OpenID - WITH Cognito
+            - Practicaly same, but 
+            1. User takes Web ID Token to Cognito first, 
+            2. then Cognito gives you token that you 
+            3. then give to STS
+            - Cognito supports MFA, Anonymou susers, and Data Synchronatiion (?)
+            - Cognito replaces "Token Vending Machine" (TVM)
         
-        Pretty cool trick!
+        Web Identity Federation - IAM Policy
+            
+            Pretty cool trick!
 
-        - the User 'logged in' can be given 'dynamic' IAM policies
-        - "After being authenticated with Web ID Federation, you can identify the user with an
-                IAM policy variable"
-        
-        - This policy says Federated User can only access 'his section' of the bucket
-        
-        {
-            "Version": "2012-10-17",
-            "Statement": [
-              {
-                "Effect": "Allow",
-                "Action": "s3:ListBucket",
-                "Resource": "arn: aws: s3: : : myBucket",
-                "Condition": {
-                "StringLike": {
-                    "s3:prefix": "Amazon/mynumbersgame/${www.amazon.com:user_id}/*"
-                  }
-                }, {
+            - the User 'logged in' can be given 'dynamic' IAM policies
+            - "After being authenticated with Web ID Federation, you can identify the user with an
+                    IAM policy variable"
+            
+            - This policy says Federated User can only access 'his section' of the bucket
+            
+            {
+                "Version": "2012-10-17",
+                "Statement": [
+                {
                     "Effect": "Allow",
-                    "Action": ["s3:Get0bject", "s3:Put0bject", "s3:Delete0bject"],
-                    "Resource": [
-                        "arn:aws: s3: : : myBucket/amazon/mynumbersgame/${www.amazon.com:user_id}",
-                        "arn:aws: s3: : : myBucket/amazon/mynumbersgame/${www.amazon.com:user_id}/*"
-                    ]                                                          /|\
-            }}}}                                                                |
-                                                                                |
-                                                           www.amazon.com:user_id = the dude that logged in
-        Varible options:
-        - cognito-identity.amazonaws.com:sub
-        - www.amazon.com:user_id
-        - graph.facebook.com:id
-        - accounts.google.com:sub
+                    "Action": "s3:ListBucket",
+                    "Resource": "arn: aws: s3: : : myBucket",
+                    "Condition": {
+                    "StringLike": {
+                        "s3:prefix": "Amazon/mynumbersgame/${www.amazon.com:user_id}/*"
+                    }
+                    }, {
+                        "Effect": "Allow",
+                        "Action": ["s3:Get0bject", "s3:Put0bject", "s3:Delete0bject"],
+                        "Resource": [
+                            "arn:aws: s3: : : myBucket/amazon/mynumbersgame/${www.amazon.com:user_id}",
+                            "arn:aws: s3: : : myBucket/amazon/mynumbersgame/${www.amazon.com:user_id}/*"
+                        ]                                                          /|\
+                }}}}                                                                |
+                                                                                    |
+                                                            www.amazon.com:user_id = the dude that logged in
+            Varible options:
+            - cognito-identity.amazonaws.com:sub
+            - www.amazon.com:user_id
+            - graph.facebook.com:id
+            - accounts.google.com:sub
     
     
-
-
 
 Microsoft AD   
     - "AD Domain Services" => Microsoft AD (any windows server)
@@ -154,13 +795,13 @@ Microsoft AD
     Active Directory Federated Services (ADFS)
         - is SSO on applications
         - SAML on 3rd party apps: AWS Console, Dropbox, Office365, ect
-AWS Directory Services
-    - 3 services
 
+AWS Directory Services
     Terms:
         trust - is a relationship that allows users in one domain (or forest) to access resources in another. 
         forest - in AD is the top-level container that holds one or more domains. It defines a security boundary.
 
+    - 3 services
     
     AWS Managed Microsoft AD
         - is Microsfot AD in AWS
@@ -200,8 +841,6 @@ AWS Directory Services
 
 
 
-
-
 AWS Organizations
 
     - You can have Orgazation Units (OU) inside of Orginazation Units
@@ -234,7 +873,7 @@ AWS Organizations
             - probably governed by SCPs.
             -  isolated from the management
 
-    OrganizationAccountAccessRole 
+    "OrganizationAccountAccessRole" IAM role
         - a predefined IAM role 
         - it is automatically created in newly created member accounts when they are added via the AWS Organizations console, CLI, or API.
         - It allows the management (master) account to assume this role in a member account to perform administrative tasks (admin tasks = tasks that only the member account can do, create their s3 bucket).
@@ -481,6 +1120,7 @@ AWS Control Tower
             - AWS Account Factory is a feature within Control Tower that focuses on the 
                 efficient creation and provisioning of new accounts.
 
+
 AWS Resource Access Manager (RAM) 
     - share yuour AWS resources with other AWS accounts
     - share with ANY account OR via your Organization
@@ -533,6 +1173,13 @@ AWS Resource Access Manager (RAM)
         - if you can choose, 
             - SSO > Federation w/ SAML 2.0
             - Cognito > Web ID Federation
+
+
+##############################
+####                      #### 
+####     Security         #### 
+####                      #### 
+##############################
 
 CloudTrails 
     - API Logs
@@ -611,7 +1258,7 @@ CloudTrails
             costs: 
                 - Based on log volume and retention
 
-KMS
+AWS Key Managment Server KMS
 
     Options A:
         Symmetric (AES-256)
@@ -779,16 +1426,16 @@ AWS Secrets Manager
         - versions: Secrets Manager maintains versioned secrets,
 
 
-        Secret Manager vs SSM Parameter Store
-        
-            | Feature                |   Secrets Manager                              |   SSM Parameter Store (SecureString)
-            | ---------------------- | ---------------------------------------------- | --------------------------------------------
-            |   Secret Rotation      | ✅ Built-in automatic rotation (via Lambda)   | ❌ No built-in rotation 
-            |   Designed Purpose     | Purpose-built for secrets                      | General configuration store 
-            |   Encryption           | KMS is mandatory                               | KMS is optional 
-            |   Versioning           | ✅ Built-in                                    | ✅ Built-in 
-            |   Pricing              | Paid per secret & API call                     | Free (Standard tier), Paid (Advanced tier)
-            |   Rotation             | yes✅                                          | no ❌ 
+    Secret Manager vs SSM Parameter Store
+    
+        | Feature                |   Secrets Manager                              |   SSM Parameter Store (SecureString)
+        | ---------------------- | ---------------------------------------------- | --------------------------------------------
+        |   Secret Rotation      | ✅ Built-in automatic rotation (via Lambda)   | ❌ No built-in rotation 
+        |   Designed Purpose     | Purpose-built for secrets                      | General configuration store 
+        |   Encryption           | KMS is mandatory                               | KMS is optional 
+        |   Versioning           | ✅ Built-in                                    | ✅ Built-in 
+        |   Pricing              | Paid per secret & API call                     | Free (Standard tier), Paid (Advanced tier)
+        |   Rotation             | yes✅                                          | no ❌ 
 
 
         params store: 
@@ -937,6 +1584,11 @@ AWS Certificate Manager (ACM)
 
 S3 Security
     Encryption
+        a. SSE-S3
+        b. SSE-KMS
+        c. SSE-C
+        d. Client-Side
+
         SSE-S3 vs SSE-KMS
             SSE-KMS pros:
                 - control who can use your encryption keys.
@@ -1004,6 +1656,11 @@ S3 Security
         - for auditors
 
     Access Points
+        1. Standard S3 Access Points
+        2. S3 Object Lambda Access Points
+        3. VPC Access Point 
+
+
         - recall, its a cool url that is scopd to a section of the bucket
         - Bucket policy might have
             "Resource": "arn:aws:s3:::example-bucket/*",
@@ -1017,6 +1674,8 @@ S3 Security
         - the Policy for the Access Point, called a Access Policy, looks very very much like a bucket policy but without a path in the bucket
 
         VPC only access
+            - They are not a separate type, but rather a network-restricted variant of standard access points.
+
             - you set VPCConfiguration during Access Point creation.
             - can make access Points only work from within a VPC
             - must use a VPC Endpoint (Interface or Gateway) 
@@ -1365,7 +2024,7 @@ Amazon Detective
     - Good b/c fast!
         - help you debug security problems
 
-Solution Architecture on AWS
+Solution Architecture on AWS (tip)
     - Usually all have similar structure
     - DNS layer (easy, r53)
     - Web Layer (load balancers, Api Gateway)
@@ -1375,6 +2034,13 @@ Solution Architecture on AWS
     - Database Layer (RDS, Aurora, DynamoDB, ect)
     - Storage Layer (EBS, EFS, S3)
     - Decoupling Orchestartion Layer (SQS, SNS, Kinesis, AmazonMQ, Step Function)
+
+
+##############################
+####                      #### 
+####     Compute          #### 
+####                      #### 
+##############################
 
 EC2 Placement Groups
     Cluster
@@ -1400,13 +2066,14 @@ EC2 Placement Groups
         - diffenent AZ & diff hardware
         -> Critical apps
 
-    Features:
+    trick:
         - You can move EC2s in or out of a placment group
             1. stop the EC2
             2. CLI command
                 $ aws ec2 modify-instance-placement --instance-id i-0123456789abcdef0 --group-name my-cluster-group
 
             3. start the EC2
+
     Host Affinity
         - when Dedicated Hosts (EC2 on reserved physical server)
         - host affinity = EC2 reboots are kept on the SAME HOST
@@ -1598,7 +2265,30 @@ High Performance Computing (HPC)
         AWS ParallelCluster
 
 
-Recall
+
+EC2 health check
+    - EC2 itself does not perform application-level health checks :O
+
+    - Two types of status checks:
+        1 System Status Checks
+            - Monitors AWS infrastructure hosting your instance (eg, hardware failure, loss of network).
+            - Not under your control.
+        2 Instance Status Checks
+            - Monitors the OS and networking of your EC2 instance (eg, OS boot issues, kernel panics).
+            - Still low-level, not application-aware.
+    - Together, these are often loosely referred to as "EC2 health checks", and they can be 
+        used by Auto Scaling Groups for termination decisions if you explicitly configure it. 
+
+    Application-Level Health Checks
+        - - you use external services
+
+        a. Elastic Load Balancer (ELB)
+            - Checks a specific URL path on the instance (e.g., /healthz).
+        b. Custom Scripts + CloudWatch
+
+
+Auto Scaling Groups
+
     ASG + CloudWatch
         - probably 100% of all ASG scaling events originate from Cloudwatch
         - CloudWatch monitors metrics from EC2 instances, ALBs, SQS queues, custom sources, ect.
@@ -1615,7 +2305,8 @@ Recall
                 - ALB/SQS/Other AWS Services -> Usually 1 minute
                 - CW has a "resolution" = aggregration interval (1 min default or 1 second w/ high-res)
 
-Auto Scaling Groups
+
+
     Good metrics to scale on:
         - CPUUtilization
             - average CPU utilization across your instances, Scale if > 70%, scale in if < 30%
@@ -1632,8 +2323,14 @@ Auto Scaling Groups
     Good to know:
         Spot Fleet Support
             - (mix Spot and on-demand instance)
+            - Fleet Request - target capacity, instance types, subnets.
+            - Allocation Strategies -lowestPrice, diversified (Spread across pools), capacityOptimized
+
         Lifecycle hooks
             - run scripts before an instance is in service or before terminated
+            - you pause the launch or termination process, so you can run scripts before
+            - only launch/terminate hooks
+
         EC2 Instance Refresh
             - do this after updating AMIs in the template to get the new AMI
                 - or don't and terminate the instances manaully for new AMIs
@@ -1660,7 +2357,7 @@ Auto Scaling Groups
                         --launch-template "LaunchTemplateName=my-webserver-template,Version=3"
                                 < OR >
                         --launch-template "LaunchTemplateName=my-webserver-template,Version=$Latest"
-.                                                                                               ↑ <---- BAM
+                                                                                                ↑ <---- BAM
                     - pushing a new Template does nothing by itself, you nee to run instance refresh
 
 
@@ -1670,7 +2367,11 @@ Auto Scaling Groups
 
 
 
-        Auto Scaling - Scaling Processes
+        Scaling Processes
+            -> Its how your EC2s are managed
+            -> Its how your EC2s behavior is defined
+                - Adding/Removing instances, health check, replacing, placement/balance
+
             - Launch
                  Add a new EC2 to the group, increasing the capacity
             - Terminate
@@ -1698,10 +2399,10 @@ Auto Scaling Groups
             - Health check should be simple 
                 - dont do stupid stuff like make ASG trigger a event in you app that checks a DB and returns s/t and then you return true/false back to the ASG/cloudwatch
 
-Auto Scaling - updating app possible strategies
-    - simply update the Launch template with a new AMI (has the new app)
-    - keep ALB pointing as same target gropu
-    - since same target group, ALB distributes traffic to target group with both, then you can unscale the previous 
+    Updating app possible strategies
+        - simply update the Launch template with a new AMI (has the new app)
+        - keep ALB pointing as same target gropu
+        - since same target group, ALB distributes traffic to target group with both, then you can unscale the previous 
 
 Spot Instance
     User Defined Max Price
@@ -1773,6 +2474,24 @@ Spot Instance
         - spot fleet says "here are all the instance I approve, and all the AZs, choose the cheapest please"
         - spot fleets are great for large-scale optimization
             - "automated, large-scale, optimized deployments."
+
+
+
+
+
+
+AWS Fargate
+    - dockers
+    - serverless
+    - to scale, increase # of tasks, done. gg
+    - integrates with:
+        SSM Parameter Store
+        Secrets Manager
+
+
+
+
+
 
 AWS Elastic Container Service (ECS)
     Recall Docker
@@ -1894,14 +2613,6 @@ AWS Elastic Container Service (ECS)
                         Target Group (ECS tasks via ENI or EC2 IP+port)
 
 
-    Fargate
-        - dockers
-        - serverless
-        - to scale, increase # of tasks, done. gg
-        - integrates with:
-            SSM Parameter Store
-            Secrets Manager
-
     ECS Networking
         bridge
             - ec2 only
@@ -1951,7 +2662,7 @@ AWS Elastic Container Service (ECS)
             - thus you need to Scale your EC2s
 
 
-    Task Placement Strategies
+    ECS Task Placement Strategies
         - answers "where to place the task?"
         - ECS needs to choose which instances to place the container in
         Strats:
@@ -1971,7 +2682,7 @@ AWS Elastic Container Service (ECS)
                 memberOf - you write a filter (coditional logic) eg. Only use instance with certain tag or certain AZ
 
 
-    Capacity Provider
+    ECS Capacity Provider
         - helps with scaling infrastructure
         - defines where and how your tasks are run. It is associated with:
         defines:
@@ -2011,12 +2722,13 @@ AWS Elastic Container Service (ECS)
                 }'
 
 
-    Draining Hooks
+    ECS Draining Hooks
         - aka Drain Mechanism or Drain Lifecycle Hook
         - refers to safely stopping s/t before it is terminated, so that the running tasks can finish gracefully or be moved elsewhere.
             - stopping tasks on an instance (or container host)
 
-This concept is critical in ECS, especially when using Spot Instances, Auto Scaling, or Fargate Spot, because tasks may be interrupted or instances removed.
+        - This concept is critical in ECS, especially when using Spot Instances, Auto Scaling, 
+            or Fargate Spot, because tasks may be interrupted or instances removed.
 
     ECS Spot Instance
         - you can use Spot Instances in your ECS cluster
@@ -2150,8 +2862,18 @@ Elastic Kubernetes Service
         - k8s is "cloud-agnostic"
 
     - nodes w/ pods inside of ithem
-    - ASG with nodes inside
+    - ASG with nodes inside:
 
+        Managed Node Groups
+            - These are EKS-managed EC2 instances that act as Kubernetes worker nodes.
+        Self-Managed Nodes
+            - You manage everything: provisioning, scaling, patching, upgrading.
+            - These are EC2 instances you provision and manage yourself, but still register as worker nodes in your EKS cluster.
+            - You manually install the EKS worker node software
+
+
+    - your EKS lives in VPC, you'll have to set up the VPC and stuff
+    - requires a "VPC CNI plugin"
 
     Node Types
         Managed Node Groups
@@ -2195,9 +2917,6 @@ Elastic Kubernetes Service
             FSx for NetApp
             Ephemeral 
                 - Temporary, delted withe the pod
-    VPC 
-        - your EKS lives in VPC, you'll have to set up the VPC and stuff
-        - requires a "VPC CNI plugin"
 
     IAM Roles for Service Accounts (IRSA)
         - Normally, all pods on a node would share the same IAM permissions 
@@ -2218,37 +2937,37 @@ Elastic Kubernetes Service
             - Needed for shared file systems.
             - Supported by EFS, FSx for Lustre/ONTAP, etc.
 
-EKS Anywhere
-    - create k8s on-prem
-    how to:
-        - Must use EKS Distro ( it has all the same k8s components in EKS)
-            - for version consistency with Amazon EKS
-            - you can get eks experiecne without being in the AWS cloud
-        1. Run EKS Anywhere Installer.
-            - it isntall EKS Distro / k8s
-            - Cluster api
-            - Optional - GitOps
-            - Optional EKS Connector
-        2. (optional) Use the EKS Conector
-            - AWS EKS Console to manager your on-prem cluster
-            - It connects EKS/Distro and non-AWS k8s to the AWS EKS Console
-            - btw, you can also connect it to k8s anywhere. Maybe outside of aws, inside of aws but not in eks, ect
-        EKS Connector
-            - "allows you to connect and manage external Kubernetes clusters (outside of AWS) through the EKS console. 
-                 These can be clusters running on-premises or on other cloud providers."
-            - Lets you view connected clusters in the AWS EKS Console 
-            - No Control Plane management!
-            - Choose one 
-                (i have no fucking clue)
-                1. Fully Connected
-                    - The external cluster is actively connected to AWS via the EKS Connector agent.
-                    - you can connec to the on-prem clust to AWS and use the console
-                2. Partially Disconnected
-                    - you sometimes can access AWS
-                    - The connection is unstable or degraded.
-                3. Fully Disconnected
-                    - you must manage your cluster not from AWS
-                    - install some tools to manage it
+    EKS Anywhere
+        - create k8s on-prem
+        how to:
+            - Must use EKS Distro ( it has all the same k8s components in EKS)
+                - for version consistency with Amazon EKS
+                - you can get eks experiecne without being in the AWS cloud
+            1. Run EKS Anywhere Installer.
+                - it isntall EKS Distro / k8s
+                - Cluster api
+                - Optional - GitOps
+                - Optional EKS Connector
+            2. (optional) Use the EKS Conector
+                - AWS EKS Console to manager your on-prem cluster
+                - It connects EKS/Distro and non-AWS k8s to the AWS EKS Console
+                - btw, you can also connect it to k8s anywhere. Maybe outside of aws, inside of aws but not in eks, ect
+            EKS Connector
+                - "allows you to connect and manage external Kubernetes clusters (outside of AWS) through the EKS console. 
+                    These can be clusters running on-premises or on other cloud providers."
+                - Lets you view connected clusters in the AWS EKS Console 
+                - No Control Plane management!
+                - Choose one 
+                    (i have no fucking clue)
+                    1. Fully Connected
+                        - The external cluster is actively connected to AWS via the EKS Connector agent.
+                        - you can connec to the on-prem clust to AWS and use the console
+                    2. Partially Disconnected
+                        - you sometimes can access AWS
+                        - The connection is unstable or degraded.
+                    3. Fully Disconnected
+                        - you must manage your cluster not from AWS
+                        - install some tools to manage it
 
 
 ECS Connector
@@ -2355,33 +3074,39 @@ AWS Lambda integration:
 
 AWS Lambda Service
     - is AWS Lambda
-    - "This refers to the entire managed compute service provided by AWS that lets you run code without provisioning or managing servers. It includes everything"
+    - "This refers to the entire managed compute service provided by AWS that 
+        lets you run code without provisioning or managing servers. It includes everything"
 
-AWS Lambd Control Plan
-    - is the management of lambda resources 
-    - responsible for management operations,
-        -> not code execution
-        Handles function deployment, versioning, invocation routing, and scaling.
-        - handles configuration (memory, timeout, environment variables, etc.)
-        - Receives invoke requests from services like API Gateway, EventBridge, S3, etc.
-        - starts your function’s execution 
-        - Integrating with IAM for permissions
+    -> ! Lambda: More memory = more CPU
+        - cannot mix and match
 
-Lambda Function URL
-    - https://<url-id>.lambda-url.<region>.on.aws
-    - publicly accessible URLS
-    - aws gives by default
-    - STILL publicly accessible by everyone even if Lambda is in a private VPC
-        - By default, Lambda has a setting called AuthType, and AuthType = NONE
-        - independent of whether the Lambda is in a VPC.
-        - set AuthType = AWS_IAM for IAM based controls, making it private
+    - study async & sync invocation
+        
+    AWS Lambda Control Plan
+        - is the management of lambda resources 
+        - responsible for management operations,
+            -> not code execution
+            Handles function deployment, versioning, invocation routing, and scaling.
+            - handles configuration (memory, timeout, environment variables, etc.)
+            - Receives invoke requests from services like API Gateway, EventBridge, S3, etc.
+            - starts your function’s execution 
+            - Integrating with IAM for permissions
+
+    Lambda Function URL
+        - https://<url-id>.lambda-url.<region>.on.aws
+        - publicly accessible URLS
+        - aws gives by default
+        - STILL publicly accessible by everyone even if Lambda is in a private VPC
+            - By default, Lambda has a setting called AuthType, and AuthType = NONE
+            - independent of whether the Lambda is in a VPC.
+            - set AuthType = AWS_IAM for IAM based controls, making it private
 
 
-    - restrict with WAF, API GW:
-        Resource policies (IP blocks/allow)
-        Custom domains
-        Cognito/Auth0/etc.
-        VPC Links for internal-only access
+        - restrict with WAF, API GW:
+            Resource policies (IP blocks/allow)
+            Custom domains
+            Cognito/Auth0/etc.
+            VPC Links for internal-only access
 
     Lambda in a VPC
         [Client]
@@ -2414,7 +3139,7 @@ Lambda Function URL
 
     Lambda that's in VPC + IP public
         - services that can sit infront of lambda: 
-         (can access private resources but through the lambda)
+            (can access private resources but through the lambda)
 
         ✅ Lambda in VPC behind a API Gateway
         ✅ Lambda in VCP behind ALB 
@@ -2481,8 +3206,7 @@ Lambda Function URL
         3 AWS VPC Endpoint
             - NO public internet
             - Secure, efficient access to AWS APIs/S3/DynamoDB from Lambda.
-    
-    study async & sync invocation
+
 
     Lambda Event Source Mapping
         - "A configuration that tells Lambda to poll an event source (like SQS) and invoke a Lambda function with the event data."
@@ -2507,7 +3231,11 @@ Lambda Function URL
             DLQ and Error Handling
                 - error stuff
 
-
+##############################
+####                      #### 
+####      Traffic         #### 
+####                      #### 
+##############################
 Elastic Load Balancers
     Classic Load Balancer (V1) 
         - HTTP or TCP (L7 or L4)
@@ -2529,6 +3257,12 @@ Elastic Load Balancers
         - health checks are per t. groups
 
         - 10,000 requests per second (RPS) 
+            
+        - ALB handles TLS termination. If instance inside of ALB is HTTP, 
+            ALB can handle encryption/TSL/certificates when 
+            HTTP (EC2) --> ALB --> Cleint & redirect if client tries HTTP
+
+
 
         NOTE
             - you CANNOT assign an IP (or Elastic IP) to the ALB
@@ -2552,6 +3286,11 @@ Elastic Load Balancers
         - target group of IPs must be private IPs
         ✅ NLB can be assigned an Elastic IP (EIP)
         ✅ NLB gets static IPs by default 
+
+        NLB cross-region balacning ENABLED =
+            ✅ TLS termination is unaffected.
+            ✅ You might enable it for load distribution and fault tolerance.
+            ⚠️ Be aware of inter-AZ data transfer costs when enabling it on NLB.
 
         Regional and Zonal DNS Name
             - When you create a NLB, AWS creates:
@@ -2636,11 +3375,13 @@ Elastic Load Balancers
                 - each TCP/UDP connection is routed to same EC2 via intelligent hash 
 
 
-Recall (Anycast)
+(recall) Anycast IP
     - Unicast IP
             One IP → One location.
     - Anycast IP
             One IP → Many locations → Closest one responds.
+
+    - (not relevant for 
     Consider this:
     - many DNS servers use Anycast
     - Google DNS 8.8.8.8, Cloudflare 1.1.1.1, use anycast IPs for their DNS resolvers.
@@ -2702,7 +3443,7 @@ Recall (Anycast)
 
 
 
-API Gateway:
+AWS API Gateway:
     - sometimes you use API GW's features like authentication, rate control, or others 
         to post messages to SQS, or Step Function, or other AWS resource
 
@@ -2736,55 +3477,61 @@ API Gateway:
             Rate limit: 25,000 RPS.
             Burst limit: 10,000 requests.
 
-        - 600 routes per AP (can request more)
+        
+        Payload
+            - 10 MB payload
+            - (note, 6MB payload for Lambda (says stackexchagne))
 
-        SIZE SOLUTION
-            Option 1
-                1. Client API GW ----> Lambda (return a presigned url) ----> Client
-                2. Client -----> s3
+        - 600 routes per API (can request more)
+        - 50 stages (REST only)
 
-                - Presigned URLs
-                - Since limit, if you want to send/recieve large files, use a Presigned URL
-            Option 2-ish?
-                - dont have files > 10MB
-            NOTE
-                - DO NOT use multipart upload
-                - b/c 100s or 1000s of pieces for large files (1gb = 1000mb = 100 uploads)
-                    - lambda has concurrenty limits
-                    - error handling on partial failures is "non-trival" / a pain?
+    PAYLOAD SIZE SOLUTION
+        Option 1
+            1. Client API GW ----> Lambda (return a presigned url) ----> Client
+            2. Client -----> s3
 
-        TIME SOLUTION
-            Option 1: Client Polling Pattern
-                - client polls a newly created endpoint until completion
-                    1 long computation starts .....
-                    2 save a request-ID in a database (DynamoDB).
-                    3 API GW/lambda responds immediately with a request ID.
-                    4 client polls some endpoint (/status/{requestId}) for results
-                ✅ Scales well
-                ❌ Requires the client to manage polling logic
-            Option 2: Webhooks or Callbacks
-                - (not web browser solution) 
-                - The server talks to the client 
-                - client has pre-built endpoint 
-                    1 long serverside computation starts .....
-                    2 long computation ends 
-                    3 server calls back to the client endpoint (webhook).
-                ✅ No polling; event-driven
-                ❌ Client must host a public endpoint and handle callbacks securely
-            Option 3: WebSockets (via API Gateway)
-                - Use API Gateway WebSocket API for real-time, bidirectional communication.
-                    1 long serverside computation starts .....
-                    2 via websocket sends back the result once ready.
-                ✅ Real-time updates
-                ❌ More complex to manage connections, state, and reconnections
-            Option 4: Frontend Queuing + Notifications
-                - notify the user once completed
-                    1 long computation starts .....
-                    2 Use Amazon SNS to notify the client when it’s done.
-                ✅ Works well for mobile push or email notifications
-                ❌ Not instant; best for delayed workflows
-            Summary
-                - Use a decoupled, async approach (queue the work, notify the client when it’s done).
+            - Presigned URLs
+            - Since limit, if you want to send/recieve large files, use a Presigned URL
+        Option 2-ish?
+            - dont have files > 10MB
+        NOTE
+            - DO NOT use multipart upload
+            - b/c 100s or 1000s of pieces for large files (1gb = 1000mb = 100 uploads)
+                - lambda has concurrenty limits
+                - error handling on partial failures is "non-trival" / a pain?
+
+    TIME SOLUTION
+        Option 1: Client Polling Pattern
+            - client polls a newly created endpoint until completion
+                1 long computation starts .....
+                2 save a request-ID in a database (DynamoDB).
+                3 API GW/lambda responds immediately with a request ID.
+                4 client polls some endpoint (/status/{requestId}) for results
+            ✅ Scales well
+            ❌ Requires the client to manage polling logic
+        Option 2: Webhooks or Callbacks
+            - (not web browser solution) 
+            - The server talks to the client 
+            - client has pre-built endpoint 
+                1 long serverside computation starts .....
+                2 long computation ends 
+                3 server calls back to the client endpoint (webhook).
+            ✅ No polling; event-driven
+            ❌ Client must host a public endpoint and handle callbacks securely
+        Option 3: WebSockets (via API Gateway)
+            - Use API Gateway WebSocket API for real-time, bidirectional communication.
+                1 long serverside computation starts .....
+                2 via websocket sends back the result once ready.
+            ✅ Real-time updates
+            ❌ More complex to manage connections, state, and reconnections
+        Option 4: Frontend Queuing + Notifications
+            - notify the user once completed
+                1 long computation starts .....
+                2 Use Amazon SNS to notify the client when it’s done.
+            ✅ Works well for mobile push or email notifications
+            ❌ Not instant; best for delayed workflows
+        Summary
+            - Use a decoupled, async approach (queue the work, notify the client when it’s done).
 
 
     API GW Authentication
@@ -2886,6 +3633,59 @@ API Gateway stuff
         - aws:SourceVpc
         - aws:SourceVpce
 
+        
+    API GW Codes
+        - 504 Gateway Timeout,
+        429	Too Many Requests	
+        500	Internal Server Error
+            - Integration failure or backend exception.
+        502	Bad Gateway
+            - Invalid response from the integration
+            - eg. Lambda returned malformed JSON
+        503	Service Unavailable	
+            - Backend or integration temporarily unavailable.
+        504	Gateway Timeout	Integration 
+            - (e.g., Lambda) took longer than 29 seconds to respond.
+
+    API GW Edge Optimized & CloudFront
+        - !!! CloudFront requires the ACM certificate to be in us-east-1, regardless of where your API Gateway is deployed.
+        - Edge-Optimized API Gateway uses CloudFront behind the scenes.
+
+
+    API GW Edge vs Optimized Global Accelerator 
+        - Global Accelerator is faster in most cases because it introduces less overhead and routes via AWS's global backbone with minimal processing.
+        - API GW has features
+        RECALL
+            Edge Optimized: User ---> Edlge location ---> GW
+            - Edge-Optimized API Gateway automatically deploys a CloudFront distribution in front of your API, with edge locations around the world.
+            - users are routed to the nearest CloudFront edge location, and then forwarded to your API Gateway endpoint in the specified AWS region.
+
+        Edge is FAST, even when cacheing is off / Cache = miss, b/c:
+            It's close to user:
+                - The first TLS handshake, DNS resolution, and initial connection happen close to the user, minimizing round-trip time (RTT) on the public internet.
+            Sits in middle (unencrypt w/ origin)
+                - Edge locations maintain persistent connections to origin servers over the AWS global backbone.
+                    - No new TLS handshake to origin on every request
+                    - Less TCP/connection overhead
+        GA is FASTER, b/c raw Layer 3 routing.
+            - also uses AWS global backbone
+            - but no DNS, no TSL
+            - TCP/UDP and HTTP/S too
+            
+    | Feature                  |   AWS Global Accelerator                                            |   CloudFront / Edge-Optimized API Gateway                       |
+    | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------- |
+    |    speed winner?         |   FASTER ZOOM!                                                      |  ...fast
+    |   Network layer          | Layer 3 (IP routing) <--- this makes it faster,no dns               | Layer 7 (HTTP/HTTPS)                                            |
+    |   Purpose                | Speed up   any TCP/UDP   traffic                                    | Deliver   web content/APIs   efficiently                        |
+    |   Traffic path           | Routes traffic   into AWS's private backbone   as early as possible | Serves content from   edge caches  , or forwards HTTP to origin |
+    |   Protocol awareness     | ❌ Protocol-agnostic                                                 | ✅ HTTP-aware                                                    |
+    |   TLS termination        | ❌ (passes through)     <-- also faster                              | ✅ TLS terminated at edge                                        |
+    |   Edge logic             | ❌ None                                                              | ✅ Caching, compression, WAF, auth, etc.                         |
+    |   Latency optimization   | ✅ Yes, pure acceleration                                            | ✅ Yes, with added processing overhead                           |
+    |   Caching                | ❌ None                                                              | ✅ Built-in content caching (if enabled)                         |
+
+
+
 AWS AppSync 
     - GraphQL
     - can do real-time
@@ -2899,7 +3699,7 @@ AWS AppSync
         - reaches DynamoDB
 
 
-AWSRoute 53 
+AWS Route 53 
      Record Types
         - A - maps a hostname to IPv4
         - AAAA - maps a hostname to IPv6
@@ -2909,15 +3709,14 @@ AWSRoute 53
         - NS - Name Servers for the Hosted Zone
 
     Alias Records Targets
-
-    - Elastic Load Balancers
-    - CloudFront Distributions
-    - API Gateway
-    - Elastic Beanstalk environments
-    - S3 Websites
-    - VPC Interface Endpoints
-    - Global Accelerator accelerator
-    - Route 53 record in the same hosted zone
+        - Elastic Load Balancers
+        - CloudFront Distributions
+        - API Gateway
+        - Elastic Beanstalk environments
+        - S3 Websites
+        - VPC Interface Endpoints
+        - Global Accelerator accelerator
+        - Route 53 record in the same hosted zone
 
     - you cant use a EC2 as a alias target, but you could still do netowrking to point to an EC2
         eg, cname point to it's ip, or to its AWS's public assinged DNS
@@ -2928,8 +3727,15 @@ AWSRoute 53
         is a setting in DNS records that tells resolvers (like ISPs and browsers) how long to cache the record before querying DNS servers again.
 
     Routing Policies
+        a. Simple Routing
+        b. Weighted Routing
+        c. Latency Routing
+        d. Geolocation Routing
+        e. GeoProximity Routing
+        f. Failover Routing
+        g. Multi Region Access Routing
 
-        IP-Based Routing
+        e. IP-Based Routing
             - based on the users IP
             - you define CIDR blocks and point to a domain
             CIDR Collection
@@ -3037,6 +3843,7 @@ AWSRoute 53
             - VPC + on-prem solutions
         - Public HZ is only public
         - Private HZ is only private VPCs
+
     Hybrid DNS
       - DNS queries beetween VPC (R53 Resolver) and your network (other DNS Resolvers)
       Terms:
@@ -3066,14 +3873,16 @@ AWSRoute 53
             - Route 53 Resolver acts like a DNS server, but it's a managed, scalable DNS resolution service built into AWS.
                 - but not 100% dns server, it does NOT ❌ maintains zone records. Also aws managed duh
 
+
+
+    R53 Health checks
+        No — the health checks do not impact latency-based routing decisions in a way that slows down normal requests.
+            - Health checks run independently in the background
+            - Route 53 maintains latency measurements from various global locations to your defined endpoints (e.g., ELB, EC2).
+            - These measurements are passive and periodic, not tied to live user requests.
+            - When a user makes a DNS query, Route 53 responds with the IP address of the endpoint in the AWS region that has historically the lowest latency for that user’s location.
+
         
-Fun fact: 
-    Client IP address preservation
-        - retain the original IP address of the user/client when traffic reaches the backend app. Good for:
-            - Logging and analytics
-            - Geo-based routing or customization
-            - Security features like IP-based access control or rate limiting
-            
 AWS Global Accelerator
     - FAST
     - you get 2 Anycast IPs
@@ -3089,6 +3898,12 @@ AWS Global Accelerator
         - regional fail over
         - fast
         - gaming, VoIP
+
+    Client IP address preservation
+        - retain the original IP address of the user/client when traffic reaches the backend app. Good for:
+            - Logging and analytics
+            - Geo-based routing or customization
+            - Security features like IP-based access control or rate limiting
 
 AWS Outposts
     - hybrid thing
@@ -3230,108 +4045,24 @@ AWS Local Zones
     Lecture 68 https://www.udemy.com/course/aws-solutions-architect-professional/learn/lecture/34785476#notes
 
 
-Use Cases:
-    Gaming: Low-latency multiplayer gaming backend services.
-    Financial Services
-    Media & Entertainment
-        - Real-time video editing, rendering, and broadcasting.
+    Use Cases:
+        Gaming: Low-latency multiplayer gaming backend services.
+        Financial Services
+        Media & Entertainment
+            - Real-time video editing, rendering, and broadcasting.
 
 
 
 
 NOTE
-    Core-based licensing 
+    Core-based licensing / Dedicated Host
         - implies physical cores, not virtualized vCPUs.
         - AWS only gives you control over physical core allocation with a Dedicated Host
-        CHATGPT
-        - AWS EC2 instances (even Reserved Instances) are abstracted from the physical hardware.
-        - You don't know which physical server the instance is running on, and AWS might move your instance during events like maintenance.
-        - Because of that, you can't prove or control how many physical cores you're using — which violates some software licensing terms that require that kind of visibility.
 
-    Hacky health check
-        EC2 provides two types of status checks:
-        1 System Status Checks
-            Monitors AWS infrastructure hosting your instance (e.g., hardware failure, loss of network).
-            Not under your control.
-        2 Instance Status Checks
-            Monitors the OS and networking of your EC2 instance (e.g., OS boot issues, kernel panics).
-            Still low-level, not application-aware.
-        - Together, these are often loosely referred to as "EC2 health checks", and they can be used by Auto Scaling Groups for termination decisions if you explicitly configure it.        
-
-    - Lambda: More memory = more CPU
-        - cannot mix and match
-
-    NLB cross-region balacning ENABLED =
-        ✅ TLS termination is unaffected.
-        ✅ You might enable it for load distribution and fault tolerance.
-        ⚠️ Be aware of inter-AZ data transfer costs when enabling it on NLB.
-
-    API GW
-        - 504 Gateway Timeout,
-        429	Too Many Requests	
-        500	Internal Server Error
-            - Integration failure or backend exception.
-        502	Bad Gateway
-            - Invalid response from the integration
-            - eg. Lambda returned malformed JSON
-        503	Service Unavailable	
-            - Backend or integration temporarily unavailable.
-        504	Gateway Timeout	Integration 
-            - (e.g., Lambda) took longer than 29 seconds to respond.
-
-    R53 Health checks
-        No — the health checks do not impact latency-based routing decisions in a way that slows down normal requests.
-            - Health checks run independently in the background
-            - Route 53 maintains latency measurements from various global locations to your defined endpoints (e.g., ELB, EC2).
-            - These measurements are passive and periodic, not tied to live user requests.
-            - When a user makes a DNS query, Route 53 responds with the IP address of the endpoint in the AWS region that has historically the lowest latency for that user’s location.
-
-    EKS
-        Managed Node Groups
-            - These are EKS-managed EC2 instances that act as Kubernetes worker nodes.
-        Self-Managed Nodes
-            - You manage everything: provisioning, scaling, patching, upgrading.
-            - These are EC2 instances you provision and manage yourself, but still register as worker nodes in your EKS cluster.
-            - You manually install the EKS worker node software
-
-    - ALB handles TLS termination. If instance inside of ALB is HTTP, ALB can handle encryption/TSL/certificates when HTTP (EC2) --> ALB --> Cleint & redirect if client tries HTTP
-
-    CloudFront & API-GW Edge Optimized
-        - !!! CloudFront requires the ACM certificate to be in us-east-1, regardless of where your API Gateway is deployed.
-        - Edge-Optimized API Gateway uses CloudFront behind the scenes.
-
-
-    Global Accelerator vs Edge optimized API gw
-        - Global Accelerator is faster in most cases because it introduces less overhead and routes via AWS's global backbone with minimal processing.
-        - API GW has features
-        RECALL
-            Edge Optimized: User ---> Edlge location ---> GW
-            - Edge-Optimized API Gateway automatically deploys a CloudFront distribution in front of your API, with edge locations around the world.
-            - users are routed to the nearest CloudFront edge location, and then forwarded to your API Gateway endpoint in the specified AWS region.
-
-        Edge is FAST, even when cacheing is off / Cache = miss, b/c:
-            It's close to user:
-                - The first TLS handshake, DNS resolution, and initial connection happen close to the user, minimizing round-trip time (RTT) on the public internet.
-            Sits in middle (unencrypt w/ origin)
-                - Edge locations maintain persistent connections to origin servers over the AWS global backbone.
-                    - No new TLS handshake to origin on every request
-                    - Less TCP/connection overhead
-        GA is FASTER, b/c raw Layer 3 routing.
-            - also uses AWS global backbone
-            - but no DNS, no TSL
-            - TCP/UDP and HTTP/S too
-            
-    | Feature                  |   AWS Global Accelerator                                            |   CloudFront / Edge-Optimized API Gateway                       |
-    | ------------------------ | ------------------------------------------------------------------- | --------------------------------------------------------------- |
-    |    speed winner?         |   FASTER ZOOM!                                                      |  ...fast
-    |   Network layer          | Layer 3 (IP routing) <--- this makes it faster,no dns               | Layer 7 (HTTP/HTTPS)                                            |
-    |   Purpose                | Speed up   any TCP/UDP   traffic                                    | Deliver   web content/APIs   efficiently                        |
-    |   Traffic path           | Routes traffic   into AWS's private backbone   as early as possible | Serves content from   edge caches  , or forwards HTTP to origin |
-    |   Protocol awareness     | ❌ Protocol-agnostic                                                 | ✅ HTTP-aware                                                    |
-    |   TLS termination        | ❌ (passes through)     <-- also faster                              | ✅ TLS terminated at edge                                        |
-    |   Edge logic             | ❌ None                                                              | ✅ Caching, compression, WAF, auth, etc.                         |
-    |   Latency optimization   | ✅ Yes, pure acceleration                                            | ✅ Yes, with added processing overhead                           |
-    |   Caching                | ❌ None                                                              | ✅ Built-in content caching (if enabled)                         |
+        CHATGPT:
+            - AWS EC2 instances (even Reserved Instances) are abstracted from the physical hardware.
+            - You don't know which physical server the instance is running on, and AWS might move your instance during events like maintenance.
+            - Because of that, you can't prove or control how many physical cores you're using — which violates some software licensing terms that require that kind of visibility.
 
 
 
@@ -3544,10 +4275,10 @@ Elastic File System (EFS)
         - it points to some path in the EFS's file system
         - access point will auto create the path if it doesnt already exist (when user mounts)
         Use Cases:
-
             Multi-tenant environments - want isolated access
             Serverless workloads (AWS Lambda with EFS)
             Kubernetes (EKS)
+
         Q: why put 3 apps on 1 EFS instead of 3 apps with 3 EFS (1 per)
         | Factor                  | Single EFS                       | Multiple EFS                        |
         | ----------------------- | -------------------------------- | ----------------------------------- |
@@ -3556,7 +4287,6 @@ Elastic File System (EFS)
         | Security isolation      | Soft (POSIX, IAM, access points) | Hard (file system-level isolation)  |
         | Performance control     | Shared capacity                  | Dedicated capacity per file system  |
         | Cost                    | Lower overall                    | Potentially higher (more resources) |
-
 
     - No, EFS does not support path-based IAM authorization like S3 does
     - EFS enforces standard Linux file permissions 
@@ -3575,17 +4305,17 @@ Elastic File System (EFS)
         - /usr/lib/python3.10/site-packages/ → local
         - /mnt/efs/myapp/venv/ → EFS
 
-    Access Point 1
-    UID: 1001            When using this access point, / (as seen by the client) is actually /config in the EFS file system.
-    GID: 1001              ↓
-    Path: /config .... / = /config
+        Access Point 1
+        UID: 1001            When using this access point, / (as seen by the client) is actually /config in the EFS file system.
+        GID: 1001              ↓
+        Path: /config .... / = /config
 
     File System Policies
         - IAM policies for an EFS file system 
         - by default grants full acces to clients
         - no, does not do path-based access like S3
 
-     Cross-Region Replication
+    Cross-Region Replication
         - automatically and continuously replicate data from EFS 1 --> EFS 2 (another region)
         - does not consume your IO
             - happens in background, free-ish (default pricing)
@@ -3639,117 +4369,116 @@ S3 Events
         - ALL EVENTS go to S3 can trigger:
             EventBridge
 
-    Multipart upload
-        - can use CLI to list incomplete multipart uploads
-        - can use Lifecycle Plicy to delete incomplete multipart uploads after x days
-        - s3 transfer accelerate can use multipart upload
+S3 Multipart upload
+    - can use CLI to list incomplete multipart uploads
+    - can use Lifecycle Plicy to delete incomplete multipart uploads after x days
+    - s3 transfer accelerate can use multipart upload
 
 
-    S3 Analytics / Storage Class Analytics
-        - helps you decide when to transition object to the right storage
-        - does work for One-Zone IA or Glaciers
-        - recommendation for Standard and Standard IA
-        - can visualize data in Amazon QuickSight
+S3 Analytics / Storage Class Analytics
+    - helps you decide when to transition object to the right storage
+    - does work for One-Zone IA or Glaciers
+    - recommendation for Standard and Standard IA
+    - can visualize data in Amazon QuickSight
 
-    Storage Lens
-        - Organization wide bucket analytics
-            - multi region, multi account
-            - Buckets on entire AWS orgs
-        - 30+ metrics
-            - such as total storage, object count, request counts, and data retrieval patterns
-        - dashboards
-            - default or create your own
-        - Can be exported daily to a destination bucket in CSV or Parquet format.
+S3 Storage Lens
+    - Organization wide bucket analytics
+        - multi region, multi account
+        - Buckets on entire AWS orgs
+    - 30+ metrics
+        - such as total storage, object count, request counts, and data retrieval patterns
+    - dashboards
+        - default or create your own
+    - Can be exported daily to a destination bucket in CSV or Parquet format.
 
-        Summary Metrics
-            - General insights
-            - StorageBytes, ObjectCount, ect
-            use case:
-            - identify fast growing (or least used) buckets
-        Cost Optimization Metrics
-            - "Provide insights to manage and optimize your storage costs"
-            - NonCurrentVersionStorageBytes, IncompleteMultipartUploadStorageBytes ...
-            use case:
-            - identify buckets with incopmlete multipart uploads older than 8 days
-            - identify object that could be transitiotned to lower cost storage
-        Data Protection Metrics
-            - Provide insights for data protection 
-            - VersioningEnabledBucketCount, MFADeleteEnabledBucketCount, SSEKMSEnabledBucketCount, CrossRegionReplicaitonRuleCount..
-            use case:
-            - identify buckets that arent following data protection practices
-        Access Managment Metrics
-            - show s3 Object Ownership
-            - ObjectOwnershipBucketOwnerEnforcedBucketCount...
-            use case:
-            - identify which Object Ownership settings your buckets use
-        Event Metrics
-            - show S3 Event Notifications
-            - EventNotificationEnabledBucketCount
-            use case:
-            - identify which buckets have s3 Event Notficaitons configured
-        Performance Metrics
-            - insights for S3 Transfer Acceleration
-            - TransferAccelerationEnabledBucketCount 
-            use case:
-            - identify which buckets have S3 Transfer Acceleration enabled
-        Activity Metrics
-            - how your storage is requested
-            - AllRequests, GetRequests, PutRequests, ListRequests, BytesDownloaded ...
-        Detailed Status Code Metrics
-            - HTTP status codes
-            - 200OKStatusCount, 403ForbiddenErrorCount, 404NotFoundErrorCount
+    Summary Metrics
+        - General insights
+        - StorageBytes, ObjectCount, ect
+        use case:
+        - identify fast growing (or least used) buckets
+    Cost Optimization Metrics
+        - "Provide insights to manage and optimize your storage costs"
+        - NonCurrentVersionStorageBytes, IncompleteMultipartUploadStorageBytes ...
+        use case:
+        - identify buckets with incopmlete multipart uploads older than 8 days
+        - identify object that could be transitiotned to lower cost storage
+    Data Protection Metrics
+        - Provide insights for data protection 
+        - VersioningEnabledBucketCount, MFADeleteEnabledBucketCount, SSEKMSEnabledBucketCount, CrossRegionReplicaitonRuleCount..
+        use case:
+        - identify buckets that arent following data protection practices
+    Access Managment Metrics
+        - show s3 Object Ownership
+        - ObjectOwnershipBucketOwnerEnforcedBucketCount...
+        use case:
+        - identify which Object Ownership settings your buckets use
+    Event Metrics
+        - show S3 Event Notifications
+        - EventNotificationEnabledBucketCount
+        use case:
+        - identify which buckets have s3 Event Notficaitons configured
+    Performance Metrics
+        - insights for S3 Transfer Acceleration
+        - TransferAccelerationEnabledBucketCount 
+        use case:
+        - identify which buckets have S3 Transfer Acceleration enabled
+    Activity Metrics
+        - how your storage is requested
+        - AllRequests, GetRequests, PutRequests, ListRequests, BytesDownloaded ...
+    Detailed Status Code Metrics
+        - HTTP status codes
+        - 200OKStatusCount, 403ForbiddenErrorCount, 404NotFoundErrorCount
 
-    Storage Lens: Free Vs Advanced (Paid)
-        - Free Tier is for general oversight
-        - Advanced Metrics for large-scale, multi-account environments and want deep operational insights.
-        Free
-            - Contains around 28 usage metrics
-            - Data is available for queries for 14 days
-        Advanced
-            -  $0.20 per million objects monitored / month
-            -  Advanced Metrics and recommendations
-            -  Additional metrics
-                - Activity, Advanced Cost Optimization, Advanced Data Protection, Status Code
-            - metrics in CloudWatch without additional charges
-            - Prefix Aggregation - Collect metrics at the prefix level
-            - Data is available for queries for 15 months
+S3 Storage Lens: Free Vs Advanced (Paid)
+    - Free Tier is for general oversight
+    - Advanced Metrics for large-scale, multi-account environments and want deep operational insights.
+    Free
+        - Contains around 28 usage metrics
+        - Data is available for queries for 14 days
+    Advanced
+        -  $0.20 per million objects monitored / month
+        -  Advanced Metrics and recommendations
+        -  Additional metrics
+            - Activity, Advanced Cost Optimization, Advanced Data Protection, Status Code
+        - metrics in CloudWatch without additional charges
+        - Prefix Aggregation - Collect metrics at the prefix level
+        - Data is available for queries for 15 months
 
-            | Feature              |   Free Tier                |   Paid Tier (Advanced)                              |
-            | -------------------- | -------------------------- | --------------------------------------------------- |
-            |   Cost               | Free                       |  $0.20 million objects/month                        |
-            |   Update Frequency   | Daily                      | Daily                                               |
-            |   Metrics            | Storage size, object count | All Free + access, requests, encryption, versioning |
-            |   Granularity        | Org/account/bucket         | + Prefix-level (top N prefixes)                     |
-            |   Recommendations    | No                         | Yes (e.g., lifecycle, tiering)                      |
-            |   Export Format      | CSV                        | CSV & Parquet                                       |
-            |   Use Case           | Basic usage tracking       | Deep insight, cost & protection ops                 |
+        | Feature              |   Free Tier                |   Paid Tier (Advanced)                              |
+        | -------------------- | -------------------------- | --------------------------------------------------- |
+        |   Cost               | Free                       |  $0.20 million objects/month                        |
+        |   Update Frequency   | Daily                      | Daily                                               |
+        |   Metrics            | Storage size, object count | All Free + access, requests, encryption, versioning |
+        |   Granularity        | Org/account/bucket         | + Prefix-level (top N prefixes)                     |
+        |   Recommendations    | No                         | Yes (e.g., lifecycle, tiering)                      |
+        |   Export Format      | CSV                        | CSV & Parquet                                       |
+        |   Use Case           | Basic usage tracking       | Deep insight, cost & protection ops                 |
 
-S3
-    "indexing system" 
-        - The term refers to whatever is used to store metadata about your S3 objects. That could be:
-            A relational DB (PostgreSQL, MySQL)
-            A NoSQL DB (DynamoDB, MongoDB)
-            A search engine (OpenSearch, Elasticsearch)
+S3 "indexing system" 
+    - The term refers to whatever is used to store metadata about your S3 objects. That could be:
+        A relational DB (PostgreSQL, MySQL)
+        A NoSQL DB (DynamoDB, MongoDB)
+        A search engine (OpenSearch, Elasticsearch)
 
-        Example: Storing Metadata in DynamoDB
-        For each object uploaded to S3, you might store:
-            s3_key                   uploaded_at           file_type    size_bytes     user_id
-            docs/2025/report.pdf     2025-06-01T10:20Z     pdf          183400         user123
+    Example: Storing Metadata in DynamoDB
+    For each object uploaded to S3, you might store:
+        s3_key                   uploaded_at           file_type    size_bytes     user_id
+        docs/2025/report.pdf     2025-06-01T10:20Z     pdf          183400         user123
 
-        Any database will work - the choice depends on:
-            - Query patterns (e.g., full-text search → OpenSearch, relational joins → RDS)
-            - Volume and performance needs
-            - Cost and operational overhead
-            - AWS-native preference (DynamoDB is serverless and scalable by default)        
-        - If you're just indexing S3 metadata with key-based access (eg, by user, tag, date), 
-            and you design the keys well, DynamoDB can be cheap and very fast.
+    Any database will work - the choice depends on:
+        - Query patterns (e.g., full-text search → OpenSearch, relational joins → RDS)
+        - Volume and performance needs
+        - Cost and operational overhead
+        - AWS-native preference (DynamoDB is serverless and scalable by default)        
+    - If you're just indexing S3 metadata with key-based access (eg, by user, tag, date), 
+        and you design the keys well, DynamoDB can be cheap and very fast.
 
-        You indexing system can faciliate:
-            API for object metadata
-                - Search by date
-                - Total storage used by a customer
-                - List of all objects with certain attributes
-                - Find all objects uploaded within a date range
+    You indexing system can faciliate:
+        API for object metadata
+            - Search by date
+            - Total storage used by a customer
+            - List of all objects with certain attributes
+            - Find all objects uploaded within a date range
 
 
 Amazon FSx
@@ -3875,7 +4604,7 @@ Amazon FSx
             use case:
                 - Suitable for long-term storage or applications requiring durability.
 
-    Archetectur solutions
+    Archetectue solutions
         - btw, you cant upgrade from Single AZ to Multi AZ in 1 click (or 100 clicks)   
             1. Create a new FSx [for Windows or w/e] Multi-AZ
                a. use AWS DataSync
@@ -3905,7 +4634,6 @@ Amazon FSx
             - no encryption ...  replaced by SFTP/FTPS.
 
 AWS DataSync
-
     - can run on schedules (hourly, daily, ect)
         - will not duplicate transfers
         - Only files that have changed will be transferred.
@@ -4064,7 +4792,11 @@ AWS Transfer Family
 
 
 
-
+##############################
+####                      #### 
+####       Cache          #### 
+####                      #### 
+##############################
 
 
 AWS CloudFront
@@ -4217,7 +4949,7 @@ AWS CloudFront
 
         b. Custom Policy
             - like signed cookies, we base64 encode the policy and cram it in the URL (ugly af)
-            - then use that policy if everything checks out (Signature)
+            - then use that policy i1f everything checks out (Signature)
             https://d111111abcdef8.cloudfront.net/image.jpg?Policy=eyANCiAgICEXAMPLEW1lbnQiOiBbeyANCiAgICAgICJSZXNvdXJjZSI6Imh0dHA6Ly9kemJlc3FtN3VuMW0wLmNsb3VkZnJvbnQubmV0L2RlbW8ucGhwIiwgDQogICAgICAiQ29uZGl0aW9uIjp7IA0KICAgICAgICAgIklwQWRkcmVzcyI6eyJBV1M6U291cmNlSXAiOiIyMDcuMTcxLjE4MC4xMDEvMzIifSwNCiAgICAgICAgICJEYXRlR3JlYXRlclRoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTI5Njg2MDE3Nn0sDQogICAgICAgICAiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjEyOTY4NjAyMjZ9DQogICAgICB9IA0KICAgfV0gDQp9DQo&Signature=nitfHRCrtziwO2HwPfWw~yYDhUF5EwRunQA-j19DzZrvDh6hQ73lDx~-ar3UocvvRQVw6EkC~GdpGQyyOSKQim-TxAnW7d8F5Kkai9HVx0FIu-5jcQb0UEmatEXAMPLE3ReXySpLSMj0yCd3ZAB4UcBCAqEijkytL6f3fVYNGQI6&Key-Pair-Id=K2JCJMDEHXQW5F
 
 
@@ -4424,6 +5156,12 @@ Questions
 
     - private ALBs cannot be reached by CF
 
+
+##############################
+####                      #### 
+####     Database         #### 
+####                      #### 
+##############################
 
 
 DynanoDB
@@ -4852,7 +5590,7 @@ AWS Aurora
             - it's a band-aid, not a backbone.
             - less endpoints to manage 
 
-    Conver RDS DB to Aurora DB
+    Convert RDS DB to Aurora DB
         - convert a regular AWS RDS database (eg, MySQL or PostgreSQL) to an Amazon Aurora DB
         Method 1 
             - Using Snapshot Migration 
@@ -4877,10 +5615,17 @@ AWS Aurora
             2. Promote to primary
                 - when "Replican Lag" is near 0, then promote it
 
-    Qs
-        - DynamoDB can practically inf scale in Storage b/c Shards
-        - Aurora has 128 TB max
-        - RDS has 64 TB max
+Qs
+    - DynamoDB can practically inf scale in Storage b/c Shards
+    - Aurora has 128 TB max
+    - RDS has 64 TB max
+
+
+###########################
+####                      #### 
+#### Event Architecture   #### 
+####                      #### 
+###########################
 
 AWS Step Functions
     - max execution time = 1 year
@@ -5020,15 +5765,6 @@ AWS Simple Notification Service (SNS)
 
     Architecture tip:
 
-Amazon MQ
-    - RabbitMQ or Active MQ
-    - runs on servers
-        - not serverless
-        - You must provision brokers (i.e., managed server instances).
-    - like SQS or SNS (you configure)
-    - MQTT, AMQP, STOMP, Openwire, WSS
-
-
 Qs 5
     lots of shopping orders
         - FIFO does 300-3,000 messages per second. Cannot do 10s thousands / sec
@@ -5038,6 +5774,21 @@ Qs 5
         - RAM (Resource Access manager) is for sharing VPC resources & License. No WAF
         - Cross-Account IAM Roles = you assume a role in the other account, with temporary permissions
             - Temporary credentials from AssumeRole last 15 minutes to 12 hours, depending on how the role is configured (default is 1 hour).
+
+##############################
+####                      #### 
+####      Big Data        #### 
+####                      #### 
+##############################
+
+AWS MQ
+    - RabbitMQ or Active MQ
+    - runs on servers
+        - not serverless
+        - You must provision brokers (i.e., managed server instances).
+    - like SQS or SNS (you configure)
+    - MQTT, AMQP, STOMP, Openwire, WSS
+
 
 AWS Kinesis
     - data cannot be deleted
@@ -5253,12 +6004,14 @@ AWS Glue
     - ETL service (Excract transform load)
     - serverless
 
-RedShift
+AWS RedShift
     - OLAP
     - Serverless OR Provisoined cluster
+
     Enhanced VPC Routing 
         - a feature that makes all COPY and UNLOAD traffic to go through your VPC
         - data stays in AWS
+
     - if your QUERIES are SPORADIC then use Athena instead
 
     Snapshots
@@ -5337,7 +6090,7 @@ RedShift
             - with a 60-second minimum
         - based on the same instance type as your main Redshift cluste
 
-Amazon TimeSeries    
+Amazon TimeSeries
     - a serverless time series database
         - autoscale up/down
     - It’s optimized for writes
@@ -5363,7 +6116,7 @@ Amazon TimeSeries
         - Logs from applications
 
 
-Athena
+AWS Athena
     - $ 5.00 / TB od data scanned
     - commonly used with Quicksight
     TIP: if "analyze data s3 using serverless SQL" then think Athena (exam)
@@ -5423,7 +6176,7 @@ AWS Quicksight
             - Handle many users at once
         - it does the querying somehow without using any syntax
 
-    Dashboard & Nalysis
+    Dashboard & Analysis
         - you define users and groups
             - groups for enterprise ONLY
             - these are QS only, not IAM users/groups
@@ -5432,7 +6185,7 @@ AWS Quicksight
 
 
 
-    RNG
+EMR vs Athena vs Redshfit
     EMR
         - us it when you need Big Data Tools like Have, Spakr
         - One long running cluster, many jobs, 
@@ -5475,6 +6228,11 @@ AWS Quicksight
         launch, configure, and manage Amazon EC2 resources directly
 
 
+##############################
+####                      #### 
+####   Observability      #### 
+####                      #### 
+##############################
 
 Cloudwatch Synthetics
     - monitor endpoints and APIs
@@ -5600,27 +6358,25 @@ CloudWatch Log Aggregation. Multi Account & Multi region
       CW Logs2 ---> sub filter 2 ----> Kinesis Data Stream ----> firehose ----> s3
       CW Logs3 ---> sub filter 3
 
+
 CloudWatch Agent - Integration with SSM
-
-
-- recall:
-    SSM Run Command lets you run scripts or commands on your EC2s without SSH or RDP.
-    SSM State Manager is the "enforcement of desired state" on your EC2 instances.
-    
-1 Install CW Agent using SSM Run Command      
-    - via SSM Run Command, it will simplify your deployment, configuration, and management.
-    - you remotely install the CW Agent EC2s without logging in to them manually.
-2 Install CW Agent using SSM State Manager
-    - State Manager ensures that the CW Agent is installed consistently on instances.
-    - useful for reapplying the config if the instance is restarted
-3 Configure CW Agent by storing configs in SSM Parameter Store
-    - You can store your CW Agent configuration (a JSON file) in SSM Parameter Store,
-        and the agent will pull thes configs when starting. 
-    - This enables centralized, repeatable configuration management.
+    - recall:
+        SSM Run Command lets you run scripts or commands on your EC2s without SSH or RDP.
+        SSM State Manager is the "enforcement of desired state" on your EC2 instances.
+        
+    1 Install CW Agent using SSM Run Command      
+        - via SSM Run Command, it will simplify your deployment, configuration, and management.
+        - you remotely install the CW Agent EC2s without logging in to them manually.
+    2 Install CW Agent using SSM State Manager
+        - State Manager ensures that the CW Agent is installed consistently on instances.
+        - useful for reapplying the config if the instance is restarted
+    3 Configure CW Agent by storing configs in SSM Parameter Store
+        - You can store your CW Agent configuration (a JSON file) in SSM Parameter Store,
+            and the agent will pull thes configs when starting. 
+        - This enables centralized, repeatable configuration management.
 
 
 Cloudwatch EventBridge
-
     Resource-Based Policies 
         - e control who can send events to your event bus.
         - allows you to grant permissions to other AWS accounts (or services) to put events on your event bus. 
@@ -5722,7 +6478,11 @@ Qs
 
 
 
-
+##############################
+####                      #### 
+####       CI/CD          #### 
+####                      #### 
+##############################
 Elastic Beanstalk
     - Ec2, ASG, ELB, RDS, ect
     - go, java, java + tomcat, .net, nodejs, php, python, ruby, packer builder
@@ -5734,7 +6494,7 @@ Elastic Beanstalk
     - should know Worker vs Web Server
     - (decoupling often = SQS)
 
-    "3 architecture modesl"
+    "3 architecture models"
         - single instance
             - good for dev
             - 1 Elastic IP
@@ -6135,6 +6895,11 @@ Qs
             b. Set a DeletionPolicy of Retain
             c. Use a custom resource or Lambda-backed custom deletion logic
 
+##############################
+####                      #### 
+####      Billing         #### 
+####                      #### 
+##############################
 
 AWS Cost Allocation Tags
     - regular key-value tags but AWS tracks money $$$ cost on them
@@ -6313,6 +7078,12 @@ Renewal of Reserved Instances
     - To renew a RI, just queue an RI purchase whenever the previous one expires
 
 
+################################
+####                        #### 
+#### On-Perm Data & Back Up #### 
+####                        #### 
+################################
+
 Could Migration Strategires: The 7Rs
     
     1 Retire 
@@ -6429,7 +7200,7 @@ AWS Storage Gateway
         - you buy from aws console
         - gg'd @ May 12, 2025
 
-Snowball
+AWS Snowball
     "Amazon s3 adapter for snowball"
         - It allows you to use existing S3-compatible tools or applications to write data
         directly to the Snowball device without having to modify your workflows significantly.
@@ -6821,8 +7592,13 @@ File Gateway is designed to expose an S3 bucket to:
 - AWS DMS (Database Migration Service) does not convert schemas - it transfers data after the schema is already in place. You must use SCT first before DMS.
 
 
+##############################
+####                      #### 
+####   VPC Networking     #### 
+####                      #### 
+##############################
 
-VPC 
+AWS VPC 
     Recall:
         Private IP
         - 10.0.0.0/8     = 10.0.0.0 - 10.255.255.255      <= big networks (corp)
@@ -7246,6 +8022,11 @@ Qs
         ECMP with TGW is essential if you need high-throughput, redundant VPN.
 
 
+##############################
+####                      #### 
+#### Machine Learning     #### 
+####                      #### 
+##############################
 
 AMazon Rekognition
     - when you scan for sensitive content and it is flagged
@@ -7316,6 +8097,12 @@ Alexa for Business
 
 
 
+
+##############################
+####                      #### 
+####       Stuff          #### 
+####                      #### 
+##############################
 
 CodeCommit
     - Discontinued as of 2024
@@ -7461,6 +8248,26 @@ EC2 Image Builder
             - Automates deployment of applications to instances/servers
             - CodeDeploy is about deploying the application into that environment. 
 
+Qs
+    AWS SSO
+        - only 1 Identity Source.
+        - The source can only be 1 of these (not 2+ at once):
+            - AWS SSO
+            - Active Directory
+            - external source
+
+        - the master account of SSO doesnt have all the permissions 
+            of the accounts it manage
+
+    Q: You have Active Directory (on premise) w/ AWS SSO. There is a 3rd party monitoring 
+        thing that requries read only access across all AWS accounts.
+        The monitoring thing will run in its own AWS account
+        -> How can you give the monitoring thing the requried permissions????
+        
+    A: Create an AWS CloudFormation template that defines a new AWS IAM role for
+        the third-party monitoring solution with the account of the third party listed in the
+        trust policy. Create the IAM role across all linked AWS accounts by using a stack set.
+        - THe 3rd monitoring thing Asumes role of everything?
 
 
 
@@ -7484,36 +8291,169 @@ AWS IOT
     - you can define a Rules Action to pip data into Firehose
         - and then firehoe pipes to s3, redshift, opensearch, ect
     
+1. AWS IoT Core
+    - connects IoT devices to AWS services and other devices.
+    - Supports MQTT, HTTP, WebSockets.
+    Use Case: Real-time data ingestion and processing from connected sensors or actuators.
+
+2. AWS IoT Device Defender
+    - detect compromised devices or misconfigurations in smart infrastructure.
+    - security for IoT devices.
+        - Monitors traffic anomalies, eg, unexpected IPs or message rates.
+    eg)
+        - if one device suddenly starts talking to IPs it never used before, it flags it. 
+            - You can set up actions to shut it down or alert you. 
+
+3. AWS IoT Device Management
+    - Manage lots of IoT devices.
+    - Firmware management, diagnostics, and tracking
+    - Schedule software updates across devices.
+        - Push firmware updates (Jobs)
+        - Remotely connect to devices (Secure Tunneling)
+        - Search your fleet and organize by attributes (Fleet Indexing)
+
+4. AWS IoT Events
+    - react to real-world conditions
+        - any condition you define based on sensor data. 
+        - When a condition is met, it triggers an action like running a Lambda 
+    Use Case: 
+        - Automatically shut down machinery if temperature crosses a threshold.
+        - "machine overheating" or 
+        - "door left open too long"
+
+5. AWS IoT Greengrass
+    - where connectivity is unreliable.
+    - when you want your devices to process locally without always sending data to the cloud.
+        - for edge computing 
+    - Good for factory floors, ships, or rural areas 
+
+6. AWS IoT SiteWise
+    - Specifically for industrial use
+    - dashboard
+    - Collects, organizes, and analyzes data from industrial equipment.
+        - eg. compressor with temperature and pressure sensors
+    - calculate metrics (like efficiency or downtime
+
+7. AWS IoT Things Graph (Deprecated – service no longer actively developed)
+    - some shitty boxes and arrows state machine or s/t idk
+    - dont use
+
+8. AWS IoT 1-Click
+    - use it for things like a help button in a store or a maintenance request in a hotel. 
+    - chatgpt: "It’s been largely sidelined; very niche and barely relevant now."
+    - Triggers AWS Lambda functions with the press of a button.
+        - for simple hardware devices (e.g., buttons).
+        - minimal configuration.
+        - Direct integration with Lambda.
+    Use Case: Panic buttons, maintenance alerts, feedback capture in physical locations.
+
+AWS Management Console 
+    - the web console, user interface
+
+AWS Proton
+    - A higher-level service built on top of CloudFormation.
+        - YAML
+    - helps platform teams (those who set up cloud infrastructure) create blueprints (called templates) for apps
+        - Then, developers use those blueprints to launch their apps 
+        - without worrying about the complex infrastructure.
+
+    - Platform teams: Define and maintain the infrastructure templates.
+    - Developers: Use those templates to deploy apps safely and consistently.
+        - Developers just "fill in the blanks" and deploy.
+
+    - builds Microservices and Serverless infrasturcture
+        - ECS, EKS, Lambda, API GW, DynamoDB, IAM, cloudwatch ....
+        - NOT EC2s
+
+
+
+AWS Service Quotas 
+    - (formerly known as limits) 
+    - the maximum number of resources or operations that you can use
+    - exist to protect both customers and AWS infrastructure from unintentional overuse.
+    increase by:
+    a. Go to the Service Quotas console.
+        - web ui form
+    b. Go to the AWS Support Center.
+    c. AWS CLI
+
+    Soft quotas / Adjustable Quotas
+        eg, number of EC2 instances per Region
+        - soft limits that AWS sets by default but you can request to increase them.
+
+    Hard quotas / Non-Adjustable Quotas
+        - Fixed limits 
+        eg, certain predefined API rate limits that can't be increased).
+        - hard limits that cannot be changed, even through a support request.
+
+
+|   Service   |   Quota Name                                          |   Limit Type   |   Default Limit      |
+| ----------- | ----------------------------------------------------- | -------------- | -------------------- |
+|   EC2       | Running On-Demand Standard Instances (per Region)     | Soft           | 128 vCPUs (varies)   |
+|             | Security Groups per VPC                               | Soft           | 2,500                |
+|             | Elastic IPs per Region                                | Soft           | 5                    |
+|   S3        | Buckets per Account                                   | Hard           | 100                  |
+|             | PUT/COPY/POST/DELETE requests per second (per prefix) | Soft           | 3,500                |
+|   Lambda    | Concurrent Executions                                 | Soft           | 1,000                |
+|             | Total Deployment Storage per Region                   | Hard           | 75 GB                |
+|   RDS       | Manual Snapshots per Region                           | Soft           | 100                  |
+|             | DB Instances per Region                               | Soft           | 40                   |
+|   VPC       | VPCs per Region                                       | Soft           | 5                    |
+|             | Subnets per VPC                                       | Hard           | 200                  |
+|   IAM       | Roles per Account                                     | Soft           | 1,000                |
+|             | Groups per User                                       | Hard           | 10                   |
+|             | Inline Policies per Role/User/Group                   | Hard           | 10                   |
 
 
 
 
+AWS App2Container (A2C) 
+    is a command-line tool that helps containerize existing applications running on virtual machines. It simplifies the process of migrating legacy .NET and Java applications into Docker containers, which can then be deployed to container services like Amazon ECS, Amazon EKS, or AWS App Runner.
+    supports:
+        Java applications (Tomcat, JBoss, etc.)
+        .NET Framework applications (Windows-based)
 
 
-Qs
-
-    AWS SSO
-        - only 1 Identity Source.
-        - The source can only be 1 of these (not 2+ at once):
-            - AWS SSO
-            - Active Directory
-            - external source
-
-        - the master account of SSO doesnt have all the permissions 
-            of the accounts it manage
-
-    Q: You have Active Directory (on premise) w/ AWS SSO. There is a 3rd party monitoring 
-        thing that requries read only access across all AWS accounts.
-        The monitoring thing will run in its own AWS account
-        -> How can you give the monitoring thing the requried permissions????
-        
-    A: Create an AWS CloudFormation template that defines a new AWS IAM role for
-        the third-party monitoring solution with the account of the third party listed in the
-        trust policy. Create the IAM role across all linked AWS accounts by using a stack set.
-        - THe 3rd monitoring thing Asumes role of everything?
+Active/active and active/passive
+        - In AWS (and cloud architecture generally), active/active and active/passive refer to high availability and disaster recovery configurations:
+    Active/Active
+        Definition: Multiple nodes are actively handling traffic simultaneously.
+            node = eg, servers, databases, or regions
+        Use Case: Load balancing, high availability, fault tolerance.
+        Example: Two AWS regions both serving user requests via Route 53 with latency-based routing.
+    Active/Passive
+        Definition: One node is active and serving traffic; the other(s) are on standby, ready to take over if the active one fails.
+        Use Case: Simpler disaster recovery setup.
+        Example: Primary RDS instance with a standby replica in another AZ or region.    
+            - Hot/Warm/Cold Standby
 
 
-    API Gateway - Errors
+Amazon Managed Blockchain
+    - manage blockchain networks using popular open-source frameworks like Hyperledger Fabric and Ethereum (Ethereum support has been deprecated as of 2023).
+
+
+AWS Tag Policies 
+    -  part of AWS Organizations 
+    -  a JSON document of rules
+    - "enforce" consistent tagging across AWS resources. 
+    - by define rules about which tags are allowed and required
+    - it doesn't block/stop incorrect tagging, it will notify you
+    - doesn’t fix existing tags.
+    - not a substitute for access control 
+        -> use SCPs or IAM for that.
+
+
+--------------------------------------------- 
+--------------------------------------------- 
+---------                            --------
+---------      ANDREW BROWN          -------- 
+---------                            --------
+---------------------------------------------
+---------------------------------------------
+
+######################################
+#####
+API Gateway - Errors
 
     4xx means Client errors
         - 400: Bad Request
@@ -7560,11 +8500,6 @@ Qs
         Definition: The ability to access your data when needed.
 
 
-    S3 Glacier  
-        - are not the same service as Amazon S3, although they are closely related
-        - a service for archival storage.
-        - S3 Glacier Vaults are part of Amazon S3 Glacier, 
-
     Object Ownership
         a Bucket owner enforced (recommended):
             - All objects are owned by the bucket owner, regardless of who uploads them.
@@ -7576,7 +8511,7 @@ Qs
             - The uploader retains ownership of the objects they upload.
 
 
-    S# Access Grants 
+    S3 Access Grants 
         - lets you map identities in a directory service (IAM Identify center, Active Directory, Okta) to access datasets in s3.
 
     S3 CORS
@@ -7600,6 +8535,11 @@ Qs
         - use case: good for scrubbing PII when sharing stuff
         - GET HEAD LIST operations
 
+    S3 Glacier  
+        - are not the same service as Amazon S3, although they are closely related
+        - a service for archival storage.
+        - S3 Glacier Vaults are part of Amazon S3 Glacier, 
+
     S3 Archieved Objects
         Archived objects = slow retrieval time, low storage cost
 
@@ -7614,7 +8554,7 @@ Qs
                 eg)
                     - S3 Intelligent-Tier (archive or deep arhive)
                     - S3
-        S3 Glacier:
+        Restoring from S3 Glacier:
             Restoring from S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive
                 - Yes, for whatever reason, you must do this:
 
@@ -7720,105 +8660,104 @@ AWS Quick Starts
     - has a cool UI for configs; with inputs, dropdownss & textfields
 
 Cloudformation
-CFN - Stack Updates
-    - When you submit an update, CloudFormation updates differently depending on the state of your resources and circumstances:
-    - When you use commands like `update-stack` or `deploy` via the AWS CLI,
+    CFN - Stack Updates
+        - When you submit an update, CloudFormation updates differently depending on the state of your resources and circumstances:
+        - When you use commands like `update-stack` or `deploy` via the AWS CLI,
 
-    Update with No Interruption
-        1.Updates the resource without disrupting operation
-        2. and without changing the resource's physical ID
+        Update with No Interruption
+            1.Updates the resource without disrupting operation
+            2. and without changing the resource's physical ID
 
-    Updates with Some Interruption
-        1. Updates the resource with some interruption
-        2. and retains the physical ID.
+        Updates with Some Interruption
+            1. Updates the resource with some interruption
+            2. and retains the physical ID.
 
-    Replacement
-        1. recreates the resource during an update,
-        2. also generates new physical ID.
-
-
-CFN - Stack Policy
-    This is a protection mechanism applied to a stack to control what resources can or cannot be updated during a stack update.
-
-    It does not perform updates; instead, it restricts them.
-    - checks before, will allow or permit the stack operation.
-    Possible Actions:
-        $  Update:Modify - Update that do not require replacing, no interruption to service.
-        $  Update:Replace - Updates require deleting a resource and creating a new resource to replace it
-        $  Update:Delete - Updates the require deleting a resource altogether.
-        $  Update :* - For all above cases
-
-        aws cloudformation set-stack-policy 
-            --stack-name prevent-stack-update 
-            --stack-policy-body '{"Statement" : [{
-                "Effect" : "Deny"
-                "Action" : "Update :* ",
-                "Principal": "*"
-                "Resource" : "LogicalResourceId/MyEC2Instance"
-            }]}
-
-CFN - Nested Stacks
-    - can put a CFN in a CFN
-
-CFN - Rollbacks
-    - when a CFN operation fails/erros, you can "Rollback" the stack to where it was before the operation
-        - this is on by default
-        - operation like create update, destroy
-
-CFN - resource attributes
-    - when you write a CFN yaml file, you'll probably see and/or use these cool features/flags/attributes
-    Creation Policy
-        - when something/resource is created
-    Deletion Policy
-        - how to delete ("Retain" "Snapshot" "Delete")
-    Update Policy
-        - how to update
-    DependsOn
-        - force an order, but CFN is usually smart
-    MetaData
-        - add metadata
-    UpdateReplacePolicy
-        - ?
-
-CFN - IaC Generator
-    - you can select resources in your AWS account, and AWS will generate you a CFN template !!!
-    - COOL
-
-AWS Application Composer 
-    - plug in your CFN template ...
-    - See a cool UI of your resources with its name, ID ect
-    - boxes and arrows
-    Canvas | Template
-
-CFN - Init
-    - like "User Data" scripts, the start up scripts ran on EC2
-    - but they are in CFN yaml files, does the same thing, just alternate way
+        Replacement
+            1. recreates the resource during an update,
+            2. also generates new physical ID.
 
 
-CFN - Hup 
-    - a daemon that runs on EC2 instances. 
-    - it monitors metadata changes in AWS CloudFormation stacks and execute custom actions (hooks) when those changes occur.
-    (short for cfn-hup) 
-    - checks in 15 min intervals
-    - apparently freakin sucks says Andrew Brown
+    CFN - Stack Policy
+        This is a protection mechanism applied to a stack to control what resources can or cannot be updated during a stack update.
 
-CFN - Registry 
-    - you can use "custom resource types"
-    custom resource types = defining infrastructure components not natively supported by CFN,
-        but you treat it like normal AWS resources in your templates.
-    - very complex
-    - very developer
+        It does not perform updates; instead, it restricts them.
+        - checks before, will allow or permit the stack operation.
+        Possible Actions:
+            $  Update:Modify - Update that do not require replacing, no interruption to service.
+            $  Update:Replace - Updates require deleting a resource and creating a new resource to replace it
+            $  Update:Delete - Updates the require deleting a resource altogether.
+            $  Update :* - For all above cases
 
-EKS Elastic Kubernets Service
-    - for its compute nodes, EKS can use:
-        - EC2s (duh)
-        - Fargate instances
-        - on prem instances (external; google, ect)
+            aws cloudformation set-stack-policy 
+                --stack-name prevent-stack-update 
+                --stack-policy-body '{"Statement" : [{
+                    "Effect" : "Deny"
+                    "Action" : "Update :* ",
+                    "Principal": "*"
+                    "Resource" : "LogicalResourceId/MyEC2Instance"
+                }]}
+
+    CFN - Nested Stacks
+        - can put a CFN in a CFN
+
+    CFN - Rollbacks
+        - when a CFN operation fails/erros, you can "Rollback" the stack to where it was before the operation
+            - this is on by default
+            - operation like create update, destroy
+
+    CFN - resource attributes
+        - when you write a CFN yaml file, you'll probably see and/or use these cool features/flags/attributes
+        Creation Policy
+            - when something/resource is created
+        Deletion Policy
+            - how to delete ("Retain" "Snapshot" "Delete")
+        Update Policy
+            - how to update
+        DependsOn
+            - force an order, but CFN is usually smart
+        MetaData
+            - add metadata
+        UpdateReplacePolicy
+            - ?
+
+    CFN - IaC Generator
+        - you can select resources in your AWS account, and AWS will generate you a CFN template !!!
+        - COOL
+
+    AWS Application Composer 
+        - plug in your CFN template ...
+        - See a cool UI of your resources with its name, ID ect
+        - boxes and arrows
+        Canvas | Template
+
+    CFN - Init
+        - like "User Data" scripts, the start up scripts ran on EC2
+        - but they are in CFN yaml files, does the same thing, just alternate way
+
+
+    CFN - Hup 
+        - a daemon that runs on EC2 instances. 
+        - it monitors metadata changes in AWS CloudFormation stacks and execute custom actions (hooks) when those changes occur.
+        (short for cfn-hup) 
+        - checks in 15 min intervals
+        - apparently freakin sucks says Andrew Brown
+
+    CFN - Registry 
+        - you can use "custom resource types"
+        custom resource types = defining infrastructure components not natively supported by CFN,
+            but you treat it like normal AWS resources in your templates.
+        - very complex
+        - very developer
+
+    EKS Elastic Kubernets Service
+        - for its compute nodes, EKS can use:
+            - EC2s (duh)
+            - Fargate instances
+            - on prem instances (external; google, ect)
 
 
 
 Open Telemetry - Instrumentation
-
     - Instrumentation is the act of embedding a monitoring library into your existing application 
         in order to capture monitoring data such as: metrics, traces or logging
 
@@ -8059,3 +8998,9 @@ NOTE
             - Salesforce Government Cloud (GovCloud) (can run in tenant-isolated mode)
             - Elastic Stack (self-managed clusters per customer)
             - Microsoft Exchange Server (when hosted per organization)
+
+
+
+
+
+
