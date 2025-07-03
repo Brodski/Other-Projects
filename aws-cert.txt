@@ -838,14 +838,19 @@ Instance Type: size ... shirt size
     ect
     
 Shared EC2 Instance (Default)
+    - DEFINITION: EC2 instances that run on physical servers shared with other AWS customers.
     - Instances that run on shared hardware with other AWS customers.
     - Pay on a per-hour or per-second
     Use Case: general-purpose applications, cost-effective.
+    
 Dedicated EC2 Instance
+    - DEFINITION: EC2 instances that run on hardware dedicated to a single customer.
     - Instances that run on hardware dedicated to a single customer but without full control over the host.
     - CPU, storage, memory isolated at the hardware level from other customers.
         Use Case: compliance, regulatory, or licensing requirements that require physical isolation.
+        
 Dedicated EC2 Host
+    - DEFINITION: A physical server fully allocated to you.
     - Bring Your Own License BYOL
     - physical servers with full control over the host and its instance placement.
     - Full visibility and control over sockets, cores, and instance placement on the host.
@@ -866,27 +871,67 @@ Dedicated INSTANCE
         - Reserved instances
         - On-demand
     
-Dedciated HOSTS    
+Dedciated HOSTS
     - Bring Your Own License BYOL
     - physcial server isolation
     - per host billing
     - visibilty of physcial charavceristics: sockets, cores, host ID
     - affinity between hsot and instance: yes, consitenct deplyemtn to the same insacnes
     - targeteted instance placment: Yes
-    - automaatice instance placemtn Yes
+    - automaatice instance placement: Yes
     - add capacity using allocaiton reqeusts Yes
     
-    
+    Physical Server dimension + specs
+        - 1U = 1.75 inches (usually 1, 2 or 4 Us)
+        - 24"-36" depth
+        - slides in to a rack.
+        Ex)
+            BIG
+                - AWS u-24tb1.metal instance (bare metal):
+                    - 224 vCPUs
+                    - 24 TB of RAM
+                    - Eight 1.9 TB NVMe SSDs (15 TB total)
+                    (prob for im-memory DB)
+            SMALL
+                - AWS c5.metal
+                    - 96 vCPUs
+                    - 384 GiB RAM
+                    - (no storage, use EBS instead)
+
 Elastic IP
     - a static IPv4 address designed for dynamic cloud computing. 
     - allows you to maintain a consistent IP address despite instance restarts or changes.
     - assigned to a EC2 instance, but sometimes could be a NAT gateway, load balacner, or aws lambda via VPC
         
-     
 
-
-        
 EC2 PRICING:
+    1. On Demand
+    2. Spot Instances (90%)
+    3. Savings Plan (newer)
+        A. Plans
+            - Compute SP (66%)
+            - EC2 Instance SP (72%)
+            - SageMaker SP (64%)
+        B. Payment options
+            - All Upfront
+            - Partial Upfront
+            - No Upfront    
+    4. Reserved Instances
+       A. Plans
+            - Standard (75%)
+                * Regional instance (scope)
+                * Zonal instance (scope)
+            - Convertible
+        B. Payments
+            - All Upfront
+            - Partial Upfront
+            - No Upfront
+    5. RI Limits        
+    6. Capcity Reservations
+    7. RI Marketplace
+    8. RI vs Saving Plans
+    
+    
     ==================
     On Demand
         - default
@@ -904,45 +949,64 @@ EC2 PRICING:
 
     ==================
     AWS Savings Plans (EC2)
+        - newer, simplier
         - a simplied purchasing process compared to Reserved Instances.
-            - specific, based on service types (ec2, fargate/lambda/ec2, or sagemaker)
-            - 2 options for duration (1,3 years)
-            - 3 payment options
+            - specific, based on service types 
+            - ec2, fargate/lambda/ec2, or sagemaker
+
+            CHOOSE: 
+                - 1 or 3 years, COMMIT
+                - a payment option (3 options)
+
+        - automatic!! * 
+            - You don’t pre-select instance types. You just run whatever compute you want.
+                -> AWS will deduct from initial commited payment at a discount
+                eg)
+                    - You run EC2 instances worth $0.70/hour (on-demand).
+                    - AWS applies the discount to the first $0.50/hour of usage (you get discounted rates there).
+                    - The remaining $0.20/hour is billed at on-demand prices.
+                    
         Note: RIs and Saving Plans
             - they don’t stack
             - the two cannot be combined or overlap for the same usage — only one discount applies per usage-hour.
             - Savings Plans are newer and more flexible than RIs.
-        Duration:
-            - ‌commit to 1 or 3 years
             
-        Saving plans
+            
+        A. SAVING PLANS
             1 Compute Savings Plans:
-                - you’re committing $$$ vefore
+                - you’re committing $$$ before
+                - 66% up to
+                
                 - any thing/where
-                    - Apply to any EC2 instance regardless of region, instance family, OS, or tenancy.
                     - you do not lock in a specific EC2 instance, Lambda function, or Fargate servic
+                    - Apply to ANY EC2 instance regardless of region, instance family, OS, or tenancy.
                     - regardless of:
                         Service: EC2, Lambda, or Fargate
                         Region
                         Instance family (e.g., c6g, m5, t3)
                         OS
                         Tenancy (dedicated or not)
-                        -> your locking money, term (1,3 year), payment (all, partial, no upfront)
+                        -> your locking 
+                            a. money, 
+                            b. term (1,3 year), 
+                            c. payment (all, partial, no upfront)
+                            
                 - support AWS Lambda and AWS Fargate.
-                - 66% up to
+                
                 Example: 
-                You commit to $100/hour. Any usage (EC2, Lambda, Fargate) up to that amount is charged at a discounted rate.
-
+                    You commit to $100/hour. 
+                    Any usage (EC2, Lambda, Fargate) up to that amount is charged at a discounted rate.
 
             2 EC2 Instance Savings Plans:
                 - specific region
                 - specific EC2 family
                 - 72% up to
+
             3 SageMaker Savings Plans:
                 - sagemaker
                 - 64% up to
                 
-        Payment options:
+        B. PAYMENT OPTIONS:
             1 All Upfront
                 Full payment is made at the start
 
@@ -964,14 +1028,19 @@ EC2 PRICING:
             - SP: EC2 Farage and Lambda
             - SP: in a specific AWS Region and instance family.
             - money
+            
     ==================
+    
     Reserved Instances
         - Commit to 1 or 3 years (Like Saving Plan)
         - measured based on a specific instance configuration
-        - No Upfront / Partial / All Upfront, not an option
+        - you cannot cancel your purchase. 
+            - However, you (possibly can) modify, exchange, or sell your RI 
+        
         -> AWS recommends Saving Plans over RI, b/c same price and easier
-        - 2 plans:
-            - Standard:
+        
+        Plans (2):
+            A. Standard:
                 - 75% reduced pricing
                 - cannot modify instances once purchased. 
                     - for predictable, steady-state workloads.
@@ -983,7 +1052,7 @@ EC2 PRICING:
                         - Scope
                 - can be bought or sold on marketplace
                     
-            - Convertible
+            B. Convertible
                 - flexible
                 - 54% reduced pricing
                 - allows you to change the instance type, operating system, and tenancy
@@ -991,13 +1060,27 @@ EC2 PRICING:
                 - dont choose a "Scope"
                 - can NOT be bought or sold on marketplace
                     - b/c they are too flexible
+                - Whenc converting (can click through AWS Console), If the new RI 
+                    is of equal or greater value, you complete the exchange. 
+                    - Yes equal or GREATER
+                -  You may need to pay the difference if the new RI costs more.
+                - You can’t downgrade to a lower-cost RI and pocket the difference.
 
-
-        - Options - "Scope":
-            - Standard, not COnvertible
+        Payments
+            - like Saving Plans.
+                a. All Upfront
+                b. Partial Upfront
+                c. No Upfront
+        Scope:
+            - For Standard only, not Convertible
             -> DOES NOT EFFECT PRICE $$$
+            
             Regional instances
+                -> NOT locked in AZ (ie reserve capcity),  not locked EC2 size/family 
+                    - Flexible EC2 size/family b/c any AZ
                 - Purchase for a region (us-east-1)
+                
+                - Increases availability and fault tolerance b/c EC2s spread across multiple AZs in region.
                     Pros:
                         - any AZ in region, flexible
                         - change between size & family, flexible x2
@@ -1005,24 +1088,16 @@ EC2 PRICING:
                         - does not reserve capcity (in case the AZ you want is full)
                     
             Zonal instances
-                - Purchase for an AZ
-                    Pros:
-                        - locks in your AZ choice
-                        - does reserver capacity in the AZ
-                    Cons:
-                        - no AZ flexibilty
-                        - no size & family flexibilty
-           
-        Zonal Reserved Instances (RIs):
-            - to a specific Availability Zone.
-            Capacity Reservation: Provide a capacity reservation within the specified AZ, ensuring instance availability.
-            Use Case: Suitable for applications that require dedicated capacity in a particular AZ.
-            
-        Region Reserved Instances (RIs):
-            - to a specified AWS region.
-            - Automatically apply to matching instances in any AZ within the region, providing greater flexibility.
-            Use Case: Ideal for workloads that can run in multiple AZs or when you require flexibility across the region.
-            Benefit: Increases availability and fault tolerance by allowing instances to be spread across multiple AZs.
+                -> Lock in AZ, not locked EC2 size/family 
+                - Purchase for an AZ                
+                - Make a capacity reservation within a specific AZ, ensuring availability.
+
+                Pros:
+                    - locks in your AZ choice
+                    - does reserve capacity in the AZ
+                Cons:
+                    - no AZ flexibilty
+                    - no size & family flexibilty
 
         RI Limits
             per month:
@@ -1033,10 +1108,11 @@ EC2 PRICING:
                     -> 20 is on-demand default limit per AZ
             Zonal
                 - apparently, you can exceed your on-demand limit by purchasing zonal RIs
-                    -> 40 of the same EC2 in on AZ :O
+                    -> 40 of the same EC2 in one AZ :O
 
 
     Capcity Reservations
+
         - a feature that allows you to reserve compute in a AZ for any duration.
             - b/c it is possible AWS runs out of servers :O
             - so you can reserve EC2 instaces for a specific Region and AZ
@@ -1075,7 +1151,27 @@ RI vs Saving Plans
     Capacity Reservation:
         Savings Plans - No (unless used with specific configurations like EC2 SP + Zonal placement)
         RIs - Yes, but only with Zonal Reserved Instances — not with Regional RIs
-    
+    How discounts are applied	
+        Savings Plan: Automatically, to any usage in-scope
+        RI (CONVERTIBLE): Only to the specific instance reserved
+
+        
+     !   
+    🔑 Exam Tip:
+        use case:
+        Instance Savings Plan 
+            -> when Automatic flexibility within a family
+        Convertible RI 
+            -> MANUAL, FAMILY/TYPE
+                b/c you have to select your RI plans and your EC2s to align everything
+                    but Saving P, you just select your EC2 and money is discounted without configuring Saving P again
+            -> when Manually switching to a different family/type 
+            -> option to adjust attributes (eg, move from m5 to r5, or change OS), which Savings Plans don’t allow.
+
+*****************************
+*****************************
+*****************************
+
 Zero Trust model:
     - "trust no one, verify everything."
     - Malicious actors might by-pass conventional access controls
