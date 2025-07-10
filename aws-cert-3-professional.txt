@@ -1,18 +1,18 @@
 1. IAM
-    IAM Access Advisor
-    IAM Access Analyzer
-    IAM Permission Boundaries
-    "NotAction" IAM keyword
-    IAM Roles vs Resource Based roles
-    Federated Identity in AWS
+    1. IAM Access Advisor
+    2. IAM Access Analyzer
+    3. IAM Permission Boundaries
+    4. "NotAction" IAM keyword
+    5. IAM Roles vs Resource Based roles
+    6. Federated Identity in AWS
         SAML
         Web Identity Federation
-    IAM policy variables
-    AWS Directory Services
+    7. IAM policy variables
+    8. AWS Directory Services
         AWS Managed Microsoft AD
         AD Connector
         Simple AD
-    AWS Organizations
+    9. AWS Organizations
         "OrganizationAccountAccessRole" IAM role
         Feature Modes
             a. Consolidated Billing Only
@@ -22,9 +22,9 @@
         Tag Policies
         AI Services Opt-out policies
         Back up Polcies
-    AWS IAM Idenity Center  
-    AWS Service Catalog 
-    AWS Control Tower
+    10. AWS IAM Idenity Center  
+    11. AWS Service Catalog 
+    12. AWS Control Tower
         Landing Zone 
         Account Factory
         AWS Guardrails 
@@ -35,10 +35,10 @@
                 1. Mandatory Guardrails
                 2. Strongly Recommended Guardrails
                 3. Elective Guardrails
-    AWS Resource Access Manager (RAM) 
+    13. AWS Resource Access Manager (RAM) 
 
 2. SECURITY
-    CloudTrails
+    1. CloudTrails
         CloudTrail Insights
         CloudTrail + EventBridge
         Event type
@@ -49,26 +49,29 @@
         "Programatic" Event arch
             a. CloudTrail + EventBridge Integration (real time, cheaper effort)
             b. CloudTrail + CloudWatch Logs Integration (not real time, easy)
-    AWS Key Managment Server KMS
+    2. AWS Key Managment Server KMS
         Key material Origin
             a. KSM-Manged keys / AWS-Generated Keys
             b. External
             c. Custom Key Store (cloudHSM)
         Multi Region Keys
-    AWS Systems Manager Parameter Store 
+    3. AWS Systems Manager Parameter Store 
         Secrets via Param Store
         "Public Parameters"
         Standard vs Advanced
         Parameter Policies
         "Rotation"
-    AWS Secrets Manager 
+    4. AWS Secrets Manager 
         Secret Rotation
         Secret Manager vs SSM Parameter Store
-    AWS RDS Security
-    Server Name Indication (SNI) 
-    (recall) Public and Private Certifcates
-    AWS Certificate Manager (ACM)
-    S3 Security
+    5. AWS RDS Security
+        TDE
+        IAM
+    6. Server Name Indication (SNI) 
+    7. (recall) Public and Private Certifcates
+    8. AWS Certificate Manager (ACM)
+        Regional
+    9. S3 Security
         Encryption
         S3 Access Logs (aka Server Access Logging) 
         Policies
@@ -78,29 +81,29 @@
         Glacier Vault Lock
         Access Points
             VPC only access
-    DDos protection
-    AWS WAF - Managed Rules
+    10. DDos protection
+    11. AWS WAF - Managed Rules
         Rule Groups
         WAF Logging 
         Pro Tip
-    Random note
+    12. Random note
         Amazon API Gateway (Private) 
         VPC Private & Public subnet communication
-    AWS Firewall Manager
+    13. AWS Firewall Manager
         Security policy
         Auto-remediation
         Audit only
-    AWS Inspector
-    AWS Config
+    14. AWS Inspector
+    15. AWS Config
+        Config rules
+        Configuration History
         Events 
             a. EventBridge
             b. Auto Remediation 
-        Configuration History
-        Config rules
-    AWS GuardDuty
-    AWS Security Hub
-    AWS Detective
-    IAM Conditions
+    16. AWS GuardDuty
+    17. AWS Security Hub
+    18. AWS Detective
+    19. IAM Conditions
         aws:sourceIP
         aws:requestedRegion
         ec2:ResourceTag + aws:PrincipleTag
@@ -110,8 +113,8 @@
         Null
         Common Condition Keys
         Logical Operators
-    AWS Managed Logs (topic)
-    Solution Architecture on AWS (tip)
+    20. AWS Managed Logs (topic)
+    21. Solution Architecture on AWS (tip)
     --- associate ---
     Amazon Macie
     AWS Shield
@@ -142,22 +145,26 @@
     Auto Scaling Groups
         Updating an app
         Good metrics to scale on
-        Lifecycle hooks
+        EC2/ASG Lifecycle hooks
+            - launch/terminate
         EC2 Instance Refresh
-        Warm Up Time
-        Scaling Processes
-        Health checks
-        Updating app possible strategies
+        ASG Warm Up Time
+        ASG Scaling Processes
+        ASG Health checks
+        ASG Updating app possible strategies
     Spot Instance
         User Defined Max Price
         Spot Fleets
     AWS Fargate
+        Fargate Spot 
     AWS Elastic Container Service (ECS)
+        ECS IAMs
         ECS w/ ALB Integration
         ECS Networking
         ECS Service Auto Scaling 
-        ECS Task Placement Strategies
         ECS Capacity Provider
+        ECS Task Placement Strategies
+            - spread/binpack/rng
         ECS Draining Hooks
         ECS Spot Instance
         Fargate Spot
@@ -171,10 +178,10 @@
             Enhanced Scanning
     Elastic Kubernetes Service
         Node Types
-        Managed Node Groups
-        Self Manged Nodes
-        Fargate mode
-        Storage Class / Data Volumes
+            Managed Node Groups
+            Self Manged Nodes
+            Fargate mode
+        Container Storage Interface (CSI)
         IAM Roles for Service Accounts (IRSA)
         Dynamic Provisioning
         Storage Access modes
@@ -185,7 +192,7 @@
     CodeDeploy with Lambda
     Pre-Traffic and Post-Traffic Hooks
     AWS Lambda Service
-        AWS Lambda Control Plan
+        AWS Lambda Control Plane
         Lambda Function URL
         Lambda in a VPC
         Lambda that's in VPC + IP public
@@ -196,8 +203,8 @@
         Lambda w/ FIXED IP
             1. NAT Gateway + VPC + Elastic IP (Most Common)
             2. AWS NLB + Static IPs + Proxy
-            3 AWS VPC Endpoint
         Lambda Event Source Mapping
+            event sources
 
 4. TRAFFIC
     Elastic Load Balancers
@@ -220,6 +227,10 @@
         Limits
         PAYLOAD SIZE SOLUTION
         TIME SOLUTION
+            1. Client Polling Pattern
+            2. Webhooks or Callbacks
+            3. WebSockets (via API Gateway)
+            4. Frontend Queuing + Notifications
         API GW Authentication
         API Gateway - Logging, Monitoring, Tracing
         Usage Plans
@@ -235,7 +246,7 @@
         Alias Records Targets
         Record TTL (Time To Live) 
         Routing Policies
-        IP-Based Routing
+            - IP-Based Routing
         Public Zones
         Private Zones
         R53 Health Checks
@@ -261,25 +272,19 @@
         Encryption - Account level setting
         Instance store 
     Elastic File System (EFS)
-        EFS Throughput Modes
+        EFS Throughput Modes 
             1. Bursting Throughput (default)
             2. Provisioned Throughput
         EFS Performance Modes 
             1. General Purpose Mode (default)
             2. Max I/O Mode
-        EFS Mount Targets
-        EFS Performance Characteristics
-            1. Performance Modes
-                a. General Purpose (default)
-                b. Max I/O
-            2. Throughput Modes
-                a. Bursting Throughput (default)
-                b. Provisioned Throughput
-                c. Elastic Throughput
+            3. Elastic Throughput
         EFS Storage Tiers 
             1. Standard (Primary Tier)
             2. Infrequent Access (IA) Tier
+            One Zone
         EFS Lifecycle Management Policy 
+        EFS Mount Targets
         Mount EFS
         EFS Access Points
         File System Policies
@@ -287,6 +292,7 @@
 
     S3 Buckets
     S3 Request Rate Limits (Per Prefix)
+        "Prefix Sharding"
     S3 Replication Time Control (RTC) 
     S3 Events
     S3 Multipart upload
@@ -318,12 +324,23 @@
 6. CACHE
     AWS CloudFront
         Origins
+            A. Amazon S3 Bucket
+            B. Custom Origin (HTTP Server)
+            C. VPC Origin
+            D. Elastic Load Balancer (ELB)
+            E. AWS Media Services
         Access Control
-        Origin Groups
-        Geo Restriction 
+            1. Origin Access Control (OAC) 
+            2. Origin Access Identity (OAI) – legacy method
+            3. Signed Cookies 
+            4. Custom Header trick
+        CF Origin Groups
+        CF Geo Restriction 
         Price Classes 
-        Signed Cookies
-        Signed URLs
+        CF Signed Cookies
+            a. Canned Policy
+            b. Custom Policy
+        CF Signed URLs
             1. Canned Policy vs Custom Policy
             2. CF Signed URL vs Signed Cookies
             3. CF Signed URLs vs S3 Signed URLs
@@ -364,8 +381,15 @@
         b. Serverless Cluster
     AWS RDS
         RDS Security (reminder)
+            - TDE
+            - IAM
         RDS Oracle
+            a Oracle Data Pump 
+            b Transparent Data Encryption (TDE)
+            c Orcale RMAN (Recovery Manager)
+            d Oracle RAC (Real Application Clusters)
         RDS MySQL
+            - mysqldump
         Cross Region Failover Architecture
     AWS Aurora
         Aurora Logs
@@ -381,6 +405,9 @@
         Aurora Cross-Region Read Replicas 
         Auora Global Databases - Write Forwarding
         Convert RDS DB to Aurora DB
+            1 Snapshot
+            2 Databse Migration Servicew
+            3 Read Replica Promote
     Qs
 
 8. MICROSERVICES
@@ -395,24 +422,35 @@
     AWS Simple Notification Service (SNS)
         Fan out trick
         Cross-Region Delivery
+
     Qs 5
 
 9. BIG DATA
     AWS MQ
+        - RabbitMQ or ActiveMQ
+        - both are SNS or SQS (you configure)
+        - not serverless
+        ... Kafka ~= Kinesis
+            - can be serverless
     AWS Kinesis
+        Provisioned deployment
+        On-demand 
     AWS Firehose
         Data Transformation
         Comparison Chart 
     Amazon Managed Streaming for Apache Kafka (Amazon MSK)
     AWS Batch
         Multi Node Mode
+            - not embarassing
+            - cant spot
     Elastic MapReduce (EMR) 
-        (Hive, HBase, Presto, Flink, and more)
+        - Hadoop and Spark
+        - (Hive, HBase, Presto, Flink, and more)
     Jobs on AWS
     AWS Glue
 
     AWS RedShift
-        Enhanced VPC Routing 
+        Redshift Enhanced VPC Routing 
         Snapshots
         Disaster Recovery   
         Redshift Workload Management (WLM)
@@ -421,6 +459,10 @@
     Amazon TimeSeries
     AWS Athena
         Performance Improvement
+            - Apache Parquet, ORC
+            - Copmress (gzip)
+            - parition
+            - larger files
         Athena Federated Query
     AWS Quicksight
         Enterprise Edition
@@ -457,6 +499,7 @@
     Elastic Beanstalk
         "3 architecture models"
         Blue / Green Deployment
+        Worker cron
     AWS CodeDeploy
         CodeDeploy agent
         Two Deployment Modes
@@ -473,7 +516,7 @@
             c. Snapshot
         CFN Custom Resources 
         CFN StackSets
-        CFN Automatic Deployment 
+            Automatic Deployment 
         CFN Drift detection
         CFN AWS Secrets Manager Integrates 
         CFN Resource Import
@@ -491,6 +534,7 @@
     AWS Cost Allocation Tags
     AWS Tag Editor 
     AWS Trusted Advisor 
+        Full Trusted Advisor
     AWS Compute Optimizer 
     AWS Service Quotas 
     AWS Budgets 
@@ -702,6 +746,7 @@ IAM Access Advisor
 IAM Access Analyzer
     - external external external external external external external external external external external external external external external external 
     - external  = outside of your zone of trust = not your account & not your organization
+    - (😵‍💫 not to be confused with Trusted Advisor, optimiztion thing)
     - shows you which AWS services a user or role could use based on their permissions, 
          and whether they’ve actually used those services recently.
     - analyze resources that are shared with external entities
@@ -1044,6 +1089,7 @@ AWS Organizations
         - No, a user account (IAM user) cannot leave an AWS Organizatio
 
     Service Control Policies (SCPs) 
+        - a AWS Org feature, only
         - both SCPs and Permission Boundaries, are the intersection 
         - allow or block IAM actions
         - OU or Account level
@@ -1093,6 +1139,8 @@ AWS Organizations
         - Applied at the organization or OU (organizational unit) level using AWS Organizations.
 
         - Wrong tag will get denied by the AWS resource (InvalidParameterException) instead of IAM's AccessDenied  ???
+        
+        - a AWS Org feature, only
 
         How to:
             1. define allowed tag keys.
@@ -1296,7 +1344,7 @@ AWS Resource Access Manager (RAM)
             - Use AWS RAM to share these rules with other AWS accounts (app, dev, etc.).
             - Associate the rules with VPCs in participant accounts.
 
-    Supported sharable resources
+    Supported sharable resources <---exam?
         - VPC subnets
         - Transit Gateway
         - Route 53 Resolver rules
@@ -1467,10 +1515,11 @@ AWS Key Managment Server KMS
                 - if you're uploading keys for SSE-C, CloudHSM is a good choice
                 - CloudHSM is practically just the hardware, if you lose the keys, gg
 
-
-    Multi Region Keys
+Key
+    KMS Multi Region Keys
+        recall, noramly you CANNOT use keys cross region.
         - replicate keys cross regions
-            - unlike CA, YES you can use keys cross region
+            - unlike CA, YES you can use keys cross region (but only when multi reg)
         - keys taken from 1 region and replicated to multiple region
         - same key-material, same key ID, same auto rotation ...
             - but still each key is managed INDEPENDENTLY
@@ -1482,6 +1531,9 @@ AWS Key Managment Server KMS
             - low-latency encryption/decryption.
             - active-active applications (?)
             - dynamoDB Global tables
+        - 😵‍💫 KMS Multi Region Keys != AWS Certificate Manager (ACM) keys
+            - KMS can be used cross region
+            - ACM is region bound, cannot cross
 
 
 AWS Systems Manager Parameter Store 
@@ -1602,6 +1654,7 @@ AWS Secrets Manager
             - automatic rotation
             - compliance-sensitive credentials 
 
+exam?
 AWS RDS Security
     - Transparent Data Encryption (TDE) encrypts data inside the database
         - within the database engine.
@@ -1703,12 +1756,21 @@ AWS Certificate Manager (ACM)
         - API Gateway
         - App Runner
 
-    NOTE!
+    Regional
         - ACM is region!
         - to use a global application (multiple ALBs) you need to issue an SSL Certifiate to 
             each region where you deploy your app
         - certificates are NOT replicated automatically across regions.
-        - CloudFront is global by default, so you only need 1
+        Solutions?
+        a. Cloudfront:
+            - CloudFront is global by default, so you only need 1 (must be @ us-east-1)
+        b. manual (PRIVATE only)
+            - use lambda
+            - public certs cannot be exported
+            - cannot be copied cross region
+        c.  request a separate cert 
+            - have to
+
         
         - ❌ You cannot share ACM certificates across regions automatically.
         - ❌ You cannot attach a cert from us-east-1 to an ALB in eu-west-1.
@@ -1819,7 +1881,8 @@ S3 Security
     Access Points
         1. Standard S3 Access Points
         2. S3 Object Lambda Access Points
-        3. VPC Access Point 
+        3. S3 Multi region access points
+        4. VPC Access Point 
 
 
         - recall, its a cool url that is scopd to a section of the bucket
@@ -1852,16 +1915,20 @@ DDos protection
     - AWS Shield
     - AWS Shield Advanced $$
     - AWS WAF (write clever rules)
-    - CloudFront and Route 53
-        - CF has rate limiting, WAF, and AWS Shield
-        - CF "has glocal edge network"
-        - R53 has AWS Shield
-        - Route 53 uses Anycast routing. It directs requests to the nearest available DNS server. 
-            This distribution makes it harder for attackers to disrupt DNS services by overwhelming a single server.
-        - R53 has Health Checks: Route 53 can be configured to route traffic away from unhealthy endpoints
+    - CloudFront
+        - CF rate limiting
+        - CF WAF
+        - CF w/ AWS Shield
+        - CF caching
+    - Route 53 w/ AWS Shield
+    - Route 53 w/ Anycast routing. 
+        - It directs requests to the nearest available DNS server. 
+        - This distribution makes it harder for attackers to disrupt DNS services by overwhelming a single server.
+    - Route 53 w/ Health Checks 
+        - if unhealthy, route traffic away
     - ELBs has AWS shield
-    - Be ready to sacle -> AWS Auto scaling. It cost you money to scale, but protects your app
-    - Split your static resource (s3 /CloudFront) from dynamic ones (EC2 /ALB)
+    - SCALE. Be ready to sacle -> AWS Auto scaling. It cost you money to scale, but protects your app
+
 
 AWS WAF - Managed Rules
     Note
@@ -1873,6 +1940,7 @@ AWS WAF - Managed Rules
     - these rules are managed by AWS and AWS Marketplace sellers
 
     - (You usualy use AWS WAF + AWS Shield + AWS Firewall Manager for comprehensive protection)
+
 
     Rule Groups
         a. Baseline Rule Groups 
@@ -1943,6 +2011,8 @@ AWS WAF - Managed Rules
 Random note
     Amazon API Gateway (Private) 
         - BOOM VPC endpoint (Interface Endpoint
+        - must use VPC Interface Endpoint
+            - Without it, the private API has no reachable DNS name from inside your VPC.
 
         - is a configuration of API Gateway that allows your APIs to be accessible only from inside your VPC 
         - not the public internet.
@@ -2038,13 +2108,30 @@ AWS Inspector
 
 AWS Config
     - COMPLIANCE COMPLIANCE COMPLIANCE COMPLIANCE
-    - NOT TO BE CONFUSED WITH AWS AppConfig (the VARIBALES at runtime)
+    - 😵‍💫 NOT TO BE CONFUSED WITH AWS AppConfig (the VARIBALES at runtime)
     - records compliance of your AWS resource
         ( EC2, S3, IAM roles)
     - does NOT prevent actions, just report & notify
     - run checks periodly or when a change occurs
     - can aggregate all AWS Config data across accounts & regions
         -> good for a security account
+
+    Config rules
+        A. AWS managed rules (over 75)
+        B. Custom rules
+            - must be defined in either AWS Lambdas, or "Guard" (Declarative language) "for simple policy-as-code rules"
+
+        config examples
+            eg) EBS disk if of type gp2, EC2 instance is t2.micro
+            eg) buckets public?
+            eg) checks if SSH is open?
+                - if so, it will notify your Admins (via SNS) that something that defies your rules was introduced
+
+    Configuration History
+        - can view compliance of a resource over time (cool UI calendar in Console)
+        - can view config changes of a resource (cool UI calendar in Console)
+        - Snapshot available
+
 
     Events can do:
         a. EventBridge
@@ -2061,23 +2148,6 @@ AWS Config
             - NOTE, AWS Firewall Manager also has Auto Remedation
                 Firewall Manager: Network/firewall/securiyt Groups
                 Config: Any resource Config is auditing (which is a lot)
-
-    Configuration History
-        - can view compliance of a resource over time (cool UI calendar in Console)
-        - can view config changes of a resource (cool UI calendar in Console)
-        - Snapshot available
-
-    Config rules
-        A. AWS managed rules (over 75)
-        B. Custom rules
-            - must be defined in either AWS Lambdas, or "Guard" (Declarative language) "for simple policy-as-code rules"
-
-    eg) EBS disk if of type gp2, EC2 instance is t2.micro
-
-    eg)
-        - buckets public?
-        - checks if SSH is open?
-            - if so, it will notify your Admins (via SNS) that something that defies your rules was introduced
 
 
 AWS GuardDuty
@@ -2104,7 +2174,7 @@ AWS Security Hub
 
 AWS Detective
     - Wheen something like GuardDuty, Macie, and Security hub finds a problem
-    - Detective will anlyze and quickly identify th eROOT CAUSE of security issues or sus activity
+    - Detective will anlyze and quickly identify the ROOT CAUSE of security issues or sus activity
         - using ML and graphs
     - auto processes events from VPC flow logs, cloudtrail, gaurdduty 
     - produces visualizations
@@ -2200,7 +2270,7 @@ IAM Conditions
                 "<DateOperator>": {     <---- DateEquals, DateLessThan, DateGreaterThanEquals
                     "aws:CurrentTime": "<ISO 8601 timestamp>"
                 }}
-        aws:TagKeys - keys not value
+        aws:TagKeys - expects certain "key" names, the key's value can be w/e
         aws:SourceVpc
         aws:SourceVpce
         s3:x-amz-server-side-encryption 
@@ -2491,7 +2561,7 @@ Auto Scaling Groups
 
     
     Updating an app (that is running on an ASG)
-        -possible pays:
+        -possible ways:
 
         1. Classic simple
             App Load Balancer ----> ASG w/ many EC2s, 
@@ -2520,7 +2590,7 @@ Auto Scaling Groups
 
             - use 2 ALBs
             - R 53 can split traffic
-            - can test ALB 2 easily easily, and then do the weighted w
+            - can test ALB 2 easily, and then do the weighted routing
 
 
     Good metrics to scale on:
@@ -2536,90 +2606,90 @@ Auto Scaling Groups
         - SQS -> ApproximateNumberOfMessagesVisible
             -  Number of unprocessed messages in an SQS queue.
 
-    Good to know:
-        EC2 Lifecycle hooks
-            - feature in ASG
-            - run scripts when instances in an Auto Scaling Group (ASG) launch or terminate.
-            - you pause the launch or termination process, so you can run scripts before
-            - only on launch/terminate hooks
+    
+    EC2/ASG Lifecycle hooks
+        - feature in ASG
+        - run scripts when instances in an Auto Scaling Group (ASG) launch or terminate.
+        - you pause the launch or termination process, so you can run scripts before
+        - only on launch/terminate hooks
 
-        EC2 Instance Refresh
-            - feature in ASG
-            - do this after updating AMIs in the template to get the new AMI
-                - or don't and terminate the instances manaully for new AMIs
-            - "Instance Refresh lets you auto replace existing EC2 instances with new ones 
-                based on an updated configs without needing to manually terminate or update instances yourself."
-            Apply changes to:
-                - Launch template/version
-                - AMI updates
-                - User data scripts
-                - Instance type or configuration
-                
-            How It Works
-                1 You trigger an instance refresh (manually or via automation (like CloudFormation))
-                2 ASG starts replacing instances
-                3 It follows health checks and cooldowns to ensure each new instance is healthy before moving on.
-                    - eg Min Health > 60% (prevents all isntances from going down at once)
-                4 Done
+    EC2 Instance Refresh
+        - feature in ASG
+        - you push a new AMI template... 
+        - do this action to get the new AMI
+        - "Instance Refresh lets you auto replace existing EC2 instances with new ones 
+            without needing to manually terminate or update instances yourself."
+        Apply changes to:
+            - Launch template/version
+            - AMI updates
+            - User data scripts
+            - Instance type or configuration
+            
+        How It Works
+            1 You trigger an instance refresh (manually or via automation (like CloudFormation))
+            2 ASG starts replacing instances
+            3 It follows health checks and cooldowns to ensure each new instance is healthy before moving on.
+                - eg Min Health > 60% (prevents all isntances from going down at once)
+            4 Done
 
-                CLI Instance Refresh
-                    $ aws autoscaling start-instance-refresh --auto-scaling-group-name "my-asg"  
-                        --strategy Rolling
-                CLI new Launch Template Version
-                    $ aws autoscaling update-auto-scaling-group --auto-scaling-group-name "my-asg" 
-                        --launch-template "LaunchTemplateName=my-webserver-template,Version=3"
-                                < OR >
-                        --launch-template "LaunchTemplateName=my-webserver-template,Version=$Latest"
-                                                                                                ↑ <---- BAM
-                    - pushing a new Template does nothing by itself, you nee to run instance refresh
-
-
-        Warm Up Time
-            - the period after a new EC2 is launched when it's not counted toward the "desired capacity" for scaling decisions.
-            - Seems like a stupid way to check if a EC2 is good to go.
+            CLI Instance Refresh
+                $ aws autoscaling start-instance-refresh --auto-scaling-group-name "my-asg"  
+                    --strategy Rolling
+            CLI new Launch Template Version
+                $ aws autoscaling update-auto-scaling-group --auto-scaling-group-name "my-asg" 
+                    --launch-template "LaunchTemplateName=my-webserver-template,Version=3"
+                            < OR >
+                    --launch-template "LaunchTemplateName=my-webserver-template,Version=$Latest"
+                                                                                            ↑ <---- BAM
+                - pushing a new Template does nothing by itself, you nee to run instance refresh
 
 
+    ASG Warm Up Time
+        - the period after a new EC2 is launched when it's not counted toward the "desired capacity" for scaling decisions.
+        - Seems like a stupid way to check if a EC2 is good to go.
 
-        Scaling Processes
-            - "the distinct operations that manage how the group scales"
-            - are built-in operations, not settings, or custom operations you create
-            -> Its how your EC2s are managed
-            -> Its how your EC2s behavior is defined
-                eg) Adding/Removing instances, health check, replacing, placement/balance
 
-            - Launch
-                 Add a new EC2 to the group, increasing the capacity
-            - Terminate
-                 Removes an EC2 instance from the group, decreasing its capacity.
-            - HealthCheck
-                 Checks the health of the instances
-            - ReplaceUnhealthy
-                 Terminate unhealthy instances and re-create them
-            - AZRebalance
-                 Balance the number of EC2 instances across AZ
-            - AlarmNotification
-                 Accept notification from CloudWatch
-            - ScheduledActions
-                 Performs scheduled actions that you create.
-            - AddToLoadBalancer
-                 Adds instances to the load balancer or target group
-            - InstanceRefresh
-                 Perform an instance refresh
 
-            -> We can suspend these processes!
+    ASG Scaling Processes
+        - "the distinct operations that manage how the group scales"
+        - are built-in operations, not settings, or custom operations you create
+        -> Its how your EC2s behavior is defined
+            - when certain events fire
+            eg) Adding/Removing instances, health check, replacing, placement/balance
 
-        Health checks
-            - checks EC2s
-            - checks ELBs (does http request, eg /health-server)
-            - Health check should be simple 
-                - dont do stupid stuff like make ASG trigger a event in you app that checks a DB and returns s/t and then you return true/false back to the ASG/cloudwatch
-            Things that health check ec2s:
-                Elastic Load Balancers
-                Route 53
-                CloudWatch Alarms (sorta)
-                ASG (?)
+        - Launch
+                Add a new EC2 to the group, increasing the capacity
+        - Terminate
+                Removes an EC2 instance from the group, decreasing its capacity.
+        - HealthCheck
+                Checks the health of the instances
+        - ReplaceUnhealthy
+                Terminate unhealthy instances and re-create them
+        - AZRebalance
+                Balance the number of EC2 instances across AZ
+        - AlarmNotification
+                Accept notification from CloudWatch
+        - ScheduledActions
+                Performs scheduled actions that you create.
+        - AddToLoadBalancer
+                Adds instances to the load balancer or target group
+        - InstanceRefresh
+                Perform an instance refresh
 
-    Updating app possible strategies
+        -> We can suspend these processes!
+
+    ASG Health checks
+        - checks EC2s
+        - checks ELBs (does http request, eg /health-server)
+        - Health check should be simple 
+            - dont do stupid stuff like make ASG trigger a event in you app that checks a DB and returns s/t and then you return true/false back to the ASG/cloudwatch
+        Things that health check ec2s:
+            Elastic Load Balancers
+            Route 53
+            CloudWatch Alarms (sorta)
+            ASG (?)
+
+    ASG Updating app possible strategies
         - simply update the Launch template with a new AMI (has the new app)
         - keep ALB pointing as same target gropu
         - since same target group, ALB distributes traffic to target group with both, then you can unscale the previous 
@@ -2641,7 +2711,7 @@ Spot Instance
                 - The Spot market price is $0.025/hour.
                 - You are charged $0.025/hour, not $0.06.
 
-    Spot Fleet Support
+    Spot Fleet Support (1/2)
         - (mix Spot and on-demand instance)
         - a fleet of EC2s
         - A Spot Fleet is a collection of Spot Instances, possibly across different instance types, Availability Zones, or pricing strategies. 
@@ -2649,7 +2719,7 @@ Spot Instance
         - Allocation Strategies -lowestPrice, diversified (Spread across pools), capacityOptimized
         - Spot Fleet Support is not exclusive to ASG
 
-    Spot Fleet
+    Spot Fleet (2/2)
         - a way to manage and launch a group of Spot Instances — and optionally On-Demand Instances — across multiple instance types and AZs
         - Spot Fleet = many Spot Instance + (optional on-demand) requests. It tries to meet your target capacity
         - Launch pool = intance type, OS, AZ
@@ -2744,31 +2814,31 @@ AWS Elastic Container Service (ECS)
         ECS Service - defines how many taks should run their configs
         Task Defintion - configs on how to run the Docker container (image name, CPU, RAM, ect). Json file
 
-        IAMs
-            ECS Task - a running docker image - an instance of a Task Def
+    ECS IAMs
+        ECS Task - a running docker image - an instance of a Task Def
 
-            ECS Task Role = the IAM role assumed by the container (call S3, DynamoDB, code like ops)
-            EC222 Task Role = An ECS Task Role used in the EC2 launch type; credentials are delivered via the ECS agent running on the EC2 instance.
-            Fargate Task Role = An ECS Task Role used in the Fargate launch type; credentials are managed and injected by the Fargate service at runtime.
+        ECS Task Role = the IAM role assumed by the container (call S3, DynamoDB, code like ops)
+        EC222 Task Role = An ECS Task Role used in the EC2 launch type; credentials are delivered via the ECS agent running on the EC2 instance.
+        Fargate Task Role = An ECS Task Role used in the Fargate launch type; credentials are managed and injected by the Fargate service at runtime.
 
-            Fargate Execution Role - Used by ECS agent. is an IAM role used to prepare or manage the container
-            EC22222 Instance Profile - used by the EC2 instance -> the agent and system
-            NOTE:
-                Fargate Execution Role ~= ECS Container Instance Role = EC2 Instance IAM Role 
+        Fargate Execution Role - Used by ECS agent. is an IAM role used to prepare or manage the container
+        EC22222 Instance Profile - used by the EC2 instance -> the agent and system
+        NOTE:
+            Fargate Execution Role ~= ECS Container Instance Role = EC2 Instance IAM Role 
 
 
 
-            CHATGPT:
-                ECS Task Role (and its variants) is for the application inside the container.
-                Fargate Execution Role and EC2 Instance Profile are for the underlying infrastructure (either managed by AWS or by you).
-                |   Term                     |   What It Is                                                     |   Attached To                |   Used By                       |   Purpose                                                              |
-                | -------------------------- | ---------------------------------------------------------------- | ---------------------------- | ------------------------------- | ---------------------------------------------------------------------- |
-                |   ECS Task                 | A running instance of a task definition (containerized workload) | ECS Cluster (EC2 or Fargate) | AWS ECS scheduler               | Runs containers as per task definition                                 |
-                |   ECS Task Role            | IAM role specified in the task definition (`taskRoleArn`)        | ECS Task                     | Code inside container           | Allows app to access AWS services (S3, DynamoDB, etc.)                 |
-                |   EC2 Task Role            | ECS Task Role when running on EC2 launch type                    | ECS Task (on EC2)            | Code inside container           | Same as above, credentials delivered via ECS agent on EC2              |
-                |   Fargate Task Role        | ECS Task Role when running on Fargate launch type                | ECS Task (on Fargate)        | Code inside container           | Same as above, credentials injected by Fargate runtime                 |
-                |   Fargate Execution Role   | IAM role specified in `executionRoleArn` for Fargate tasks       | ECS Task (on Fargate)        | ECS control plane (not the app) | Lets ECS pull images, write logs, etc. on behalf of the task           |
-                |   EC2 Instance Profile     | IAM role attached to the EC2 instance (container host)           | EC2 instance in ECS cluster  | ECS agent, Docker daemon        | Lets instance interact with ECS, pull images, push logs, use SSM, etc. |
+        CHATGPT:
+            ECS Task Role (and its variants) is for the application inside the container.
+            Fargate Execution Role and EC2 Instance Profile are for the underlying infrastructure (either managed by AWS or by you).
+            |   Term                     |   What It Is                                                     |   Attached To                |   Used By                       |   Purpose                                                              |
+            | -------------------------- | ---------------------------------------------------------------- | ---------------------------- | ------------------------------- | ---------------------------------------------------------------------- |
+            |   ECS Task                 | A running instance of a task definition (containerized workload) | ECS Cluster (EC2 or Fargate) | AWS ECS scheduler               | Runs containers as per task definition                                 |
+            |   ECS Task Role            | IAM role specified in the task definition (`taskRoleArn`)        | ECS Task                     | Code inside container           | Allows app to access AWS services (S3, DynamoDB, etc.)                 |
+            |   EC2 Task Role            | ECS Task Role when running on EC2 launch type                    | ECS Task (on EC2)            | Code inside container           | Same as above, credentials delivered via ECS agent on EC2              |
+            |   Fargate Task Role        | ECS Task Role when running on Fargate launch type                | ECS Task (on Fargate)        | Code inside container           | Same as above, credentials injected by Fargate runtime                 |
+            |   Fargate Execution Role   | IAM role specified in `executionRoleArn` for Fargate tasks       | ECS Task (on Fargate)        | ECS control plane (not the app) | Lets ECS pull images, write logs, etc. on behalf of the task           |
+            |   EC2 Instance Profile     | IAM role attached to the EC2 instance (container host)           | EC2 instance in ECS cluster  | ECS agent, Docker daemon        | Lets instance interact with ECS, pull images, push logs, use SSM, etc. |
 
 
     ECS w/ ALB Integration
@@ -2782,17 +2852,17 @@ AWS Elastic Container Service (ECS)
         - ALB Listener rules
             - /api/* ----> Service # 1
         
-        Fargate & ECS on EC2s 
+        Fargate & ECS on ALBs 
             - SUPPORTED
             - Fargate: ALB registers targets by ENI IP (awsvpc mode) and container port.
                 - no limit, possilby (unless you cap it)
             - ECS-regular: ALB registers container instances using instance IP and dynamic port 
                 - limited by EC2 capacity
 
-        Use cases:
-            - better resiliency
-            - max CPU / cores
-            - can performing rolling updates w/o impacting app uptime
+            Use cases:
+                - better resiliency
+                - max CPU / cores
+                - can performing rolling updates w/o impacting app uptime
 
         NOTE    
             - 🚫 ECS w/ API Gateway Integration
@@ -2876,6 +2946,7 @@ AWS Elastic Container Service (ECS)
             - ASG scales instances (ec2s)
             - if ECS wants to scale, but there is no room on ec2s, tasks will be stuck in PENDING
         Capacity Providers
+            - (more below)
             - manages the scaling of infrastructure for tasks
             - each cluster can have 1+ capacity providers
             - solution to ECS w/ ASG
@@ -2888,26 +2959,6 @@ AWS Elastic Container Service (ECS)
         - "Application Auto Scaling" manages the scaling behavior.
             - It does NOT scale your ec2 Auto Scaling
             - thus you need to Scale your EC2s
-
-
-    ECS Task Placement Strategies
-        - answers "where to place the task?"
-        - ECS needs to choose which instances to place the container in
-        Strats:
-            spread
-                - even distriubtion 
-                - can spread across EC2s or across AZ
-            binpack
-                - 'packs' taks on as few isntances as possible based on either PU or memory
-                - eg binpack(memory) -> ECS fills up EC2s memory before moving to the next
-            random
-                - literally random
-                - not useful, prob for testing. But is an option :shrug:
-        Task Placment Constraints (Filters)
-            - filters out isntances that DONT qualify
-            - 2 types
-                distinctInstance - tasks from same service dont land on same EC2
-                memberOf - you write a filter (coditional logic) eg. Only use instance with certain tag or certain AZ
 
 
     ECS Capacity Provider
@@ -2950,6 +3001,26 @@ AWS Elastic Container Service (ECS)
                 }'
 
 
+    ECS Task Placement Strategies
+        - answers "where to place the task?"
+        - ECS needs to choose which instances to place the container in
+        Strats:
+            spread
+                - even distriubtion 
+                - can spread across EC2s or across AZ
+            binpack
+                - 'packs' taks on as few isntances as possible based on either PU or memory
+                - eg binpack(memory) -> ECS fills up EC2s memory before moving to the next
+            random
+                - literally random
+                - not useful, prob for testing. But is an option :shrug:
+        Task Placment Constraints (Filters)
+            - filters out isntances that DONT qualify
+            - 2 types
+                distinctInstance - tasks from same service dont land on same EC2
+                memberOf - you write a filter (coditional logic) eg. Only use instance with certain tag or certain AZ
+
+
     ECS Draining Hooks
         - aka Drain Mechanism or Drain Lifecycle Hook
         - refers to safely stopping s/t before it is terminated, so that the running tasks can finish gracefully or be moved elsewhere.
@@ -2958,11 +3029,12 @@ AWS Elastic Container Service (ECS)
         - This concept is critical in ECS, especially when using Spot Instances, Auto Scaling, 
             or Fargate Spot, because tasks may be interrupted or instances removed.
 
+        - No, ECS draining and ASG lifecycle hooks ARE NOT THE SAME
+
     ECS Spot Instance
         - you can use Spot Instances in your ECS cluster
         - Either Fargate Spot
         - OR EC2s Spot (just like on-demand non-ECS EC2s)
-        
         
         How to:
             1 Choose instances (can use mixed-instance ASGs (Spot and On-Demand))
@@ -3129,15 +3201,15 @@ Elastic Kubernetes Service
             Use Case: 
                 - small, event-driven, or stateless apps where infrastructure management is unnecessary.
 
-    Storage Class / Data Volumes
-        - uses CSI (Container Storage Interface)
-            - is a standard for connecting storage systems to Kubernetes (and other container orchestrators).
-            - CSI = plug-and-play storage support for Kubernetes.
-            - AWS provides CSI drivers, like; 
-                - (dont think you need this on exam)
-                - EBS CSI driver → block storage (one pod per volume)
-                - EFS CSI driver → shared file system
-                - FSx CSI drivers → high-performance or enterprise storage
+    Container Storage Interface (CSI)
+        - for Storage Class / Data Volumes
+        - CSI = plug-and-play storage support for Kubernetes.
+        - is a standard for connecting storage systems to Kubernetes (and other container orchestrators).
+        - AWS provides CSI drivers, like; 
+            - (dont think you need this on exam)
+            - EBS CSI driver → block storage (one pod per volume)
+            - EFS CSI driver → shared file system
+            - FSx CSI drivers → high-performance or enterprise storage
         options:
             EBS 
             EFS
@@ -3155,12 +3227,14 @@ Elastic Kubernetes Service
         - k8s can create storage volumes (PersistentVolumes) when your application requests them.
 
     Storage Access modes
-        - ReadWriteOnce (RWO)
+        - its how persistent storage volumes (like EBS) can be mounted by pods
+        ReadWriteOnce (RWO)
             - One node can mount the volume read/write. (all its pods too) 
             - Most common for EBS.
-        - ReadOnlyMany (ROX)
+            -> ONLY 1 b/c EBS is Block Storage Tied to a Single EC2 Instance
+        ReadOnlyMany (ROX)
             - Many nodes can mount the volume read-only.
-        - ReadWriteMany (RWX)
+        ReadWriteMany (RWX)
             - Many nodes can mount the volume read/write.
             - Needed for shared file systems.
             - Supported by EFS, FSx for Lustre/ONTAP, etc.
@@ -3310,7 +3384,7 @@ AWS Lambda Service
 
     - study async & sync invocation
         
-    AWS Lambda Control Plan
+    AWS Lambda Control Plane
         - is the management of lambda resources 
         - responsible for management operations,
             -> not code execution
@@ -3358,7 +3432,7 @@ AWS Lambda Service
             (can access private resources but through the lambda)
 
         ✅ Lambda in VPC behind a API Gateway
-        ✅ Lambda in VCP behind ALB 
+        ✅ Lambda in VPC behind ALB 
         ✅ Cloudfront
 
         (ALBs):
@@ -3407,9 +3481,6 @@ AWS Lambda Service
             - When you need more control over outbound routing or don't want to use NAT Gateway.
             - Cost: EC2 + NLB costs.
 
-        3 AWS VPC Endpoint
-            - NO public internet
-            - Secure, efficient access to AWS APIs/S3/DynamoDB from Lambda.
 
 
     Lambda Event Source Mapping
@@ -3434,6 +3505,14 @@ AWS Lambda Service
                 - workaround via eventbridge instead of Event Source Mapping
             DLQ and Error Handling
                 - error stuff
+
+        event sources:
+            Amazon Kinesis Data Streams
+            Amazon DynamoDB Streams
+            Amazon SQS
+            Amazon MQ (ActiveMQ and RabbitMQ)
+            MSK (Amazon Managed Streaming for Apache Kafka)
+            Self-managed Kafka
 
 ##############################
 ####                      #### 
@@ -3495,6 +3574,7 @@ Elastic Load Balancers
             ✅ TLS termination is unaffected.
             ✅ You might enable it for load distribution and fault tolerance.
             ⚠️ Be aware of inter-AZ data transfer costs when enabling it on NLB.
+            - disabled by default
 
         Regional and Zonal DNS Name
             - When you create a NLB, AWS creates:
@@ -3554,7 +3634,8 @@ Elastic Load Balancers
                 - ALB: ALWAYS on (cannot turn off)
                 - NLB and CLB: off by default, but can enable
                 - $$ Costs extra b/c of cross-AZ data fee
-            DISABLED (default):
+            DISABLED :
+                - (default off for NLB)
                 - If off -> traffic is split evenly to AZs (not to ECs)
                 AZ 1 has 2 instances ---> 25%  traffic / EC2 = 50% traffic in AZ
                 AZ 2 has 8 instances --->  6.25% traffic / EC2 = 50% traffic in AZ
@@ -3599,7 +3680,7 @@ Elastic Load Balancers
         The same IP address is configured on multiple servers 
         Each server tell the internet via BGP: “I own IP 203.0.113.1”.
         When a user sends data to that IP, 
-        the internet's routing system does mage and sends the user to the closest server that advertised the IP
+        the internet's routing system does magic and sends the user to the closest server that advertised the IP
     
     Q: “What is the IP of myapp.example.com?”
     A: 1 The DNS server replies: "203.0.113.1"
@@ -3961,6 +4042,7 @@ AWS Route 53
                 - EnableDnsHostnames (default: false for custom VPCs)
                     - Required for instances to get public DNS names.
 
+    exam?
         Reserved IPS
             | IP Address   | Purpose                            |
             | ------------ | ---------------------------------- |
@@ -4045,6 +4127,7 @@ AWS Route 53
                     - combine multiple Health Checks into one Health check
                         - OR, AND or NOT operators
                     - monitor up to 256 chealth health checks
+                    - 😵‍💫 not to be confused with "CW Composite Alarms"
                 3. Cloudwatch Alarms 
                     - you have R53 to used the CW Alarm as it health check
                     
@@ -4387,8 +4470,36 @@ Elastic Block Storage
             - performance
             - your instance might have FASTER IO than EBS can handle, (faster then io2)
 
+
 Elastic File System (EFS)
     - Linux only (POSIX) not windows!
+    - Managed NFS (network file system)
+    -> can span multi AZ AND/OR on-premises too via DX & VPN
+    - more coslty than EBS (3x gp2), pay per GB used
+    - NOT WINDOWS
+        - Linux only (POSIX)
+
+    - EFS mounts over the network using the NFS protocol, 
+        so AWS uses Security Groups to allow/block access to the file system.
+    - must use correct Security Groups to control acces to EFS 
+    - correct SG:
+        - Type: NFS
+        - Protocol: TCP
+        - Port: 2049
+        - Source: The Security Group ID of your EC2 instance (e.g., sg-ec2)
+
+    - 1000s of concurrent NFS clients attatched
+    - 10 GB / sec of throughput possible
+    - Can grow to PETAbytes :o
+    ✅ Storage auto-scales up and down.
+    ❌ Provisioned throughput does not
+
+    - even lambda can use EFS, but neds to be "Lambda in VPC" since Mount Targets (see below)
+
+    Use case:
+        - wordpress
+        - data sharing
+
 
     EFS Throughput Modes
         - (not in lecture)
@@ -4421,13 +4532,16 @@ Elastic File System (EFS)
         - (more like Latency Modes??)
 
         1. General Purpose Mode (default)
-            - I dont understand it
+            - 1-5 ms
+            - low latency
             Use cases:
                 Web servers (e.g. Apache, Nginx)
                 CMS systems (e.g. WordPress)
                 Development environments
                 Home directories
         2. Max I/O Mode
+            - 5-10 ms
+            - Massive-scale
             Use Cases:
                 Big data workloads
                 HPC (High-Performance Computing)
@@ -4439,50 +4553,6 @@ fun fact
     - FTP (File Transfer Protocol) is a network protocol used to transfer files between systems over a TCP/IP network.
     - It's not designed for mounting file systems or accessing files as if they were local.
     - no encryption ...  replaced by SFTP/FTPS.
-
-Elastic File System (EFS)
-    - Managed NFS (network file system)
-    -> can span multi AZ AND/OR on-premises too via DX & VPN
-    - more coslty than EBS (3x gp2), pay per GB used
-    - NOT WINDOWS
-        - Linux only (POSIX)
-
-    - EFS mounts over the network using the NFS protocol, 
-        so AWS uses Security Groups to allow/block access to the file system.
-    - must use correct Security Groups to control acces to EFS 
-    - correct SG:
-        - Type: NFS
-        - Protocol: TCP
-        - Port: 2049
-        - Source: The Security Group ID of your EC2 instance (e.g., sg-ec2)
-
-    - 1000s of concurrent NFS clients attatched
-    - 10 GB / sec of throughput possible
-    - Can grow to PETAbytes :o
-    ✅ Storage auto-scales up and down.
-    ❌ Provisioned throughput does not
-
-    - even lambda can use EFS, but neds to be "Lambda in VPC" since Mount Targets (see below)
-
-    Use case:
-        - wordpress
-        - data sharing
-
-
-    EFS Mount Targets
-        - vpc related, exists in
-        - When you create an EFS file system, AWS creates Mount Targets in your specified VPC subnets
-            - one "mount target" per AZ
-        - These "mount targets" are network interfaces (ENIs) with private IPs inside your VPC.
-        - Your EC2 instances (or w/e) connect to these mount targets
-        - you still need: 
-            - Security Groups (for the mount targets),
-            - IAM policies (for EFS APIs).
-        Yes, you can share EFS across VPCs 
-            - via VPC Peering or 
-            - via Transit Gateway
-            - and across accounts
-
 
     EFS Performance Characteristics
         - two performance modes 
@@ -4551,38 +4621,39 @@ Elastic File System (EFS)
             - EFS One Zone-IA
 
 
-        EFS Lifecycle Management Policy 
-            - automatic transition between storage tiers
-            - Transition time is based on when the files were last accessed 
-            - policy is deliberately simple and limited in terms of what you can control per file.
-            Transtion:
-                - Standard → IA 
-                    eg) "AFTER_30_DAYS"
-                    - $0.30 / GB / Month
-                    - By default, after 30 days files are transitioned into Archive.
-                - Standard → Archive
-                    - By default, after 90 days files are transitioned into Archive.
+    EFS Lifecycle Management Policy 
+        - automatic transition between storage tiers
+        - Transition time is based on when the files were last accessed 
+        - policy is deliberately simple and limited in terms of what you can control per file.
+        Transtion:
+            - Standard → IA 
+                eg) "AFTER_30_DAYS"
+                - $0.30 / GB / Month
+                - By default, after 30 days files are transitioned into Archive.
+            - Standard → Archive
+                - By default, after 90 days files are transitioned into Archive.
 
-                - IA → Standard
-                    - 1-5 ms
-                    - 7 days, 14 days, 30 days, 60 days, 90 days
-                    -  the inactivity periods are fixed. You must choose one of the following predefined thresholds:
-                    - $0.016 / GB / Month
-                - IA → Archive
-                    - 1-3 seconds
-                    - 90 days or 180 days
-                    - compliance logs, old backups, historical data,
-                    - By default, after 90 days files are transitioned into Archive.
-                    - $0.008 / GB / Month
-            Zone
-                - One Zone 
-                    – $0.16 / GB /month
-                - One Zone Infrequent Access (One Zone-IA) 
-                    – $0.0133 / GB / month
-                - Muli AZ
-                    - redudant / 'availability' 
-                    - aws manages 
-                    - data is Multi AZ
+            - IA → Standard
+                - 1-5 ms
+                - 7 days, 14 days, 30 days, 60 days, 90 days
+                -  the inactivity periods are fixed. You must choose one of the following predefined thresholds:
+                - $0.016 / GB / Month
+            - IA → Archive
+                - 1-3 seconds
+                - 90 days or 180 days
+                - compliance logs, old backups, historical data,
+                - By default, after 90 days files are transitioned into Archive.
+                - $0.008 / GB / Month
+        Zone
+            - One Zone 
+                – $0.16 / GB /month
+            - One Zone Infrequent Access (One Zone-IA) 
+                – $0.0133 / GB / month
+            - Muli AZ
+                - redudant / 'availability' 
+                - aws manages 
+                - data is Multi AZ
+
     Mount EFS
         - VPC to VPC 
          OR 
@@ -4590,6 +4661,20 @@ Elastic File System (EFS)
             Use the ENI IP to mount the EFS
             And run 
             $ sudo mount -t nfs4 -o nfsvers=4.1 fs-xxxxxxxx.efs.<region>.amazonaws.com:/ /mnt/efs
+
+    EFS Mount Targets
+        - vpc related, exists in
+        - When you create an EFS file system, AWS creates Mount Targets in your specified VPC subnets
+            - one "mount target" per AZ
+        - These "mount targets" are network interfaces (ENIs) with private IPs inside your VPC.
+        - Your EC2 instances (or w/e) connect to these mount targets
+        - you still need: 
+            - Security Groups (for the mount targets),
+            - IAM policies (for EFS APIs).
+        Yes, you can share EFS across VPCs 
+            - via VPC Peering or 
+            - via Transit Gateway
+            - and across accounts
 
     EFS Access Points
         - are not URLs like S3 access points.
@@ -4648,7 +4733,7 @@ Elastic File System (EFS)
         - by default grants full acces to clients
         - no, does not do path-based access like S3
 
-    Cross-Region Replication
+    EFS Cross-Region Replication
         - automatically and continuously replicate data from EFS 1 --> EFS 2 (another region)
         - does not consume your IO
             - happens in background, free-ish (default pricing)
@@ -4856,7 +4941,7 @@ Amazon FSx
     |   FSx for Windows        | SMB             | Windows EC2, ECS on Windows, or Linux with SMB client |
     |   FSx for Lustre         | Lustre          | Linux EC2 (via Lustre client)                         |
     |   FSx for OpenZFS        | NFS             | Linux EC2, ECS (via NFS mount)                        |
-    |   FSx for NetApp ONTAP   | NFS, SMB, iSCSI | EC2, ECS, Kubernetes, etc.                            |
+    |   FSx for NetApp ONTAP   | NFS, SMB, iSCSI | EC2, ECS, Kubernetes, etc. (not good, and expensive)  |
 
 
     FSx for Windows (File Server)
@@ -5114,7 +5199,7 @@ AWS Transfer Family
             4 The file lands directly in S3. You can process it with Lambda, Glue, or Athena.
         So Transfer Family is the "door", S3 or EFS is the "room" where the files actually go.
 
-
+    exam
     Cool Table of Werid Similar AWS Networking things
 
     |   Service               |   Component                       |   Description                                                                |
@@ -5159,6 +5244,10 @@ AWS CloudFront
                 - Useful for dynamic content, APIs, or applications hosted outside AWS.
                 eg) EC2 instance, on-prem server, ect
             C. VPC Origin
+                - You cannot click a checkbox or toggle called “VPC Origin” 
+                    - it is not a built-in feature.
+                    - Instead, you configure CloudFront cleverly to simulate a VPC origin 
+                        by pointing it to a publicly accessible endpoint (like a load balancer or API Gateway)
                 - stuff in your VPC (ALB, NLB, EC2 only?)
                 - enhanced security, easy to scale and easier to manage, b/c VPC, they say
                 - you created a VPC w/ private subnets
@@ -5166,11 +5255,11 @@ AWS CloudFront
                     - CF connects to your private subnet via a "VPC Origin"
                         CF ----> VPC Origin -----> Ec2, ALB, ect.
 
-            C. Elastic Load Balancer (ELB)
+            D. Elastic Load Balancer (ELB)
                 - microservices or high availabilty servers
                 - must be public
                 eg) EC2 instances or containers.
-            D. AWS Media Services
+            E. AWS Media Services
                 For streaming media content using services like AWS MediaPackage or MediaStore.
 
     CF Access Control
@@ -5271,8 +5360,13 @@ AWS CloudFront
 
 
     CF Signed URLs
-        - (not to be confused with S3 Signed URLs, which allow client to  upload/download from a s3 bucket)
+        - (😵‍💫 not to be confused with S3 Pre-Signed URLs, which allow client to  upload/download from a s3 bucket)
         - a special URL
+        - 1 item! ... sorta
+            - even if the policy allows wildcards, the actual URL is issued per file.
+            - each URL still maps to one file
+        - NOT AN IAM
+
         - signed url = temporary permission to GET something through CloudFront, bypassing public access.
             - (CLOUDFRONT, not S3)
         - Only users who have the URL can access the resource.
@@ -5380,18 +5474,16 @@ Cloudfront Functions
             - this is transforming the request's attributes to create an optimal cache key (headers, cookies, query string, URL)
 
 
+    LIMITS 
+
         | Feature        | CloudFront Functions    | Lambda@Edge                  |
         | -------------- | ----------------------- | ---------------------------- |
         | Use Case       | Lightweight logic       | Complex processing           |
         | Runtime        | JavaScript only (ES5.1) | Node.js, Python              |
         | Triggers       | Viewer Request/Response | All 4 request/response types |
-        | Execution Time | ≤ 1 ms                  | 5 seconds max - Viewer events      <------------ 
+        | Execution Time | ≤ 1 ms                  | 5 seconds max - Viewer events      <------------ EXAM
         |                |                         | 30 seconds max - Origin events
-        | Memory         | Fixed 2 MB              | Configurable: 128 MB – 3,008 MB            
-
-        | Network Calls  | Not allowed             | Allowed                      |
-        | Cost           | Low                     | Higher                       |
-        | Cold Starts    | None                    | Possible                     |
+        | Memory         | Fixed 2 MB              | Configurable: 128 MB – 3,008 MB
         | Request body   | ?                       | Viewer 40 KB                 
         |                | ?                       | Origin 1 MB (origin/viewer triggers the @edge func)
         | Package Size   | Max 2 MB                | Max 50 MB (zipped) -- 250 MB (unzipped)
@@ -5651,7 +5743,7 @@ DynanoDB
 
         - ! No, Kinesis Data Streams for DynamoDB is not the same as DynamoDB Streams,
             - DynamoDB streams is a built in feature
-            - "Kinesis Data Streams for DynamoDB" is an extension of DynamoDB streams of DynamoDB Streams
+            - "Kinesis Data Streams for DynamoDB" is an extension of DynamoDB streams
 
     Kinesis Data Streams for DynamoDB 
         - Automatically forwards DynamoDB Stream records to Kinesis Data Streams (KDS)
@@ -5945,6 +6037,9 @@ AWS Aurora
         - normally, the proxy creates to the Primary Instance
         - BUT you can ask for another read-only ednpoint, that connects to read-only replicas instead
 
+        - RDS Proxy = a service from AWS, a middle layer that sits between your application and your RDS/Aurora database.
+                    - you still need username/password
+
     RDS Proxy (read only) vs Reader Endpoint
         - RDS Proxy is more advanced,
         - Proxy offers connection pooling, failover handling, security features, and session persistence. 
@@ -6185,15 +6280,6 @@ AWS Simple Notification Service (SNS)
         eg) every message sent to an SNS topic in us-east-1 is also delivered to an SNS topic in eu-west-1.
 
 
-AWS MQ
-    - RabbitMQ or Active MQ
-    - runs on servers
-        - not serverless
-        - You must provision brokers (i.e., managed server instances).
-    - like SQS or SNS (you configure)
-    - MQTT, AMQP, STOMP, Openwire, WSS
-
-
 
 Qs 5
     lots of shopping orders
@@ -6211,9 +6297,51 @@ Qs 5
 ####                      #### 
 ##############################
 
+
+AWS MQ
+    - RabbitMQ or Active MQ
+    - runs on servers
+        - not serverless
+        - You must provision brokers (i.e., managed server instances).
+    - like SQS or SNS (you configure)
+    - MQTT, AMQP, STOMP, Openwire, WSS
+
 AWS Kinesis
     - data cannot be deleted
         - you must wait for it to expire
+
+    Kinesis Data Stream
+        A. Provisioned deployment
+            - just shards
+            - AWS gives you an endpoint
+            - no cpu, no memory
+            - no VPCs, no networking
+            $$ charged  for sharges + data usage (aka PUT paylod Units)
+            1 "PUT payload unit" = 25 KB of data.
+            1 million PUTs = $0.014
+            25 GB = 0.014
+            - Fanout feature cost money
+            - extended retention (stuff past 7 days) cost money
+
+            - yes, can simultaneously write up to 1MB/sec and read up to 2MB/sec per shard 
+                - no crazy math
+            when LOTS of data
+                ❗ The request is rejected by Kinesis
+                ❌ data NOT accepted
+                ❌ data NOT queued
+                - 'ProvisionedThroughputExceededException'
+                - retrying or scaling
+
+        B. On-demand 
+            - automatically adjusts the number of shards to accommodate incoming data volume.
+            - No shard provisioning
+            - $$$ pay per GB written & read
+                - not per shard hour
+            -> $0.08 per GB
+            - (technically not "scale-to-zero" because the service remains provisioned and ready)
+                - you'll be charge pennies a month if not using 
+            - 400 MB/sec read (400,000 read)
+            -  200 MB/sec write (or 200,000 records/second)
 
 AWS Firehose
     - near real time
@@ -6251,13 +6379,13 @@ AWS Firehose
 Comparison Chart 
     - of various stream like services (s3 not quite recommended)
 
-| Category    | Kinesis Data Streams                  | SQS            | SQS FIFO                 |  SNS                      | DynamoDB                      S3                                      |
-|-------------|---------------------------------------|----------------|--------------------------|---------------------------|------------------------------|-----------------------------------------|
-| Data        | Immutable                             | Immutable      | Immutable                 | Immutable                | Mutable                      | Mutable                                 |
-| Retention   | 1–365 days, export to S3 using KDF    | 1–14 days      | 1–14 days                 | No retention             | Infinite or can implement TTL| Infinite, can setup lifecycle policies  |
-| Ordering    | Per shard                             | No ordering    | Per group-id              | No ordering              | No ordering                  | No ordering                             |
-| Scalability | Provision shards                      | Soft limit     | 300 msg/s or 3000 if batch| Soft limit               | WCU & RCU, On-demand         | Infinite, 3500 PUT / 5500 GET per prefix|
-| Latency     | KDS (200 ms), KDF (1 min)             | Low (10–100 ms)| Low (10–100 ms)           | Low (10–100 ms)          | Low (10–100 ms)              | Low (10–100 ms)                         |
+    | Category    | Kinesis Data Streams                  | SQS            | SQS FIFO                 |  SNS                      | DynamoDB                      S3                                      |
+    |-------------|---------------------------------------|----------------|--------------------------|---------------------------|------------------------------|-----------------------------------------|
+    | Data        | Immutable                             | Immutable      | Immutable                 | Immutable                | Mutable                      | Mutable                                 |
+    | Retention   | 1–365 days, export to S3 using KDF    | 1–14 days      | 1–14 days                 | No retention             | Infinite or can implement TTL| Infinite, can setup lifecycle policies  |
+    | Ordering    | Per shard                             | No ordering    | Per group-id              | No ordering              | No ordering                  | No ordering                             |
+    | Scalability | Provision shards                      | Soft limit     | 300 msg/s or 3000 if batch| Soft limit               | WCU & RCU, On-demand         | Infinite, 3500 PUT / 5500 GET per prefix|
+    | Latency     | KDS (200 ms), KDF (1 min)             | Low (10–100 ms)| Low (10–100 ms)           | Low (10–100 ms)          | Low (10–100 ms)              | Low (10–100 ms)                         |
 
 
 Amazon Managed Streaming for Apache Kafka (Amazon MSK)
@@ -6357,7 +6485,7 @@ AWS Batch
         - "run a single job across multiple EC2s (nodes)"
         - Placment = Cluster = Same rack, Same AZ
         - for high-performance computing (HPC), such as MPI-based workloads.
-        - DOES NOT WORK WITH SPOT INSTANCES
+        - DOES NOT WORK WITH SPOT INSTANCES (exam?)
 
         eg)  training a machine learning model that distributes work across 4 GPUs on 4 machines
 
@@ -6383,6 +6511,7 @@ Elastic MapReduce (EMR)
         - single AZ
     - use "EMRFS" for permanent storage = s3 = the main data lake
     - use "HDFS" for temporary storage = EBS
+        - btw "EMR clusters are often set up to delete EBS volumes when the EC2 instances terminate."
     - read/write to DynamoDB
     -write to RedShift 
 
@@ -6408,10 +6537,15 @@ Elastic MapReduce (EMR)
     Instance Groups
         - One instance type per group (master, core, task).
         - also can be On Demand / Spot
-    Instance Flet
+    Instance Fleet
         - multiple instance types 
         - on-demand / spot mix.
 
+
+    Comparision
+        EMR vs. Glue (EMR = more control, Glue = serverless)
+        EMR vs. Athena (Athena = SQL queries only, no cluster)
+        EMR vs. Redshift (Redshift = data warehouse, not big data processing)
 
 Jobs on AWS
     Options 1
@@ -6450,7 +6584,8 @@ AWS RedShift
             - You just pay per GB scanned per query
 
 
-    Enhanced VPC Routing 
+    Redshift Enhanced VPC Routing 
+        - redshift features
         - traffic stays within your VPC !
         - a feature that makes all COPY and UNLOAD traffic to go through your VPC
         - data stays in AWS
@@ -6461,7 +6596,7 @@ AWS RedShift
             - its stupid
 
     Snapshots
-        - can be cross region
+        - can be cross region b/c of snapshot copy grants I think
 
         Snapshot Copy Grants
             - if you want to copy snapshots to another AWS region, Redshift needs permission to 
@@ -6671,30 +6806,34 @@ EMR vs Athena vs Redshfit
         - adanaced SQL queryes
         - you provison servers
         - can sue Spectrum for queries (servless) on S3
+    Glue
+        - Use Glue when you want easy, serverless ETL.
+        - Use EMR when you need full control of big data tools.
+            - Presto and Spark
 
 
 
     Qs 7 exam
-    - S3 events can only go to SNS, SQS, and LAMBDA
-    Distributed - means the work is split up and done by multiple computers instead of just one.
-        - AWS Batch can do Distributed
-        - Fargate can NOT do distributed
-        - you have 1 Master/controller container 
-        - then (eg) 9 worker containers
-        - you set up AWS Batch to know who your master & workers are
-        - OR you have 10 Parallel/Independent Workers + Shared Storage (loosely coordinated)
-            - sorta hacky imo
-            - Each container gets a different index (AWS_BATCH_JOB_ARRAY_INDEX) and processes one file chunk.
-        - Athena runs Presto, not Hive. <---
-        - It does not support querying DynamoDB tables natively.
-    - NO, there doesnt exist any sort of feature that allows Kinesis to 'act serverless' when traffic goes beyond it's provisioned size
+        - S3 events can only go to SNS, SQS, and LAMBDA
+        Distributed - means the work is split up and done by multiple computers instead of just one.
+            - AWS Batch can do Distributed
+            - Fargate can NOT do distributed
+            - you have 1 Master/controller container 
+            - then (eg) 9 worker containers
+            - you set up AWS Batch to know who your master & workers are
+            - OR you have 10 Parallel/Independent Workers + Shared Storage (loosely coordinated)
+                - sorta hacky imo
+                - Each container gets a different index (AWS_BATCH_JOB_ARRAY_INDEX) and processes one file chunk.
+            - Athena runs Presto, not Hive. <---
+            - It does not support querying DynamoDB tables natively.
+        - NO, there doesnt exist any sort of feature that allows Kinesis to 'act serverless' when traffic goes beyond it's provisioned size
 
 
 
         Use Batch
-        We can use Multi-node parallel jobs in Batch to run large-scale, tightly coupled, high
-        performance computing applications and distributed GPU model training without the need to
-        launch, configure, and manage Amazon EC2 resources directly
+            We can use Multi-node parallel jobs in Batch to run large-scale, tightly coupled, high
+            performance computing applications and distributed GPU model training without the need to
+            launch, configure, and manage Amazon EC2 resources directly
 
 
 ##############################
@@ -6721,6 +6860,7 @@ Cloudwatch Synthetics
 
 
 CW Synthetics Canary Blueprints 
+    - for CW Synthetics
     - They are starter scripts
         - "are predefined script templates provided by AWS to help you quickly create canaries for common monitoring scenarios. "
     eg)
@@ -6822,15 +6962,15 @@ CloudWatch Logs Subscriptions
                 - (firehose usually cheaper and scalble but only 'near' real time
         
 
+      CW Logs1 ---> sub filter 1
+      CW Logs2 ---> sub filter 2 ----> Kinesis Data Stream ----> firehose ----> s3
+      CW Logs3 ---> sub filter 3
+
 CloudWatch Log Aggregation. Multi Account & Multi region
     - Centralize logs from many accounts and regions into a single account and region.
     - CloudWatch does not aggregate logs across regions or accounts by default, 
         but you can implement aggregation using a combination of services         
     - for: compliance, security audits, and operations.
-
-      CW Logs1 ---> sub filter 1
-      CW Logs2 ---> sub filter 2 ----> Kinesis Data Stream ----> firehose ----> s3
-      CW Logs3 ---> sub filter 3
 
 
 CloudWatch Agent - Integration with SSM
@@ -6933,6 +7073,11 @@ Amazon Pinpoint
         - Track if they opened, clicked, or ignored it.
         - Group users into segments (like “people who haven’t logged in for 7 days”) and target just them.
         - Run campaigns that send messages on a schedule or when something happens (like a purchase or a sign-up).
+
+
+
+
+
 Qs
     - The Unified Agent does not support triggering CloudWatch Events or Alarms directly from filters at the agent level.
     - btw "Unified CloudWatch Agent" = "Cloudwatch Agent"
@@ -6995,23 +7140,24 @@ Elastic Beanstalk
                     - Low queue depth = worker at good rate
                     - High queue depth: workers are falling behind 
 
-    - a cron.yml file = cron jobs (scheduled tasks)
-        - goes in root of your app source bundle (zip or WAR)
-        eg)
-        version: 1
-        cron:
-            - name: "daily-log-cleanup"
-                url: "/cleanup"
-                schedule: "0 0 * * *"
-            - name: "hourly-job"
-                url: "/hourly"
-                schedule: "0 * * * *"
-        NOTE
-            -> URLs not scripts/methods/tests
-            - url = The relative URL path the environment's internal HTTP server should call. 
-            - cron.yml only supports hitting URLs, not running arbitrary shell scripts directly.
-            - Beanstalk worker environments are structured around the idea that jobs come in via HTTP requests, e
-            - Workers are not exposed to public internet
+    Worker cron
+        - a cron.yml file = cron jobs (scheduled tasks)
+            - goes in root of your app source bundle (zip or WAR)
+            eg)
+            version: 1
+            cron:
+                - name: "daily-log-cleanup"
+                    url: "/cleanup"
+                    schedule: "0 0 * * *"
+                - name: "hourly-job"
+                    url: "/hourly"
+                    schedule: "0 * * * *"
+            NOTE
+                -> URLs not scripts/methods/tests
+                - url = The relative URL path the environment's internal HTTP server should call. 
+                - cron.yml only supports hitting URLs, not running arbitrary shell scripts directly.
+                - Beanstalk worker environments are structured around the idea that jobs come in via HTTP requests, e
+                - Workers are not exposed to public internet
 
 
     Blue / Green Deployment
@@ -7427,6 +7573,7 @@ AWS Tag Editor
 
 
 AWS Trusted Advisor 
+    - (😵‍💫 not to be confused with IAM Access Analyzer, the external IAM finder)
     - a cloud optimization service 
     - provides real-time guidance to help you follow AWS best practices. 
     - checks security groups for rules that allow unrestricted access to a resource
@@ -7816,7 +7963,7 @@ Disaster Recovery
             - RPO/RTO = minutes
             - scaled down copy of your infrastructure running ready to scale up
             - smaller version of the full production system
-        Multi-site Active/active
+        Multi-site / Hot site approach
             - RPO/RTO = real time
             - scaled UP copy of your infrastructure in another region
 
@@ -7937,7 +8084,8 @@ AWS Application Migration Service (AWS MGN)
     - supports many OS types
 
 
-AWS Elastic Disaster Recovery (AWS DRS)
+
+Elastic Disaster Recovery (AWS DRS)
     - (formerly "AWS CloudEndure Disaster Recovery")
     - replicates your servers to AWS continuously at the block level    
         - on-prem, or cloud VMs. 
@@ -7988,7 +8136,7 @@ AWS Elastic Disaster Recovery (AWS DRS)
         | Long-term retention                | ✅ Designed for it          | ❌ Not cost-effective             |
         | Disaster drills/failovers          | ❌ Manual and slow          | ✅ Quick, but higher runtime cost |
 
-            ^ Good table
+            ^ Good table exam?
             v bad table
 
 
@@ -8210,6 +8358,8 @@ AWS VPC
         - Works with Resource Access Manager (RAM), Direct Connect Gateway, VPN connections
 
         IP Multicast
+            - 😵‍💫 not to be confused with Anycast IP (1 IP, multiple servers)
+            - send data from one source to many receivers
             - TGW supports this
             - possibly nothing else supports iP Multicast
             IP Multicast = sends a single stream of data to a group
@@ -8322,7 +8472,7 @@ VPC Endpoints
         - DNS Setting Resolution = instances in a VPC to resolve domain names to IP addresses using the Amazon-provided DNS server.
 
     - Gateway Endpoints are strictly VPC-local
-        - INSIDE VPC,  INSIDE VPC,  INSIDE VPC,  INSIDE VPC,  INSIDE VPC, 
+        - INSIDE VPC,  INSIDE VPC,  INSIDE VPC,  INSIDE VPC,  INSIDE VPC,  exam
         -> Traffic from outside that VPC — even from connected environments — cannot use the endpoint.
         - It only works within the same VPC where it's created. 
         - the following CANNOT use that gateway endpoint:
@@ -8334,7 +8484,7 @@ VPC Endpoints
 
         solutions
             a. use a VPC Interface Endpoint instead (duh, -.-)
-            b. proxy: create an forward Proxy in the same VPC
+            b. proxy: create an forward Proxy in the same VPC  <------------
                 - proxy in VPC can use Gateway Endpoint
                 - you send requests to the Proxy
                 "Proxy VPC pattern (aka Centralized Egress VPC or VPC Proxy Access pattern) 
@@ -8344,6 +8494,9 @@ VPC Endpoints
 
 
     Private DNS for Interface Endpoints
+        - (Not using Private DNS can defeat the purpose of Interface Endpoints if your apps rely on standard AWS service names.)
+            - you'd have to do crazy shit like weird custom DNS or hardcode the interface Endpoints IPs
+
         Recall - Interface Endpoints:
             - is an ENI (Elastic Network Interface) in your VPC.
             - It privately connects your VPC to supported AWS services or PrivateLink-powered services.
@@ -8363,9 +8516,17 @@ VPC Endpoints
 
         WHAT IT IS:
             - "Private DNS" is an option you can enable on the Interface Endpoint.
-            - is a setting on an Interface Endpoint 
+            - you create a magic endpoint that 
+                a. funnels traffic towards a service (eg KMS) 
+                b. keeps it private, b/c you setup VPC Interface smartly
             - your intance domain names (like hnasdfjlka.ec2.amazonaws.com) resolve to private IPs inside your VPC, instead of their public IPs.
             - (again) "makes AWS override the public DNS name of a service (like ec2.us-east-1.amazonaws.com) inside your VPC."
+            
+            - endpoint in front of s/t (KMS) to keep traffic private
+            - you practically have to do enable it.
+            - network calls from other EC2s, will be magically directed to the Interface Endpoint. 
+            - via override public DNS name
+
             eg) 
                 https://my-bucket.s3.amazonaws.com/myfile.txt'
                 assume, You're using a Interface Point b/c apparenlty these settings are fucking stupid and there just
@@ -8380,8 +8541,11 @@ VPC Endpoints
             - meaning, any network calls from other EC2s in that VPC, that are directed to other EC2s
                 - will be magically directed to the Interface Endpoint, and keeps your traffic private
 
+Interface Endpoints's Private DNS:
+
 VPC Endpoint Policies 
-    - policies that control what actions and resources are allowed through a specific VPC Endpoint.
+    -> policies that control what actions and resources are allowed through a specific VPC Endpoint.
+    - both Gateway and Interface Enpoints
     - They do not replace IAM policies; instead, they work in conjunction
     - Attached to a VPC Endpoint (not to IAM roles or users).
     - Endpoint Policies do not override IAM policies. 
@@ -8499,7 +8663,9 @@ AWS VPN CloudHub
     - up to 10 Customer Gatewasy / offices
     - spoke-to-spoke communication
 
-    Use this approach if you have multiple branch offices and existing internet connections and would like to implement a convenient, potentially low-cost hub-and-spoke model for primary or backup connectivity between these remote offices.
+    Use this approach if you have multiple branch offices and existing internet connections 
+       and would like to implement a convenient, potentially low-cost hub-and-spoke model for 
+       primary or backup connectivity between these remote offices.
 
 AWS Client VPN
     - individuals (workers) connect to aws
@@ -9101,6 +9267,7 @@ AWS Service Quotas
         - Fixed limits, cannot be changed
         - even through a support request.
 
+exam exam
 QUOTAS LIMITS
 |   Service   |   Quota Name                                          |   Limit Type   |   Default Limit      |
 | ----------- | ----------------------------------------------------- | -------------- | -------------------- |
@@ -9109,6 +9276,7 @@ QUOTAS LIMITS
 |             | Elastic IPs per Region                                | Soft           | 5                    |
 |   S3        | Buckets per Account                                   | Hard           | 100                  |
 |             | PUT/COPY/POST/DELETE requests per second (per prefix) | Soft           | 3,500                |
+|             | GET/HEAD requests per second (per prefix)             | Soft           | 5,500                |
 |   Lambda*   | Concurrent Executions                                 | Soft           | 1,000                |
 |             | Total Deployment Storage per Region                   | SOFT           | 75 GB                |
 |   RDS       | Manual Snapshots per Region                           | Soft           | 100                  |
@@ -9131,7 +9299,8 @@ Lambda Limits:
     Container Image Size - 10 GB
     Response/Request payload  - 6 MB (synchronous) (the normal http style)
     Response/Request payload - 256 KB (asnyc) (sqs, eventbridge, ect)
-
+    600 routes per API (can request more)
+    50 stages (REST only)
 
 
 AWS App2Container (A2C) 
@@ -9191,6 +9360,8 @@ AWS Tag Policies
 ######################################
 #####
 API Gateway - Errors
+
+    exam
 
     4xx means Client errors
         - 400: Bad Request
@@ -9427,9 +9598,9 @@ Cloudformation
         It does not perform updates; instead, it restricts them.
         - checks before, will allow or permit the stack operation.
         Possible Actions:
-            $  Update:Modify - Update that do not require replacing, no interruption to service.
-            $  Update:Replace - Updates require deleting a resource and creating a new resource to replace it
-            $  Update:Delete - Updates the require deleting a resource altogether.
+            $  Update:Modify - Updates that do NOT require replacing, no interruption to service.
+            $  Update:Replace - Updates that require deleting a resource and creating a new resource to replace it
+            $  Update:Delete - Updates that require deleting a resource altogether.
             $  Update :* - For all above cases
 
             aws cloudformation set-stack-policy 
@@ -9497,11 +9668,11 @@ Cloudformation
         -> 😵‍💫 this is the modern version of "CFN Custom Resources"
         - like same thing but this is better
 
-    EKS Elastic Kubernets Service
-        - for its compute nodes, EKS can use:
-            - EC2s (duh)
-            - Fargate instances
-            - on prem instances (external; google, ect)
+EKS Elastic Kubernets Service
+    - for its compute nodes, EKS can use:
+        - EC2s (duh)
+        - Fargate instances
+        - on prem instances (external; google, ect)
 
 
 
