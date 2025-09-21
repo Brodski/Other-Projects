@@ -1,0 +1,1117 @@
+
+Supervised 
+    - learning with labels.
+    - task driven
+        - make a prediction
+    eg)
+        classifaction
+        regression
+Unsupervised 
+    - finding structure without labels.
+    - data driven
+        - recognize a pattern/structure
+    eg) 
+        clustering
+        dimensionality
+        reduction
+        association
+        
+Reinforcement Learning 
+    - learns by interacting with an environment 
+    - learns by doing and receiving feedback
+    - 
+    - decision driven
+    eg)
+        Game AI
+        Learning Tasks??
+        Robot Navigation
+        
+
+
+classifaction 
+    - finding a function to diviate a dataset into categories
+    - 'hot' or 'cold'
+regression 
+    - a function to correlate a dataset into continuous function/value
+    - 84 degress
+Clustering
+    - group unlabeled data 
+    - high risk / low risk
+association
+    - find a relationship between variables through association
+    - if buying bread, suggest butter
+Dimensionality Reduction
+    - the production of reducing the amount of data while retaining data integrity
+
+Perceptron
+    - single neuron
+    - inpt & output 
+
+
+Activaiton functions:
+    Old/simple
+        - Linear, Binary, Sigmoid, Tanh.
+    Modern workhorses
+        - ReLU, Leaky ReLU.
+    Advanced alternatives
+        - ELU, Swish, Maxout.
+    Special case
+        - Softmax (for multi-class outputs).
+
+
+ML model 
+    - is a mathematical or computational system that is trained to recognize patterns and make predictions 
+    - It “learns” from examples rather than being explicitly programmed with rules.
+
+
+
+Feature
+    - a measurable property used as input 
+    - Features are the variables that the model uses to make predictions or identify patterns.
+    - are to be used by an ML model to make predictions
+    eg) 
+        - In predicting house prices: 
+            features = square footage, number of bedrooms, location, and age of the house.
+
+        - In image recognition:
+            features = pixel values, edges, or shapes detected in the image.
+
+
+
+Inference 
+    - is getting a prediction
+
+
+Parameters
+    - Define the model’s function.
+    - learned from data 
+        - recall, the model's constants/variables change during training
+    eg) Weights and biases in each neuron
+
+
+Hyperparameters
+    - Set before training.
+    - Control training or model structure.
+
+    Example:
+        Learning rate  η=0.01
+        Number of layers  L=3
+        Batch size B=32
+
+    DIFFERENCE
+        - Parameters are learned! 
+        - Hyperparameters are set manually.
+
+
+Data Labeling
+    - tagging raw data with meaningful information
+    - so the model can learn from it
+    - meaningful informative
+    eg)
+        - Text: Tagging sentiment
+        - Images: Dog, cat, car,
+        - Audio: siren, dog barking
+    
+Data Mining
+    - extracting patterns from lots of data 
+    - not the extraction of data itself
+    - PATTERNS
+    
+Data Wrangling 
+    - transforming raw data into a structured format for model training
+    - wrangling is essential before applying machine learning
+    - ensures that the dataset is usable
+    - aka data munging
+
+    Steps:
+        Data Collection
+        Data Cleaning
+        Data Transformation
+        Data Integration
+        Data Validation
+
+
+Data Model
+    - A way to represent data for computer use.
+    - Structural: organizes how data is stored and related (e.g., database tables).
+    - ML model: a mathematical system learned from data to make predictions.
+
+
+Data Modeling
+    - the process of defining data requirements to support the business 
+
+
+Data Analytics 
+    - examining and arranging data so that you can extract and study useful information.
+
+Data Scientist 
+    - math, statistics, predictive modeling and machine learning.
+
+
+
+
+Datasets:
+    1 Training Dataset
+        - Data used to train the model
+        - the model learns from this data.
+
+    2 Validation Dataset
+        - Data used to evaluate the model during training
+        - the model sees it but does not learn from it. 
+            - Helps fine-tune hyperparameters.
+
+    3 Test Dataset
+        - Data used for evaluation of the final model. 
+        - Sampled to reflect real-world data and not used in training or validation.
+        - model never sees this data during training or validation.
+
+Corpus
+    - literally "A large collection of writings of a specific kind or on a specific subject"
+    - for NLP
+    - a large set of texts or data used for training, testing, and evaluating models 
+        - to be analyzed to see how a language is being used.
+        - provides real-world examples to learn
+    eg
+        books, articles, web pages, transcripts, or any textual data.
+    
+    
+
+Foundational Model (FM) 
+    - a general purpose model that is trained on vast amounts of data.
+    - is "pretrained" because it can be fined tuned for specific tasks.
+
+
+          Data                                               --------------------- 
+  -------------------                                        | Prediction         |
+  | Text            |                  +----+                | Classification     |
+  | Images          | --- Training --> | FM | ---  Uses  --> | Text Generation    |
+  | Videos          |                  +----+                | Video Generation   |
+  | Structured Data |                                        | Image Generation   |
+  -------------------                                        | Audio Generation   |
+                                                             --------------------- 
+
+
+
+
+
+
+Large Language Model (LLM) 
+    - is a Foundational Model that implements the trans
+    - LLM just predicts the next sequences of words
+    
+
+Tokenization 
+    - the process of breaking down text into smaller units called tokens.
+    - tokens are mapped to an embedding vector
+    - there are mutliple tokenization methods
+    
+        "Hello, how are you doing today?"
+        → ["Hello", ",", "how", "are", "you", "do", "ing", "today", "?"]
+        → [15496, 11, 634, 389, 345, 1103, 356, 2375, 30]
+        15496 → vector [0.12, -0.37, 0.44, ...]
+
+
+        Tokens are not universal. Each model (GPT, BERT, LLaMA, etc.) has its own tokenizer and vocabulary.
+            - actual vectors (like [0.12, -0.37, 0.44, …]) are learned during training.
+        chunks depend on the rules learned during that model’s training.
+        Each token ID corresponds to a vector (embedding).
+        
+        - embedding matrix
+            - Inside every language model, there’s a huge embedding matrix.
+            - a giant lookup table.
+            vocabulary size 
+                = how many tokens the tokenizer knows (eg, 50k).
+            embedding dimensions
+                = model’s hidden size (e.g., 768, 1024, 12288).
+            Example for BERT-base:
+                - vocab_size ≈ 30,000
+                - embedding_dim = 768
+                - Matrix size = 30,000 × 768 ≈ 23 million parameters
+                (layers can also make matrix bigger, idk how it works)
+                
+            - yes, there’s a limited number of tokens in each model, fixed at training time
+                
+        
+        
+Encoders & Decoders
+
+Encoder: 
+    - Converts raw input (text, image, audio) into embeddings (dense vectors).
+    - must use the exact same encoding algorithm during inference. ... Consistency
+    - encoding algorithm is not “baked into” the model, 
+        but the model depends on it.
+    - bundling: 
+        - frameworks package the model together with the tokenizer/encoder.
+            - eg Hugging Face Transformers or TensorFlow Hub
+        - This ensures that anyone loading the model automatica
+        or 
+        - The developer ships a preprocessing function along with the model.
+        or
+        ONNX (Open Neural Network Exchange)
+            - so models can be shared across frameworks and platforms
+            - allows models trained in one framework to run in another
+Decoder: 
+    - Takes embeddings and generates outputs (text, image, audio).
+    - usually part of the model’s parameters 
+    - Decoder is learned by the model itself
+    - Decoder relies on internal learned parameters to generate outputs, 
+        - so no special "same" algorithm is needed 
+    fun fact
+        - Decoder's output in a raw or intermediate numerical form
+        Typical Model Outputs
+            Text models: Output a sequence of token IDs or probability distributions over a vocabulary.
+            Image models: Output a tensor of pixel values (e.g., a 3D array for RGB).
+            Audio models: Output a waveform array or spectrogram values.
+
+    
+    
+Embedding
+    - how language models “see” text.
+    - a vector so the model can work with the token
+    - vector/embedding represents a token
+    "cat" → 3542 → [0.12, -0.88, 0.33, 0.41, -0.07]1
+    
+    Embedding space
+        - a huge 3D map (except instead of 3 dimensions, it might be 768, 1024, or 12,288 dimensions).
+        
+Positional Encoding
+    = extra numbers added to token embeddings to mark their position.
+    - used in transformer models 
+        - eg BERT, GPT
+    - shows order of tokens in a sequence.
+    
+    - So the model knows:
+        "I love cats" ≠ "cats love I".
+    
+Attention 
+    - is a way for a model to focus on the most relevant parts of the input.
+        - Each input element (like a word) gets a weight showing its importance.
+        - The model uses these weights to decide what to emphasize when making predictions.
+        - important in transformers
+            - can "look at" other parts to understand context.
+    - It’s essentially dynamic weighting of input features based on relevance.
+    - how each word (or token) in a sequence is important to other words via a weight
+    
+    
+    
+Fine-tuning LLMs 
+    - Adapt a pre-trained model to a specific task or domain.
+    - used to adapt a pre-trained model to perform better on a specific task or in a specific domain
+
+
+
+
+AWS Bedrock
+    - is a LLModel-as-Service (LLMaaS)
+    - easy to deploy, customize, evaluate, secure and maintain various LLMs models to integrate into your apps.
+    - an API layer for LLMs and other generative AI models. 
+    - Bedrock is mostly about code
+      (but not exclusively)
+    - Instead of you downloading or training a model, you just call an endpoint that AWS hosts.
+        - You pick a model (say Claude from Anthropic or Titan from AWS).
+        - You send text (a "prompt") to the API.
+        - The model sends back text, code, an embedding, or an image—depending on the model.
+    Bedrock = AWS renting you access to other people’s models without you touching GPUs or infrastructure.
+    - The primary way to use it is by calling its API from your app.
+    
+    Features:
+        Model Catalog
+        Custom Models
+        Playgrounds
+        Prompt Management
+        Knowledge Base
+        Prompt Flows
+        Agents
+        Guardrails
+        Watermark detection
+        Inference
+        Eval Assessments
+        Bedrock Studio
+    
+    nice - Console access: You can also play with the models directly inside the AWS Management Consol
+
+    eg)
+        ##########################
+        import boto3
+        client = boto3.client('bedrock-runtime')
+        
+        prompt = "Write a professional email to a client thanking them for their purchase."
+        response = client.invoke_model(
+            modelId='amazon.titan-text',
+            contentType='application/json',
+            accept='application/json',
+            body=f'{{"input": "{prompt}"}}'
+        )
+        result = response['body'].read().decode('utf-8')
+        ##########################
+        
+
+
+AWS Bedrock - Model Catalog (aka Model Garden) 
+    - a collection of LLM models ready to deploy with an LLMaaS.
+    models & providers:
+    - Amazon e.g. Titan Premier
+    - Anthropic e.g. Claude Sonnet
+    - Cohere e.g. Command R
+    - Al21 e.g. Jamba Instruct
+    - Meta e.g. Llama 3 70B
+    - Mistral Al e.g. Mistral Large
+    - Stability Al e.g. SDXL 1.0
+
+AWS Bedrock - Deployment Models
+    1. On-Demand
+        - severless
+        - pay for input and output tokens.
+        eg. Cohere Command R+
+            · $0.0030 - Price per 1,000 input tokens
+            · $0.0150 - Price per 1,000 output tokens
+        neat:
+            - token usage in the Bedrock Playground
+            - logs in CloudWatch 
+    2. Provisioned Throughput
+        - Model Units (MUs) 
+        - you pay base on MUs
+        - is a dedicated level of throughput for specific models.
+        - MU = the number of input and output tokens a model can process per minute.
+
+        Commitment Options:
+            No Commitment: Cancel anytime.
+            1 Month: Fixed term with discounted rates.
+            6 Months: Longer commitment with further discounts
+
+Amazon Bedrock Playground 
+    - cute UI to try models w/o code
+    - a tool in AWS Console to experiment with various foundation models (FMs) 
+        - like Anthropic, AI21 Labs, Meta, and Stability AI. 
+    - a visual interface to test prompts, ect, without writing code.
+
+    1. Chat (Chat Completion)
+        -  chat completion.
+        - chatgpt
+    2. Text (Completion)
+        - to predict next text.
+        - (older style before chat)
+        eg) Input: "Today is a good day to:"
+            Output: "Reflect and appreciate the present [...] Accomplish something meaningful."
+    3. Image
+        - use LLMs that generate Images
+
+Amazon Bedrock Knowledge Bases 
+    - you connect your company's data to generative AI models. 
+    - uses Retrieval-Augmented Generation (RAG) to provide contextually accurate responses.
+    Steps:
+        1. Data sources
+            - Where your information comes
+                - S3, Confluence, Salesforce, SharePoint, web crawlers, APIs.
+        2. Chunking
+            - Breaking large documents into smaller, manageable pieces so the AI can process them efficiently.
+        3. Parsing
+            - Reading the content of each chunk
+            - get information using an LLM
+                - claude 3 sonnet
+        4. Embedding
+            - Turning text chunks into vectors
+        5. Vectorstore
+            - stores data/embedding
+                - Amazon Aurora
+                - MongoDB Atlas
+                - OpenSearch Serverless
+
+
+        
+AWS Bedrock Agent Builder 
+    - a feature within Bedrock 
+    - helps you deploy AI agents without needing deep ML expertise or complex infrastructure setup.
+    - a system for creating AI “agents” 
+    - can take in instructions, reason over data, and call tools/APIs automatically. 
+    - its a layer on top of foundation models 
+    - handles orchestration, context, and tool access so you don’t have to manually code everything.
+    
+AWS Bedrock Promp Flow
+    - visual (boxs and arros)
+        - a tool for building prompts
+    - inputs and outputs to get predictable, composable results from LLMs.
+    
+    Andrew Brown says its better to use LangChain or lambda index b/c a lot more flexibility
+    -prompt flow competes with ^
+    
+    
+AWS Bedrock Prompt Management (aka Prompt Manager)
+    - string w/ variables
+    - You write prompts once, store them in Bedrock instead of scattering them across your codebase.
+    - You can version them: v1, v2, v3, et
+    - You test prompts against models: send prompt variants to a foundation model (Anthropic, Cohere, Llama, etc.)
+    - You call prompts via API: instead of hardcoding strings in your app, you just say “run Prompt X, version Y” and Bedrock injects it into the model.
+    
+
+Amazon Bedrock - Custom Models    
+    - to customize a model by training a Foundational Model (FM)
+    - tailor FMs to your specific use cases
+    - take an existing foundation model (like those from Anthropic, AI21, Cohere, Meta, Mistral, 
+        or Amazon’s own Titan models) and specialize it using your proprietary data.
+    - you have to use Provisioned Throughput (you set up cpu, mem ect)
+    - $0.004 per 1000 tokens when training
+    - $1.95 per month baseline per model / month
+    - $49.50 per Model Unit / hour (idk)
+    How to:
+        1. Pick a base model (say Cohere Command or Amazon Titan).
+        2 Prepare your training data in JSONL format (usually input → output pairs).
+        3 Upload it to S3.
+        4 Call Bedrock’s API to start a fine-tuning job, pointing it to your dataset.
+        5 Wait. When it finishes, you get back an ARN for your custom model.
+        6 From then on, you call the custom model just like any other Bedrock model, except now it’s specialized.    
+    
+    - (You retrain the model for new data)
+    
+AWS Bedrock - Import Models
+    - bring your own model (BYOM) into Bedrock
+    - You export the trained weights + inference container into a model artifact.
+    - Bedrock has specific requirements for the format (containerized, with a serving handler).
+    - model has own ARN
+        - to be used with other thngs
+    
+    
+    
+Amazon Bedrock - Guardrails
+    Input filtering (before prompt hits the model)
+        - You can block user inputs that break your rules.
+        - how to make a bomb
+    Output filtering (after model generates response)
+        - The model might return something you don’t want (toxic language, disallowed subjects).
+    Content filters
+    Denied topic
+    Word/phrase lists
+    Sensitive info
+    
+AWS Bedrock - Invocatin Logging
+    - sends data to Cloudwatch Logs
+    - data: 
+        - which model invoked
+        - the actual input and output
+        - tokens used in input/output
+        - account region
+        
+    
+AWS Bedrock - Model Evaluation
+    - compare the performance of foundation models (FMs) and retrieval-augmented generation (RAG) system
+    - you find which models best meet specific application
+    
+    
+Vectorstores:
+    - Pinecone
+    - MongoDB Atlas for vector search
+    - Redis Enterprise for Vectgor DB
+    
+    
+Vectorstores in Amazon RDS and Aurora
+    - PGVector Extension
+        - install this to act allow your DB act like a vector store
+        - for Postgres
+    - allows vector-based search 
+    - allow storage
+    - for vector embeddings
+    - good for: 
+        - RAG (Retrieval-Augmented Generation) 
+        - semantic search
+        - recommendation systems
+
+    ##############
+        CREATE TABLE items (
+            ...
+            embedding vector(1536)  # stores a 1536-dimensional vector
+        );
+        ...
+        ORDER BY embedding <=> '[0.05, 0.1, 0.2, ...]'  # <=> is distance operator
+        ...
+        embedding <=> '[0.2, 0.1, 0.4]' AS distance # computes the distance between each row’s embedding and the query vector, labeling it distance
+        ^ `embedding` is a field we defined prior, not a keyword
+    ##############
+
+
+AWS DynamoDB and DocumentDB
+    - cannot be used for as a vector store out of the box
+    - but you can modify and do manual work
+    - (you can use anything if you write it and do the work)
+
+
+AWS Neptune
+    - is a graph DB
+        - (nodes, edges, properties)
+    - Graph databases don't store vectors/embeddings the way a vector database do
+        (vectorDBs: Pinecone, Weaviate, Milvus, or OpenSearch)
+
+AWS OpenSearch 
+    - a search & analytics service, built on Apache Lucene
+    - Vectorstore - but later Amazon allowed to act as a vectorstore
+        - (does not comput embedding, just stores)
+            - unlike its native text/keyword searching via Lucene (can compute & store & search)
+    Lucene features (native)
+        - Keyword / exact match search
+        - Full-text search (tokenization, stemming, stopwords)
+        - Boolean queries (AND, OR, NOT)
+    Embedding / vector search (AI/ML)
+        - OpenSearch stores and searches vectors (dense_vector)
+        - you must generate embeddings externally using ML models
+        - Can combine with Lucene queries (hybrid search)
+    Traditional search
+        - feed text → OpenSearch handles indexing & search via Lucene
+    Vector search
+        - feed text → external ML model → generate embedding → store in OpenSearch → query with vector
+    
+    Lucene = built-in, classic search, no ML needed
+    Embeddings = external ML required, OpenSearch handles storage & nearest-neighbor retrieval
+
+
+
+AWS PartyRock
+    - playground
+    - dont need AWS account
+    - lowcode / no-code 
+    - build AI apps easily and quickly without code
+    - "Create and customize AI apps with powerful capabilities ·"
+
+
+
+
+General Machine Learning Workflow
+    - AKA: ML pipelines
+    - is a collection of phases which in turn have a collection of steps to achieve an ML solution.
+    - eg Fetch ➔ Clean ➔ Prepar ➔ Train ➔ Evaluate model ➔ Deploy ➔ Evaluate
+           ↑                                                             ↓
+           ---------------------------------------------------------------
+
+AWS SageMaker 
+    - simplifies building, training, and deploying ML models at scale.
+    - provides tools for ML workflow
+    
+Pandas (Python, not AWS)
+    - handles data in tables (DataFrames) or single columns (Series) efficiently 
+    - better than lists or dictionaries
+    - a wrapper around NumPy arrays with labels and convenience methods
+    
+AWS Athena Wrangler (aka AWS Data Wrangler)
+    - open source library by AWS
+        - python
+        - extend Pandas
+    - simplifies data processing AWS services
+    - offer neet functions to exectue ETL tasks, eg "get form bucket, do stuff"
+        - "abstracted functions to do usually ETL taks (load/unload from datalakes/warehouses/databases)
+        
+        #########################
+        # Read a Parquet file from S3 into a pandas DataFrame
+        
+        import awswrangler as wr
+        df = wr.s3.read_parquet("s3://my-bucket/my-data/")
+        wr.s3.to_csv(df, "s3://my-bucket/my-output/")
+        ##########################
+
+AWS SageMaker Canvas
+    - a no-code/low-code ML tool
+    - lets non business people build train and deploy ML models
+    - its fucking expensive, never use it.
+    - YOU HAVE TO LOG OUT OF IT!!!
+    - YOU ARE CHARGED JUST FOR THE INTERFACE
+     - AWS launches computer for the UI you look at, even if no ML work is happening
+     
+     SageMaker AutoPilot (formally AutoML)
+        - automates the ML pipeline
+        - "I dont know science" ... "Look at me, I am cool, I am a data scientist now"
+        - can 'solve' common ML problems:
+            - linear regression (predict numberical value)
+            - multiclass classification (predict category)
+            - Binary classificaion (predict true/false)
+     SageMaker Canvas Datasets
+        - some shit to view and work with data
+
+NOTE:
+    Feature
+        - a piece of information about your data that a ML model uses to make predictions, 
+            - such as age, income, or purchase history
+        - like a column in your dataset that represents a characteristic relevant to the problem.
+        
+AWS SageMaker Feature Store
+    - a measurableor characteristic of the data that you use as input to your model
+    - helps the model figure out patterns or make predictions can be a feature. 
+    - a database for ML features that makes sure the features you train on 
+        are the same ones you use for inference. 
+    - like a place where you store precomputed variables for your models 
+        - so you don’t have to redo calculations every time.
+
+    Streaming Ingestion 
+        - continuously ingesting feature data in real time 
+            - into the feature store as events occur, 
+            - rather than in batch jobs. 
+        - allows ML models to use up-to-date features for real-time predictions.
+        
+AWS SageMaker - Endpoints
+    - a server that runs your model so you can send data to it and get predictions back. 
+        - That’s it. Everything else (configs, scaling, VPC, IAM) is just engineering around that server.
+        
+    Service endpoints
+        - like a global endpoint
+    Region endpoints
+        - per region endpoints
+        - for $$$$ and data
+        
+        
+AWS SageMaker - Python SDK
+    - a library to train a deploy ML models on sagemaker
+    - more features than boto
+    - can run in local mode
+        
+        
+AWS Ground Truth
+    - data labeling. 
+    - doesn't train your model. 
+    - raw data (images, text, video, audio) gets labels attached to it
+    - so you can later use that labeled dataset to train ML models.
+    
+NOTE:
+    Hyperparameters 
+        - are settings you choose before training a model. 
+        - They  control how the model learns.
+        eg)
+            Learning rate → how big each adjustment is when updating weights.
+            Batch size → how many samples are processed before updating weights.
+            Number of trees (in XGBoost) → how many decision trees to build.
+            Hidden layer size (in neural networks) → how many neurons per layer.
+        
+AWS SageMaker Automatic Model Tuning 
+    - aka hyperparameter tuning
+    - for finding the best version of a model
+    - automatically searches for the best set of hyperparameters for a model
+    - Instead of manually trying different combinations of parameters (learning rate, batch size, number of layers), 
+        - SageMaker runs multiple training jobs in parallel with different hyperparameter values.
+    - You define a metric to optimize (e.g., accuracy, F1 score, loss).
+        
+        
+NOTE
+    - Inference is the act of requesting and getting a prediction
+    - Once a ML model is trained, it needs to be deployed so you can infer predictions.
+    
+AWS SageMaker Hosting Services
+
+    - it deploys models for inference on SageMaker
+    - Realtime Prediction (Endpoints)
+        - accessible API endpoint
+        - model hosted on a server
+    - AWS does provisioning of infrastructure, autoscaling, monitoring, and model versioning.
+    Use cases:
+        - Fraud detection
+        - recommendations
+        - Chatbots
+    
+    
+    Multi-Model Endpoint (MME) 
+        - a endpoint that serves multiple models. 
+        - Instead of 1 model per endpoint (which can get costly at scale), 
+            - you store many models in S3 and SageMaker loadd them into the endpoint on demand.
+    
+    Multi-Container Endpoint (MCE) 
+        - deploy multi containers for different models
+        - a endpoint that hosts multiple containers on the same instance
+        - allowing you to run different inference containers side by side within a single endpoint.
+    
+AWS SageMaker Batch Transform
+        - Batch Predictions
+        - You provide a trained model along with input data stored in Amazon S3.
+        - SageMaker runs the model against the data in batch, and the predictions are written back to S3
+        - large datasets
+        - not latency-sensitive
+            - apply predictions to a large dataset
+            - server exists for only the batch job
+        - you call a 'transformer' to do stuff
+
+
+Inference pipeline in Amazon SageMaker 
+    - Inference pipeline is for real-time inference with multiple steps chained.
+    - chain models and data processing into a single endpoint.
+    - You build a sequence of containers (processing steps or models).
+    - requests are ran through the pipeline:
+        1. Preprocessing (eg., data cleaning, feature extraction, tokenization).
+        2. Model(s) (one or more trained models that generate predictions).
+        3. Postprocessing (e.g.,  probabilities to labels, formatting output).        
+            
+    note
+        - preprocessing: you transfomr your data, probalby with Spark ML
+        pre-processing and post-processing variants 
+            - are containers (or steps) in the pipeline that transforms data before and after 
+                the actual model inference
+
+Model Drift
+    - aka "model decay"
+    - When the model's predictions degrade over time due to changes in data or input and
+        
+AWS SageMaker Model Monitor 
+    - monitors the quality of ML models
+    - Continuous monitoring with a real-time endpoint.
+    - Continuous monitoring with a batch transform job that runs regularly.
+    - On-schedule monitoring for asynchronous batch transform jobs.
+            
+AWS SageMaker Model Registry
+     - model version control
+     - model grouping
+     versioning, deployment, and governance
+     - stages: Pending → Approved → Rejected → Archived.
+        
+AWS SageMaker Processing 
+    - run Python or Spark code in AWS
+    - for handling data before or after ML stuff. 
+    - It’s not for training models per se; it’s for preprocessing, postprocessing, and analysis.
+        - (before training) prepare data for machine learning models 
+        - (after inference) or analyze results from models
+        
+    1.  You write a script
+    2. You package it into a Processing Job.
+    3. Specify computer instances (provision?)
+    4. input/output
+    - SciKit-Learn
+    - apache spark
+        
+        
+SageMaker Model Building Pipelines 
+    - for building ML pipelines 
+    - direct integration to SageMaker
+    - directly within SageMaker no interaction with any other AWS services
+    
+    - end-to-end ML workflows 
+    - using a directed acyclic graph (DAG) of steps
+    - connected steps, defined by JSON
+        
+    Model Building Pipelines  VS Inference Pipelines
+
+    | Feature  | Model Building Pipelines                    | Inference Pipelines                            |
+    | -------- | ------------------------------------------- | ---------------------------------------------- |
+    | Purpose  | Automate training, evaluation, registration | Automate prediction workflow                   |
+    | Stage    | Pre-deployment                              | Post-deployment                                |
+    | Focus    | MLOps, reproducibility                      | Multi-step inference (preprocess → model → postprocess)|
+    | Main Use | Create & manage models                      | Run models for predictions                     |
+ 
+        
+        
+Note
+    Explainable AI (XAP)
+        - AI systems designed to make their decisions actions understandable to humans. 
+        - The goal of XAI is to provide transparency in AI models, 
+        - explain “black-box” (like deep neural networks), so that users can trust AI
+        
+        
+AWS SageMaker Clarify 
+    - reduce/find bias
+    - help detect and mitigate bias in models & datasets
+
+    - pre-training: Analyzes datasets before training
+    - post-training: bias (eg. based on gender, race, or age).
+    
+    terminology :
+    
+    Feature - A specific measurable attribute or property of an entity being studied (e.g., age, income, or height). 
+        Each feature represents one aspect of a sample.  
+    Sample - A single observation or instance in a dataset, described by its feature values and associated label.
+
+    Label - The target value the model is trained to predict.
+    Predicted label - The value the model predicts for the label.
+    Dataset - A collection of samples.
+    Bias - Unequal behavior in the data or model predictions across different groups (e.g., age, income).
+    Bias metric - A number that shows the level of potential bias.
+    Bias report - A set of bias metrics for a dataset or a dataset and model.
+    Positive label values - Label values that are favorable for a group.
+    Negative label values - Label values that are unfavorable for a group.
+    Group variable - A categorical column used to form subgroups for measuring bias in Conditional Demographic Disparity (CDD).
+    Facet - A feature used to measure bias.
+    Facet value - The specific value of a facet that might be favored or disfavored.
+    Predicted probability - The model’s predicted chance of a sample having a positive or negative outcome.
+
+
+
+SHAP algorithm (Shapley Additive Explanations) 
+    - helps explain the output of models. 
+    - tells you how much each feature contributes to a specific prediction.
+    - Based on Shapley values from cooperative game theory.
+    
+AWS SageMaker Model Cards
+        - metadata about the model
+            - what it is
+            - how it was trained, 
+            - what it can and can’t do.
+        - "documentation framework"
+        - cute UI 
+        
+        Info:
+            - Name, version, algorithm/framework.
+            - Dataset info - What data it was trained and tested on, including size, source, preprocessing.
+            - Metrics: Accuracy, precision, recall, F1, etc., on test sets.
+            - Intended use: Exactly what tasks the model is meant for.
+            - Limitations: Known failure modes, biases, or situations where the model performs poorly.
+            - log info: Optional fields for compliance, like who trained it, when, and under what conditions.    
+        
+        
+        How it’s used
+            1 You register a model in SageMaker Model Registry.
+            2 You attach a model card to it (JSON/YAML).
+            3 Anyone using the model can see the card to avoid misusing it.
+        
+        
+        
+AWS SageMaker JumpStart 
+    - work with models very quickly
+    - a shortcut for building ML applications. 
+    - pre made parts so you don’t have to start everything from scratch. Here's what it offers in simple term
+        
+AWS SageMaker Studio Lab 
+    - free!
+    - a copy of Google Colabs
+    - jupiter notebooks
+    - cloud-based environment for data science and ML, 
+    - makes it easy to experiment with ML and data analysis without worrying about infrastructure management
+    
+AWS Augmented AI (Amazon A2I) 
+    - incorporate human review 
+    - human judgment can be applied to enhance accuracy
+        - when models produce predictions with low confidence or require validation, 
+    - for image recognition, text extraction, etc
+    - You define a confidence threshold. If the model’s prediction is below that threshold, it triggers human review.
+    
+    NOTE!
+        AWS Ground Truth 
+             - human creating labeled datasets to train machine learning models
+             - data preparation/training tool.
+             - input
+        AWS A2I
+            -  human review to AI predictions in real-time
+            - output
+    
+NOTE
+    Confusion Matrix
+        - shows how well the model's predictions match the actual labels.
+            - eg) False Positive (bad), True Positive (good)
+        - in classification tasks 
+        
+    Accuracy: How many predictions (both positive and negative) are correct.
+    Precision: Of all predicted positives, how many are actually positive.
+    F1 score: is a single number that shows how good a model is at finding the positive cases without making too many mistakes.
+    
+    Disease detection:
+        Positive = has disease
+        Negative = healthy
+        If the model predicts everyone healthy:
+            Accuracy might be high (most people are healthy)
+            But it misses all sick people → dangerous
+    
+    
+    Accuracy is used when the True Positives and True negatives are more important
+    F1-score is used when the False Negatives and False Positives are more important
+    
+    | Metric    | What it measures                            | When it matters most                                                         |
+    | ----------| ------------------------------------------- | ---------------------------------------------------------------------------- |
+    | Accuracy  | Overall correctness (all predictions)       | When classes are balanced and all errors matter equally                      |
+    | Precision | Correctness of positive predictions only    | When false positives are costly                                              |
+    | F1 Score  | Balance of precision and recall (positives) | When you care about both catching positives **and** avoiding false positives |
+
+    
+AUC 
+    - Area Under the Curve
+    
+    
+ROC 
+    - Receiver Operating Characteristic 
+    - curve is just a way to see how good your model is at telling two things apart.
+    
+    
+    
+    
+    
+Ranking metrics 
+    - for recommendation systems.
+    - place relevant items at the top of the list.
+    
+    Types
+        1. binary relevance based metrics
+            - A item is good or bad (binary)
+        2. utility based metrics
+            - A item is a measurement of good or bad
+
+    Mean Reciprocal Rank (MRR)
+        - Simple, fast and easy
+        - cares only about where the first relevant result shows up.
+    Mean Average Precision (MAP)
+        – looks at all relevant results, assuming each is equally important.
+        
+    Normalized Discounted Cumulative Gain (NDCG)
+        - looks at all results and also how relevant each one is, giving more weight to the top of the list.
+        - cares about all items, their order, and how relevant they are.
+        - search engines and recommendation systems 
+        - complex, slower, hard
+
+    
+Computer Vision Metrics
+    Peak signal-to-noise ratio (PSNR) - measures reconstructed or compressed image compared to the original.
+    Structural similarity index measure (SSIM) - measures similarity
+    Intersection over Union (loU) measuring overlap between two bounding boxes or masks
+    
+    
+NLP Metrics
+    Perplexity: 
+        - Measures how well a language model predicts text; lower is better.
+    BLEU: 
+        - Compares generated text to references using overlapping n-grams; higher is better.
+        - Bilingual Evaluation Understudy
+    METEOR: 
+        - Evaluates similarity considering synonyms, stemming, and word order; higher is better.
+        - Metric for Evaluation of Translation with Explicit Oddering (METEOR)
+    ROUGE: 
+        - Focuses on recall of overlapping units (like n-grams or sentences) 
+            between generated and reference text; higher is better.
+            
+Deep Learning Metrics
+    - Inception Score (IS):
+        - Evaluates how realistic and diverse generated images are. 
+        - Uses a pretrained classifier to check if images look like clear objects 
+            and if outputs cover many categories.
+        👉 IS = quality + diversity of individual images.
+    - Fréchet Inception Distance (FID):
+        - Measures how close the distribution of generated images is to real ones. 
+        - Compares feature representations of real vs. fake images. Lower FID = more realistic and similar to real data.
+        👉 FID = similarity between generated set and real set.
+        
+
+
+Regression Metrics
+    - Mean Squared Error (MSE)
+    - Mean Absolute Error (MAE)
+    - Root Mean squared error (RMAE)
+    
+    
+AWS Foundation Model Evaluation Library (fmeval) 
+    - helps evaluate LLMs, ("foundation models" i guess sounds cool)
+    - is a library to evaluate LLMs in order to help select the best LLM for your use case
+    - https://github.com/aws/fmeval
+    - measures:
+        performance and responsibility 
+        safety 
+        robustness dimensions
+    
+1 CodeGuru
+2 Code Whisper
+3 Amazon Q
+4 Comprehend
+5 Forecast
+6 Fraud Detector
+7 Kendra
+8 Lex
+9 Personalize
+10 Polly
+11 Recogniztion
+12 Textract
+13 Translate
+
+ISO/IEC 42001:2023 
+    - governance of AI systems
+    - the first international standard for AI Management Systems (AIMS).
+    - to ensure that AI is developed and used responsibly, transparently, and 
+        in alignment with legal/ethical expectations.
+    
+
+
+Algorithmic Accountability Act 
+    - laws in US 
+    - companies must be transparent about their algorithms to ensure they are fair and unbiased.
+    - decision-making systems by companies. 
+    - algorithms used in critical areas are transparent, fair, and do not bias or discrimination.
+    - such as employment, housing, lending, healthcare, and education
+
+
+Generative AI Security Scoping Matrix
+    - a "responsibility map"
+    - The more control you take on generative AI system, 
+        the more security and risk you have to do.
+    - helps you determine the scope of the security
+    Scopes
+        Consumer app – Use public AI; no control; minimal security.
+            Ex) ChatGPT
+                Midjourney
+        Enterprise app – Vendor AI app; watch contracts, compliance.
+            Ex) Salesforce Einstein GPT
+                Amazon CodeWhisperer
+        Pre-trained model – Call API; secure inputs/outputs, monitor for misuse.
+            Ex) Amazon Bedrock base models
+        Fine-tuned model – Retrain base model; protect data, check outputs, handle bias.
+            Ex) Amazon Bedrock customized models
+                Amazon SageMaker JumpStart
+        Self-trained model – Build model from scratch; full responsibility for data, training, deployment, monitoring.
+            Ex) Amazon SageMaker
+
+    Securing Generative Al
+        - Governance & Compliance
+        - Legal & Privacy
+        - Risk Management
+        - Controls
+        - Resilience
+        
+Prompt injection 
+    - an "attack" or manipulation at LLMs. 
+    - crafts input in a way that tricks the model into 
+        - doin unintended instructions 
+        - revealing sensitive information
+    - it override the model’s normal behavior.
+
+
+Glue
+
+Athena
+    - Athena integrates with the following AWS services:
+        CloudFormation
+        CloudFront
+        CloudTrail
+        DataZone
+        ELB
+        EMR
+        AWS Glue Data Catalog
+        IAM
+        QuickSight
+        S3 Inventory
+        Step Functions
+        Systems Manager Inventory
+        VPC
+
+
+
+
+AWS Glue Data Quality 
+    - prob not on exam
+    - help you assess the quality of your data
+    - check if your data is “good” 
+    - enforce rules in ETL pipelines
+    Rules/constraints on your data, like:
+        column X must not be null
+        column Y must be unique
+        column Z values must be within [0, 100]
+    - Reports % of data passing/failing each rule.
+    - can act on 'bad' data
+
+AWS Glue DataBrew 
+    - no-code tool
+    - a GUI tool for cleaning and transforming data. 
+    - Instead Python, SQL, or Spark code,
+        - you point, click, and apply transformations.
+
+
+Amazon OpenSearch
+    (elatic search)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
